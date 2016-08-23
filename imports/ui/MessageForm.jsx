@@ -39,11 +39,10 @@ export default class MessageForm extends Component {
 
     	return(
         	<div className='message_form'>
-	            <h3>Write New Message</h3>
-	               
+	          	               
 	          	<form className="new_message" onSubmit={this.handleSubmit.bind(this)}>
-	            	<input type="text" ref="textInput" placeholder="Type send a message" disabled={this.state.disabled}/>
-	       		</form>
+	            	<input type="text" ref="textInput" placeholder="Write a new message" disabled={this.state.disabled}/>
+	       		  </form>
         	</div>
     	);
   	}

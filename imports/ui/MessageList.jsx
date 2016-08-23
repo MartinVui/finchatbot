@@ -8,7 +8,6 @@ export default class MessageList extends Component {
   render() {
       return (
           <div className='messages'>
-              <h2> Conversation: </h2>
               {this.props.messages.map((message, i) => (
                 <Message key={i} text={message.text} author={message.author}/>
               ))
