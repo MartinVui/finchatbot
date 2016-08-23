@@ -10,7 +10,7 @@ export default class MessageList extends Component {
           <div className='messages'>
               <h2> Conversation: </h2>
               {this.props.messages.map((message, i) => (
-                <Message key={i} text={message.text}/>
+                <Message key={i} text={message.text} author={message.author}/>
               ))
               }
           </div>

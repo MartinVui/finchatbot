@@ -10,6 +10,7 @@ Meteor.methods({
 
 		Messages.insert({
 	      text,
+        author: 'user',
 	      createdAt: new Date(),
    		});
 	},
@@ -29,6 +30,7 @@ Meteor.methods({
         var botMessage = json.botResponse;
         Messages.insert({
           text: botMessage,
+          author: 'bot',
           createdAt: new Date()
         });
       })
