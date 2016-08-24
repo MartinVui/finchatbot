@@ -12,15 +12,61 @@ import MessageList from './MessageList.jsx';
 
 import DeleteAllMessages from './DeleteAllMessages.jsx';
 
+import ChatBox from './ChatBox.jsx';
+
 class App extends Component {
 
+	
+	renderChatbox() {
+		event.preventDefault();
+		return(
+				<div className="container">
+		        	<header>
+		          		<h1>Chat</h1>
+		          		<DeleteAllMessages onClick={this.deleteAllMessages}/> 
+		        	</header>
+		        	<div className="conversation">
+		        		<MessageList messages={this.props.messages}/>
+		        	</div>
+		        	<footer>
+		        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
+		        	</footer>
+	     		</div>
 
+		);
+		    
+	}
+	
+	rendertest() {
+		return(
+			<div>
+			{this.renderChatbox()}
+			</div>
+		);
+	}
+	
 	render() {
 		return(
-			<div className="container">
-	        	<Image source={require('./logo.png')} />
+			<div>
+			<button className='image' onClick={this.rendertest}>Image incoming</button>
+			
+			{this.renderChatbox()}
+			</div>
+			
+			
+/*			<div className="container">
+	        	<header>
+	          		<h1>Chat</h1>
+	          		<DeleteAllMessages onClick={this.deleteAllMessages}/> 
+	        	</header>
+	        	<div className="conversation">
+	        		<MessageList messages={this.props.messages}/>
+	        	</div>
+	        	<footer>
+	        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
+	        	</footer>
      		</div>
-
+*/
 	    );
 	}
 }

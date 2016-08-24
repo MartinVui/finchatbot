@@ -14,7 +14,7 @@ import DeleteAllMessages from './DeleteAllMessages.jsx';
 export default class ChatBox extends Component {
 
 
-	render() {
+	renderChatbox() {
 		return(
 			<div className="container">
 	        	<header>
@@ -30,5 +30,14 @@ export default class ChatBox extends Component {
      		</div>
 
 	    );
+	}
+
+	render() {
+		return(
+			<div className="image" onClick={this.renderChatbox.bind(this)}>
+				<h1>Image incoming</h1>
+				{this.renderChatbox()}
+			</div>
+		);
 	}
 }
