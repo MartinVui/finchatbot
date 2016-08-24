@@ -14,12 +14,13 @@ import DeleteAllMessages from './DeleteAllMessages.jsx';
 export default class ChatBox extends Component {
 
 
-	renderChatbox() {
+
+	render() {
 		return(
-			<div className="container">
+			<div><div className="container">
 	        	<header>
 	          		<h1>Chat</h1>
-	          		<DeleteAllMessages onClick={this.deleteAllMessages}/> 
+	          		{/*<button className='close_conversation' onClick={this._onButtonClick}>&times;</button> */}
 	        	</header>
 	        	<div className="conversation">
 	        		<MessageList messages={this.props.messages}/>
@@ -28,16 +29,8 @@ export default class ChatBox extends Component {
 	        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
 	        	</footer>
      		</div>
+     		<p><img src='images/bulle.png' className='bulle'></img></p></div>
 
 	    );
-	}
-
-	render() {
-		return(
-			<div className="image" onClick={this.renderChatbox.bind(this)}>
-				<h1>Image incoming</h1>
-				{this.renderChatbox()}
-			</div>
-		);
 	}
 }

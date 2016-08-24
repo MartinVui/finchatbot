@@ -14,7 +14,7 @@ export default class DeleteAllMessages extends Component {
 
 	render() {
 		return(
-			<button className='delete_all_messages' onClick={this.deleteAllMessages.bind(this)}>Delete all messages
+			<button className='close_conversation' onClick={this._onButtonClick}>
           	&times;
           	</button>
         );  	

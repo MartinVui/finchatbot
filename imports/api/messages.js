@@ -38,7 +38,25 @@ Meteor.methods({
 
     'messages.deleteAllMessages'() {
     
-    Messages.remove({});
+      Messages.remove({});
     },
 
-});
+
+    'messages.sendInitialMessage'() {
+
+      var link = 'https://api.motion.ai/messageBot?msg=start&bot=9549&session=mysessionfinchatbot&key=9413cb990ecf2a08abc1c53d74e183dc';
+      fetch(link)
+      .then(response => {
+        return response.json()
+      }).then(json => {
+        var initialMessage = json.botResponse;
+
+      Messages.insert({
+        text: initialMessage,
+        author: 'bot',
+        createdAt: new Date()
+      })
+    })
+}
+
+})
