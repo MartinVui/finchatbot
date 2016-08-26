@@ -7,12 +7,7 @@ import Message from './Message.jsx';
 // Message component - represents a single message
 export default class MessageForm extends Component {
 
-	constructor(props) {
-    	super(props);
-    	this.state = {
-      		disabled: false,
-    	};
-    }
+
 
 	handleSubmit(event) {
 
@@ -23,17 +18,18 @@ export default class MessageForm extends Component {
  
    		Meteor.call('messages.insert',text);
       Meteor.call('messages.getBotResponse', text);
+
+      // this.setState({
+      //   showGif: true
+      // });
+
  
     	// Clear form
    		ReactDOM.findDOMNode(this.refs.textInput).value = '';
 
    		}
-/*
 
-   	switchDisabled() {
-   		this.setState({disabled:true});
-   	}
-*/
+   
 
  	render() {
 
@@ -41,7 +37,7 @@ export default class MessageForm extends Component {
         	<div className='message_form'>
 	          	               
 	          	<form className="new_message" onSubmit={this.handleSubmit.bind(this)}>
-	            	<input type="text" ref="textInput" placeholder="Write a new message" disabled={this.state.disabled}/>
+	            	<input type="text" ref="textInput" placeholder="Write a new message"/>
 	       		  </form>
         	</div>
     	);

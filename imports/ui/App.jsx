@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
-//import { AppRegistry, View, Image, StyleSheet} from 'react-native';
+//import AutoScroll from 'react-auto-scroll';
 
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
@@ -21,6 +21,7 @@ class App extends Component {
     	super(props);
     	this.state = {
       		showChatBox: false,
+          //showGif: true
     	};
     	this._onButtonClick = this._onButtonClick.bind(this);
   	}
@@ -38,14 +39,15 @@ class App extends Component {
       		this.setState({
       			showChatBox: true
       		});
+          Meteor.call('messages.deleteAllMessages'),
+          Meteor.call('messages.getBotResponse', 'start'); 
         }
         else if(this.state.showChatBox == true) {
       		this.setState({
       			showChatBox: false
       		});
         }
-        Meteor.call('messages.deleteAllMessages');
-    	Meteor.call('messages.sendInitialMessage')
+  
     }
 	
 	
