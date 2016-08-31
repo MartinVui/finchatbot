@@ -1,9 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-// Message component - represents a single message
+
 export default class Message extends Component {
 
+  // componentDidMount() {
+  //   if(this.props.author === 'bot') {
+  //   Session.set('showGif', false);
+  //   }
+  // }
 
 	render() {
       	if(this.props.author === 'user') {

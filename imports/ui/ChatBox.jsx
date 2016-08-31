@@ -10,8 +10,6 @@ import MessageForm from './MessageForm.jsx';
 
 import MessageList from './MessageList.jsx';
 
-import DeleteAllMessages from './DeleteAllMessages.jsx';
-
 export default class ChatBox extends Component {
 
 

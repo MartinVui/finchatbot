@@ -4,38 +4,64 @@ import ReactDOM from 'react-dom';
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
 
-// Message component - represents a single message
-export default class MessageForm extends Component {
+import Button from './Button.jsx';
 
+export default class MessageForm extends Component {
 
 
 	handleSubmit(event) {
 
-    	event.preventDefault();
+    event.preventDefault();
  
-    	// Find the text field via the React ref
-   		const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+
+    Meteor.call('messages.insert',text, 'user');
+    Meteor.call('messages.getBotResponse', text);
+
+
+
+   	ReactDOM.findDOMNode(this.refs.textInput).value = '';
+
+    //Session.set('showGif', true);
+
+    Meteor.call('messages.getExpectedResponses', text, function(err, result) {
+      if (err)
+        console.log(err);
+      Session.set('q', result);
+    });
+    return Session.get('q');
+
+  }
+
+
+  /*_onButtonClick() {
+
+    var text = Session.get('q');
+
+    Meteor.call('messages.insert',text, 'user');
+    Meteor.call('messages.getBotResponse', text);
  
-   		Meteor.call('messages.insert',text);
-      Meteor.call('messages.getBotResponse', text);
+    ReactDOM.findDOMNode(this.refs.textInput).value = '';
 
-      // this.setState({
-      //   showGif: true
-      // });
+    Meteor.call('messages.getExpectedResponses', text, function(err, result) {
+          if (err)                          // Voir si on peut faire sans Session.get('text')
+            console.log(err);
+          Session.set('q', result);
+        });
 
- 
-    	// Clear form
-   		ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    }*/
 
-   		}
 
-   
 
  	render() {
+    return(
 
-    	return(
         	<div className='message_form'>
-	          	               
+              {this.renderButtons()}
+              {/*<div className="button"
+                    onClick={this._onButtonClick.bind(this)}>
+                    {Session.get('q')}
+              </div>*/}
 	          	<form className="new_message" onSubmit={this.handleSubmit.bind(this)}>
 	            	<input type="text" ref="textInput" placeholder="Write a new message"/>
 	       		  </form>

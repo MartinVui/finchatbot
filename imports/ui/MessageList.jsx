@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
 
-// MessageList component - represents all the messages
 export default class MessageList extends Component { 
 
 
@@ -39,11 +38,11 @@ export default class MessageList extends Component {
                 <Message key={i} text={message.text} author={message.author}/>
                 ))
               }
-              
-                {/*this.state.showGif ?
-                  <img src='images/logo.png' className="bot_message"/> : null
-                */}
-              
+
+              {Session.get('showGif') ?
+                <img src='images/logo.png'/>: null
+              }
+
           </div>
       );
   }
