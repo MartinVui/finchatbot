@@ -139,7 +139,7 @@ Messages.insert({
 
 };
         console.log('json', json.cards[0].buttons[0].buttonText);
-        return result = json;//.cards[0].buttons[0].buttonText;
+        return result = json.cards[0].buttons[0].buttonText;
         //return console.log('json', json.cards[0].buttons[1].buttonText); 
 
   }

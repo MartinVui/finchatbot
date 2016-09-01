@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
 
-import Button from './Button.jsx';
+//import Button from './Button.jsx';
 
 export default class MessageForm extends Component {
 
@@ -34,7 +34,7 @@ export default class MessageForm extends Component {
   }
 
 
-  /*_onButtonClick() {
+  _onButtonClick() {
 
     var text = Session.get('q');
 
@@ -49,7 +49,7 @@ export default class MessageForm extends Component {
           Session.set('q', result);
         });
 
-    }*/
+    }
 
 
 
@@ -57,11 +57,11 @@ export default class MessageForm extends Component {
     return(
 
         	<div className='message_form'>
-              {this.renderButtons()}
-              {/*<div className="button"
+              
+              <div className="button"
                     onClick={this._onButtonClick.bind(this)}>
                     {Session.get('q')}
-              </div>*/}
+              </div>
 	          	<form className="new_message" onSubmit={this.handleSubmit.bind(this)}>
 	            	<input type="text" ref="textInput" placeholder="Write a new message"/>
 	       		  </form>
