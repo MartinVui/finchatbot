@@ -1,25 +1,48 @@
-/* CSS declarations go here */
 body {
   font-family: sans-serif;
-  background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
-  background-attachment: fixed;
- 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
- 
-  padding: 0;
-  margin: 0;
- 
   font-size: 14px;
+
+  background-attachment: fixed;
+  background-overflow: visible;
+  background-image:url('images/allan_grey_opening_page.jpg');
+  background-repeat: no-repeat;
+  z-index: -1;
 }
 
-h3
+.typing_gif
 {
-  margin-bottom:0px;
+  margin:5px;
+  margin-left: 20px;
+  padding:3px;
+  background-color: #dfe9ef;
+  max-width: 50px;
+  height: auto;
+  display:flex;
+  border-radius:7px;
+}
+
+.button
+{
+  width: auto;  
+  margin:5px;
+  align-self: center;  
+  background-color:#8b8b8b;
+  text-align: center;
+  color: #ffffff;
+  margin:3px;
+  border-radius:3px;
+  padding: 7px;
+}
+
+.buttonList
+{
+  background-color:#ffffff;
+  height: auto;
+  min-height: 0px;
+  display: flex;
+  flex-wrap: wrap;  
+  justify-content: center;
+  align-content: center;
 }
 
 form.new_message
@@ -33,26 +56,25 @@ form.new_message
   height: 100px;
   width: 100px;
   position: fixed;
-  right:30px;
-  bottom:30px;
+  right:20px;
+  bottom:10px;
   z-index: 998;
 }
+
 .bulle
 {
   height: 90px;
   width: 100px;
   position: fixed;
-  right:100px;
-  bottom:130px;
+  right:105px;
+  bottom:90px;
   z-index: 999;
-  color:#62a8ea;
- 
+  color:#62a8ea; 
 }
 
 .user_message
 {
 text-align:right;
-
 margin:5px;
 padding:3px;
 height: auto;
@@ -64,7 +86,6 @@ justify-content: flex-end;
 .bot_message
 {
 text-align:left;
-
 margin:5px;
 padding:3px;
 max-width: 150px;
@@ -87,7 +108,7 @@ word-wrap: break-word;
 .user_text
 { 
   max-width: 100px;
-  background-color: #62a8ea;
+  background-color: #c53146;
   color: #ffffff;
   padding:7px;
   border-radius: 4px;
@@ -106,10 +127,6 @@ img.bot_message{
   padding:0px;
 }
 
-footer{
-  background-color: #d2edf4;
-}
-
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
@@ -119,19 +136,16 @@ footer{
   font-family: arial,sans-serif;
   font-size: 14px;
   position: fixed;
-  right:30px;
-  bottom:200px;
+  right:20px;
+  bottom:160px;
   z-index: 998;
-  border-radius: 10px;
+  border-radius: 10px 10px 20px 20px;
 }
 
 .conversation{
   height:250px;
-
   display:flex;
   border-radius: 10px;
-  /*justify-content: flex-start;
-*/
 }
 
 .messages
@@ -143,114 +157,24 @@ footer{
 .message_form
 {
   width: 250px;
-
 }
 
-header {
-  background: #62a8ea;
-  /*background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);*/
-  padding: 20px 15px 15px 15px;
-  position: relative;
-  border-radius: 10px 10px 0px 0px;
+input
+{
+  width:225px;
 }
+
+
 
 footer { 
-  background: #62a8ea;
+  background: #c53146;
   border-radius: 0px 0px 10px 10px;
- /* background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);*/
 }
  
-#login-buttons {
-  display: block;
-}
- 
-h1 {
-  font-size: 1.5em;
-  margin: 0;
-  margin-bottom: 10px;
-  display: inline-block;
-  margin-right: 1em;
-}
- 
+
 form {
   margin-top: 10px;
   margin-bottom: -10px;
   position: relative;
   padding:10px;
-}
- 
-.new-task input {
-  box-sizing: border-box;
-  padding: 10px 0;
-  background: transparent;
-  border: none;
-  width: 100%;
-  padding-right: 80px;
-  font-size: 1em;
-}
- 
-.new-task input:focus{
-  outline: 0;
-}
- 
-ul {
-  margin: 0;
-  padding: 0;
-  background: white;
-}
- 
-.delete {
-  float: right;
-  font-weight: bold;
-  background: none;
-  font-size: 1em;
-  border: none;
-  position: relative;
-}
- 
-li {
-  position: relative;
-  list-style: none;
-  padding: 15px;
-  border-bottom: #eee solid 1px;
-}
- 
-li .text {
-  margin-left: 10px;
-}
- 
-li.checked {
-  color: #888;
-}
- 
-li.checked .text {
-  text-decoration: line-through;
-}
- 
-li.private {
-  background: #eee;
-  border-color: #ddd;
-}
- 
-header .hide-completed {
-  float: right;
-}
- 
-.toggle-private {
-  margin-left: 5px;
-}
- 
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
- 
-  .search {
-    width: 150px;
-    clear: both;
-  }
- 
-  .new-task input {
-    padding-bottom: 5px;
-  }
 }

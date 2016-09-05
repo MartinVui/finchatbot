@@ -6,57 +6,46 @@ import Message from './Message.jsx';
 
 export default class Button extends Component {
 
-  onButtonClick(i) {
+  onButtonClick() {
+    // handle the click event
+    // insert the button text in the messages 
+    // Get the corresponding bot response
 
-/*    const text = Session.get('q').cards[0].buttons[i].buttonText;
+    const text = this.props.buttonText;
 
-    Meteor.call('messages.insert',text, 'user', function(err) {
-    	if (err)
-    		console.log(err);
+    Meteor.call('messages.insert',text, 'user');
+
+    Meteor.call('messages.getLink', text, Session.get('sessionId'), function(err, result) {
+      fetch(result)
+      .then(response => {        
+        return response.json()
+      }).then(json => {
+        Session.set('botResponseJSON', json);
+        Meteor.call('messages.insert', json.botResponse, 'bot');
+      });
     });
-    Meteor.call('messages.getBotResponse', text, function(err) {
-    	if (err)
-    		console.log(err);
-    });
-    console.log('yoyoyo');
- 
-//    ReactDOM.findDOMNode(this.refs.textInput).value = '';
 
-    Meteor.call('messages.getExpectedResponses', text, function(err, result) {
-          if (err)                          // Voir si on peut faire sans Session.get('text')
-            console.log(err);
-          Session.set('q', result);
-        });*/
-    }
+    Session.set('showGif', true);
+
+  }
+
+/*  render() {
+    console.log(this.props.buttonText);
+    if(this.props.buttonText)
+  }*/
 
 
-	render() {
-		return(
-			<div>
-				{buttons.map(function(buttons,i) {
-					return <Button button={buttons} key={i}
-				})}
+  render() {
 
+    if (this.props.buttonText == undefined) {
+      return(null);
+    }    
 
-				<div className="button"
-                    onClick={this.onButtonClick(i)}>
-                    {Session.get('q').cards[0].buttons[i].buttonText}
-              	</div>
-			}
-		);
-	}
+    return( 
+      <div className="button" //id={this.props.buttonKey}
+      onClick={this.onButtonClick.bind(this)}>
+      {this.props.buttonText}
+      </div>
+    );
+  }
 }
-/*
-	render() {
-		return(
-			<div className='buttons' onClick={this._onButtonClick.bind(this), this.handleSubmit.bind(this)}>
-	            {Session.get('q')}
-	        </div>
-	    );
-	}
-}*/
-
- // Pour l'instant, ce fichier ne sert plus à rien
- // Il faudra peut-être faire le render des boutons ici plutot que dans MessageForm.jsx
-
- // Faire comme Message/MessageList : Button/MessageForm

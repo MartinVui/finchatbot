@@ -10,13 +10,17 @@ Meteor.methods({
 
 
   'messages.deleteAllMessages'() {
-    
+  // Delete all the messages of the current conversation. Only used when the app is started, to make sure that the
+  // chatbow will be empty
       Messages.remove({});
    },
 
 
-	'messages.insert'(text, author) {
 
+
+	'messages.insert'(text, author) {
+    // Insert a single message in the conversation. The author has to be specified to create
+    // a distinction bot message / user message
 		  check(text, String);
 
 		  Messages.insert({
@@ -26,13 +30,53 @@ Meteor.methods({
    		});
 	},
 
+  'messages.getLink'(text,sessionId) {
+    // return the link to send to motion.ai to get the bot response. The text is the text sent by the user, the sessionId
+    //  is a session var defined when the app starts
 
+    check(text, String);
+//    var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=4673&session=mysessionfinchatbot3&key=a83ebd13d599e75be283bc8767796034';
+    var link = 'https://api.motion.ai/messageBot?msg='
+                +text
+                +'&bot=8034&session='
+                +sessionId
+                +'3&key=27760428f1127c90cbc48c939cdda02b';
+    return link;
+  },
+
+
+})
+
+
+
+
+
+
+// All this is not used now
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/*
+  'messages.getJSON'(text) {
+    check(text, String);
+      var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=9998&session=mysessionfinchatbot2&key=a83ebd13d599e75be283bc8767796034';
+      fetch(link)
+      .then(response => {
+        
+        return response.json()
+      }).then(json => {
+        console.log(json);
+        return json;
+    })
+  },*/
+/*
  'messages.getBotResponse'(text) {
   	check(text, String);
     
- /* 	var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=9998&session=mysessionfinchatbot2&key=a83ebd13d599e75be283bc8767796034';
+  	var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=9998&session=mysessionfinchatbot2&key=a83ebd13d599e75be283bc8767796034';
     fetch(link) 
       .then(response => {
+        console.log(response.json);
         return response.json();        
         }).then(json => {
         var text = json.botResponse;
@@ -42,8 +86,8 @@ Meteor.methods({
           author: 'bot',
           createdAt: new Date(),
       });
-      });*/
-     var json = {
+      });
+ /*    var json = {
  "botResponse": "Hello! Can I help you to solve your debt problems?",
  "inReplyTo": "Hi Bot",
  "cards": [
@@ -77,44 +121,40 @@ Meteor.methods({
 
 };
 var botMessage = json.botResponse;
-console.log(botMessage);
+//console.log(botMessage);
 Messages.insert({
   text: botMessage,
   author: 'bot',
   createdAt: new Date()
-});
-	},
+});*/
+	//},
 
-
-    'messages.deleteAllMessages'() {    
-      Messages.remove({});
-    },
 
 
     
+/*
+    'messages.getExpectedResponses'(text) {
 
-    'messages.getExpectedResponses'(text,i) {
-
-      /*check(text, String);
+      check(text, String);
       var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=9549&session=mysessionfinchatbot2&key=9413cb990ecf2a08abc1c53d74e183dc';
       fetch(link)
       .then(response => {
         return response.json()
       }).then(json => {
-        return expectedResponses = json.cards.buttons.buttonText;
-    })*/                                                                //Marche pas sans motion.ai
+        return result=json
+    })
 
-       
-        var json = {
- "botResponse": "Hello! Can I help you to solve your debt problems?",
- "inReplyTo": "Hi Bot",
- "cards": [
-   {
-     "cardImage": "",
-     "cardTitle": "",
-     "cardSubtitle": "",
-     "_id": "5795cb8a4a5e9c1100f287ec",
-     "buttons": [
+   /*    
+    var json = {
+     "botResponse": "Hello! Can I help you to solve your debt problems?",
+     "inReplyTo": "Hi Bot",
+     "cards": [
+     {
+       "cardImage": "",
+       "cardTitle": "",
+       "cardSubtitle": "",
+       "_id": "5795cb8a4a5e9c1100f287ec",
+       "buttons": [
        {
          "buttonText": "Yebo!",
          "buttonType": "module",
@@ -133,15 +173,14 @@ Messages.insert({
          "target": "",
          "_id": "5795cb8a4a5e9c1100f287ed"
        }
-     ]
-   }
- ],
+       ]
+     }
+     ],
 
-};
-        console.log('json', json.cards[0].buttons[0].buttonText);
-        return result = json.cards[0].buttons[0].buttonText;
+   };
+        //console.log('json', json.cards[0].buttons[0].buttonText);
+       // console.log(json);
+        return result = json;//.cards[0].buttons[0].buttonText;
         //return console.log('json', json.cards[0].buttons[1].buttonText); 
 
-  }
-
-})
+  }*/

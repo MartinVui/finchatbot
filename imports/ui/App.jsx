@@ -16,12 +16,12 @@ class App extends Component {
       		showChatBox: false,
           mounted:false
     	};
-    	this._onButtonClick = this._onButtonClick.bind(this);
+    	this.onLogoClick = this.onLogoClick.bind(this);
   //    Session.set('json', '');
   	}
 
   	
- 	_onButtonClick() {
+ 	onLogoClick() {
  		if(this.state.showChatBox == false) {
      		this.setState({
      			showChatBox: true
@@ -37,28 +37,15 @@ class App extends Component {
   
   }
 	
-  // componentWillMount() {
-  //   Session.set('showGif', true);
-  // }
-
-  componentDidMount() {
-    Meteor.call('messages.deleteAllMessages');
-    Meteor.call('messages.getBotResponse','start');
-
-    if (this.state.mounted === false) {
-      Meteor.call('messages.getExpectedResponses', 'start', function(err, result) {
-        if (err)
-          console.log(err);
-        Session.set('q', result);
-      });
-      this.setState({mounted :true})
-    }
+  componentWillMount() {
+    Session.set('showGif', false);
   }
+
 	
   	render() {
     	return (
     		<div>    		
-    	    <p><img src='images/logo.png' className='logo' onClick={this._onButtonClick}></img></p>
+    	    <p><img src='images/LogoChatBot.png' className='logo' onClick={this.onLogoClick}></img></p>
     			
     	    {this.state.showChatBox ?
         		<ChatBox messages={this.props.messages}/>: null
