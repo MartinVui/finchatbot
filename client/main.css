@@ -39,6 +39,7 @@ body {
 {
   background-color:#ffffff;
   height: auto;
+  width:325px;
   min-height: 0px;
   display: flex;
   flex-wrap: wrap;  
@@ -133,7 +134,7 @@ img.bot_message{
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: auto;
+  height: 373px;
   width: 325px;
   padding-top:10px;
   font-family: arial,sans-serif;
@@ -143,10 +144,13 @@ img.bot_message{
   bottom:160px;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .conversation{
-  height:250px;
+  height:auto;
   display:flex;
   border-radius: 10px;
 }
@@ -173,6 +177,7 @@ input
 footer { 
   background: #c53146;
   border-radius: 0px 0px 10px 10px;
+
 }
  
 
