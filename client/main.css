@@ -16,7 +16,7 @@ body {
   padding:3px;
   background-color: #dfe9ef;
   max-width: 50px;
-  height: auto;
+  height: 20px;
   display:flex;
   border-radius:7px;
 }
@@ -32,6 +32,7 @@ body {
   margin:3px;
   border-radius:3px;
   padding: 7px;
+  cursor: pointer;
 }
 
 .buttonList
@@ -88,7 +89,7 @@ justify-content: flex-end;
 text-align:left;
 margin:5px;
 padding:3px;
-max-width: 150px;
+max-width: 2000px;
 height: auto;
 display:flex;
 border-radius:4px;
@@ -97,7 +98,7 @@ word-wrap: break-word;
 
 .bot_text
 {
-  max-width: 100px;
+  max-width: 150px;
   height: auto;
   background-color: #dfe9ef;
   padding:7px;
@@ -107,7 +108,7 @@ word-wrap: break-word;
 
 .user_text
 { 
-  max-width: 100px;
+  max-width: 150px;
   background-color: #c53146;
   color: #ffffff;
   padding:7px;
@@ -150,6 +151,7 @@ img.bot_message{
 
 .messages
 {
+  height: auto;
   width: 250px;
   overflow: auto;
 }
