@@ -36,18 +36,18 @@ Meteor.methods({
 
     check(text, String);
  //  var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=4673&session=mysessionfinchatbot3&key=a83ebd13d599e75be283bc8767796034';
-    var link = 'https://api.motion.ai/messageBot?msg='
+ /*   var link = 'https://api.motion.ai/messageBot?msg='
                 +text
                 +'&bot=8034&session='
                 +sessionId
-                +'3&key=27760428f1127c90cbc48c939cdda02b';
+                +'3&key=27760428f1127c90cbc48c939cdda02b';*/
 
-  /*      var link = 'https://api.motion.ai/messageBot?msg='
+        var link = 'https://api.motion.ai/messageBot?msg='
                 +text
-                +'&bot=10490&session='
+                +'&bot=10572&session='
                 +sessionId
-                +'3&key=a83ebd13d599e75be283bc8767796034';*/
-
+                +'&key=7f2b2ba9b12841373a488a50ffd49888';
+    
     return link;
   },
 

@@ -98,7 +98,8 @@ word-wrap: break-word;
 
 .bot_text
 {
-  max-width: 150px;
+  font-size: 15px;
+  max-width: 200px;
   height: auto;
   background-color: #dfe9ef;
   padding:7px;
@@ -108,7 +109,8 @@ word-wrap: break-word;
 
 .user_text
 { 
-  max-width: 150px;
+  font-size: 15px;
+  max-width: 200px;
   background-color: #c53146;
   color: #ffffff;
   padding:7px;
@@ -132,7 +134,7 @@ img.bot_message{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
   height: auto;
-  width: 250px;
+  width: 325px;
   padding-top:10px;
   font-family: arial,sans-serif;
   font-size: 14px;
@@ -152,7 +154,7 @@ img.bot_message{
 .messages
 {
   height: auto;
-  width: 250px;
+  width: 325px;
   overflow: auto;
 }
  
@@ -163,7 +165,7 @@ img.bot_message{
 
 input
 {
-  width:225px;
+  width:300px;
 }
 
 

@@ -34,15 +34,25 @@ class App extends Component {
      			showChatBox: false
      		});
       }
-  
+  }
+
+  displayChatBox() {
+// Automatically open the chatbox after 10 sec
+
+    this.setState({
+      showChatBox:true
+    });
   }
 	
   componentWillMount() {
     Session.set('showGif', false);
+    var TIMEOUT = setTimeout(this.displayChatBox.bind(this), 10000);
   }
 
 	
   	render() {
+      
+
     	return (
     		<div>    		
     	    <p><img src='images/LogoChatBot.png' className='logo' onClick={this.onLogoClick}></img></p>

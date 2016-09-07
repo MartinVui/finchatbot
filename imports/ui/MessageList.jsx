@@ -13,6 +13,7 @@ export default class MessageList extends Component {
 
     var node = ReactDOM.findDOMNode(this.refs.messageList);
     node.scrollTop = node.scrollHeight;
+    //Session.set('showGif', false);
   }
 
 

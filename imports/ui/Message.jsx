@@ -4,29 +4,17 @@ import ReactDOM from 'react-dom';
 
 export default class Message extends Component {
 
-  componentWillMount() {
+  componentDidMount() {
     if(this.props.author === 'bot') {
       Session.set('showGif', false);
     }
+    console.log(Session.get('sessionId'));
   }
 
 
-
- /* renderLink() {
-    var messageText = this.props.text;
-    var regex = /<ahref=(.+)>(.+)<\/a>/;
-    var message = '<p className="bot_text">{messageText}</p>'
-
-    console.log(RegExp.$1,RegExp.$2);
-    var link = '<a href=$1>$2</a>';
-    var newText = message.replace(regex, link);
-    console.log(newText);
-    return newText;
-  }*/
-
   render() {
-    // render a single message. Check the author, to display bot messages and user messages differently
 
+    // render a single message. Check the author, to display bot messages and user messages differently
 
 
      // Check if nested content is a plain string

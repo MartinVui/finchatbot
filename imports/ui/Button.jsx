@@ -22,7 +22,7 @@ export default class Button extends Component {
       }).then(json => {
         Session.set('botResponseJSON', json);
         Meteor.call('messages.insert', json.botResponse, 'bot');
-      });
+      })
     });
 
     Session.set('showGif', true);
