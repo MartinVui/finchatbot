@@ -6,9 +6,9 @@ import App from '../imports/ui/App.jsx';
  
 Meteor.startup(() => {
 
-    Session.set('sessionId', new Date());
+  Session.set('sessionId', new Date());
 
-	Meteor.call('messages.deleteAllMessages');
+//	Meteor.call('messages.deleteAllMessages'());
 
     Meteor.call('messages.getLink', 'start', Session.get('sessionId'), function(err, result) {
       fetch(result)
@@ -20,7 +20,7 @@ Meteor.startup(() => {
       	
         Session.set('botResponseJSON', result);
         
-        Meteor.call('messages.insert', result.botResponse, 'bot');
+        Meteor.call('messages.insert', result.botResponse, 'bot', Session.get('sessionId'));
       });
     });
 

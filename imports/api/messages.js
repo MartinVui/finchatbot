@@ -9,16 +9,16 @@ export const Messages = new Mongo.Collection('messages');
 Meteor.methods({
 
 
-  'messages.deleteAllMessages'() {
+  'messages.deleteAllMessages'(sessionId) {
   // Delete all the messages of the current conversation. Only used when the app is started, to make sure that the
   // chatbow will be empty
-      Messages.remove({});
+      Messages.remove({session: sessionId});
    },
 
 
 
 
-	'messages.insert'(text, author) {
+	'messages.insert'(text, author, sessionId) {
     // Insert a single message in the conversation. The author has to be specified to create
     // a distinction bot message / user message
 		  check(text, String);
@@ -26,6 +26,7 @@ Meteor.methods({
 		  Messages.insert({
           text,
           author,
+          sessionId,
 	        createdAt: new Date(),
    		});
 	},
@@ -36,17 +37,17 @@ Meteor.methods({
 
     check(text, String);
  //  var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=4673&session=mysessionfinchatbot3&key=a83ebd13d599e75be283bc8767796034';
- /*   var link = 'https://api.motion.ai/messageBot?msg='
+    var link = 'https://api.motion.ai/messageBot?msg='
                 +text
                 +'&bot=8034&session='
                 +sessionId
-                +'3&key=27760428f1127c90cbc48c939cdda02b';*/
+                +'3&key=27760428f1127c90cbc48c939cdda02b';
 
-        var link = 'https://api.motion.ai/messageBot?msg='
+    /*    var link = 'https://api.motion.ai/messageBot?msg='
                 +text
                 +'&bot=10572&session='
                 +sessionId
-                +'&key=7f2b2ba9b12841373a488a50ffd49888';
+                +'&key=7f2b2ba9b12841373a488a50ffd49888';*/
     
     return link;
   },

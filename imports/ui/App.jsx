@@ -13,9 +13,8 @@ class App extends Component {
 	constructor(props) {
     	super(props);
     	this.state = {
-      		showChatBox: false,
-          mounted:false
-    	};
+      	showChatBox: false,
+      };
     	this.onLogoClick = this.onLogoClick.bind(this);
   //    Session.set('json', '');
   	}
@@ -75,6 +74,6 @@ App.propTypes = {
 
 export default createContainer(() => {
   return {
-    messages: Messages.find({}).fetch(),
+    messages: Messages.find({sessionId: Session.get('sessionId')}).fetch(),
   };
 }, App);

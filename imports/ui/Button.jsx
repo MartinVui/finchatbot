@@ -13,7 +13,7 @@ export default class Button extends Component {
 
     const text = this.props.buttonText;
 
-    Meteor.call('messages.insert',text, 'user');
+    Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
 
     Meteor.call('messages.getLink', text, Session.get('sessionId'), function(err, result) {
       fetch(result)
@@ -21,7 +21,7 @@ export default class Button extends Component {
         return response.json()
       }).then(json => {
         Session.set('botResponseJSON', json);
-        Meteor.call('messages.insert', json.botResponse, 'bot');
+        Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
       })
     });
 

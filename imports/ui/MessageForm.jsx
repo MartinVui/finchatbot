@@ -15,7 +15,7 @@ export default class MessageForm2 extends Component {
  
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
-    Meteor.call('messages.insert',text, 'user');
+    Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
 
 
 
@@ -25,7 +25,7 @@ export default class MessageForm2 extends Component {
         return response.json()
       }).then(json => {
         Session.set('botResponseJSON', json);
-        Meteor.call('messages.insert', json.botResponse, 'bot');
+        Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
       });
     });
 
@@ -42,7 +42,7 @@ export default class MessageForm2 extends Component {
     return(
 
         	<div className='message_form'>
-              <ButtonList />             
+            <ButtonList />
               
 	          	<form className="new_message" onSubmit={this.handleSubmit.bind(this)}>
 	            	<input type="text" ref="textInput" placeholder="Write a new message"/>
