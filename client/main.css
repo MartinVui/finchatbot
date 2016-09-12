@@ -2,11 +2,19 @@ body {
   font-family: sans-serif;
   font-size: 14px;
 
-  background-attachment: fixed;
-  background-overflow: visible;
-  background-image:url('images/allan_grey_opening_page.jpg');
   background-repeat: no-repeat;
   z-index: -1;
+}
+
+.background
+{
+
+    height: 105%;
+    width: 105%;
+    box-sizing: border-box;
+    position: fixed;
+    left:0px;
+    top:0px;
 }
 
 .typing_gif
@@ -112,7 +120,7 @@ word-wrap: break-word;
 { 
   font-size: 15px;
   max-width: 200px;
-  background-color: #c53146;
+  background-color: #a6a6a6;
   color: #ffffff;
   padding:7px;
   border-radius: 4px;
@@ -134,7 +142,7 @@ img.bot_message{
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: 373px;
+  height: 350px;
   width: 325px;
   padding-top:10px;
   font-family: arial,sans-serif;
@@ -175,7 +183,7 @@ input
 
 
 footer { 
-  background: #c53146;
+  background: #a6a6a6;
   border-radius: 0px 0px 10px 10px;
 
 }

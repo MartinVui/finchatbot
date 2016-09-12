@@ -44,7 +44,7 @@ Meteor.methods({
 
         var link = 'https://api.motion.ai/messageBot?msg='
                 +text
-                +'&bot=10572&session='
+                +'&bot=10801&session='
                 +sessionId
                 +'&key=7f2b2ba9b12841373a488a50ffd49888';
     

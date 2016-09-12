@@ -14,6 +14,10 @@ export default class Message extends Component {
 
   render() {
 
+/*
+    if (this.props.text == undefined) {
+      return(null);
+    }    */
     // render a single message. Check the author, to display bot messages and user messages differently
 
 
@@ -62,7 +66,7 @@ export default class Message extends Component {
     if(this.props.author === 'bot') {
       return (
        <div className="bot_message">
-       <img src='images/LogoChatBot.png' className="bot_message"/>
+       <img src='images/logo.png' className="bot_message"/>
        <p className="bot_text">{contents}</p>   
        </div>
        );

@@ -6,6 +6,7 @@ import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
 
 import ChatBox from './ChatBox.jsx';
+import Slides from './Slides.jsx';
 
 class App extends Component {
 
@@ -50,11 +51,14 @@ class App extends Component {
 
 	
   	render() {
-      
 
     	return (
-    		<div>    		
-    	    <p><img src='images/LogoChatBot.png' className='logo' onClick={this.onLogoClick}></img></p>
+
+
+    		<div>
+          <Slides/>    		
+          {/*<img src='images/allan_grey_opening_page.jpg' className='background' />*/}
+    	    <p><img src='images/logo.png' className='logo' onClick={this.onLogoClick}></img></p>
     			
     	    {this.state.showChatBox ?
         		<ChatBox messages={this.props.messages}/>: null
