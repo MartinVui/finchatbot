@@ -26,8 +26,7 @@ class App extends Component {
      		this.setState({
      			showChatBox: true
      		});
-   //       Meteor.call('messages.deleteAllMessages'),
-  //        Meteor.call('messages.getBotResponse', 'start'); 
+
     }
       else if(this.state.showChatBox == true) {
      		this.setState({
