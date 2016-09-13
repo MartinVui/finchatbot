@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
@@ -56,7 +58,9 @@ class App extends Component {
 
 
     		<div>
-          <Slides/>    		
+        
+          <img src='images/sized_background.jpg' className='background2'/>
+          <Slides imageSrc={Session.get('slide')}/>  		
           {/*<img src='images/allan_grey_opening_page.jpg' className='background' />*/}
     	    <p><img src='images/logo.png' className='logo' onClick={this.onLogoClick}></img></p>
     			

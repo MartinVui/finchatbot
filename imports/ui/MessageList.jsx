@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class MessageList extends Component { 
 
@@ -22,10 +23,16 @@ export default class MessageList extends Component {
       return (
         
           <div className='messages' ref="messageList">
-              {this.props.messages.map((message, i) => (
+          <ReactCSSTransitionGroup                // Animation when the messages appear
+          transitionName="example" 
+          transitionEnterTimeout={400} 
+          transitionLeaveTimeout={3}>
+          {this.props.messages.map((message, i) => (
                 <Message key={i} text={message.text} author={message.author}/>
                 ))
               }
+        </ReactCSSTransitionGroup>
+              
 
               {Session.get('showGif') ?         // Check if the "typing" gif has to be shown
               <div className='bot_message'>

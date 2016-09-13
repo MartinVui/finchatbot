@@ -13,10 +13,14 @@ export default class MessageForm2 extends Component {
 
     event.preventDefault();
  
-    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
-    Meteor.call('messages.insert',text, 'user');
-
+    if(text === "") {
+      var text = "no_text"
+    }
+    else {
+      Meteor.call('messages.insert',text, 'user');
+    }
 
 
     Meteor.call('messages.getLink', text, Session.get('sessionId'), function(err, result) {
@@ -25,7 +29,15 @@ export default class MessageForm2 extends Component {
         return response.json()
       }).then(json => {
         Session.set('botResponseJSON', json);
+        console.log('botResponseJSON', Session.get('botResponseJSON'));
         Meteor.call('messages.insert', json.botResponse, 'bot');
+        if (json.quickReplies[0].title == undefined) {
+        }
+        else {
+          var slide = json.quickReplies[0].title;
+          Session.set('slide', slide);
+          console.log('slide', Session.get('slide'));
+        }
       });
     });
 

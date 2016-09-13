@@ -15,6 +15,19 @@ body {
     position: fixed;
     left:0px;
     top:0px;
+    z-index: 1;
+}
+
+.background2  /* The background behind the background */
+{
+
+    height: 105%;
+    width: 105%;
+    box-sizing: border-box;
+    position: fixed;
+    left:0px;
+    top:0px;
+    z-index: 0;
 }
 
 .typing_gif
@@ -194,4 +207,38 @@ form {
   margin-bottom: -10px;
   position: relative;
   padding:10px;
+}
+
+
+
+
+/* -------------- All the CSS below is used for the animations --------------- */
+
+.example-enter {
+  opacity: 0;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+
+
+.example2-enter {
+  opacity: 0;
+}
+
+.example2-enter.example2-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in;
+}
+
+.example2-leave {
+  opacity: 1;
+}
+
+.example2-leave.example2-leave-active {
+  opacity: 0;
+  transition: opacity 600ms ease-in;
 }
