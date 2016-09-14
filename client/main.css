@@ -97,7 +97,7 @@ form.new_message
 
 .user_message
 {
-text-align:right;
+text-align:left;
 margin:5px;
 padding:3px;
 height: auto;

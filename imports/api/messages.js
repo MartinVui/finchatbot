@@ -45,11 +45,11 @@ Meteor.methods({
                 +text
                 +'&bot=10908&session='
                 +sessionId
-                +'3&key=cd4631d3eb74cb66b51921ce2c3c6b57';    
+                +'3&key=cd4631d3eb74cb66b51921ce2c3c6b57';   
 
 /*        var link = 'https://api.motion.ai/messageBot?msg='
                 +text
-                +'&bot=10801&session='
+                +'&bot=10572&session='
                 +sessionId
                 +'&key=7f2b2ba9b12841373a488a50ffd49888';   */
     

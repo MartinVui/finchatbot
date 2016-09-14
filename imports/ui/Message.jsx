@@ -37,12 +37,20 @@ export default class Message extends Component {
         // Space if the word isn't the very last in the set
         var separator = i < (words.length - 1) ? ' ' : '';
 
+        
         // The word is a URL, return the URL wrapped in a <a> component
         if (word.match(/https/)) {
           
           return <a key={i} href={word}>view the demo{separator}</a>;
         // The word is not a URL, return the word
-        } else {                                                  
+        } else if (word.match(/<gras>(.*)/)) {
+
+          console.log('yoyo');
+          var regex = /<gras>(.*)/;
+          word = word.replace(regex, RegExp.$1);
+          return <strong>{word}{separator}</strong>;
+        }
+        else {                                                  
           
           return word + separator;
         }
