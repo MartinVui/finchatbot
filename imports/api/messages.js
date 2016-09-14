@@ -41,12 +41,12 @@ Meteor.methods({
  //   check(text, String);
  //  var link = 'https://api.motion.ai/messageBot?msg='+text+'&bot=4673&session=mysessionfinchatbot3&key=a83ebd13d599e75be283bc8767796034';
  
-    var link = 'https://api.motion.ai/messageBot?msg='
+/*    var link = 'https://api.motion.ai/messageBot?msg='
                 +text
                 +'&bot=10908&session='
                 +sessionId
                 +'3&key=cd4631d3eb74cb66b51921ce2c3c6b57';   
-
+*/
 /*        var link = 'https://api.motion.ai/messageBot?msg='
                 +text
                 +'&bot=10572&session='

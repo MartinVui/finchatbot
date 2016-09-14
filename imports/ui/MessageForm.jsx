@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
+import bloc from '../api/blocs.js';
 
-import ButtonList from './ButtonList.jsx';
+//import ButtonList from './ButtonList.jsx';
 
 export default class MessageForm2 extends Component {
 
@@ -23,7 +24,22 @@ export default class MessageForm2 extends Component {
     }
 
 
-    Meteor.call('messages.getLink', text, Session.get('sessionId'), function(err, result) {
+
+    var json = bloc(text, Session.get('nextBlocName'));//, function(err, result) {
+
+    Session.set('botResponseJSON', json);
+
+    if (json.quickReplies[0].title == undefined) {
+    } else {
+      var slide = json.quickReplies[0].title;
+      Session.set('slide', slide);
+    }
+
+    Meteor.call('messages.insert', json.botResponse, 'bot');
+
+    Session.set('nextBlocName', json.nextBlocID);
+    
+ /*   Meteor.call('messages.getLink', text, Session.get('sessionId'), function(err, result) {
       fetch(result)
       .then(response => {        
         return response.json()
@@ -39,7 +55,8 @@ export default class MessageForm2 extends Component {
           console.log('slide', Session.get('slide'));
         }
       });
-    });
+    });*/
+
 
     Session.set('showGif', true);
 
@@ -54,7 +71,7 @@ export default class MessageForm2 extends Component {
     return(
 
         	<div className='message_form'>
-              <ButtonList />             
+              {/*<ButtonList />        */}     
               
 	          	<form className="new_message" onSubmit={this.handleSubmit.bind(this)}>
 	            	<input type="text" ref="textInput" placeholder="Write a new message"/>
