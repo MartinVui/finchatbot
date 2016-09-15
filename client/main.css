@@ -9,7 +9,6 @@ body {
 .background
 {
 
-    height: 100%;
     width: 100%;
     
     position: fixed;
@@ -21,7 +20,6 @@ body {
 .background2  /* The background behind the background */
 {
 
-    height: 100%;
     width: 100%;
     
     position: fixed;
@@ -180,7 +178,7 @@ img.bot_message{
 {
   height: auto;
   width: 325px;
-  overflow: auto;
+  overflow: scroll;
 }
  
 .message_form
