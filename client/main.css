@@ -9,9 +9,9 @@ body {
 .background
 {
 
-    height: 105%;
-    width: 105%;
-    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    
     position: fixed;
     left:0px;
     top:0px;
@@ -21,9 +21,9 @@ body {
 .background2  /* The background behind the background */
 {
 
-    height: 105%;
-    width: 105%;
-    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    
     position: fixed;
     left:0px;
     top:0px;

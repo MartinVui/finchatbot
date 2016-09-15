@@ -11,6 +11,128 @@ export default function bloc(text, blocName) {
 //						-The bloc ID
 //	
 
+	if (text.match(/(.*)team(.*)/i)) {
+
+		var botResponse = 'Sure';
+		var inReplyto = text;
+		var nextBlocID = 'Chatbot industry';
+		//var slide = 'pres/example';
+		var quickReplies = [{"title": "pres/team.jpg"}];
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"nextBlocID": nextBlocID
+		};
+
+		console.log(json);
+		return json;
+	}
+	
+	if (text.match(/(.*)security(.*)/i)) {
+
+		var botResponse = 'Have a look at my architecture';
+		var inReplyto = text;
+		var nextBlocID = 'Machine learning';
+		//var slide = 'pres/example';
+		var quickReplies = [{"title": "pres/security.jpg"}];
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"nextBlocID": nextBlocID
+		};
+
+		console.log(json);
+		return json;
+	}
+
+	if (text.match(/(.*)machine\slearning(.*)/i)) {
+
+		var botResponse = 'Have a look at my architecture';
+		var inReplyto = text;
+		var nextBlocID = 'Far Ventures';
+		//var slide = 'pres/example';
+		var quickReplies = [{"title": "pres/m-learning.jpg"}];
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"nextBlocID": nextBlocID
+		};
+
+		console.log(json);
+		return json;
+	}
+
+	if (text.match(/(.*)example(.*)/i)) {
+
+		var botResponse = 'Chatbots recently started to get into the South African financial industry';
+		var inReplyto = text;
+		var nextBlocID = 'Impact';
+		//var slide = 'pres/example';
+		var quickReplies = [{"title": "pres/example.jpg"}];
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"nextBlocID": nextBlocID
+		};
+
+		console.log(json);
+		return json;
+	}
+
+	if (text.match(/(.*)impact(.*)/i)) {
+
+		var botResponse = 'We’ve identified two main things: The <gras>customer <gras>experience and the <gras>Call <gras>center <gras>workforces <gras>costs';
+		var inReplyto = text;
+		var nextBlocID = 'Journey';
+		//var slide = 'pres/example';
+		var quickReplies = [{"title": "pres/back.jpg"}];
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"nextBlocID": nextBlocID
+		};
+
+		console.log(json);
+		return json;
+	}
+
+	if (text.match(/(.*)industry(.*)/i)) {
+
+		var botResponse = 'Sure! Chatbots are becoming mainstream worldwide thanks to communicating apps success. It is time to reach and guide your users or customers by the most convenient way: <gras>human-kind <gras>conversations';
+		var inReplyto = text;
+		var nextBlocID = 'Yebo';
+		//var slide = 'pres/example';
+		var quickReplies = [{"title": "pres/chat-rev.jpg"}];
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"nextBlocID": nextBlocID
+		};
+
+		console.log(json);
+		return json;
+	}
+
+
+
 
 	if (blocName==='Hi') {
 
@@ -265,7 +387,7 @@ export default function bloc(text, blocName) {
 		
 		var botResponse = 'I know ;)';
 		var inReplyto = text;
-		var nextBlocID = 'Nap';
+		var nextBlocID = 'Security';
 		//var slide = 'pres/example';
 		var quickReplies = [{"title": "pres/back.jpg"}];
 		
