@@ -9,7 +9,8 @@ body {
 .background
 {
 
-    width: 100%;
+    height: 100%;
+    width: auto;
     
     position: fixed;
     left:0px;
@@ -20,7 +21,8 @@ body {
 .background2  /* The background behind the background */
 {
 
-    width: 100%;
+    height: 100%;
+    width: auto;
     
     position: fixed;
     left:0px;
@@ -159,7 +161,7 @@ img.bot_message{
   font-family: arial,sans-serif;
   font-size: 14px;
   position: fixed;
-  right:20px;
+  right:30px;
   bottom:160px;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
@@ -178,7 +180,7 @@ img.bot_message{
 {
   height: auto;
   width: 325px;
-  overflow: scroll;
+  overflow: auto;
 }
  
 .message_form
