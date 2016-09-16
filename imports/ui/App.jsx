@@ -84,6 +84,6 @@ App.propTypes = {
 
 export default createContainer(() => {
   return {
-    messages: Messages.find({}).fetch(),
+    messages: Messages.find({sessionId: Session.get('sessionId')}).fetch(),
   };
 }, App);
