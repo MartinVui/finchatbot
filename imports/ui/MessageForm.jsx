@@ -20,44 +20,29 @@ export default class MessageForm2 extends Component {
       var text = "no_text"
     }
     else {
-      Meteor.call('messages.insert',text, 'user');
+      Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
     }
 
 
-
-    var json = bloc(text, Session.get('nextBlocName'));//, function(err, result) {
+    // get the JSON response from the bot
+    var json = bloc(text, Session.get('nextBlocName'));
 
     Session.set('botResponseJSON', json);
 
+    // Change the slide if it has to be changed 
     if (json.quickReplies[0].title == undefined) {
     } else {
       var slide = json.quickReplies[0].title;
       Session.set('slide', slide);
     }
 
-    Meteor.call('messages.insert', json.botResponse, 'bot');
+    // Insert the bot message
+    Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
 
+    // Set the new state of the bot
     Session.set('nextBlocName', json.nextBlocID);
     
- /*   Meteor.call('messages.getLink', text, Session.get('sessionId'), function(err, result) {
-      fetch(result)
-      .then(response => {        
-        return response.json()
-      }).then(json => {
-        Session.set('botResponseJSON', json);
-        console.log('botResponseJSON', Session.get('botResponseJSON'));
-        Meteor.call('messages.insert', json.botResponse, 'bot');
-        if (json.quickReplies[0].title == undefined) {
-        }
-        else {
-          var slide = json.quickReplies[0].title;
-          Session.set('slide', slide);
-          console.log('slide', Session.get('slide'));
-        }
-      });
-    });*/
-
-
+    // Show the typing gif (not used now)
     Session.set('showGif', true);
 
    	ReactDOM.findDOMNode(this.refs.textInput).value = '';

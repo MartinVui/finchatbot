@@ -4,30 +4,40 @@ body {
 
   background-repeat: no-repeat;
   z-index: -1;
+  width: 100%;
+}
+
+.left_part
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 73vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .background
 {
-
-    height: 100%;
-    width: auto;
-    
-    position: fixed;
-    left:0px;
-    top:0px;
-    z-index: 1;
+  width:auto;
+  height: auto;
+  max-width: 90%;
+  max-height: 90%;
 }
 
 .background2  /* The background behind the background */
 {
 
     height: 100%;
-    width: auto;
+    width: 100%;
     
     position: fixed;
     left:0px;
     top:0px;
-    z-index: 0;
+    z-index: -1;
 }
 
 .typing_gif
@@ -60,7 +70,7 @@ body {
 {
   background-color:#ffffff;
   height: auto;
-  width:325px;
+  width:25%;
   min-height: 0px;
   display: flex;
   flex-wrap: wrap;  
@@ -79,18 +89,18 @@ form.new_message
   height: 100px;
   width: 100px;
   position: fixed;
-  right:20px;
-  bottom:10px;
+  right:1.5%;
+  bottom:2%;
   z-index: 998;
 }
 
 .bulle
 {
-  height: 90px;
-  width: 100px;
+  height: 16%;
+  width: 7%;
   position: fixed;
-  right:105px;
-  bottom:90px;
+  right:8%;
+  bottom:16%;
   z-index: 999;
   color:#62a8ea; 
 }
@@ -111,7 +121,7 @@ justify-content: flex-end;
 text-align:left;
 margin:5px;
 padding:3px;
-max-width: 2000px;
+max-width: 100%;
 height: auto;
 display:flex;
 border-radius:4px;
@@ -121,7 +131,7 @@ word-wrap: break-word;
 .bot_text
 {
   font-size: 15px;
-  max-width: 200px;
+  max-width: 70%;
   height: auto;
   background-color: #dfe9ef;
   padding:7px;
@@ -132,7 +142,7 @@ word-wrap: break-word;
 .user_text
 { 
   font-size: 15px;
-  max-width: 200px;
+  max-width: 70%;
   background-color: #a6a6a6;
   color: #ffffff;
   padding:7px;
@@ -155,14 +165,14 @@ img.bot_message{
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: 350px;
-  width: 325px;
+  height: 64%;
+  width: 25%;
   padding-top:10px;
   font-family: arial,sans-serif;
   font-size: 14px;
   position: fixed;
-  right:30px;
-  bottom:160px;
+  right:2%;
+  bottom:29%;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
   display: flex;
@@ -179,18 +189,18 @@ img.bot_message{
 .messages
 {
   height: auto;
-  width: 325px;
+  width: 100%;
   overflow: auto;
 }
  
 .message_form
 {
-  width: 250px;
+  width: 100%;
 }
 
 input
 {
-  width:300px;
+  width:100%;
 }
 
 
@@ -205,7 +215,7 @@ footer {
 form {
   margin-top: 10px;
   margin-bottom: -10px;
-  position: relative;
+  
   padding:10px;
 }
 
@@ -231,14 +241,6 @@ form {
 
 .example2-enter.example2-enter-active {
   opacity: 1;
-  transition: opacity 1000ms ease-in;
-}
-
-.example2-leave {
-  opacity: 1;
-}
-
-.example2-leave.example2-leave-active {
-  opacity: 0;
   transition: opacity 600ms ease-in;
 }
+

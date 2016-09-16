@@ -14,11 +14,11 @@ export default class Slides extends Component {
 	// quickReplies[0] contains the URL of the background image we want to display
 	render() {
 		return(
-			<div>
+			<div className='left_part'>
 			<ReactCSSTransitionGroup 
 	          transitionName="example2" 
-	          transitionEnterTimeout={1000} 
-	          transitionLeaveTimeout={600}>
+	          transitionEnterTimeout={600}
+	          transitionLeave={false}>
 	          <img src={this.props.imageSrc} key={this.props.imageSrc} className='background'/>
 	        </ReactCSSTransitionGroup>
 	        </div>		

@@ -7,9 +7,9 @@ import bloc from '../imports/api/blocs.js';
  
 Meteor.startup(() => {
 
-/*
 
-  var isMobile={
+//  Check if the user is on mobile. If he is, redirect him to the mobile version
+/*  var isMobile={
     Android:function(){
       return navigator.userAgent.match(/Android/i);
     },
@@ -31,51 +31,36 @@ Meteor.startup(() => {
   };
 
   if(isMobile.any()) {
-    document.location.href="http://facebook.com"
-  }
-*/
+    console.log('mobile');
+    window.location.href="https://mdemofinchatbot.herokuapp.com";
+  }*/
 
 
-  Session.set('sessionId', new Date());
+  // Define a SessionID for the database
+  Session.set('sessionId', 'demoSession');
 
+  // Delete the messages of the same session when the app starts (for the demo, mostly)
+  Meteor.call('messages.deleteAllMessages', Session.get('sessionId'));
 
-  Meteor.call('messages.deleteAllMessages');
-
- /* Meteor.call('messages.getLink', 'start', Session.get('sessionId'), function(err, result) {
-    fetch(result)
-    .then(response => {      
-      return response.json();
-    }).then(json => {
-     return result = json;
-    }).then(result => {
-
-    Session.set('botResponseJSON', result);
-
-    if (result.quickReplies[0].title == undefined) {
-    }
-    else {
-      var slide = result.quickReplies[0].title;
-      Session.set('slide', slide);
-      console.log('slide', Session.get('slide'));
-    }
-
-    Meteor.call('messages.insert', result.botResponse, 'bot');
-  });
- });*/
+  // Set the first state of the bot to 'Hi'
   Session.set('nextBlocName', 'Hi');
 
-  var json = bloc('start', Session.get('nextBlocName'));//, function(err, result) {
+  // Get the JSON response of the bot
+  var json = bloc('start', Session.get('nextBlocName'));
 
     Session.set('botResponseJSON', json);
 
+    // Display of the slide (if there is a slide to display)
     if (json.quickReplies[0].title == undefined) {
     } else {
       var slide = json.quickReplies[0].title;
       Session.set('slide', slide);
     }
 
-    Meteor.call('messages.insert', json.botResponse, 'bot');
+    // Insert the message in the database
+    Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
 
+    // Set the next state of the bot
     Session.set('nextBlocName', json.nextBlocID);
     
  // });

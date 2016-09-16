@@ -60,7 +60,9 @@ class App extends Component {
     		<div>
         
           <img src='images/sized_background.jpg' className='background2'/>
+          
           <Slides imageSrc={Session.get('slide')}/>  		
+          
           {/*<img src='images/allan_grey_opening_page.jpg' className='background' />*/}
     	    <p><img src='images/logo.png' className='logo' onClick={this.onLogoClick}></img></p>
     			

@@ -23,7 +23,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Chatbot industry';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/team.jpg"}];
+		var quickReplies = [{"title": "pres/team.png"}];
 		
 
 		var json = {
@@ -43,7 +43,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Machine learning';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/security.jpg"}];
+		var quickReplies = [{"title": "pres/security.png"}];
 		
 
 		var json = {
@@ -63,7 +63,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Far Ventures';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/m-learning.jpg"}];
+		var quickReplies = [{"title": "pres/m-learning.png"}];
 		
 
 		var json = {
@@ -83,7 +83,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Impact';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/example.jpg"}];
+		var quickReplies = [{"title": "pres/example.png"}];
 		
 
 		var json = {
@@ -103,7 +103,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Journey';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -123,7 +123,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Yebo';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/chat-rev.jpg"}];
+		var quickReplies = [{"title": "pres/chat-rev.png"}];
 		
 
 		var json = {
@@ -150,7 +150,7 @@ export default function bloc(text, blocName) {
 			var inReplyto = text;
 			var nextBlocID = 'Presentation';
 			//var slide = 'pres/example';
-			var quickReplies = [{"title": "pres/back.jpg"}];
+			var quickReplies = [{"title": ""}];
 		
 		} else {							// Define the error JSON  (no match)
 			var botResponse = 'sorry';
@@ -176,7 +176,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Introduce yourself';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -196,7 +196,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Thanks';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -216,7 +216,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Chatbot industry';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/team.jpg"}];
+		var quickReplies = [{"title": "pres/team.png"}];
 		
 
 		var json = {
@@ -236,7 +236,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Yebo';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/chat-rev.jpg"}];
+		var quickReplies = [{"title": "pres/chat-rev.png"}];
 		
 
 		var json = {
@@ -256,7 +256,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Example';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -276,7 +276,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Impact';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/example.jpg"}];
+		var quickReplies = [{"title": "pres/example.png"}];
 		
 
 		var json = {
@@ -296,7 +296,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Journey';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -316,7 +316,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Call center';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/journey.jpg"}];
+		var quickReplies = [{"title": "pres/journey.png"}];
 		
 
 		var json = {
@@ -336,7 +336,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Super joke';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/call.jpg"}];
+		var quickReplies = [{"title": "pres/call.png"}];
 		
 
 		var json = {
@@ -356,7 +356,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Functions';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -376,7 +376,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'I know';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/functions.jpg"}];
+		var quickReplies = [{"title": "pres/functions.png"}];
 		
 
 		var json = {
@@ -396,7 +396,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Security';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -416,7 +416,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Are you there';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -436,7 +436,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Security';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/back.jpg"}];
+		var quickReplies = [{"title": ""}];
 		
 
 		var json = {
@@ -456,7 +456,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Machine learning';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/security.jpg"}];
+		var quickReplies = [{"title": "pres/security.png"}];
 		
 
 		var json = {
@@ -476,7 +476,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Far Ventures';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/m-learning.jpg"}];
+		var quickReplies = [{"title": "pres/m-learning.png"}];
 		
 
 		var json = {
@@ -496,7 +496,7 @@ export default function bloc(text, blocName) {
 		var inReplyto = text;
 		var nextBlocID = 'Continue';
 		//var slide = 'pres/example';
-		var quickReplies = [{"title": "pres/fventures.jpg"}];
+		var quickReplies = [{"title": "pres/fventures.png"}];
 		
 
 		var json = {
