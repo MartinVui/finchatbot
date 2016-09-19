@@ -4,11 +4,11 @@ import ReactDOM from 'react-dom';
 
 export default class Message extends Component {
 
-  componentDidMount() {
-    if(this.props.author === 'bot') {
-      Session.set('showGif', false);
-    }
-  }
+  // componentDidMount() {
+  //   if(this.props.author === 'bot') {
+  //     Session.set('showGif', false);
+  //   }
+  // }
 
 
   render() {

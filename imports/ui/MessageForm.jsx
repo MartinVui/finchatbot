@@ -36,8 +36,14 @@ export default class MessageForm2 extends Component {
       Session.set('slide', slide);
     }
 
+    Session.set('showGif', true);
+    var TIMEOUT = setTimeout(function() {
+      Session.set('showGif', false);
+    Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+    },2500);
+
     // Insert the bot message
-    Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
+ //   Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
 
     // Set the new state of the bot
     Session.set('nextBlocName', json.nextBlocID);

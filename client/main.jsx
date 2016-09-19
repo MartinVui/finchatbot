@@ -7,7 +7,8 @@ import bloc from '../imports/api/blocs.js';
  
 Meteor.startup(() => {
 
-
+  Session.set('showGif', false);
+  
 //  Check if the user is on mobile. If he is, redirect him to the mobile version
 /*  var isMobile={
     Android:function(){
