@@ -10,6 +10,17 @@ export default class Message extends Component {
   //   }
   // }
 
+  constructor() {
+    super();
+    this.state = {
+          imageLoaded: false,
+      };
+  }
+
+  handleImageLoad() {
+    this.setState({imageLoaded: true});
+  }
+
 
   render() {
 
@@ -66,22 +77,29 @@ export default class Message extends Component {
     var newText = messageText.replace(regEx, link);
     console.log(newText);*/
   
+    if(this.state.imageLoaded === true) {
+      if(this.props.author === 'user') {
+        return (
+         <div className="user_message">
+         <p className="user_text">{this.props.text}</p>       
+         </div>
+         );
+      }
 
-    if(this.props.author === 'user') {
-      return (
-       <div className="user_message">
-       <p className="user_text">{this.props.text}</p>       
-       </div>
-       );
-    }
-
-    if(this.props.author === 'bot') {
-      return (
-       <div className="bot_message">
-       <img src='images/logo.png' className="bot_message"/>
-       <p className="bot_text">{contents}</p>   
-       </div>
-       );
+      if(this.props.author === 'bot') {
+        return (
+         <div className="bot_message">
+         <img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
+         <p className="bot_text">{contents}</p>   
+         </div>
+         );
+      }
+    } else {
+      return(
+        <div className="bot_message">
+        <img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
+        </div>
+      )
     }
   }
 }
