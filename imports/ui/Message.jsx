@@ -56,10 +56,10 @@ export default class Message extends Component {
         // The word is not a URL, return the word
         } else if (word.match(/<gras>(.*)/)) {
 
-          console.log('yoyo');
+      
           var regex = /<gras>(.*)/;
           word = word.replace(regex, RegExp.$1);
-          return <strong>{word}{separator}</strong>;
+          return <strong key={i}>{word}{separator}</strong>;
         }
         else {                                                  
           
@@ -77,7 +77,7 @@ export default class Message extends Component {
     var newText = messageText.replace(regEx, link);
     console.log(newText);*/
   
-    if(this.state.imageLoaded === true) {
+    
       if(this.props.author === 'user') {
         return (
          <div className="user_message">
@@ -90,16 +90,11 @@ export default class Message extends Component {
         return (
          <div className="bot_message">
          <img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
-         <p className="bot_text">{contents}</p>   
+         {this.state.imageLoaded  ?
+          <p className="bot_text">{contents}</p> :null
+          }  
          </div>
          );
       }
-    } else {
-      return(
-        <div className="bot_message">
-        <img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
-        </div>
-      )
-    }
   }
 }
