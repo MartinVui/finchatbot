@@ -52,9 +52,9 @@ Meteor.startup(() => {
     Session.set('botResponseJSON', json);
 
     // Display of the slide (if there is a slide to display)
-    if (json.quickReplies[0].title == undefined) {
+    if (json.slides[0].title == undefined) {
     } else {
-      var slide = json.quickReplies[0].title;
+      var slide = json.slides[0].title;
       Session.set('slide', slide);
     }
 

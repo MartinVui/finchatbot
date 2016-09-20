@@ -5,7 +5,7 @@ import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
 import bloc from '../api/blocs.js';
 
-//import ButtonList from './ButtonList.jsx';
+import ButtonList from './ButtonList.jsx';
 
 export default class MessageForm2 extends Component {
 
@@ -30,9 +30,9 @@ export default class MessageForm2 extends Component {
     Session.set('botResponseJSON', json);
 
     // Change the slide if it has to be changed 
-    if (json.quickReplies[0].title == undefined) {
+    if (json.slides[0].title == undefined) {
     } else {
-      var slide = json.quickReplies[0].title;
+      var slide = json.slides[0].title;
       Session.set('slide', slide);
     }
 
@@ -60,7 +60,7 @@ export default class MessageForm2 extends Component {
     return(
 
         	<div className='message_form'>
-              {/*<ButtonList />        */}     
+              <ButtonList />            
               
 	          	<form className="new_message" onSubmit={this.handleSubmit.bind(this)}>
 	            	<input type="text" ref="textInput" placeholder="Write a new message"/>
