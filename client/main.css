@@ -18,6 +18,11 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  display: -webkit-flex;
+  -webkit-flex-direction: row;
+  -webkit-justify-content: center;
+  -webkit-align-items: center;
 }
 
 .background
@@ -48,6 +53,7 @@ body {
   background-color: #dfe9ef;
   height: 20px;
   display:flex;
+  display: -webkit-flex;
   border-radius:7px;
 }
 
@@ -75,6 +81,11 @@ body {
   flex-wrap: wrap;  
   justify-content: center;
   align-content: center;
+
+  display: -webkit-flex;
+  -webkit-flex-wrap: wrap;
+  -webkit-justify-content: center;
+  -webkit-align-content: center;
 }
 
 
@@ -108,6 +119,10 @@ height: auto;
 display: flex;
 align-self: flex-end;
 justify-content: flex-end;
+
+display: -webkit-flex;
+-webkit-align-self: flex-end;
+-webkit-justify-content: flex-end;
 }
 
 .bot_message
@@ -118,6 +133,7 @@ padding:3px;
 max-width: 100%;
 height: auto;
 display:flex;
+display: -webkit-flex;
 border-radius:4px;
 word-wrap: break-word;
 }
@@ -169,7 +185,7 @@ img.bot_message{
   bottom:29%;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -182,6 +198,7 @@ img.bot_message{
 .conversation{
   height:auto;
   display:flex;
+  display: -webkit-flex;
   border-radius: 10px;
 }
 
@@ -207,6 +224,7 @@ form {
   padding:10px;
   background: #a6a6a6;
   display: flex;
+  display: -webkit-flex;
 }
 
 
