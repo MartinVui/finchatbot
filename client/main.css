@@ -169,9 +169,14 @@ img.bot_message{
   bottom:29%;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
+  
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  display: -webkit-flex;
+  -webkit-justify-content: flex-end;
+  -webkit-flex-direction: column;
 }
 
 .conversation{

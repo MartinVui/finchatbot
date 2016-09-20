@@ -78,23 +78,23 @@ export default class Message extends Component {
     console.log(newText);*/
   
     
-      if(this.props.author === 'user') {
-        return (
-         <div className="user_message">
-         <p className="user_text">{this.props.text}</p>       
-         </div>
-         );
-      }
+    if(this.props.author === 'user') {
+      return (
+       <div className="user_message">
+       <p className="user_text">{this.props.text}</p>       
+       </div>
+       );
+    }
 
-      if(this.props.author === 'bot') {
-        return (
-         <div className="bot_message">
-         <img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
-         {this.state.imageLoaded  ?
-          <p className="bot_text">{contents}</p> :null
-          }  
-         </div>
-         );
-      }
+    if(this.props.author === 'bot') {
+      return (
+        <div className="bot_message">
+        <img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
+        {this.state.imageLoaded  ?
+        <p className="bot_text">{contents}</p> :null
+        }  
+        </div>
+      );
+    }
   }
 }
