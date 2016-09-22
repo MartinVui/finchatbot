@@ -38,7 +38,9 @@ Meteor.startup(() => {
 
 
   // Define a SessionID for the database
-  Session.set('sessionId', new Date());
+  var date = new Date();
+  var datestamp = Date.parse(date);
+  Session.set('sessionId', datestamp);
 
   // Delete the messages of the same session when the app starts (for the demo, mostly)
   Meteor.call('messages.deleteAllMessages', Session.get('sessionId'));
