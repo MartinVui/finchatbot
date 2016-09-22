@@ -27,7 +27,7 @@ export default class ChatBox extends Component {
 	        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
 	        	</footer>
      		</div>
-     		<p><img src='images/bulle_grise.png' className='bulle'></img></p></div>
+     		<p><img src='images/bulle_bleu.png' className='bulle'></img></p></div>
 
 	    );
 	}

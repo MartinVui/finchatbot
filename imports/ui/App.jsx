@@ -59,7 +59,7 @@ class App extends Component {
 
     		<div>
         
-          <img src='images/sized_background.jpg' className='background2'/>
+          <img src='images/background.jpg' className='background2'/>
           
           <Slides imageSrc={Session.get('slide')}/>  		
           

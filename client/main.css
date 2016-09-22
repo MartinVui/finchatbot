@@ -5,6 +5,7 @@ body {
   background-repeat: no-repeat;
   z-index: -1;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .left_part
@@ -36,10 +37,13 @@ body {
 .background2  /* The background behind the background */
 {
 
-    height: 100%;
+    height: auto;
     width: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-left: -10px;
     
-    position: fixed;
+    
     left:0px;
     top:0px;
     z-index: -1;
@@ -153,7 +157,7 @@ word-wrap: break-word;
 { 
   font-size: 15px;
   max-width: 70%;
-  background-color: #a6a6a6;
+  background-color: #10454c;
   color: #ffffff;
   padding:7px;
   border-radius: 4px;
@@ -222,7 +226,7 @@ input
 form {
   border-radius: 0px 0px 10px 10px;
   padding:10px;
-  background: #a6a6a6;
+  background: #10454c;
   display: flex;
   display: -webkit-flex;
 }
