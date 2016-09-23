@@ -18,7 +18,7 @@ export default class ChatBox extends Component {
 	// Render the whole chatbox when the user click on the chatbot logo
 	
 		return(
-			<div><div className="container">
+			<div className="container">
 	        	
 	        	<div className="conversation">
 	        		<MessageList messages={this.props.messages}/>
@@ -27,7 +27,7 @@ export default class ChatBox extends Component {
 	        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
 	        	</footer>
      		</div>
-     		<p><img src='images/bulle_grise.png' className='bulle'></img></p></div>
+     		
 
 	    );
 	}

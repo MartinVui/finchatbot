@@ -25,25 +25,6 @@ body {
   -webkit-align-items: center;
 }
 
-.background
-{
-  width:auto;
-  height: auto;
-  max-width: 90%;
-  max-height: 90%;
-}
-
-.background2  /* The background behind the background */
-{
-
-    height: 100%;
-    width: 100%;
-    
-    position: fixed;
-    left:0px;
-    top:0px;
-    z-index: -1;
-}
 
 .typing_gif
 {
@@ -97,17 +78,6 @@ body {
   right:1.5%;
   bottom:2%;
   z-index: 998;
-}
-
-.bulle
-{
-  height: 16%;
-  width: 7%;
-  position: fixed;
-  right:8%;
-  bottom:16%;
-  z-index: 999;
-  color:#62a8ea; 
 }
 
 .user_message
@@ -175,14 +145,14 @@ img.bot_message{
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: 64%;
-  width: 25%;
+  height: 100%;
+  width: 100%;
   padding-top:10px;
   font-family: arial,sans-serif;
   font-size: 14px;
   position: fixed;
-  right:2%;
-  bottom:29%;
+  top:0px;
+  left:0px;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
 
