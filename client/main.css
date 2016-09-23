@@ -72,12 +72,21 @@ body {
 
 .logo
 {
-  height: 25%;
+  height: 20%;
   width: auto;
   position: fixed;
   right:1.5%;
   bottom:0%;
   z-index: 998;
+}
+
+.bulle {
+  height:19%;
+  width: auto;
+  position: fixed;
+  right: 20%;
+  bottom: 15%;
+  z-index: 1000;
 }
 
 .user_message
@@ -145,7 +154,7 @@ img.bot_message{
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: 70%;
+  height: 65%;
   width: 94%;
   padding-top:10px;
   font-family: arial,sans-serif;
