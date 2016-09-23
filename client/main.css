@@ -72,8 +72,8 @@ body {
 
 .logo
 {
-  height: 100px;
-  width: 100px;
+  height: 25%;
+  width: auto;
   position: fixed;
   right:1.5%;
   bottom:2%;
@@ -145,7 +145,7 @@ img.bot_message{
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: 100%;
+  height: 70%;
   width: 100%;
   padding-top:10px;
   font-family: arial,sans-serif;

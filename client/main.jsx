@@ -4,6 +4,8 @@ import { render } from 'react-dom';
  
 import App from '../imports/ui/App.jsx';
 import bloc from '../imports/api/blocs.js';
+
+
  
 Meteor.startup(() => {
 
