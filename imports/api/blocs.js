@@ -28,7 +28,7 @@ export default function bloc(text, blocName) {
 		matchWord=/(.*)start(.*)/;
 
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
-			var botResponse = 'Hi there! My name is Henry, I heard you wanted to contact the team. Can I get your email address please?';
+			var botResponse = 'Hey there! My name is Dave, I heard you wanted to contact the team. Can I get your email address please?';
 			var inReplyto = text;
 			var nextBlocID = 'Check mail';
 			var quickReplies = [];
@@ -84,6 +84,28 @@ export default function bloc(text, blocName) {
 	}
 
 	if (blocName==='Check name') {
+
+		
+		var botResponse = 'Thanks! What message do you want me to spread ?';
+		var inReplyto = text;
+		var nextBlocID = 'Get message';
+		var quickReplies = [{}];
+		var slides = [{"title": ""}];
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"slides": slides,
+			"nextBlocID": nextBlocID
+		};
+
+		console.log(json);
+		return json;
+	}
+
+	if (blocName==='Get message') {
 
 		
 		var botResponse = 'Ok cool, I have everything I need. I will let them know and they will come back to you as soon as possible. By then, do not hesitate to keep in touch with us by email: hello@finchatbot.com';
