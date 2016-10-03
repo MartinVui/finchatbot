@@ -28,7 +28,7 @@ export default function bloc(text, blocName) {
 		matchWord=/(.*)start(.*)/;
 
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
-			var botResponse = 'Hey there! My name is Dave, I heard you wanted to contact the team. Can I get your email address please?';
+			var botResponse = 'Hey there! My name is Chris, I heard you wanted to contact the team. Can I get your email address please?';
 			var inReplyto = text;
 			var nextBlocID = 'Check mail';
 			var quickReplies = [];
