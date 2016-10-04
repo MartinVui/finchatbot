@@ -134,7 +134,7 @@ img.bot_message{
   font-family: arial,sans-serif;
   font-size: 14px;
   position: fixed;
-  top:3%;
+  bottom: 0%;
   left:3%;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
@@ -173,7 +173,7 @@ input
 }
 
 form {
-  border-radius: 0px 0px 10px 10px;
+  
   padding:10px;
   background: #a6a6a6;
   display: flex;
