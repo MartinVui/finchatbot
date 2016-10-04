@@ -64,8 +64,17 @@ export default function bloc(text, blocName) {
 			var quickReplies = [];
 			var slides = [{"title": ""}];
 		
-		} else {							// Define the error JSON  (no match)
-			var botResponse = 'Sorry mate, I am not an expert but it does not look like a proper email address. Can you give it to me again please?';
+		} else {			// Define the error JSON  (no match)
+			var rand = Math.random()*10;
+			console.log(rand);
+			
+			if (rand<=3) {
+				var botResponse = 'Sorry mate, I am not an expert but it does not look like a proper email address. Can you give it to me again please?';
+			} else if(rand>=7) {
+				var botResponse = 'Is that an email address? Can you give it again please?'
+			} else {
+				var botResponse = 'I do not think that it is a proper email address, can you give it to me again please?'
+			}
 			var inReplyto = text;
 			var nextBlocID = 'Check mail';
 			var slides = [{"title":""}];
