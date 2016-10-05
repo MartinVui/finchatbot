@@ -38,6 +38,14 @@ class App extends Component {
       }
   }
 
+  hideChatBox() {
+    this.setState({
+      showChatBox:false
+    });
+  }
+
+
+
   displayChatBox() {
 // Automatically open the chatbox after 10 sec
 
@@ -59,12 +67,14 @@ class App extends Component {
 
     		<div>
         
-          <img src='images/background.jpg' className='background2'/>
+          <img src='images/background.jpg' className='background2' onClick={this.hideChatBox.bind(this)}/>
           
-          <Slides imageSrc={Session.get('slide')}/>  		
+		
           
           {/*<img src='images/allan_grey_opening_page.jpg' className='background' />*/}
-    	    <p><img src='images/logo.png' className='logo' onClick={this.onLogoClick}></img></p>
+          {this.state.showChatBox==false ?
+    	       <p><img src='images/logo.png' className='logo' onClick={this.onLogoClick}></img></p> : null
+          }
     			
     	    {this.state.showChatBox ?
         		<ChatBox messages={this.props.messages}/>: null

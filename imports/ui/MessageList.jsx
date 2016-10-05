@@ -8,6 +8,18 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 export default class MessageList extends Component { 
 
 
+  constructor() {
+    super();
+    this.state = {
+          imageLoaded: false,
+      };
+  }
+
+  handleImageLoad() {
+    this.setState({imageLoaded: true});
+  }
+
+
 
   componentDidUpdate() {
     // Used for the autoscroll. Need to find something for smooth autoscroll
@@ -27,6 +39,14 @@ export default class MessageList extends Component {
           transitionName="example" 
           transitionEnterTimeout={400} 
           transitionLeaveTimeout={3}>
+
+          <div className="bot_message">
+          <img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
+          {this.state.imageLoaded  ?
+          <p className="bot_text">{Session.get('first_message')}</p> :null
+          }  
+          </div>
+
           {this.props.messages.map((message, i) => (
                 <Message key={i} text={message.text} author={message.author}/>
                 ))

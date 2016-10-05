@@ -8,6 +8,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  color: #fff;
+}
+
 .left_part
 {
   position: fixed;
@@ -147,7 +151,8 @@ word-wrap: break-word;
   font-size: 15px;
   max-width: 70%;
   height: auto;
-  background-color: #dfe9ef;
+  background-color: #3e8cd5;
+  color: #fff;
   padding:7px;
   border-radius:4px;
   margin: 0px;
@@ -157,8 +162,8 @@ word-wrap: break-word;
 { 
   font-size: 15px;
   max-width: 70%;
-  background-color: #10454c;
-  color: #ffffff;
+  background-color: #eef1f5;
+  color: #000;
   padding:7px;
   border-radius: 4px;
   margin: 0px;
@@ -179,14 +184,14 @@ img.bot_message{
 .container{
   background: #fff;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: 64%;
+  height: 70%;
   width: 25%;
   padding-top:10px;
   font-family: arial,sans-serif;
   font-size: 14px;
   position: fixed;
   right:2%;
-  bottom:29%;
+  bottom:0%;
   z-index: 998;
   border-radius: 10px 10px 20px 20px;
 
@@ -224,9 +229,9 @@ input
 }
 
 form {
-  border-radius: 0px 0px 10px 10px;
+  
   padding:10px;
-  background: #10454c;
+  background: #616161;
   display: flex;
   display: -webkit-flex;
 }

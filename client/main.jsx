@@ -60,8 +60,9 @@ Meteor.startup(() => {
       Session.set('slide', slide);
     }
 
-    // Insert the message in the database
-    Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
+    // Insert the message in the database    // UPDATE : the first bot message is not inserted in the database
+   // Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
+    Session.set('first_message', json.botResponse);
 
     // Set the next state of the bot
     Session.set('nextBlocName', json.nextBlocID);
