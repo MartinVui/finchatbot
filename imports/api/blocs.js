@@ -54,7 +54,7 @@ export default function bloc(text, blocName) {
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
 			var botResponse = 'Hello, my name is Zuko. How can I help you today?';
 			var inReplyto = text;
-			var nextBlocID = 'Insurrance';
+			var nextBlocID = 'Name';
 			var quickReplies = [{}];
 			var slides = [{"title": ""}];
 			var skip = false;
@@ -81,9 +81,33 @@ export default function bloc(text, blocName) {
 		return json;
 	}
 
+	if (blocName==='Name') {
+		
+		var botResponse = 'Ok sure! Before processing your request, I would need your e-mail adress please';
+		var inReplyto = text;
+		var nextBlocID = 'Insurrance';
+		var quickReplies = [{}];
+		var slides = [{"title": ""}];
+		var skip = false;
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"slides": slides,
+			"nextBlocID": nextBlocID,
+			"skip": skip
+		};
+
+		console.log(json);
+		return json;
+	}
+
+
 	if (blocName==='Insurrance') {
 		
-		var botResponse = 'Ok I see. It will depend of what type of life cover you are looking for. Are you interested in personal, business or HIV cover?';
+		var botResponse = 'Thank you! Are you interested in personal cover, business cover or HIV cover?';
 		var inReplyto = text;
 		var nextBlocID = 'Offers';
 		var quickReplies = [{"title":"Personal cover"},{"title":"Business cover"},{"title":"HIV cover"}];
@@ -134,7 +158,7 @@ export default function bloc(text, blocName) {
 		
 		var botResponse = 'Very well! A life cover is to ensure that your partner or family will survive financialy when you are no longer around to contribute. Would you like to read more about this insurance? https://www.triarc.co.za/life-insurance/life-cover/';
 		var inReplyto = text;
-		var nextBlocID = 'Introduce yourself';
+		var nextBlocID = 'Contact';
 		var quickReplies = [{}];
 		var slides = [{"title": ""}];
 		var skip = false;
@@ -152,4 +176,55 @@ export default function bloc(text, blocName) {
 		console.log(json);
 		return json;
 	}
+
+
+	if (blocName==='Contact') {
+		
+		var botResponse = 'May I ask for your number please, and one of our consultant will call you back at your convenience';
+		var inReplyto = text;
+		var nextBlocID = 'Number';
+		var quickReplies = [{}];
+		var slides = [{"title": ""}];
+		var skip = false;
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"slides": slides,
+			"nextBlocID": nextBlocID,
+			"skip": skip
+		};
+
+		console.log(json);
+		return json;
+	}
+
+
+	if (blocName==='Number') {
+		
+		var botResponse = 'Thank you! One of our consultants will call you back later on';
+		var inReplyto = text;
+		var nextBlocID = 'End';
+		var quickReplies = [{}];
+		var slides = [{"title": ""}];
+		var skip = false;
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"slides": slides,
+			"nextBlocID": nextBlocID,
+			"skip": skip
+		};
+
+		console.log(json);
+		return json;
+	}
+
+
+
 }

@@ -19,7 +19,7 @@ export default class Button extends Component {
     // get the JSON response from the bot
     var json = bloc(text, Session.get('nextBlocName'));
 
-    Session.set('botResponseJSON', json);
+    
 
     // Change the slide if it has to be changed 
     if (json.slides[0].title == undefined) {
@@ -31,12 +31,14 @@ export default class Button extends Component {
     // Insert the bot message
     Session.set('showGif', true);
     var TIMEOUT = setTimeout(function() {
+      Session.set('botResponseJSON', json);
       Session.set('showGif', false);
-    Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-    },2500);
+      Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+    
+      // Set the new state of the bot
+      Session.set('nextBlocName', json.nextBlocID);
 
-    // Set the new state of the bot
-    Session.set('nextBlocName', json.nextBlocID);
+    },2500);
     
     // Show the typing gif (not used now)
     Session.set('showGif', true);
