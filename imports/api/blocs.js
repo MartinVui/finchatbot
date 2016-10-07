@@ -108,7 +108,7 @@ export default function bloc(text, blocName) {
 
 	if (blocName==='Quote') {
 		
-		var botResponse = 'Let\'s do this! Can i know the model of your car?';
+		var botResponse = 'Let\'s do this! Can I know the model of your car?';
 		var inReplyto = text;
 		var nextBlocID = 'Model';
 		var quickReplies = [{}];
@@ -133,7 +133,7 @@ export default function bloc(text, blocName) {
 	if (blocName==='Model') {
 		
 		
-			var botResponse = 'Nice one! Now i will need more informations about you. Can i have your name and surname please?';
+			var botResponse = 'Nice one! Now I would need more informations about you. Can I have your name and surname please?';
 			var inReplyto = text;
 			var nextBlocID = 'Name';
 			var quickReplies = [{}];
@@ -181,21 +181,38 @@ export default function bloc(text, blocName) {
 
 	if (blocName==='Contact') {
 		
-		var botResponse = 'Thanks! We will come back to you as soon as possible. if you want to consult our offers, you can follow https://www.miway.co.za/car-insurance';
-		var inReplyto = text;
-		var nextBlocID = 'Number';
-		var quickReplies = [{}];
-		var slides = [{"title": ""}];
-		var skip = false;
 		
+		matchWord=/(.*)@(.*)/;
+
+		if (text.match(matchWord)) {		// Define the response JSON if there is a match
+			var botResponse = 'Thanks! We will come back to you as soon as possible. if you want to consult our offers, you can follow https://www.miway.co.za/car-insurance';
+			var inReplyto = text;
+			var nextBlocID = 'End';
+			var quickReplies = [];
+			var slides = [{"title": ""}];
+		
+		} else {			// Define the error JSON  (no match)
+			var rand = Math.random()*10;
+			console.log(rand);
+			
+			if (rand<=3) {
+				var botResponse = 'Sorry mate, I am not an expert but it does not look like a proper email address. Can you give it to me again please?';
+			} else if(rand>=7) {
+				var botResponse = 'Is that an email address? Can you give it again please?'
+			} else {
+				var botResponse = 'I do not think that it is a proper email address, can you give it to me again please?'
+			}
+			var inReplyto = text;
+			var nextBlocID = 'Contact';
+			var slides = [{"title":""}];
+		}
 
 		var json = {
 			"botResponse": botResponse,
 			"inReplyTo": inReplyto,
 			"quickReplies": quickReplies,
 			"slides": slides,
-			"nextBlocID": nextBlocID,
-			"skip": skip
+			"nextBlocID": nextBlocID
 		};
 
 		console.log(json);
@@ -203,11 +220,11 @@ export default function bloc(text, blocName) {
 	}
 
 
-	if (blocName==='Number') {
+	if (blocName==='End') {
 		
 		var botResponse = 'Thank you! One of our consultants will call you back later on';
 		var inReplyto = text;
-		var nextBlocID = 'End';
+		var nextBlocID = 'YOOOO';
 		var quickReplies = [{}];
 		var slides = [{"title": ""}];
 		var skip = false;
