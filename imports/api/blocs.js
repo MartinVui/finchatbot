@@ -54,7 +54,7 @@ export default function bloc(text, blocName) {
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
 			var botResponse = 'Hello, my name is Zuko. How can I help you today?';
 			var inReplyto = text;
-			var nextBlocID = 'Name';
+			var nextBlocID = 'Car insurance';
 			var quickReplies = [{}];
 			var slides = [{"title": ""}];
 			var skip = false;
@@ -81,11 +81,36 @@ export default function bloc(text, blocName) {
 		return json;
 	}
 
-	if (blocName==='Name') {
+
+	if (blocName==='Car insurance') {
 		
-		var botResponse = 'Ok sure! Before processing your request, I would need your e-mail adress please';
+		var botResponse = 'Ok sure! Do you want to know more about our offers or to get a speed quote?';
 		var inReplyto = text;
-		var nextBlocID = 'Insurrance';
+		var nextBlocID = 'Quote';
+		var quickReplies = [{"title": "See the offers"},{"title": "Get a quote"}];
+		var slides = [{"title": ""}];
+		var skip = false;
+		
+
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"quickReplies": quickReplies,
+			"slides": slides,
+			"nextBlocID": nextBlocID,
+			"skip": skip
+		};
+
+		console.log(json);
+		return json;
+	}
+
+
+	if (blocName==='Quote') {
+		
+		var botResponse = 'Let\'s do this! Can i know the model of your car?';
+		var inReplyto = text;
+		var nextBlocID = 'Model';
 		var quickReplies = [{}];
 		var slides = [{"title": ""}];
 		var skip = false;
@@ -105,58 +130,34 @@ export default function bloc(text, blocName) {
 	}
 
 
-	if (blocName==='Insurrance') {
-		
-		var botResponse = 'Thank you! Are you interested in personal cover, business cover or HIV cover?';
-		var inReplyto = text;
-		var nextBlocID = 'Offers';
-		var quickReplies = [{"title":"Personal cover"},{"title":"Business cover"},{"title":"HIV cover"}];
-		var slides = [{"title": ""}];
-		var skip = false;
-		
-
-		var json = {
-			"botResponse": botResponse,
-			"inReplyTo": inReplyto,
-			"quickReplies": quickReplies,
-			"slides": slides,
-			"nextBlocID": nextBlocID,
-			"skip": skip
-		};
-
-		console.log(json);
-		return json;
-	}
-
-
-	if (blocName==='Offers') {
+	if (blocName==='Model') {
 		
 		
-			var botResponse = 'We can offer you four different types of personal covers depending on what you need. Which one would you like to get more information about?';
+			var botResponse = 'Nice one! Now i will need more informations about you. Can i have your name and surname please?';
 			var inReplyto = text;
-			var nextBlocID = 'See more';
-			var quickReplies = [{"title":"Life cover"},{"title":"Disability cover"},{"title":"Dread disease cover"},{"title":"Income protection"}];
+			var nextBlocID = 'Name';
+			var quickReplies = [{}];
 			var slides = [{"title": ""}];
 			var skip = false;
 		
 
-		var json = {
-			"botResponse": botResponse,
-			"inReplyTo": inReplyto,
-			"quickReplies": quickReplies,
-			"slides": slides,
-			"nextBlocID": nextBlocID,
-			"skip": skip
-		};
+			var json = {
+				"botResponse": botResponse,
+				"inReplyTo": inReplyto,
+				"quickReplies": quickReplies,
+				"slides": slides,
+				"nextBlocID": nextBlocID,
+				"skip": skip
+			};
 
-		console.log(json);
-		return json;
+			console.log(json);
+			return json;
 	}
 
 
-	if (blocName==='See more') {
+	if (blocName==='Name') {
 		
-		var botResponse = 'Very well! A life cover is to ensure that your partner or family will survive financialy when you are no longer around to contribute. Would you like to read more about this insurance? https://www.triarc.co.za/life-insurance/life-cover/';
+		var botResponse = 'Thank you! Can I have your e-mail address please? We will send you your quote to this address as soon as it is done';
 		var inReplyto = text;
 		var nextBlocID = 'Contact';
 		var quickReplies = [{}];
@@ -180,7 +181,7 @@ export default function bloc(text, blocName) {
 
 	if (blocName==='Contact') {
 		
-		var botResponse = 'May I ask for your number please, and one of our consultant will call you back at your convenience';
+		var botResponse = 'Thanks! We will come back to you as soon as possible. if you want to consult our offers, you can follow https://www.miway.co.za/car-insurance';
 		var inReplyto = text;
 		var nextBlocID = 'Number';
 		var quickReplies = [{}];
