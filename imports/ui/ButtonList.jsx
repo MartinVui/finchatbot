@@ -13,8 +13,8 @@ export default class ButtonList extends Component {
 
     var ButtonList = [];
     // We don't use quickReplies[0], as it contains the URL of the background image, and not a button text
-    for (var i = 0; i < Session.get('botResponseJSON').quickReplies.length; i++) {
-      ButtonList.push(<Button buttonText={Session.get('botResponseJSON').quickReplies[i].title} key={i} buttonKey={i}/>);
+    for (var i = 0; i < Session.get('botResponseJSON').input.buttons.length; i++) {
+      ButtonList.push(<Button buttonText={Session.get('botResponseJSON').input.buttons[i].title} response={Session.get('botResponseJSON').input.buttons[i].response} key={i} buttonKey={i}/>);
     }
     
     return (

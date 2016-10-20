@@ -4,10 +4,6 @@ import { render } from 'react-dom';
  
 import App from '../imports/ui/App.jsx';
 import bloc from '../imports/api/blocs.js';
-
-
-
-
  
 Meteor.startup(() => {
 
@@ -49,6 +45,8 @@ Meteor.startup(() => {
   // Delete the messages of the same session when the app starts (for the demo, mostly)
   Meteor.call('messages.deleteAllMessages', Session.get('sessionId'));
 
+  Session.set('allData', []);
+
   // Set the first state of the bot to 'Hi'
   Session.set('nextBlocName', 'Hi');
 
@@ -57,12 +55,6 @@ Meteor.startup(() => {
 
     Session.set('botResponseJSON', json);
 
-    // Display of the slide (if there is a slide to display)
-    if (json.slides[0].title == undefined) {
-    } else {
-      var slide = json.slides[0].title;
-      Session.set('slide', slide);
-    }
 
     // Insert the message in the database    // UPDATE : the first bot message is not inserted in the database
    // Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
@@ -70,6 +62,25 @@ Meteor.startup(() => {
 
     // Set the next state of the bot
     Session.set('nextBlocName', json.nextBlocID);
+
+    var text = 'no_text';
+
+    if (json.skip === true) {
+        console.log('skip');
+
+        // var json = bloc(text, Session.get('nextBlocName'));
+        var json2 = bloc(text, Session.get('nextBlocName'));
+
+        Session.set('showGif', true);
+        var TIMEOUT2 = setTimeout(function() {
+          Session.set('botResponseJSON', json2);
+          Session.set('showGif', false);
+          Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+
+          // Set the new state of the bot
+          Session.set('nextBlocName', json2.nextBlocID);
+          },2500);
+      }
     
  // });
 

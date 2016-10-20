@@ -12,31 +12,91 @@ export default class Button extends Component {
     // insert the button text in the messages 
     // Get the corresponding bot response
 
-    const text = this.props.buttonText;
+    const data = this.props.response;
 
+    console.log(Session.get('allData'));
+
+    if (Session.get('botResponseJSON').createData !== false) {
+      var dataName = Session.get('botResponseJSON').createData.dataName;
+      var allData = Session.get('allData');
+      allData.push({dataName: dataName, text: data});
+      Session.set('allData',allData);
+    }
+
+    var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+    
+
+    var dataWrapper = Session.get('botResponseJSON').dataWrapper;
+
+
+    var text = dataWrapper.replace(/DATA/, data);
     Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
 
-    // get the JSON response from the bot
-    var json = bloc(text, Session.get('nextBlocName'));
-
-    Session.set('botResponseJSON', json);
-
-    // Change the slide if it has to be changed 
-    if (json.slides[0].title == undefined) {
-    } else {
-      var slide = json.slides[0].title;
-      Session.set('slide', slide);
-    }
 
     // Insert the bot message
     Session.set('showGif', true);
     var TIMEOUT = setTimeout(function() {
+      Session.set('botResponseJSON', json);
       Session.set('showGif', false);
-    Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-    },2500);
+      Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
 
-    // Set the new state of the bot
-    Session.set('nextBlocName', json.nextBlocID);
+      // Set the new state of the bot
+      Session.set('nextBlocName', json.nextBlocID);
+
+
+      if (json.skip === true) {
+
+        var json2 = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+
+
+        Session.set('showGif', true);
+        var TIMEOUT2 = setTimeout(function() {
+          Session.set('botResponseJSON', json2);
+          Session.set('showGif', false);
+          Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+
+          // Set the new state of the bot
+          Session.set('nextBlocName', json2.nextBlocID);
+
+          if (json2.skip === true) {
+
+
+            // var json = bloc(text, Session.get('nextBlocName'));
+            var json3 = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+
+            Session.set('showGif', true);
+            var TIMEOUT3 = setTimeout(function() {
+              Session.set('botResponseJSON', json3);
+              Session.set('showGif', false);
+              Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+
+              // Set the new state of the bot
+              Session.set('nextBlocName', json3.nextBlocID);
+
+              if (json3.skip === true) {
+
+
+                // var json = bloc(text, Session.get('nextBlocName'));
+                var json4 = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+
+                Session.set('showGif', true);
+                var TIMEOUT4 = setTimeout(function() {
+                  Session.set('botResponseJSON', json4);
+                  Session.set('showGif', false);
+                  Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+
+                  // Set the new state of the bot
+                  Session.set('nextBlocName', json4.nextBlocID);
+                  },2500);
+              }
+
+              },2500);
+          }
+
+          },2500);
+      }
+
+    },2500);
     
     // Show the typing gif (not used now)
     Session.set('showGif', true);
@@ -58,7 +118,7 @@ export default class Button extends Component {
     return( 
       <div className="button" //id={this.props.buttonKey}
       onClick={this.onButtonClick.bind(this)}>
-      {this.props.buttonText}
+      <p>{this.props.buttonText}</p>
       </div>
     );
   }

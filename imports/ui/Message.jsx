@@ -52,7 +52,7 @@ export default class Message extends Component {
         // The word is a URL, return the URL wrapped in a <a> component
         if (word.match(/https/)) {
           
-          return <a key={i} href={word}>view the demo{separator}</a>;
+          return <a key={i} href={word}>ChatbotMagazine.com{separator}</a>;
         // The word is not a URL, return the word
         } else if (word.match(/<gras>(.*)/)) {
 

@@ -5,7 +5,7 @@ import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-export default class MessageList extends Component { 
+export default class MessageList extends Component {
 
   constructor() {
     super();
@@ -21,11 +21,28 @@ export default class MessageList extends Component {
 
 
   componentDidUpdate() {
-    // Used for the autoscroll. Need to find something for smooth autoscroll
+    this.scrollDown()
+  }
 
+  scrollDown() {
     var node = ReactDOM.findDOMNode(this.refs.messageList);
     node.scrollTop = node.scrollHeight;
-    //Session.set('showGif', false);
+
+    var TIMEOUT = setTimeout(function() {
+      node.scrollTop = node.scrollHeight;
+    },150);
+
+    var TIMEOUT2 = setTimeout(function() {
+      node.scrollTop = node.scrollHeight;
+    },300);
+
+    var TIMEOUT3 = setTimeout(function() {
+      node.scrollTop = node.scrollHeight;
+    },450);
+
+    var TIMEOUT4 = setTimeout(function() {
+      node.scrollTop = node.scrollHeight;
+    },600);
   }
 
 
