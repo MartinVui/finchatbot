@@ -190,6 +190,7 @@ input {
   border: none;
   outline: none !important;
   border: 1px solid #a6a6a6;
+  font-size: 16px !important;
 }
 
 input :focus {
@@ -224,6 +225,9 @@ form {
   opacity:0.7;
 }
 
+#newMessageForm {
+  font-size: 16px;
+}
 
 
 
