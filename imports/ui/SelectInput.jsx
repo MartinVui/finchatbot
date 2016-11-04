@@ -76,9 +76,7 @@ export default class SelectInput extends Component {
  		            <option value="0" disabled selected>{Session.get('botResponseJSON').input.text}</option>
  		            {options}
 				</select>
- 		        <div className="button" onClick={this.onButtonClick.bind(this)}>
- 				Send
- 				</div>
+ 		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>
  		    </div>
  		)
 	}

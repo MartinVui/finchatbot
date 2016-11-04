@@ -10,7 +10,7 @@ Meteor.startup(() => {
   Session.set('showGif', false);
   
 //  Check if the user is on mobile. If he is, redirect him to the mobile version
-/*  var isMobile={
+var isMobile={
     Android:function(){
       return navigator.userAgent.match(/Android/i);
     },
@@ -33,8 +33,11 @@ Meteor.startup(() => {
 
   if(isMobile.any()) {
     console.log('mobile');
-    window.location.href="https://mdemofinchatbot.herokuapp.com";
-  }*/
+    Session.set('isMobile',true);
+    console.log(Session.get('isMobile'));
+  } else {
+    Session.set('isMobile',false);
+  }
 
 
   // Define a SessionID for the database

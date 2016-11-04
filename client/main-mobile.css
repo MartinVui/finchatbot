@@ -20,17 +20,6 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'Corbert';
-    src: url('fonts/corbert/Corbert-Regular.eot');
-    src: url('fonts/corbert/Corbert-Regular.eot?#iefix') format('embedded-opentype'),
-         url('fonts/corbert/Corbert-Regular.woff') format('woff'),
-         url('fonts/corbert/Corbert-Regular.otf') format('truetype'),
-         url('fonts/corbert/Corbert-Regular.svg#ambleregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 
 body {
   font-family: 'CaviarDreams';
@@ -105,7 +94,7 @@ a:visited {
   margin:5px;
   margin-left: 20px;
   padding:3px;
-  background-color: #2a3060;
+  background-color: #dfe9ef;
   height: 20px;
   display:flex;
   display: -webkit-flex;
@@ -210,7 +199,7 @@ img.bot_message {
   height: 100%;
   width: 100%;
   padding-top:10px;
-  font-family: 'Corbert';
+  font-family: 'GeoSansLight';
   font-weight: bold;
   font-size: 14px;
   position: fixed;
@@ -275,7 +264,6 @@ select {
   background-color: #fff;
   border-radius: 10px;
   outline: none !important;
-  font-size: 16px;
 }
 
 select :focus {
@@ -322,18 +310,8 @@ form {
 
 
 .send-icon {
-  height:0px;
-  width:0px;
-  margin-left: 15px;
-  align-self: center;
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-
-.send-icon-mobile {
   height:30px;
-  width: auto;
+  width:30px;
   margin-left: 15px;
   align-self: center;
   padding: 0;
@@ -349,28 +327,6 @@ form {
   font-size: 16px;
 }
 
-
-#checkbox-input {
-  display: flex;
-  justify-content: center;
-}
-
-.checkbox {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 40%;
-}
-
-.one-checkbox {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.one-checkbox input {
-  width: 10% !important;
-}
 
 
 

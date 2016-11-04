@@ -170,7 +170,7 @@ for select : text to be display on the button, value of the choices
 
 		if (text.match(matchWord1)) {
 
-			var botResponse = 'Yes sure! I think the best way is to get your e-mail address and I wil let them know. What\'s your e-mail address please? ';
+			var botResponse = 'Yes sure! I think the best way is to get your e-mail address and I will let them know. What\'s your e-mail address please? ';
 			var inReplyto = text;
 			var nextBlocID = 'Get email';
 			var skip = false;
