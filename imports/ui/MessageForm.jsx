@@ -25,7 +25,9 @@ export default class MessageForm2 extends Component {
         return response.json()
       }).then(json => {
         Session.set('botResponseJSON', json);
-        Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
+        Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId')
+
+          );
       });
     });
 

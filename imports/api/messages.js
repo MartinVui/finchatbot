@@ -4,12 +4,21 @@ import { check } from 'meteor/check';
  
 export const Messages = new Mongo.Collection('messages');
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+// For every methods : try to define a new collection for each session, that is deleted when the session closes.
+// Maybe faster than inserting all messages in the same collection, and then fetching only the messages corresponding
+// to the session
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Meteor.methods({
 
 
-  'messages.deleteAllMessages'(sessionId) {
+  'messages.deleteAllMessages'(sessionId) {   // I think it is useless now. I should put it back if I create 
+                                              // collections for each session
+                                              // In that case, delete the whole collection
+
   // Delete all the messages of the current conversation. Only used when the app is started, to make sure that the
   // chatbow will be empty
       Messages.remove({session: sessionId});
@@ -19,7 +28,7 @@ Meteor.methods({
 
 
 	'messages.insert'(text, author, sessionId) {
-    // Insert a single message in the conversation. The author has to be specified to create
+    // Insert a single message in the conversation. The author (bot or user) has to be specified to create
     // a distinction bot message / user message
 		  check(text, String);
 

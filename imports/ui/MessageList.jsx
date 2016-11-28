@@ -27,12 +27,13 @@ export default class MessageList extends Component {
                 ))
               }
 
-              {Session.get('showGif') ?         // Check if the "typing" gif has to be shown
+              {/*Session.get('showGif') ?         // Check if the "typing" gif has to be shown
               <div className='bot_message'>
                 <img src='images/LogoChatBot.png' className="bot_message"/>
                 <img src='images/typing.gif' className="typing_gif"/>
               </div>: null
-              }
+              */              // Not working very well, so I take it out while I haven't fixed it
+            }
 
           </div>
       );

@@ -20,20 +20,18 @@ class App extends Component {
   	}
 
   	
- 	onLogoClick() {
- 		if(this.state.showChatBox == false) {
-     		this.setState({
-     			showChatBox: true
-     		});
-   //       Meteor.call('messages.deleteAllMessages'),
-  //        Meteor.call('messages.getBotResponse', 'start'); 
-    }
-      else if(this.state.showChatBox == true) {
-     		this.setState({
-     			showChatBox: false
-     		});
+    onLogoClick() {
+      if(this.state.showChatBox == false) {
+        this.setState({
+          showChatBox: true
+        });
       }
-  }
+      else if(this.state.showChatBox == true) {
+        this.setState({
+          showChatBox: false
+        });
+      }
+   }
 
   displayChatBox() {
 // Automatically open the chatbox after 10 sec

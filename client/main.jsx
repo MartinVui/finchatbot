@@ -8,7 +8,6 @@ Meteor.startup(() => {
 
   Session.set('sessionId', new Date());
 
-//	Meteor.call('messages.deleteAllMessages'());
 
     Meteor.call('messages.getLink', 'start', Session.get('sessionId'), function(err, result) {
       fetch(result)
