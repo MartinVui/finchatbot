@@ -1,71 +1,115 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import emoji from 'react-easy-emoji';
+
+import MapMessage from './MapMessage.jsx';
 
 
 export default class Message extends Component {
 
-  componentDidMount() {
-    if(this.props.author === 'bot') {
-      Session.set('showGif', false);
-    }
-    console.log(Session.get('sessionId'));
-  }
 
 
-  render() {
+	constructor() {
+		super();
+		this.state = {
+			imageLoaded: false,
+		};
+	}
 
-    // render a single message. Check the author, to display bot messages and user messages differently
+	handleImageLoad() {
+		this.setState({imageLoaded: true});
+	}
 
 
-     // Check if nested content is a plain string
-    if (typeof this.props.text === 'string') {
+	render() {
 
-      // Split the content on space characters
-      var words = this.props.text.split(/\s/);
 
-      // Loop through the words
-      var contents = words.map(function(word,i) {
+		if (this.props.text === "") {
+			return(null);
+		}    
 
-        // Space if the word isn't the very last in the set, thus not requiring a space after it
-        var separator = i < (words.length - 1) ? ' ' : '';
 
-        // The word is a URL, return the URL wrapped in a custom <a> component
-        if (word.match(/https/)) {
-          console.log('found a link');
-          return <a key={i} href={word}>transfer on Allan Gray retirement annuity.{separator}</a>;
-        // The word is not a URL, return the word as-is
-        } else {
-          console.log('no link found');
-          return word + separator;
-        }
-      });
-    }
-    
+		// Check if content is a  string
+		if (typeof this.props.text === 'string') {
 
- /*   var messageText = this.props.text;
-    var regex = /<ahref='(.+)'>(.+)<\/a>/
+			// Split the content on space characters
+			var words = this.props.text.split(/\s/);
 
-    console.log(RegExp.$1,RegExp.$2);
-    var link = '<a href="$1">$2</a>';
-    var newText = messageText.replace(regex, link);
-    console.log(newText);*/
-  
+			// Loop through the words
+			var contents = words.map(function(word,i) {
 
-    if(this.props.author === 'user') {
-      return (
-       <div className="user_message">
-       <p className="user_text">{this.props.text}</p>       
-       </div>
-       );
-    }
+				// Space if the word isn't the very last in the set
+				var separator = i < (words.length - 1) ? ' ' : '';
 
-    if(this.props.author === 'bot') {
-      return (
-       <div className="bot_message">
-       <img src='images/LogoChatBot.png' className="bot_message"/>
-       <p className="bot_text">{contents}</p>   
-       </div>
-       );
-    }
-  }
+
+				// The word is a URL, return the URL wrapped in a <a> component
+				if (word.match(/LINK(.*)TEXT(.*)END/)) {
+
+					return <a key={i} target="_blank" href={RegExp.$1}>{RegExp.$2}{separator}</a>;
+					// The word is not a URL, return the word
+
+				} else if (word.match(/<gras>(.*)/)) {
+
+					var regex = /<gras>(.*)/;
+					word = word.replace(regex, RegExp.$1);
+					return <strong key={i}>{word}{separator}</strong>;
+
+				} else if (word.match(/SMILE/)) {
+
+					return <span>{emoji('😀')}</span>;
+
+				}
+
+
+				else {                                                  
+
+					return word + separator;
+				}
+			});
+		}
+
+
+		if(this.props.author === 'user') {
+
+			if(this.props.text === 'MAP') {
+
+				return (
+					<div className="user_message">
+						<MapMessage/>
+					</div>
+				)
+
+			} else {
+
+				return (
+
+					<div className="user_message">
+						<p className="user_text">{this.props.text}</p>       
+					</div>
+				);
+			}
+		}
+
+		if(this.props.author === 'bot') {
+
+			if(this.props.text === 'IMAGE') {
+				return (
+					<div className="bot_message">
+						<img src={Session.get('image')}/>
+					</div>
+				);
+
+			} else {
+
+				return (
+					<div className="bot_message">
+						<img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
+						{this.state.imageLoaded  ?
+							<p className="bot_text">{contents}</p> :null
+						}  
+					</div>
+				);
+			}
+		}
+	}
 }
