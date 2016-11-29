@@ -1148,7 +1148,7 @@ Meteor.methods({
 			+'    <!-- Two Columns, With Padding ==> Stacked Layout : BEGIN -->      <!-- Two Columns, With Padding ==> Stacked Layout : END -->'
 			+'    <!-- Full Width, Fluid Column : BEGIN -->'
 			+'    <tbody><tr>'
-			+'      <td><a href="http://www.hollardmail.co.za" "target="_blank"?utm_source=PI&utm_medium=BANNER&utm_term=HOLLARD&utm_campaign=HOLLARD "target="_blank"?utm_source=PI&utm_medium=BANNER&utm_term=HOLLARD&utm_campaign=HOLLARD "target="_blank"><img src="https://finchatbotcpt.herokuapp.com/images/stangen.png width="100%" height="auto" alt="Get Affordable Funeral Cover with Hollard"></a></td>'
+			+'      <td><a href="http://www.hollardmail.co.za" "target="_blank"?utm_source=PI&utm_medium=BANNER&utm_term=HOLLARD&utm_campaign=HOLLARD "target="_blank"?utm_source=PI&utm_medium=BANNER&utm_term=HOLLARD&utm_campaign=HOLLARD "target="_blank"><img src="https://finchatbotcpt.herokuapp.com/images/stangen.png" width="100%" height="auto" alt="Get Affordable Funeral Cover with Hollard"></a></td>'
 			+'    </tr>'
 			+'      <tr>'
 			+'        <td align="center" style="padding:10px; background-color:#fff"><table width="100%" border="0" cellspacing="8" cellpadding="6">'
