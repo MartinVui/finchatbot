@@ -206,7 +206,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}]
+					'buttons': [{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},/*{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},*/{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
