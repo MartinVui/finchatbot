@@ -1564,7 +1564,7 @@ Meteor.methods({
 		    this.unblock();
 		    Email.send({
 			   	to: data['email'],
-			    from: "hello@mobilife.com",
+			    from: "hello@mstangen.com",
 			    subject: 'Your quote',
 			    html: html
 		    });
