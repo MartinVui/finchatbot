@@ -11,6 +11,7 @@ export default class DateInput extends Component {
 
 
 	sendBotMessage(json) {
+		// Always the same, see AddressInput
 
 		var _this = this;
 
@@ -63,6 +64,7 @@ export default class DateInput extends Component {
 
 
 	onButtonClick() {
+		// Create tthe response format: DD/MM/YYYY
 		var day = ReactDOM.findDOMNode(this.refs.day).value.trim();
 		var month = ReactDOM.findDOMNode(this.refs.month).value.trim();
 		var year = ReactDOM.findDOMNode(this.refs.year).value.trim();
@@ -100,6 +102,9 @@ export default class DateInput extends Component {
 
 
 	render() {
+
+		// First we create the select input containing all the days, months and years.
+		// Maybe we should change this with a basic html date input. The design of this is quite bad tho
 
 		var days = [];
 		for (var i=1; i<32; i++) {

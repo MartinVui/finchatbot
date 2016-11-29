@@ -8,7 +8,7 @@ import bloc from '../../api/blocs.js';
 
 export default class TextInput extends Component {
 
-
+	// This one is really shitty. It only works for name + surname input. It only add the name to the data. That's shit, really
 
 
 	sendBotMessage(json) {

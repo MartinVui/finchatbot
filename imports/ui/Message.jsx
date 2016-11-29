@@ -41,6 +41,7 @@ export default class Message extends Component {
 				// Space if the word isn't the very last in the set
 				var separator = i < (words.length - 1) ? ' ' : '';
 
+				// Now we check if the word has a special display: URL / bold / smiley / and more to come
 
 				// The word is a URL, return the URL wrapped in a <a> component
 				if (word.match(/LINK(.*)TEXT(.*)END/)) {
@@ -54,7 +55,7 @@ export default class Message extends Component {
 					word = word.replace(regex, RegExp.$1);
 					return <strong key={i}>{word}{separator}</strong>;
 
-				} else if (word.match(/SMILE/)) {
+				} else if (word.match(/:SMILE:/)) {	// We can add any emoji we want
 
 					return <span>{emoji('😀')}</span>;
 
@@ -71,7 +72,7 @@ export default class Message extends Component {
 
 		if(this.props.author === 'user') {
 
-			if(this.props.text === 'MAP') {
+			if(this.props.text === 'MAP') {	// Check if the message is a map
 
 				return (
 					<div className="user_message">
@@ -92,7 +93,7 @@ export default class Message extends Component {
 
 		if(this.props.author === 'bot') {
 
-			if(this.props.text === 'IMAGE') {
+			if(this.props.text === 'IMAGE') {	// Check if the message is an image
 				return (
 					<div className="bot_message">
 						<img src={Session.get('image')}/>

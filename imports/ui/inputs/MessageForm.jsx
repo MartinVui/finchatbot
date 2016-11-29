@@ -20,13 +20,16 @@ export default class MessageForm extends Component {
 
   
     render() {
+    // Decides the type of input that has to be displayed
 
     return(
+
+
 
         <footer>
 
 
-        {Session.get('showGif') !== true ?
+        {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappear. Quite smart.
 
             <div className='message_form'>
              
@@ -63,7 +66,8 @@ export default class MessageForm extends Component {
         }
 
         </footer>
-       
+
+
         );
     }
 }

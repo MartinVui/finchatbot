@@ -18,7 +18,7 @@ export default class CheckBoxInput extends Component {
 	}
 	
 
-	sendBotMessage(json) {
+	sendBotMessage(json) {		// Always the same function - See AddressInput
 
 		var _this = this;
 
@@ -59,14 +59,14 @@ export default class CheckBoxInput extends Component {
 	}
 
 
-	onButtonClick() {
+	onButtonClick() {	// See AddressInput fore more details
 
 		var data = '';
 		var checkedItems = [];
 		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
 
 
-		for (var i = 0; i < this.state.checksValue.length; i++) {
+		for (var i = 0; i < this.state.checksValue.length; i++) {	// Create an array with the values the user checked
 			if(this.state.isChecked[this.state.checksValue[i]]===true) {
 				var data = data +' '+this.state.checksValue[i];
 				checkedItems.push(this.state.checksValue[i]);
@@ -84,7 +84,8 @@ export default class CheckBoxInput extends Component {
 		var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
 
 
-		var betweenData = [];
+		var betweenData = [];	// We are going to create an array containing all the words that has to be send between the values checked by the user
+								// For instance: betweenData = [", "," and "] -> I like peaches", "abricots" and "bananas
 
 		if (checkedItems.length > 1) {
 			betweenData.push(" and ");
@@ -100,7 +101,7 @@ export default class CheckBoxInput extends Component {
 
 		var text = checkedItems[0];
 
-		for (i = 0; i < betweenData.length; i++) {
+		for (i = 0; i < betweenData.length; i++) {	// Create the response using the checked values
 			text = text + betweenData[i] + checkedItems[i+1];
 		}
 
@@ -119,16 +120,18 @@ export default class CheckBoxInput extends Component {
 
 
 
-	onUpdate(val, checkedValue) {
+	onUpdate(val, checkedValue) {	// Modify the state isCheked when an input is checked
       	this.state.isChecked[checkedValue] = val;
   	}
 
 
 	render() {
+		// Display the checkbox
+		// Also create the state checksValue containing all the checkable values
 
 		var checkbox = [];
 
-		this.state.checksValue = []
+		this.state.checksValue = []	
 		
 		for (var i = 0; i < Session.get('botResponseJSON').input.checks.length; i++) {
 	     	checkbox.push(<CheckBox value={Session.get('botResponseJSON').input.checks[i].value} key={"check"+i} onUpdate={this.onUpdate.bind(this)}/>);

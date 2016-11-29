@@ -48,7 +48,7 @@ export default function bloc(text, blocName, data) {
 	}
 
 
-sendE
+
 Some explainations: 
 
 	This json defines what the bot will says, the future state of the bot, but also the display of the chatbox : buttons/text input...
@@ -71,13 +71,34 @@ for select : text to be display on the button, value of the choices
 
 For the links : LINKhttps://google.comTEXTyoEND
 
+
+
+
+	Different inputs : 
+
+						var input = {"type":'select',
+									'text':"Select cover",
+									"choices": [{"value": "R10000"},{"value": "R15000"},{"value": "R20000"}]
+									};
+
+						var input = {"type":"date"};
+
+						var input = {"type":"text"};
+
+						var input = {"type":"buttons"
+									"buttons":[{"title":"Yes", "response": "Yes, please"}, {"title":"No", "response":"No thanks"}]
+									}
+
+						var input = {"type":"multitext",
+									"inputs":[{"title":"name"},{"title":"surname"}]
+									};
+
 */
 
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// Here goes the global connections
-
 
 
 
@@ -227,7 +248,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		} else if (text.match(matchWord2)) {
 
-			var botResponse = 'Yeah '+data['name']+', I am glad to see that you are intrigued by me! SMILE';
+			var botResponse = 'Yeah '+data['name']+', I am glad to see that you are intrigued by me! :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Holly';
@@ -600,7 +621,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		} else {
 
-			var botResponse = 'Cool! Please find your bank in the tab below SMILE';
+			var botResponse = 'Cool! Please find your bank in the tab below :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Funeral get birth date';
@@ -658,7 +679,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName==='Funeral get birth date 2') {
 
-		var botResponse = 'Now I would need your date of birth. Please enter it below SMILE';
+		var botResponse = 'Now I would need your date of birth. Please enter it below :SMILE:';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Funeral cover amount 2';
@@ -963,7 +984,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 
-			var botResponse = 'Okay '+data['name']+'! Please choose among the list below the extra benefits you would like to add to your premium insurance SMILE'
+			var botResponse = 'Okay '+data['name']+'! Please choose among the list below the extra benefits you would like to add to your premium insurance :SMILE:'
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Funeral add benefits';
@@ -1141,7 +1162,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 		
-			var botResponse = 'Ahaha yes that\'s true '+data['name']+', but I am learning! I prefer to double check SMILE';
+			var botResponse = 'Ahaha yes that\'s true '+data['name']+', but I am learning! I prefer to double check :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Funeral check number 2';
@@ -1321,7 +1342,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 		
-			var botResponse = 'Ah, I am glad you came back to reason SMILE! We haven\'t done all this work together for nothing though';
+			var botResponse = 'Ah, I am glad you came back to reason :SMILE:! We haven\'t done all this work together for nothing though';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Funeral get quote 2';
@@ -2656,7 +2677,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		if (blocName==='adiios 5') {
 
 					
-			var botResponse = 'Have a good day '+data['name']+', take care and see you soon! SMILE';
+			var botResponse = 'Have a good day '+data['name']+', take care and see you soon! :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'End';
@@ -2743,7 +2764,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		if (blocName==='Holly 2') {
 
 				
-			var botResponse = 'Me and my robot friends can answer to a lot of your questions. Okay fair enough, don\'t ask me chocolate cake recipes though, even if I would be able to answer this SMILE';
+			var botResponse = 'Me and my robot friends can answer to a lot of your questions. Okay fair enough, don\'t ask me chocolate cake recipes though, even if I would be able to answer this :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Holly 3';
@@ -2944,7 +2965,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		if (blocName==='Funeral info 4') {
 
 					
-			var botResponse = 'Enjoy have a good read! SMILE';
+			var botResponse = 'Enjoy have a good read! :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Funeral info 5';
@@ -3441,7 +3462,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === "Car claim free years") {
 
 
-		var botResponse = 'By this I mean the number of years you had uninterrupted comprehensive insurance cover for and not claimed! Come on, be honest SMILE';
+		var botResponse = 'By this I mean the number of years you had uninterrupted comprehensive insurance cover for and not claimed! Come on, be honest :SMILE:';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Car driving license';
@@ -3470,7 +3491,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === "Car driving license") {
 
 
-		var botResponse = 'Oh congratulations! I am sure I would have not done better if I would have been able to drive SMILE';
+		var botResponse = 'Oh congratulations! I am sure I would have not done better if I would have been able to drive :SMILE:';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Car driving license 2';
@@ -3550,7 +3571,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === "Car vehicule park") {
 
 
-		var botResponse = 'Nice! Few more questions and we are done. Hold on! SMILE';
+		var botResponse = 'Nice! Few more questions and we are done. Hold on! :SMILE:';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Car vehicule park 2';
@@ -3901,7 +3922,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === "Car other driver driving license") {
 
 
-		var botResponse = 'Oh congratulations! I am sure I would have not done better if I would have been able to drive SMILE';
+		var botResponse = 'Oh congratulations! I am sure I would have not done better if I would have been able to drive :SMILE:';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Car other driver driving license 2';
@@ -4094,7 +4115,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 		
-			var botResponse = 'Ahaha yes that\'s true '+data['name']+', but I am learning! I prefer to double check SMILE';
+			var botResponse = 'Ahaha yes that\'s true '+data['name']+', but I am learning! I prefer to double check :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Car check number 2';
@@ -4274,7 +4295,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 		
-			var botResponse = 'Ah, I am glad you came back to reason SMILE! We haven\'t done all this work together for nothing though';
+			var botResponse = 'Ah, I am glad you came back to reason :SMILE:! We haven\'t done all this work together for nothing though';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Car get quote 2';

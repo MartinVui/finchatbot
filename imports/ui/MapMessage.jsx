@@ -12,9 +12,9 @@ export default class MapMessage extends Component {
 
 
 	mapInit() {
+		// Shows a map using Google API
 
-
-		var map = new google.maps.Map(document.getElementById('map'), {
+		var map = new google.maps.Map(document.getElementById('map'), {	// Init the map on the location of Far Ventures office. Maybe we can init it on the address typed by the user
 			center: {lat: -33.920926, lng: 18.462258},
 			zoom: 13
 		});

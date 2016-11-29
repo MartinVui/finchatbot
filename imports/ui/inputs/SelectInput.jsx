@@ -10,6 +10,7 @@ export default class SelectInput extends Component {
 
 
 	sendBotMessage(json) {
+		// See AddressInput for more details
 
 		var _this = this;
 
@@ -91,6 +92,7 @@ export default class SelectInput extends Component {
 
 
 	render() {
+		// Shows a select input with the values we decided
 
 		var options = [];
 		for (var i=0; i<Session.get('botResponseJSON').input.choices.length; i++) {

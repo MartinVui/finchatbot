@@ -9,10 +9,9 @@ import Button from './Button.jsx';
 
 export default class ButtonList extends Component {
 
-    render() {
+    render() {  // Just display the button list...
 
         var ButtonList = [];
-        // We don't use quickReplies[0], as it contains the URL of the background image, and not a button text
         for (var i = 0; i < Session.get('botResponseJSON').input.buttons.length; i++) {
             ButtonList.push(<Button buttonText={Session.get('botResponseJSON').input.buttons[i].title} response={Session.get('botResponseJSON').input.buttons[i].response} key={i} buttonKey={i}/>);
         }

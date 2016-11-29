@@ -24,11 +24,30 @@ export default class MessageList extends Component {
 		this.scrollDown()
 	}
 
+	// scrollABitToTheBottom() {
+	// 	var node = ReactDOM.findDOMNode(this.refs.messageList);
+	// 	node.scrollTop = node.scrollHeight;
+	// }
+
 	scrollDown() {
+		// Here is the worst function ever created!
+		// I should change this, but it works fine
+		// When using the animation for the render of the message form, the form would cause the conversation to scroll a bit to the top
+		// Thanks to this function, it doesn't (and it's almost smooth)
+
 		var node = ReactDOM.findDOMNode(this.refs.messageList);
 		node.scrollTop = node.scrollHeight;
 
-		var TIMEOUT = setTimeout(function() {
+		//_this = this;
+
+		// for (var i = 0; i < 600; i++) {
+
+		// 	var TIMEOUT = setTimeout(function() {
+		// 		_this.scrollABitToTheBottom();
+		// 	},i);
+		// }
+
+		var TIMEOUT1 = setTimeout(function() {
 			node.scrollTop = node.scrollHeight;
 		},150);
 
@@ -58,8 +77,9 @@ export default class MessageList extends Component {
 
 					<div className="bot_message">
 					<img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
-					{this.state.imageLoaded  ?
-					<p className="bot_text">{Session.get('first_message')}</p> :null
+
+					{this.state.imageLoaded  ?	// Only shows the text when the image is loaded. It's ugly otherwise
+						<p className="bot_text">{Session.get('first_message')}</p> :null
 					}  
 					</div>
 

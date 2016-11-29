@@ -8,20 +8,16 @@ import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
 
 import ChatBox from './ChatBox.jsx';
-import SendMail from './sendMail.jsx';
+
 
 class App extends Component {
 
 
-	render() {
+	render() {	// Seems like the app is only a chatbox. Maybe we could delete this component
 
 		return (
 			<div>  
-
 				<ChatBox messages={this.props.messages}/>
-
-				
-
 			</div>
 		);
 	}

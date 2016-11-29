@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 
 import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
@@ -21,7 +23,7 @@ export default class ChatBox extends Component {
 	}
 
 
-	startConversation() {
+	startConversation() {	// I think it sends the first message. I did this a loooong time ago
 
 		this.setState({showIntro:false});
 
@@ -64,7 +66,7 @@ export default class ChatBox extends Component {
 				<div className="container">
 
 
-					{this.state.showIntro ? 
+					{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
 						<div className="introduction">
 							<div id="intro-part1">
 								<img src="images/logo.png" className="intro-logo"/>
@@ -82,9 +84,22 @@ export default class ChatBox extends Component {
 			        		<MessageList messages={this.props.messages}/>
 			        	</div>:null
 			        }
+
+
 			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>:null
+
+			        <ReactCSSTransitionGroup                // Animation when the messages appear
+			        transitionName="footer" 
+			        transitionAppearTimeout={600} 
+			        transitionEnterTimeout= {600}
+			        transitionLeaveTimeout={6}>
+
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
+
+			        	</ReactCSSTransitionGroup>:null
 			        }
+
+
 	     		</div>
      		</div>
 	    );

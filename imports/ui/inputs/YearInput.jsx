@@ -7,6 +7,7 @@ import bloc from '../../api/blocs.js';
 
 
 export default class YearInput extends Component {
+	// Exactly the same as DateInput, but only with the year
 
 
 
