@@ -100,6 +100,10 @@ a:visited {
     color: white;
 }
 
+strong {
+  font-weight: bolder;
+}
+
 .introduction {
     height: 100%;
     display: flex;
@@ -114,6 +118,13 @@ a:visited {
   display: flex;
   align-items: center;
 
+}
+
+.special-offer {
+  position: fixed;
+  top: 2%;
+  left: 2%;
+  height: 20%;
 }
 
 .intro-logo {

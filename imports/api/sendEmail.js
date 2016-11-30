@@ -312,6 +312,8 @@ Meteor.methods({
 			+''
 			+'</body></html>';
 
+		}
+
 
 
 		if (type === "Funeral") {
