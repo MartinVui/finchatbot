@@ -732,11 +732,11 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'Okay cool! Do you want to load the 1h air time now?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Defaule text email';
+		var nextBlocID = 'Default text email';
 		var skip = false;
 		var input = {'type':'buttons',
 					'buttons':[{'title':'Load now', 'response': 'Load now!'}, {'title':'Later', 'response':'Load later'}]}
-		var dataWrapper = "The Cell C number I want to recharge is DATA";
+		var dataWrapper = "DATA";
 		var createData = false;
 		
 		
@@ -817,9 +817,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself..  So that’s all for me today';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Default text email 2';
-		var skip = true;
-		var input = {"type":'none'};
+		var nextBlocID = 'Default text email 3';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1002,12 +1003,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Default samsung email') {
 
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself..  So that’s all for me today';
+		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Default samsung email 2';
-		var skip = true;
-		var input = {"type":'none'};
+		var nextBlocID = 'Default samsung email 3';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1190,12 +1192,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Default iphone email') {
 
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself..  So that’s all for me today';
+		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Default iphone email 2';
-		var skip = true;
-		var input = {"type":'none'};
+		var nextBlocID = 'Default iphone email 3';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
