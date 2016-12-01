@@ -87,16 +87,7 @@ export default class ChatBox extends Component {
 
 
 			        {this.state.showIntro === false ?
-
-			        <ReactCSSTransitionGroup                // Animation when the messages appear
-			        transitionName="footer" 
-			        transitionAppearTimeout={600} 
-			        transitionEnterTimeout= {600}
-			        transitionLeaveTimeout={6}>
-
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
-
-			        	</ReactCSSTransitionGroup>:null
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>:null
 			        }
 
 
