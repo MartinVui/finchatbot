@@ -570,8 +570,8 @@ Meteor.methods({
 		}
 
 
-				// Funeral mail for Metropolitan
-  		if (type === "samsung") {
+		// Funeral mail for Metropolitan
+  		if (type === "airtime") {
 
 	  		var html = "<!DOCTYPE html>"
 			+'<!-- saved from url=(0048)http://www.hollardmail.co.za/mailers/funeral/V1/ -->'
@@ -853,17 +853,17 @@ Meteor.methods({
 
 
 
-			process.env.MAIL_URL = "smtp://postmaster%40finchatbot.com:5e66679eec3180b029b627343e020848@smtp.mailgun.org:587";
-		    // check([to, from, subject, text], [String]);
-		    // Let other method calls from the same client start running,
-		    // without waiting for the email sending to complete.
-		    this.unblock();
-		    Email.send({
-			   	to: data['email'],
-			    from: "hello@cellc.com",
-			    subject: 'Your quote',
-			    html: html
-			});
+		process.env.MAIL_URL = "smtp://postmaster%40finchatbot.com:5e66679eec3180b029b627343e020848@smtp.mailgun.org:587";
+		   // check([to, from, subject, text], [String]);
+		   // Let other method calls from the same client start running,
+		   // without waiting for the email sending to complete.
+		this.unblock();
+		Email.send({
+		   	to: data['email'],
+		    from: "hello@cellc.com",
+		    subject: 'Your quote',
+		    html: html
+		});
 		
 
 

@@ -23,12 +23,16 @@ export default class Button extends Component {
             Session.set('botResponseJSON', json);
 
             // Check if there is a mail to send. Also check the kind of mail. We don't need it on other inputs yet
-            if (json.sendEmail === "Car") {
-                Meteor.call('sendEmail', "Car", Session.get('allData'));
+            if (json.sendEmail === "iphone") {
+                Meteor.call('sendEmail', "iphone", Session.get('allData'));
             }
-            if (json.sendEmail === "Funeral") {
-                Meteor.call('sendEmail', "Funeral", Session.get('allData'));
+            if (json.sendEmail === "samsung") {
+                Meteor.call('sendEmail', "samsung", Session.get('allData'));
             }
+            if (json.sendEmail === "airtime") {
+                Meteor.call('sendEmail', "airtime", Session.get('allData'));
+            }
+
 
 
             if (json.skip === true) {   // See AdressInput, that's basically the same function
