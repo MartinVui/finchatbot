@@ -817,10 +817,9 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself..  So that’s all for me today';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Default text email 3';
+		var nextBlocID = 'Default text email 2';
 		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
+		var input = {"type":'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1006,10 +1005,9 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Default samsung email 3';
+		var nextBlocID = 'Default samsung email 2';
 		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
+		var input = {"type":'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1195,10 +1193,9 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Default iphone email 3';
+		var nextBlocID = 'Default iphone email 2';
 		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
+		var input = {"type":'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
 
