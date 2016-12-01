@@ -818,7 +818,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default text email 2';
-		var skip = false;
+		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
@@ -1006,7 +1006,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default samsung email 2';
-		var skip = false;
+		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
@@ -1194,7 +1194,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default iphone email 2';
-		var skip = false;
+		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
