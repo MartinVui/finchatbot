@@ -494,7 +494,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = '';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Default text email';
+			var nextBlocID = 'Default samsung email';
 			var skip = true;
 			var input = {'type':'none'}
 			var dataWrapper = "DATA";
