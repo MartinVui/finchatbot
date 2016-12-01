@@ -873,8 +873,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {"type":'text'};
+			var skip = true;
+			var input = {"type":'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
 
@@ -884,7 +884,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Default text email 4';
-			var skip = true;
+			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "DATA";
 			var createData = {'dataName':'email'};
@@ -1061,8 +1061,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {"type":'text'};
+			var skip = true;
+			var input = {"type":'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
 
@@ -1072,7 +1072,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Default samsung email 4';
-			var skip = true;
+			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "DATA";
 			var createData = {'dataName':'email'};
@@ -1249,8 +1249,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {"type":'text'};
+			var skip = true;
+			var input = {"type":'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
 
@@ -1260,7 +1260,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Default iphone email 4';
-			var skip = true;
+			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "DATA";
 			var createData = {'dataName':'email'};
