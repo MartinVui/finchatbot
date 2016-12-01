@@ -223,6 +223,17 @@ a:visited {
   word-wrap: break-word;
 }
 
+.image-message {
+  display: flex;
+  display: -webkit-flex;
+  -webkit-justify-content: center;
+}
+
+.image-message img {
+  height: 50vh;
+  width: auto;
+}
+
 .bot_text {
   font-size: 14px;
   max-width: 70%;

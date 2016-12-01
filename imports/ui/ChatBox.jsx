@@ -72,7 +72,7 @@ export default class ChatBox extends Component {
 								<img src="images/logo.png" className="intro-logo"/>
 							</div>
 							<div id="intro-part2">
-								<h1>FinChatBot</h1>
+								<h1>Peach Bot</h1>
 								<h2>Your personal assisant</h2>
 								<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
 							</div>

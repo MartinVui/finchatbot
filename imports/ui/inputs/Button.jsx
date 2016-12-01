@@ -38,7 +38,6 @@ export default class Button extends Component {
 
                 if(json.image !== false) {
                     Session.set('image', json.image);
-                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
                 }
 
                 // Set the new state of the bot
