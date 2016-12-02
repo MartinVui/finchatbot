@@ -24,8 +24,9 @@ export default class LanguageSelector extends Component {
 			<div className="LanguageSelector">
  				
  				<select value={this.state.language} onChange={this.handleChange.bind(this)} className="scroll-input">
- 					<option value="eng" style={{backgroundImage:"http://www.lexilogos.com/images/gb_drapeau.gif"}}>English</option>
- 					<option value="fr" style={{backgroundImage:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/langfr-225px-Flag_of_France.svg.png"}}>Français</option>
+ 					<option value="eng">English</option>
+ 					<option value="zulu">Zulu</option>
+ 					<option value="xhosa">Xhosa</option>
 				</select>
  		    </div>
  		)

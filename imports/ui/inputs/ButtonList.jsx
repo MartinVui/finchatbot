@@ -13,7 +13,7 @@ export default class ButtonList extends Component {
 
         var ButtonList = [];
         for (var i = 0; i < Session.get('botResponseJSON').input.buttons.length; i++) {
-            ButtonList.push(<Button buttonText={Session.get('botResponseJSON').input.buttons[i].title} response={Session.get('botResponseJSON').input.buttons[i].response} key={i} buttonKey={i}/>);
+            ButtonList.push(<Button buttonText={Session.get('botResponseJSON').input.buttons[i].title} response={Session.get('botResponseJSON').input.buttons[i].response} language={this.props.language} key={i} buttonKey={i}/>);
         }
         
         return (

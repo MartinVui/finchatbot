@@ -36,7 +36,7 @@ export default class TextInput extends Component {
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
 				
-				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
+				var newJson = bloc(" ", Session.get('nextBlocName'), _this.props.language, Session.get('allData'));
 
 				Session.set('showGif', true);
 
@@ -75,7 +75,7 @@ export default class TextInput extends Component {
 			Session.set('allData',allData);
 		}
 
-		var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+		var json = bloc(data, Session.get('nextBlocName'), this.props.language, Session.get('allData'));
 
 		Session.set('botResponseJSON', {"quickReplies":[]});
 

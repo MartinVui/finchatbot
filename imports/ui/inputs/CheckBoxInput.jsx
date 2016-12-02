@@ -37,7 +37,7 @@ export default class CheckBoxInput extends Component {
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
 				
-				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
+				var newJson = bloc(" ", Session.get('nextBlocName'), _this.props.language, Session.get('allData'));
 
 				Session.set('showGif', true);
 
@@ -81,7 +81,7 @@ export default class CheckBoxInput extends Component {
 			Session.set('allData',allData);
 		}
 
-		var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+		var json = bloc(data, Session.get('nextBlocName'), this.props.language, Session.get('allData'));
 
 
 		var betweenData = [];	// We are going to create an array containing all the words that has to be send between the values checked by the user

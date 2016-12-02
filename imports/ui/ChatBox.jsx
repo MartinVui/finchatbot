@@ -30,7 +30,7 @@ export default class ChatBox extends Component {
 		this.setState({showIntro:false});
 
 		// Get the first JSON response of the bot
-		var json = bloc('start', 'Hi');
+		var json = bloc('start', 'Hi', this.state.language);
 
 
 		Session.set('botResponseJSON', json);
@@ -53,7 +53,7 @@ export default class ChatBox extends Component {
 
 
 		    // var json = bloc(text, Session.get('nextBlocName'));
-		    var json2 = bloc(text, Session.get('nextBlocName'));
+		    var json2 = bloc(text, Session.get('nextBlocName'), this.state.language);
 
 		    Session.set('showGif', true);
 		    var TIMEOUT2 = setTimeout(function() {
@@ -93,15 +93,22 @@ export default class ChatBox extends Component {
 							{this.state.language === 'eng' ?
 								<div id="intro-part2">
 									<h1>FinChatBot</h1>
-									<h2>Your personal assisant</h2>
+									<h2>Your personal assistant</h2>
 									<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
 								</div>:null
 							}
-							{this.state.language === 'fr' ?
+							{this.state.language === 'zulu' ?
 								<div id="intro-part2">
 									<h1>FinChatBot</h1>
-									<h2>Votre assisant personnel</h2>
-									<p onClick={this.startConversation.bind(this)}>Cliquez ici pour commencer la conversation</p>
+									<h2>Umsizi wakho siqu</h2>
+									<p onClick={this.startConversation.bind(this)}>Chofoza lapha ukuze uqale ingxoxo</p>
+								</div>:null
+							}
+							{this.state.language === 'xhosa' ?
+								<div id="intro-part2">
+									<h1>FinChatBot</h1>
+									<h2>umncedisi yakho yobuqu</h2>
+									<p onClick={this.startConversation.bind(this)}>Nqakraza apha ukuqala incoko</p>
 								</div>:null
 							}
 						</div> :null
