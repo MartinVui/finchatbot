@@ -110,7 +110,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 		matchWord=/(.*)start(.*)/;
 
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
-			var botResponse = {"eng":'Hey! My name is Holly and I am your personal robot assistant', 'fr':'Bonjour, je m\'appelle Holly'};
+			// var botResponse = {"eng":'Hey! My name is Holly and I am your personal robot assistant', 'fr':'Bonjour, je m\'appelle Holly'};
+			var botResponse = 'Hey! My name is Holly and I am your personal robot assistant'
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'What is your name';
@@ -141,7 +142,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 		
-		var botResponse = {"eng":'And you what\'s your name?', 'fr':'Et toi, comment tu t\'appelles?'};
+		// var botResponse = {"eng":'And you what\'s your name?', 'fr':'Et toi, comment tu t\'appelles?'};
+		var botResponse = 'And you what\'s your name?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Nice to meet you';
@@ -205,7 +207,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},{'title':'I am interested in a credit life insurance', 'response':'I am interested in a credit life insurance'}/*,{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}*/]
+					'buttons': [/*{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},*/{'title':'I am interested in a credit life insurance', 'response':'I am interested in a credit life insurance'},{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -4677,10 +4679,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 
-			var botResponse = 'Yes sure '+data['name']+'! A Car cover is an insurance protecting you against the financial pressure in case you or one of you loved ones pass away';
+			var botResponse = 'Yes sure '+data['name']+'! A Credit Life Insurance cover is a regulatory requirement that will help you to meet your obligations in terms of your credit agreement/facility in the case of an unexpected and unfortunate circumstance';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Car info';
+			var nextBlocID = 'Credit life info';
 			var skip = true;
 			var input = {"type":'none'};
 			var dataWrapper = "DATA";
@@ -5586,6 +5588,137 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var input = {'type':'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+
+	if (blocName === 'Credit life info') {
+
+				
+		var botResponse = 'With the most basic credit life package, you are covered only in the event of death. But you can add specific options to your insurance premium in order to get a more comprehensive one (permanent or temporary disability covers for example) :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Credit life info 2';
+		var skip = true;
+		var input = {'type':'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Credit life info 2') {
+
+				
+		var botResponse = 'Of course, your insurance premium will vary depending on the features you decide to add. But in any cases, you have the last word!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Credit life info 3';
+		var skip = true;
+		var input = {'type':'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Credit life info 3') {
+
+				
+		var botResponse = 'Ok '+data['name']+', want to see how much it will cost you for a credit life insurance? Would you want me to get you a quote?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Credit life info 4';
+		var skip = false;
+		var input = {'type':'buttons',
+					'buttons':[{'title':'Yes', 'response':'Yes'}, {'title':'No','response':'No'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Credit life info 4') {
+
+		if(text.match(/(.*)no(.*)/i)) {
+
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'How can I help you';
+			var skip = true;
+			var input = {'type':'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		} else {
+
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Credit life start quote';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		}
+
+				
+		
 			
 
 		var json = {

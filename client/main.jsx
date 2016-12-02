@@ -43,9 +43,6 @@ Meteor.startup(() => {
         Session.set('isMobile',false);
     }
 
-
-
-
 // Define a SessionID for the database
     var date = new Date();
     var datestamp = Date.parse(date);

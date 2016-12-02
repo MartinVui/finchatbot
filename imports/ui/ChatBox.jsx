@@ -12,6 +12,7 @@ import bloc from '../api/blocs.js';
 import MessageForm from './inputs/MessageForm.jsx';
 
 import MessageList from './MessageList.jsx';
+import LanguageSelector from './LanguageSelector.jsx';
 
 export default class ChatBox extends Component {
 
@@ -19,6 +20,7 @@ export default class ChatBox extends Component {
 		super();
 		this.state = {
 			showIntro: true,
+			language: "eng",
 		};
 	}
 
@@ -27,17 +29,25 @@ export default class ChatBox extends Component {
 
 		this.setState({showIntro:false});
 
-				// Get the JSON response of the bot
-		var json = bloc('start', Session.get('nextBlocName'));
+		// Get the first JSON response of the bot
+		var json = bloc('start', 'Hi');
+
 
 		Session.set('botResponseJSON', json);
 
+		// I didn't want to store the first message in the db. It would create a doc every time someone visit the website, without even using the bot
+		// Delete this when we stop storing the bot messages in the db
+
+
+		//Session.set('first_message', json.botResponse[this.state.language]);
 		Session.set('first_message', json.botResponse);
+
+	
 
 		// Set the next state of the bot
 		Session.set('nextBlocName', json.nextBlocID);
 
-		var text = 'no_text';
+		var text = "Yo that's a text!";
 
 		if (json.skip === true) {
 
@@ -49,12 +59,19 @@ export default class ChatBox extends Component {
 		    var TIMEOUT2 = setTimeout(function() {
 		        Session.set('botResponseJSON', json2);
 		        Session.set('showGif', false);
-		        Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-
+		        
+				//Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse[this.state.language], 'bot', Session.get('sessionId'));
+				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+				
 		        // Set the new state of the bot
 		        Session.set('nextBlocName', json2.nextBlocID);
 		    },2500);
-      }
+      	}
+	}
+
+
+	onChange(val) {
+		this.setState({language: val})
 	}
 
 
@@ -65,17 +82,28 @@ export default class ChatBox extends Component {
 			<div>
 				<div className="container">
 
+					<LanguageSelector onChange={this.onChange.bind(this)}/>
+
 
 					{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
 						<div className="introduction">
 							<div id="intro-part1">
 								<img src="images/logo.png" className="intro-logo"/>
 							</div>
-							<div id="intro-part2">
-								<h1>FinChatBot</h1>
-								<h2>Your personal assisant</h2>
-								<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
-							</div>
+							{this.state.language === 'eng' ?
+								<div id="intro-part2">
+									<h1>FinChatBot</h1>
+									<h2>Your personal assisant</h2>
+									<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
+								</div>:null
+							}
+							{this.state.language === 'fr' ?
+								<div id="intro-part2">
+									<h1>FinChatBot</h1>
+									<h2>Votre assisant personnel</h2>
+									<p onClick={this.startConversation.bind(this)}>Cliquez ici pour commencer la conversation</p>
+								</div>:null
+							}
 						</div> :null
 					}
 		        	
@@ -87,7 +115,7 @@ export default class ChatBox extends Component {
 
 
 			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>:null
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} language={this.state.language}/>:null
 			        }
 
 

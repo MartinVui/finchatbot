@@ -40,28 +40,28 @@ export default class MessageForm extends Component {
             <div className='message_form'>
              
             {Session.get('botResponseJSON').input.type === 'text' ?
-                <TextInput/>: null
+                <TextInput language={this.props.language}/>: null
             }
             {Session.get('botResponseJSON').input.type === 'buttons' ?
-                <ButtonList/>: null
+                <ButtonList language={this.props.language}/>: null
             }
             {Session.get('botResponseJSON').input.type === 'select' ?
-                <SelectInput/>: null
+                <SelectInput language={this.props.language}/>: null
             }
             {Session.get('botResponseJSON').input.type === 'date' ?
-                <DateInput/>: null
+                <DateInput language={this.props.language}/>: null
             }
             {Session.get('botResponseJSON').input.type === 'multitext' ?
-                <MultitextInput/>: null
+                <MultitextInput language={this.props.language}/>: null
             }
             {Session.get('botResponseJSON').input.type === 'address' ?
-                <AddressInput/>: null
+                <AddressInput language={this.props.language}/>: null
             }
             {Session.get('botResponseJSON').input.type === 'checkbox' ?
-                <CheckBoxInput/>: null
+                <CheckBoxInput language={this.props.language}/>: null
             }
             {Session.get('botResponseJSON').input.type === 'year' ?
-                <YearInput/>: null
+                <YearInput language={this.props.language}/>: null
             }
             {/*Session.get('botResponseJSON').input.type === 'carmake' ?
                 <CarMakeInput/>: null
