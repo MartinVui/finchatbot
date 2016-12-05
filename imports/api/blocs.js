@@ -816,7 +816,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === 'Funeral check cover amount') {
 
 
-		var botResponse = 'You would like to be cover for '+data['cover amount']+'. Is that right?';
+		var botResponse = 'You would like to be covered for '+data['cover amount']+'. Is that right?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Funeral add family members';
@@ -4902,7 +4902,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === 'Credit life cover amount 3') {
 
 
-		var botResponse = 'You would like to be cover for '+data['Credit life cover amount']+'. Is that right?';
+		var botResponse = 'You would like to be covered for '+data['Credit life cover amount']+'. Is that right?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Credit life cover amount 4';
