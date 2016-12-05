@@ -110,7 +110,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		matchWord=/(.*)start(.*)/;
 
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
-			var botResponse = {"eng":'Hey! My name is Holly and I am your personal robot assistant', 'fr':'Bonjour, je m\'appelle Holly'};
+			var botResponse = 'Hey! My name is Holly and I am your personal robot assistant';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'What is your name';
@@ -141,7 +141,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 		
-		var botResponse = {"eng":'And you what\'s your name?', 'fr':'Et toi, comment tu t\'appelles?'};
+		var botResponse = 'And you what\'s your name?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Nice to meet you';
