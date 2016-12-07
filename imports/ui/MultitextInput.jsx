@@ -15,7 +15,6 @@ export default class TextInput extends Component {
 
 
 		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
-		console.log(dataWrapper)
 
 		var text1 = ReactDOM.findDOMNode(this.refs.textInput1).value.trim();
 		var text2 = ReactDOM.findDOMNode(this.refs.textInput2).value.trim();
@@ -56,7 +55,6 @@ export default class TextInput extends Component {
 
 
 			if (json.skip === true) {
-				console.log('skip');
 
 				// var json = bloc(text, Session.get('nextBlocName'));
 				var json2 = bloc(text, Session.get('nextBlocName'), Session.get('allData'));

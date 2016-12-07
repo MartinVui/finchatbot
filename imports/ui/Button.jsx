@@ -14,7 +14,6 @@ export default class Button extends Component {
 
     const data = this.props.response;
 
-    console.log(Session.get('allData'));
 
     if (Session.get('botResponseJSON').createData !== false) {
       var dataName = Session.get('botResponseJSON').createData.dataName;
@@ -102,11 +101,6 @@ export default class Button extends Component {
     Session.set('showGif', true);
 
   }
-
-/*  render() {
-    console.log(this.props.buttonText);
-    if(this.props.buttonText)
-  }*/
 
 
   render() {

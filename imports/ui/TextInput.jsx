@@ -22,7 +22,6 @@ export default class TextInput extends Component {
       Session.set('allData',allData);
     }
 
-    console.log('data',Session.get('allData'));
     var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
 
     Session.set('botResponseJSON', {"quickReplies":[]});
@@ -54,7 +53,6 @@ export default class TextInput extends Component {
 
 
       if (json.skip === true) {
-        console.log('skip');
 
         // var json = bloc(text, Session.get('nextBlocName'));
         var json2 = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
@@ -69,7 +67,6 @@ export default class TextInput extends Component {
           Session.set('nextBlocName', json2.nextBlocID);
 
           if (json2.skip === true) {
-            console.log('skip');
 
             // var json = bloc(text, Session.get('nextBlocName'));
             var json3 = bloc(text, Session.get('nextBlocName'), Session.get('allData'));

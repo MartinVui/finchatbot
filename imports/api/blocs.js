@@ -82,17 +82,45 @@ for select : text to be display on the button, value of the choices
 		matchWord=/(.*)start(.*)/;
 
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
-			var botResponse = 'Hey! My name is Holly and I am the personal assistant of the FinChatBot team. And you, what is your name?';
+			var botResponse = 'Hey! My name is Holly and I am the personal assistant of the FinChatBot team';
 			var inReplyto = text;
-			var nextBlocID = 'Nice to meet you';
+			var nextBlocID = 'Hi 2';
 			var quickReplies = [];
-			var input = {"type":"multitext",
-						"inputs":[{"title":"Name"},{"title":"Surname"}]
-						};							
-			var dataWrapper = 'Hi Holly! My name is DATA, nice to meet you!';
-			var skip = false;
-			var createData = {"dataName": "name"};
+			var input = {"type":"none"};							
+			var dataWrapper = 'Data';
+			var skip = true;
+			var createData = false;
 		}
+			
+		var json = {
+			"botResponse": botResponse,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"quickReplies": quickReplies,
+			"input": input,
+			"dataWrapper": dataWrapper,
+			"skip": skip,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName==='Hi 2') {
+
+
+		var botResponse = 'And you, what is your name?';
+		var inReplyto = text;
+		var nextBlocID = 'Nice to meet you';
+		var quickReplies = [];
+		var input = {"type":"multitext",
+					"inputs":[{"title":"Name"},{"title":"Surname"}]
+					};							
+		var dataWrapper = 'Hi Holly! My name is DATA, nice to meet you!';
+		var skip = false;
+		var createData = {"dataName": "name"};
+
 			
 		var json = {
 			"botResponse": botResponse,

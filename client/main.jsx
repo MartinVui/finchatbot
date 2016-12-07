@@ -32,9 +32,8 @@ var isMobile={
   };
 
   if(isMobile.any()) {
-    console.log('mobile');
+
     Session.set('isMobile',true);
-    console.log(Session.get('isMobile'));
   } else {
     Session.set('isMobile',false);
   }
@@ -57,35 +56,6 @@ var isMobile={
   var json = bloc('start', Session.get('nextBlocName'));
 
     Session.set('botResponseJSON', json);
-
-
-    // Insert the message in the database    // UPDATE : the first bot message is not inserted in the database
-   // Meteor.call('messages.insert', json.botResponse, 'bot', Session.get('sessionId'));
-    Session.set('first_message', json.botResponse);
-
-    // Set the next state of the bot
-    Session.set('nextBlocName', json.nextBlocID);
-
-    var text = 'no_text';
-
-    if (json.skip === true) {
-        console.log('skip');
-
-        // var json = bloc(text, Session.get('nextBlocName'));
-        var json2 = bloc(text, Session.get('nextBlocName'));
-
-        Session.set('showGif', true);
-        var TIMEOUT2 = setTimeout(function() {
-          Session.set('botResponseJSON', json2);
-          Session.set('showGif', false);
-          Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-
-          // Set the new state of the bot
-          Session.set('nextBlocName', json2.nextBlocID);
-          },2500);
-      }
-    
- // });
 
   render(<App />, document.getElementById('render-target'));
 });

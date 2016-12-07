@@ -46,7 +46,6 @@ export default class DateInput extends Component {
 
 
 	      if (json.skip === true) {
-	        console.log('skip');
 
 	        // var json = bloc(text, Session.get('nextBlocName'));
 	        var json2 = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
