@@ -205,7 +205,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},{'title':'I am interested in a credit life insurance', 'response':'I am interested in a credit life insurance'}/*,{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}*/]
+					'buttons': [{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},{'title':'I am interested in a credit life insurance', 'response':'I am interested in a credit life insurance'},{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -4767,10 +4767,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'Credit life qualification level';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'Yes', 'response':'Yes Holly'},{'title':'No', 'response': 'No Holly'}]
+					'buttons': [{'title':'Yes', 'response':'Yes'},{'title':'No', 'response': 'No'}]
 					};
 		var dataWrapper = 'DATA';
-		var createData = false;
+		var createData = {"dataName":"smoker"};
 
 
 		var json = {
@@ -4799,7 +4799,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 					"choices": [{"value": "< Matric"},{"value": "Matric"},{"value": "Matric + further studies"},{"value": "3 year diploma"},{"value": "3 year degree"},{"value": "3 year technikon"},{"value": "4 year technikon"},{"value": "4 year degree"}]
 					};
 		var dataWrapper = 'DATA';
-		var createData = false;
+		var createData = {"dataName":"qualification"};
 
 
 		var json = {
@@ -4828,7 +4828,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 					"choices": [{"value": "3000 - 6000"},{"value": "6000 - 12000"},{"value": "12000 - 16000"},{"value": "16000 - 20000"},{"value": "20000 - 24000"},{"value": "24000 +"}]
 					};
 		var dataWrapper = 'DATA';
-		var createData = false;
+		var createData = {"dataName":"income"};
 
 
 		var json = {
@@ -4982,7 +4982,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'And would you like to add any additional covers to your credit life cover? The most basic credit life package pays out only in the event of death, but choosing to extend your policy to cover these options means that we will pay out in event of these happening  (such as retrenchment/ disability etc?)'
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Funeral add benefits';
+		var nextBlocID = 'Credit life additional benefits 2';
 		var skip = false;
 		var input = {"type": 'buttons',
 					'buttons': [{'title': 'Yes', 'response': 'Yes please'}, {'title': 'No', 'response': 'No thanks'}]
@@ -5155,7 +5155,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Car get email';
+			var nextBlocID = 'Credit life get email';
 			var skip = false;
 			var input = {'type':'text'};
 			var dataWrapper = "DATA";
@@ -5411,7 +5411,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		};
 
 
-		
+		console.log(json);
 		return json;
 	}
 

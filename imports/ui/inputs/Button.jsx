@@ -29,6 +29,9 @@ export default class Button extends Component {
             if (json.sendEmail === "Funeral") {
                 Meteor.call('sendEmail', "Funeral", Session.get('allData'));
             }
+            if (json.sendEmail === "Credit life") {
+                Meteor.call('sendEmail', "Credit life", Session.get('allData'));
+            }
 
 
             if (json.skip === true) {   // See AdressInput, that's basically the same function
