@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
-export const Scores = new Mongo.Collection('scores');
+export const Scores = new Mongo.Collection('leaderboard');
 
 
 
