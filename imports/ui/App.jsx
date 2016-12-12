@@ -1,23 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
-import { Messages } from '../api/messages.js';
-import Message from './Message.jsx';
+import { Scores } from '../api/scores.js';
 
-import ChatBox from './ChatBox.jsx';
+import Form from './Form.jsx';
+import LeaderBoard from './LeaderBoard.jsx';
 
 
-class App extends Component {
+export default class App extends Component {
 
 
 	render() {	// Seems like the app is only a chatbox. Maybe we could delete this component
 
+
+
 		return (
+			<div>
+			<div id="app">
+			<div id="image-part">
+				<h1>Far Ventures pingpong league</h1>
+				<img src="images/ping.png" id="img"/>
+			</div>
 			<div>  
-				<ChatBox messages={this.props.messages}/>
+				<Form scores={this.props.scores}/>
+				<LeaderBoard scores={this.props.scores}/>
+			</div>
+			</div>
 			</div>
 		);
 	}
@@ -25,12 +35,12 @@ class App extends Component {
 
 
 App.propTypes = {
-	messages: PropTypes.array.isRequired,
+	scores: PropTypes.array.isRequired,
 };
 
 
 export default createContainer(() => {
 	return {
-		messages: Messages.find({sessionId: Session.get('sessionId')}).fetch(),
+		scores: Scores.find({}, {sort:{score: -1}}).fetch(),
 	};
 }, App);

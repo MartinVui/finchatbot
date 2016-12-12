@@ -1,2 +1,1 @@
-import '../imports/api/messages.js';
-import '../imports/api/sendEmail.js';
+import '../imports/api/scores.js';
