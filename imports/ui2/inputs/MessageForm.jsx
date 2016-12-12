@@ -28,12 +28,6 @@ export default class MessageForm extends Component {
 
         <footer>
 
-        {/*<ReactCSSTransitionGroup                // Animation when the messages appear
-            transitionName="footer" 
-            transitionEnterTimeout={500} 
-            transitionAppearTimeout={500}
-            transitionLeaveTimeout={1500}>*/}
-
 
         {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappear. Quite smart.
 
@@ -70,8 +64,6 @@ export default class MessageForm extends Component {
 
             </div>:null
         }
-
-        {/*</ReactCSSTransitionGroup>*/}
 
         </footer>
 

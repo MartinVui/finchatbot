@@ -77,8 +77,14 @@ export default class TextInput extends Component {
 
         var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
 
+        Session.set('botResponseJSON', {"quickReplies":[]});
 
-        Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+        if(text === "") {
+            var text = "no_text"
+        }
+        else {
+            Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+        }
       
 
         ReactDOM.findDOMNode(this.refs.textInput).value = '';
@@ -95,7 +101,7 @@ export default class TextInput extends Component {
 
 		return(
 			<form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-		       	<input type="text" ref="textInput" placeholder="Write a new message" required/>
+		       	<input type="text" ref="textInput" placeholder="Write a new message"/>
                 {Session.get('isMobile') === true ?
                     <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
                 }

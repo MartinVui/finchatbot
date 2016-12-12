@@ -6,12 +6,11 @@ import Message from '../Message.jsx';
 import bloc from '../../api/blocs.js';
 
 
-export default class YearInput extends Component {
-	// Exactly the same as DateInput, but only with the year
-
+export default class SelectInput extends Component {
 
 
 	sendBotMessage(json) {
+		// See AddressInput for more details
 
 		var _this = this;
 
@@ -48,7 +47,7 @@ export default class YearInput extends Component {
 				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
 
 				if(json.image !== false) {
-		          	Session.set('image', json.image);
+		         	Session.set('image', json.image);
 		          	Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
 		        }
 
@@ -62,73 +61,53 @@ export default class YearInput extends Component {
 	}
 
 
-
 	onButtonClick() {
-
-		var year = ReactDOM.findDOMNode(this.refs.year).value.trim();
-
-		var text = year
-
-
+		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
+		var data = ReactDOM.findDOMNode(this.refs.content).value.trim();
+		
 		if (Session.get('botResponseJSON').createData !== false) {
       		var dataName = Session.get('botResponseJSON').createData.dataName;
       		var allData = Session.get('allData');
-      		if (Session.get('botResponseJSON').createData.data !== undefined) {
-
-      			allData[dataName] = Session.get('botResponseJSON').createData.data;
-      		} else {
-      			allData[dataName] = text;
-      		}
+      		allData[dataName] = data;
       		Session.set('allData',allData);
     	}
 
-    	var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
+   		var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
 
-
-	    Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-
+		if(data === "") {
+	      var data = "no_text";
+	    }
+	    else {
+	    	var text = dataWrapper.replace(/DATA/, data);
+	    	Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+	    }
 
 	    // Insert the bot message
 	    Session.set('showGif', true);
 	    
 	    this.sendBotMessage(json);
-
 	}
+
+
 
 
 	render() {
+		// Shows a select input with the values we decided
 
-		
-
-		var date = new Date();
-		var year = date.getFullYear();
-
-		var years = [];
-		for (var i=year; i>=1900; i--) {
-			i=i.toString();
-			years.push(<option key={'year'+i} value={i}>{i}</option>);
-		}		
-
-		return (
-			<div className="SelectInput">
-		        <select ref='year' data-validation="required" className="scroll-input">
-		            <option value="0" disabled selected>Year</option>
-		            {years}
-		        </select>
-		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>
-		    </div>
-		)
-	}
-
-	/*render() {
+		var options = [];
+		for (var i=0; i<Session.get('botResponseJSON').input.choices.length; i++) {
+			options.push(<option key={'select'+i} value={Session.get('botResponseJSON').input.choices[i].value}>{Session.get('botResponseJSON').input.choices[i].value}</option>);
+		}
 
 		return(
-			<form className="new_message" id="newMessageForm">
-				<input type='date' ref='content'/>
-				<div className="button" onClick={this.onButtonClick.bind(this)}>
-				Send
-				</div>
-			</form>
-		)
-	}*/
+			<div className="SelectInput">
+ 				<select ref='content' data-validation="required" className="scroll-input">
+ 					<option value="0" disabled selected>{Session.get('botResponseJSON').input.text}</option>
+ 		            {options}
+				</select>
+ 		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>
+ 		    </div>
+ 		)
+	}
+
 }

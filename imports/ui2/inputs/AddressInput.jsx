@@ -82,13 +82,18 @@ export default class AddressInput extends Component {
 
         var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
 
+        Session.set('botResponseJSON', {"quickReplies":[]});        // Is it really useful ??
 
-        // Insert the message in the database
-        // Also insert the map! See MapMessage
-        Session.set('address',text);
-        Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-        Meteor.call('messages.insert',"MAP", 'user', Session.get('sessionId'));
-        
+        if(text === "") {
+            var text = "no_text"        // I think that's useless too...
+        }
+
+        else {      // Insert the message in the database
+                    // Also insert the map! See MapMessage
+            Session.set('address',text);
+            Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+            Meteor.call('messages.insert',"MAP", 'user', Session.get('sessionId'));
+        }
 
         
 
@@ -120,7 +125,7 @@ export default class AddressInput extends Component {
         return(
           
             <form className="new_message address" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-                <input id="address-input" ref="textInput" type="text" placeholder="Enter a location" required/>
+                <input id="address-input" ref="textInput" type="text" placeholder="Enter a location"/>
                 {Session.get('isMobile') ?
                     <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
                 }

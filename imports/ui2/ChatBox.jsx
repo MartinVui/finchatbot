@@ -12,7 +12,6 @@ import bloc from '../api/blocs.js';
 import MessageForm from './inputs/MessageForm.jsx';
 
 import MessageList from './MessageList.jsx';
-import LanguageSelector from './LanguageSelector.jsx';
 
 export default class ChatBox extends Component {
 
@@ -24,27 +23,21 @@ export default class ChatBox extends Component {
 	}
 
 
-
 	startConversation() {	// I think it sends the first message. I did this a loooong time ago
 
 		this.setState({showIntro:false});
 
-		// Get the first JSON response of the bot
-		var json = bloc('start', 'Hi');
-
+				// Get the JSON response of the bot
+		var json = bloc('start', Session.get('nextBlocName'));
 
 		Session.set('botResponseJSON', json);
 
-		// I didn't want to store the first message in the db. It would create a doc every time someone visit the website, without even using the bot
-		// Delete this when we stop storing the bot messages in the db
-
 		Session.set('first_message', json.botResponse);
-
 
 		// Set the next state of the bot
 		Session.set('nextBlocName', json.nextBlocID);
 
-		var text = "Yo that's a text!";
+		var text = 'no_text';
 
 		if (json.skip === true) {
 
@@ -56,11 +49,7 @@ export default class ChatBox extends Component {
 		    var TIMEOUT2 = setTimeout(function() {
 		        Session.set('botResponseJSON', json2);
 		        Session.set('showGif', false);
-		        
-
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-				
-		        
+		        Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
 
 		        // Set the new state of the bot
 		        Session.set('nextBlocName', json2.nextBlocID);
@@ -76,15 +65,9 @@ export default class ChatBox extends Component {
 			<div>
 				<div className="container">
 
-					{/*<LanguageSelector/>*/}
-
-				<ReactCSSTransitionGroup                // Animation when the messages appear
-					transitionName="introduction" 
-					transitionEnterTimeout={1} 
-					transitionLeaveTimeout={1000}>
 
 					{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
-						<div className="introduction" >
+						<div className="introduction">
 							<div id="intro-part1">
 								<img src="images/logo.png" className="intro-logo"/>
 							</div>
@@ -95,21 +78,25 @@ export default class ChatBox extends Component {
 							</div>
 						</div> :null
 					}
-
-				</ReactCSSTransitionGroup>
 		        	
-		        	{/*this.state.showIntro === false ?
+		        	{this.state.showIntro === false ?
 			        	<div className="conversation">
 			        		<MessageList messages={this.props.messages}/>
 			        	</div>:null
-			        */}
-			        	<div className="conversation">
-			        		<MessageList messages={this.props.messages}/>
-			        	</div>
+			        }
 
 
 			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>:null
+
+			        <ReactCSSTransitionGroup                // Animation when the messages appear
+			        transitionName="footer" 
+			        transitionAppearTimeout={600} 
+			        transitionEnterTimeout= {600}
+			        transitionLeaveTimeout={6}>
+
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>
+
+			        	</ReactCSSTransitionGroup>:null
 			        }
 
 

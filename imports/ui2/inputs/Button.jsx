@@ -4,26 +4,34 @@ import ReactDOM from 'react-dom';
 import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
 import bloc from '../../api/blocs.js';
+import cars from '../../api/carSample.js';
 
-
-export default class TextInput extends Component {
-
-
+export default class Button extends Component {
+// See AddressInput for more info. I won't write all this twice
 
     sendBotMessage(json) {
-        // See AddressInput for more details
 
         var _this = this;
 
         var typingTime = 300+json.botResponse.length*20;
 
+
+
         setTimeout(function() {
 
-    
+        
             Session.set('botResponseJSON', json);
 
+            // Check if there is a mail to send. Also check the kind of mail. We don't need it on other inputs yet
+            if (json.sendEmail === "Car") {
+                Meteor.call('sendEmail', "Car", Session.get('allData'));
+            }
+            if (json.sendEmail === "Funeral") {
+                Meteor.call('sendEmail', "Funeral", Session.get('allData'));
+            }
 
-            if (json.skip === true) {
+
+            if (json.skip === true) {   // See AdressInput, that's basically the same function
 
                 Session.set('showGif', false);
                 Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
@@ -54,7 +62,7 @@ export default class TextInput extends Component {
 
                 // Set the new state of the bot
                 Session.set('nextBlocName', json.nextBlocID);
-              
+                  
             }
 
         }, typingTime)
@@ -62,28 +70,27 @@ export default class TextInput extends Component {
     }
 
 
-	handleSubmit(event) {
+    onButtonClick() {
 
-        event.preventDefault();
-     
-        var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+        const data = this.props.response;   // With the buttons, each button correspond to a response. Yes -> Hell yes Holly!
+                                            // We send this response, not the button text 
 
         if (Session.get('botResponseJSON').createData !== false) {
             var dataName = Session.get('botResponseJSON').createData.dataName;
             var allData = Session.get('allData');
-            allData[dataName] = text;
+            allData[dataName] = data;
             Session.set('allData',allData);
         }
 
-        var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
+        var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+        
+        // The dataWrapper is something cool. If the guy click on the car insurance button, we can write "I am inerested in a car insurance"
+        var dataWrapper = Session.get('botResponseJSON').dataWrapper;
 
 
+        var text = dataWrapper.replace(/DATA/, data);
         Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-      
 
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';
-
-        // Insert the bot message
         Session.set('showGif', true);
         
         this.sendBotMessage(json);
@@ -91,18 +98,17 @@ export default class TextInput extends Component {
     }
 
 
-	render() {
+    render() {
 
-		return(
-			<form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-		       	<input type="text" ref="textInput" placeholder="Write a new message" required/>
-                {Session.get('isMobile') === true ?
-                    <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
-                }
-                {Session.get('isMobile') !== true ?   // Only shows the send icon when the user is on mobile
-                    <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>:null
-                }
-		    </form>
-		)
-	}
+        if (this.props.buttonText == undefined) {       // That's quite useless now
+            return(null);                               // Totally useless
+        }    
+
+        return( 
+            <div className="button" //id={this.props.buttonKey}
+            onClick={this.onButtonClick.bind(this)}>
+            <p>{this.props.buttonText}</p>
+            </div>
+        );
+    }
 }

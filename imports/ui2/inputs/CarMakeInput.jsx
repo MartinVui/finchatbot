@@ -3,15 +3,29 @@ import ReactDOM from 'react-dom';
 
 import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
+import CarPropositions from './CarPropositions.jsx';
 import bloc from '../../api/blocs.js';
+import cars from '../../api/carMake.js';
 
 
-export default class TextInput extends Component {
+export default class CarMakeInput extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            make: undefined,
+        };
+    }
+
+
+    handleChange(event) {
+
+        //var make = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+        this.setState({make: event.target.value});
+    }
 
 
     sendBotMessage(json) {
-        // See AddressInput for more details
 
         var _this = this;
 
@@ -19,7 +33,7 @@ export default class TextInput extends Component {
 
         setTimeout(function() {
 
-    
+
             Session.set('botResponseJSON', json);
 
 
@@ -41,7 +55,7 @@ export default class TextInput extends Component {
                 Session.set('showGif', true);
 
                 _this.sendBotMessage(newJson);
-                  
+
             } else {
 
                 Session.set('showGif', false);
@@ -54,7 +68,7 @@ export default class TextInput extends Component {
 
                 // Set the new state of the bot
                 Session.set('nextBlocName', json.nextBlocID);
-              
+
             }
 
         }, typingTime)
@@ -62,10 +76,10 @@ export default class TextInput extends Component {
     }
 
 
-	handleSubmit(event) {
+    handleSubmit(event) {
 
         event.preventDefault();
-     
+
         var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
         if (Session.get('botResponseJSON').createData !== false) {
@@ -77,9 +91,15 @@ export default class TextInput extends Component {
 
         var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
 
+        Session.set('botResponseJSON', {"quickReplies":[]});
 
-        Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-      
+        if(text === "") {
+            var text = "no_text"
+        }
+        else {
+            Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+        }
+          
 
         ReactDOM.findDOMNode(this.refs.textInput).value = '';
 
@@ -91,18 +111,21 @@ export default class TextInput extends Component {
     }
 
 
-	render() {
+    render() {
 
-		return(
-			<form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-		       	<input type="text" ref="textInput" placeholder="Write a new message" required/>
-                {Session.get('isMobile') === true ?
-                    <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
-                }
-                {Session.get('isMobile') !== true ?   // Only shows the send icon when the user is on mobile
-                    <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>:null
-                }
-		    </form>
-		)
-	}
+        return(
+            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
+            <input type="text" ref="textInput" placeholder="Write a new message" onChange={this.handleChange.bind(this)}/>
+            {this.state.make!== undefined ?
+                <CarPropositions make={this.state.make}/>:null
+            }
+            {Session.get('isMobile') === true ?
+                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
+            }
+            {Session.get('isMobile') !== true ?
+                <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>:null
+            }
+            </form>
+        )
+    }
 }

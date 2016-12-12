@@ -84,9 +84,12 @@ export default class YearInput extends Component {
 
     	var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
 
-
-	    Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-
+		if(text === "") {
+	      var text = "no_text"
+	    }
+	    else {
+	      Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+	    }
 
 	    // Insert the bot message
 	    Session.set('showGif', true);

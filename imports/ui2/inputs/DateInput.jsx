@@ -9,29 +9,6 @@ import bloc from '../../api/blocs.js';
 export default class DateInput extends Component {
 
 
-	constructor() {
-		super();
-		this.state = {
-			year: "year",
-			month: "month",
-			day: "day",
-		};
-	}
-
-
-	handleDayChange(event) {
-    		this.setState({day: event.target.value});
-  	}
-
-  	handleMonthChange(event) {
-    		this.setState({month: event.target.value});
-  	}
-
-  	handleYearChange(event) {
-    		this.setState({year: event.target.value});
-  	}
-
-
 
 	sendBotMessage(json) {
 		// Always the same, see AddressInput
@@ -88,42 +65,39 @@ export default class DateInput extends Component {
 
 	onButtonClick() {
 		// Create tthe response format: DD/MM/YYYY
-		var day = this.state.day;
-		var month = this.state.month;
-		var year = this.state.year;
+		var day = ReactDOM.findDOMNode(this.refs.day).value.trim();
+		var month = ReactDOM.findDOMNode(this.refs.month).value.trim();
+		var year = ReactDOM.findDOMNode(this.refs.year).value.trim();
+
+		var text = day+" "+month+" "+year;
 
 
-		if (day === "day" || month === "month" || year === "year") {
-		}
+		if (Session.get('botResponseJSON').createData !== false) {
+      		var dataName = Session.get('botResponseJSON').createData.dataName;
+      		var allData = Session.get('allData');
+      		if (Session.get('botResponseJSON').createData.data !== undefined) {
 
+      			allData[dataName] = Session.get('botResponseJSON').createData.data;
+      		} else {
+      			allData[dataName] = text;
+      		}
+      		Session.set('allData',allData);
+    	}
 
-		else {
+    	var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
 
-			var text = day+" "+month+" "+year;
+		if(text === "") {
+	      var text = "no_text"
+	    }
+	    else {
+	      Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+	    }
 
+	    // Insert the bot message
+	    Session.set('showGif', true);
+	    
+	    this.sendBotMessage(json);
 
-			if (Session.get('botResponseJSON').createData !== false) {
-	      		var dataName = Session.get('botResponseJSON').createData.dataName;
-	      		var allData = Session.get('allData');
-	      		if (Session.get('botResponseJSON').createData.data !== undefined) {
-
-	      			allData[dataName] = Session.get('botResponseJSON').createData.data;
-	      		} else {
-	      			allData[dataName] = text;
-	      		}
-	      		Session.set('allData',allData);
-	    	}
-
-	    	var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
-
-		    Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-
-		    // Insert the bot message
-		    Session.set('showGif', true);
-		    
-		    this.sendBotMessage(json);
-
-		}
 	}
 
 
@@ -156,16 +130,16 @@ export default class DateInput extends Component {
 
 		return (
 			<div className="SelectInput">
-				<select value={this.state.day} onChange={this.handleDayChange.bind(this)} className="scroll-input">
-					<option value={this.state.day} disabled>{this.state.day}</option>
+				<select ref='day' data-validation="required" className="scroll-input">
+		            <option value="0" disabled selected>Day</option>
 		            {days}
 		        </select>
-		        <select value={this.state.month} onChange={this.handleMonthChange.bind(this)} className="scroll-input">
-		        	<option value={this.state.month} disabled>{this.state.month}</option>
+		        <select ref='month' data-validation="required" className="scroll-input">
+		            <option value="0" disabled selected>Month</option>
 		            {months}
 		        </select>
-		        <select value={this.state.year} onChange={this.handleYearChange.bind(this)} className="scroll-input">
-		        	<option value={this.state.year} disabled>{this.state.year}</option>
+		        <select ref='year' data-validation="required" className="scroll-input">
+		            <option value="0" disabled selected>Year</option>
 		            {years}
 		        </select>
 		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>
