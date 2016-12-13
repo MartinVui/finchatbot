@@ -4955,10 +4955,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var nextBlocID = 'Credit life qualification level';
 			var skip = false;
 			var input = {'type':'buttons',
-						'buttons': [{'title':'Yes', 'response':'Yes Holly'},{'title':'No', 'response': 'No Holly'}]
+						'buttons': [{'title':'Yes', 'response':'Yes'},{'title':'No', 'response': 'No'}]
 						};
 			var dataWrapper = 'DATA';
-			var createData = false;
+			var createData = {"dataName":"smoker"};
 
 
 			var json = {
@@ -4988,7 +4988,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 						"choices": [{"value": "< Matric"},{"value": "Matric"},{"value": "Matric + further studies"},{"value": "3 year diploma"},{"value": "3 year degree"},{"value": "3 year technikon"},{"value": "4 year technikon"},{"value": "4 year degree"}]
 						};
 			var dataWrapper = 'DATA';
-			var createData = false;
+			var createData = {"dataName":"qualification"};
 
 
 			var json = {
@@ -5018,7 +5018,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 						"choices": [{"value": "3000 - 6000"},{"value": "6000 - 12000"},{"value": "12000 - 16000"},{"value": "16000 - 20000"},{"value": "20000 - 24000"},{"value": "24000 +"}]
 						};
 			var dataWrapper = 'DATA';
-			var createData = false;
+			var createData = {"dataName":"income"};
 
 
 			var json = {
@@ -10819,7 +10819,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 						'buttons': [{'title':'Ja', 'response':'Nee'},{'title':'Nee', 'response': 'Nee'}]
 						};
 			var dataWrapper = 'DATA';
-			var createData = false;
+			var createData = {"dataName":"smoker"};
 
 
 			var json = {
@@ -10849,7 +10849,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 						"choices": [{"value": "< Matriek"},{"value": "Matriek"},{"value": "Matriek en verdere studies"},{"value": "3 jaar diploma"},{"value": "3 jaar graad"},{"value": "3 jaar technikon"},{"value": "4 jaar technikon"},{"value": "4 jaar graad"}]
 						};
 			var dataWrapper = 'DATA';
-			var createData = false;
+			var createData = {"dataName":"qualification"};
 
 
 			var json = {
@@ -10879,7 +10879,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 						"choices": [{"value": "3000 - 6000"},{"value": "6000 - 12000"},{"value": "12000 - 16000"},{"value": "16000 - 20000"},{"value": "20000 - 24000"},{"value": "24000 +"}]
 						};
 			var dataWrapper = 'DATA';
-			var createData = false;
+			var createData = {"dataName":"income"};
 
 
 			var json = {
