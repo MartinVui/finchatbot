@@ -5552,14 +5552,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 			
 				
-				var botResponse = 'Well I am proud to tell you you got yourself a great deal!';
-				var image = false;
-				var inReplyto;
-				var nextBlocID = 'Credit life get quote 2';
-				var skip = true;
-				var input = {'type':'none'};
-				var dataWrapper = "DATA";
-				var createData = false;
+			var botResponse = 'Well I am proud to tell you you got yourself a great deal!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Credit life get quote 2';
+			var skip = true;
+			var input = {'type':'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
 				
 			
 
@@ -5918,7 +5918,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life start quote';
-				var skip = false;
+				var skip = true;
 				var input = {'type':'none'};
 				var dataWrapper = "DATA";
 				var createData = false;

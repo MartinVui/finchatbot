@@ -85,27 +85,37 @@ export default class ChatBox extends Component {
 					<LanguageSelector onChange={this.onChange.bind(this)}/>
 
 
-					{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
-						<div className="introduction">
-							<div id="intro-part1">
-								<img src="images/logo.png" className="intro-logo"/>
-							</div>
-							{this.state.language === 'eng' ?
-								<div id="intro-part2">
-									<h1>FinChatBot</h1>
-									<h2>Your personal assistant</h2>
-									<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
-								</div>:null
-							}
-							{this.state.language === 'afr' ?
-								<div id="intro-part2">
-									<h1>FinChatBot</h1>
-									<h2>Jou persoonlike assistent</h2>
-									<p onClick={this.startConversation.bind(this)}>Klik hier om die gesprek te begin</p>
-								</div>:null
-							}
-						</div> :null
-					}
+					<ReactCSSTransitionGroup                // Animation when the messages appear
+					transitionName="introduction" 
+					transitionEnterTimeout={1} 
+					transitionLeaveTimeout={1000}>
+
+
+
+						{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
+							<div className="introduction">
+								<div id="intro-part1">
+									<img src="images/logo.png" className="intro-logo"/>
+								</div>
+								{this.state.language === 'eng' ?
+									<div id="intro-part2">
+										<h1>FinChatBot</h1>
+										<h2>Your personal assistant</h2>
+										<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
+									</div>:null
+								}
+								{this.state.language === 'afr' ?
+									<div id="intro-part2">
+										<h1>FinChatBot</h1>
+										<h2>Jou persoonlike assistent</h2>
+										<p onClick={this.startConversation.bind(this)}>Klik hier om die gesprek te begin</p>
+									</div>:null
+								}
+							</div> :null
+						}
+
+
+					</ReactCSSTransitionGroup>
 		        	
 		        	{this.state.showIntro === false ?
 			        	<div className="conversation">
