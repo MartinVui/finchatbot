@@ -10892,7 +10892,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var nextBlocID = 'Credit life cover amount';
 			var skip = false;
 			var input = {'type':'select',
-						'text':"Select an income bracket",
+						'text':"Kies 'n inkomstegroep",
 						"choices": [{"value": "3000 - 6000"},{"value": "6000 - 12000"},{"value": "12000 - 16000"},{"value": "16000 - 20000"},{"value": "20000 - 24000"},{"value": "24000 +"}]
 						};
 			var dataWrapper = 'DATA';
@@ -11404,7 +11404,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life get quote';
-			var skip = false;
+			var skip = true;
 			var input = {'type':'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
