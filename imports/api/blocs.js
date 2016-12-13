@@ -4954,7 +4954,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var nextBlocID = 'Credit life qualification level';
 			var skip = false;
 			var input = {'type':'buttons',
-						'buttons': [{'title':'Yes', 'response':'Yes Holly'},{'title':'No', 'response': 'No Holly'}]
+						'buttons': [{'title':'Yes', 'response':'Yes'},{'title':'No', 'response': 'No'}]
 						};
 			var dataWrapper = 'DATA';
 			var createData = {"dataName":"smoker"};
