@@ -25,8 +25,7 @@ export default class LanguageSelector extends Component {
  				
  				<select value={this.state.language} onChange={this.handleChange.bind(this)} className="scroll-input">
  					<option value="eng">English</option>
- 					<option value="zulu">Zulu</option>
- 					<option value="xhosa">Xhosa</option>
+ 					<option value="afr">Afrikaans</option>
 				</select>
  		    </div>
  		)

@@ -5976,11 +5976,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////    ZULU VERSION 	/////////////////////////////////////////////////////////
+////////////////////////////////////////////    AFRIKAANS VERSION 	/////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	if (language === "zulu") {
+
+
+	if (language === 'afr') {
 
 
 		if (blocName === 'Hi') {
@@ -5989,7 +5991,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 			if (text.match(matchWord)) {		// Define the response JSON if there is a match
 				// var botResponse = {"eng": 'Hey! My name is Holly and I am your personal robot assistant', 'zulu':'Sawubona! Igamalami ngu Holly, imina ozobe ekusiza', 'xhosa':'', 'afr':''};
-				var botResponse = 'Sawubona! Igamalami ngu Holly, imina ozobe ekusiza'
+				var botResponse = 'Hey! My naam is Holly en ek is jou persoonlike robot'
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'What is your name';
@@ -6021,7 +6023,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 			
 			// var botResponse = {"eng":'And you what\'s your name?', 'zulu':'Ubani igama lakho?', 'xhosa':'', 'afr':''};
-			var botResponse = 'Ubani igama lakho?';
+			var botResponse = 'En wat is jou naam?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Nice to meet you';
@@ -6030,7 +6032,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 						'inputs': [{'title':'Name', 'createData':'name'},{'title':'Surname', 'createData':'surname'}]
 						};
 			//var input = {'type':'carmake'};
-			var dataWrapper = 'Sawbona! Igama lami ngingu DATA, ngijabulela ukukwazi';
+			var dataWrapper = 'My naam is DATA, goed om jou te ontmoet';
 			var createData = {"dataName": "name"}; 
 
 
@@ -6051,7 +6053,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		if (blocName === 'Nice to meet you') {
 
 			// var botResponse = {"eng": 'Great to meet you too '+data['name']+'!', 'zulu':'Ngiya jabula ukukwazi '+data['name']+'!, 'xhosa':'', 'afr':''};
-			var botResponse = 'Ngiya jabula ukukwazi '+data['name']+'!';
+			var botResponse = 'Goed om jou ook te ontmoet '+data['name']+'!';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'How can I help you';
@@ -6079,13 +6081,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			// var botResponse = {"eng": 'How can I help you today?', 'zulu':'Ngingaku siza ngani?', 'xhosa':'', 'afr':''};
-			var botResponse = 'Ngingaku siza ngani?';
+			var botResponse = 'Hoe kan ek jou vandag help?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'How can I help you 2';
 			var skip = false;
 			var input = {'type':'buttons',
-						'buttons': [/*{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},*/{'title':'Ngikukhonzile okungihlanganisa nezikweletu', 'response':'Ngikukhonzile okungihlanganisa nezikweletu'},{'title':'Ungangitshela kabanzi ngawe', 'response': 'Ungangitshela kabanzi ngawe, Holly?'}]
+						'buttons': [/*{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},*/{'title':'Ek stel belang in\'n krediet lewensversekering', 'response':'Ek stel belang in\'n krediet lewensversekering'},{'title':'Kan jy my bietjie meer van jouself vertel?', 'response': 'Kan jy my bietjie meer van jouself vertel?'}]
 						};
 			var dataWrapper = 'DATA';
 			var createData = false;
@@ -6108,10 +6110,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 		if (blocName === 'How can I help you 2') {
 
 			matchWord1 = /(.*)cover(.*)/i;
-			matchWord2 = /(.*)Ungangitshela\skabanzi\sngawe(.*)/i;
+			matchWord2 = /(.*)jouself(.*)/i;
 			matchWord3 = /(.*)called\sback(.*)/i;
 			matchWord4 = /(.*)insurance(.*)/i;
-			matchWord5 = /(.*)Ngikukhonzile\sokungihlanganisa\snezikweletu(.*)/i;
+			matchWord5 = /(.*)lewensversekering(.*)/i;
 
 			if (text.match(matchWord1)) {
 
@@ -6130,7 +6132,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else if (text.match(matchWord2)) {
 
 				
-				var botResponse = 'Ngiyajabula ukubona ukuthi uhlatshwa umxhwele ngami! :SMILE:';
+				var botResponse = 'Yeah '+data['name']+', ek is bly om te sien jy is geboei deur my! :SMILE:';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Holly';
@@ -6221,13 +6223,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 			if (text.match(matchWord1)) {
 
 				
-				var botResponse = 'Kulungile! Futhi yini obungathanda ukuyenza? Khetha phakathi izinkinobho ezahlukene ngezansi';
+				var botResponse = 'Ok got it! And what would you like to do? Choose between the different buttons below';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Funeral cover';
 				var skip = false;
 				var input = {"type":'buttons',
-							'buttons':[{"title": "Umasingcwabisane, yhini lokhu?", "response": "Ngingathanda ukuthola ulwazi oluthe xaxa mayelana nomasinngcwabisane ngiyacela Holly"}, {"title": "Thola isilinganiso senani lokuzothengwa ngokubhaliwe", "response": "Thola isilinganiso senani lokuzothengwa ngokubhaliwe"}]};
+							'buttons':[{"title": "Funeral cover, what is this?", "response": "I would be interested in getting more info about funeral cover please Holly"}, {"title": "Get a quote", "response": "I would like to get a quote please"}]};
 				var dataWrapper = "DATA";
 				var createData = false;
 
@@ -8513,13 +8515,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 						
 				
-				var botResponse = 'Uqinisekile ukuthi ufuna ukuhamba '+data['name']+'?';
+				var botResponse = 'Is jy seker jy wil gaan? '+data['name']+'?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'adiios 2';
 				var skip = false;
 				var input = {'type':'buttons',
-							'buttons': [{'title':'Yebo', 'response':'Yebo'}, {'title': 'Cha', 'response': 'Cha'}]};
+							'buttons': [{'title':'Ja', 'response':'Ja'}, {'title': 'Nee', 'response': 'Nee'}]};
 				var dataWrapper = "DATA";
 				var createData = false;
 					
@@ -8541,10 +8543,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 			if (blocName === 'adiios 2') {
 
-				if(text.match(/(.*)yebo(.*)/i)) {
+				if(text.match(/(.*)ja(.*)/i)) {
 						
 					
-					var botResponse = 'Ok ungakhathazeki! Bekumnandi kakhulu ukukuhlangana nawe. Uma unemibuzo, unganqikazi ungithinte';
+					var botResponse = 'Ok geen bekommernisse nie! Dit was goed om jou te ontmoet. As jy enige vrae het, moet asseblief nie huiwer om kontak met ons te maak nie.';
 					var image = false;
 					var inReplyto;
 					var nextBlocID = 'adiios 3';
@@ -8559,7 +8561,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 					var botResponse = '';
 					var image = false;
 					var inReplyto;
-					var nextBlocID = 'Funeral what to do next';
+					var nextBlocID = 'Credit life what to do next';
 					var skip = true;
 					var input = {'type':'none'};
 					var dataWrapper = "DATA";
@@ -8586,7 +8588,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 						
 				
-				var botResponse = 'Nge e-mail: hello@finchatbot.com';
+				var botResponse = 'Met email: hello@guardrisk.com';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'adiios 4';
@@ -8615,7 +8617,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 						
 				
-				var botResponse = 'Noma ngocingo lapho kuyoba omunye umsebenzisi wethu uzokukusiza: 07835527293';
+				var botResponse = 'Of oor die foon waar een van ons agente jou graag sal help: 07835527293';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'adiios 5';
@@ -8644,7 +8646,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 						
 				
-				var botResponse = 'Ube nosuku oluhle, ngizokubona masinyane! :SMILE:';
+				var botResponse = 'Geniet die dag. Kyk mooi na jouself en sien jou binnekort :SMILE:';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'End';
@@ -8705,7 +8707,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 				
-				var botResponse = 'Njengoba ngasho my name is Holly mina ngiliirobhothi. Yebo irobhothi ... ngadalwa kweqembu elihlaniphile lifisa ukwenza isipiliyoni umsebenzisi digital enembile futhi kujabulise. Ngelilodwa nje, kumnandi!';
+				var botResponse = 'Soos ek gese het my naam is Holly en ek is n robot. Ja n robot. Ek was deur n klomp nerds geskep om die digitale gebruikers ervaring meer intuitief en genotvolle te maak. In een word, meer pret!';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Holly 2';
@@ -8734,7 +8736,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 				
-				var botResponse = 'Me nabangane bami robot ungaphendula eziningi zemibuzo yakho. fair Kulungile ngokwanele, bayangibuza chocolate cake zokupheka Nokho, ngisho noma ngingathanda ukwazi ukuphendula lo :SMILE:';
+				var botResponse = 'Ek en my robot maatjies kan al jou vrae beantwoord. Ok moet my nou nie vir n sjokolade koek resep vra nie, al kon ek dit antwoord :SMILE:';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Holly 3';
@@ -8763,13 +8765,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 				
-				var botResponse = 'For example today I can help you getting a quote in whatever the type of insurance you interested in. I can help you to understand more clearly what we have to offer you. Would you like to try?';
+				var botResponse = 'Byvoorbeeld, vandag kan ek jou met n kwotasie help vir enige versekering waarin jy belang stel. Ek kan jou help verstaan als wat ons aanbied. Wil jy probeer?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Holly 4';
 				var skip = false;
 				var input = {'type':'buttons',
-							'buttons': [{'title': 'Yes', 'response': 'Hmm let\'s see how much you will impress me holly!'}, {'title': 'No', 'response': 'No'}]
+							'buttons': [{'title': 'Ja', 'response': 'Ja'}, {'title': 'Nee', 'response': 'Nee'}]
 							};
 				var dataWrapper = "DATA";
 				var createData = false;
@@ -8792,7 +8794,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 			if (blocName === 'Holly 4') {
 
-				if (text.match(/(.*)no(.*)/i)) {
+				if (text.match(/(.*)nee(.*)/i)) {
 
 					
 					var botResponse = '';
@@ -10707,13 +10709,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		if (blocName === "Credit life insurance") {
 
 			// var botResponse = {"eng": 'Ok got it! And what would you like to do? Choose between the different buttons below', 'zulu':'Yini ofisa ukuyenza? Khetha phakathi kwezinkinobo ezansi', 'xhosa':'', 'afr':''};
-			var botResponse = 'Yini ofisa ukuyenza? Khetha phakathi kwezinkinobo ezansi';
+			var botResponse = 'Ok het dit! En wat wil jy doen? Kies tussen die volgende opsies hieronder';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life insurance 2';
 			var skip = false;
 			var input = {'type':'buttons',
-						'buttons': [{'title': 'Ngicela ukuthola isilinganiso', 'response': 'Ngicela ukuthola isilinganiso'}, {'title': 'Credit life insurance, what is this?', 'response':'Credit life insurance, what is this?'}]};
+						'buttons': [{'title': 'Kry n kwotasie', 'response': 'Kry n kwotasie'}, {'title': 'Kredietlewensversekering? Wat is dit?', 'response':'Kredietlewensversekering? Wat is dit?'}]};
 			var dataWrapper = 'DATA';
 			var createData = false;
 
@@ -10732,7 +10734,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === "Credit life insurance 2") {
 
-			matchWord1 = /(.*)what(.*)/i;
+			matchWord1 = /(.*)wat(.*)/i;
 
 			if (text.match(matchWord1)) {
 
@@ -10749,13 +10751,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else {
 
 				
-				var botResponse = 'Kulungile, kulemizuzu emfishane elandelayo ngizoku buza imibuzo ngaphambi kokuthi uqonde ukuthi ufunani, njengalokhu, ngingakutholela  umshwalense okufanele. Ukulungele ukuhamba?';
+				var botResponse = 'Ja verseker! Vir die volgende paar minute gaan ek jou vrae vra sodat ek kan verstaan wat die beste versekering vir jou sal wees. So, reg om te gaan?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life start quote';
 				var skip = false;
 				var input = {'type':'buttons',
-							'buttons': [{'title': 'Yebi', 'response': 'Yebo!'}, {'title': 'Cha', 'response':'Cha'}]};
+							'buttons': [{'title': 'Ja', 'response': 'Ja!'}, {'title': 'Nee', 'response':'Nee'}]};
 				var dataWrapper = 'DATA';
 				var createData = false;			
 
@@ -10777,24 +10779,26 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === "Credit life start quote") {
 
-			matchWord1 = /(.*)cha(.*)/i;
+			matchWord1 = /(.*)nee(.*)/i;
 
 			if (text.match(matchWord1)) {
 
 				
-				var botResponse = '';
+				var botResponse = 'Ok, hoe kan ek jou dan help?';
 				var image = false;
 				var inReplyto;
-				var nextBlocID = 'How can I help you ';
-				var skip = true;
-				var input = {'type':'none'};
+				var nextBlocID = 'How can I help you 2';
+				var skip = false;
+				var input = {'type':'buttons',
+							'buttons': [{'title':'Ek stel belang in\'n krediet lewensversekering', 'response':'Ek stel belang in\'n krediet lewensversekering'},{'title':'Kan jy my bietjie meer van jouself vertel?', 'response': 'Kan jy my bietjie meer van jouself vertel?'}]
+							};
 				var dataWrapper = 'DATA';
 				var createData = false;
 
 			} else {
 
 				
-				var botResponse = 'Ok ngiyabonga omkhulu! Manje ukuze mina uthole ukuqonda kangcono izidingo zakho, mina nje kudingeka abuze imibuzo ethile siqu eyengeziwe';
+				var botResponse = 'Ok. Wondelik dankie! Ten einde vir my om n beter begrip te kry van jou behoeftse moet ek jou n paar addisionele persoonlike vrae vra';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life smoker';
@@ -10823,13 +10827,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Ingabe wena uyabhema?';
+			var botResponse = 'Is jy n roker?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life qualification level';
 			var skip = false;
 			var input = {'type':'buttons',
-						'buttons': [{'title':'Yebo', 'response':'Yebo'},{'title':'Cha', 'response': 'Cha'}]
+						'buttons': [{'title':'Ja', 'response':'Nee'},{'title':'Nee', 'response': 'Nee'}]
 						};
 			var dataWrapper = 'DATA';
 			var createData = false;
@@ -10852,14 +10856,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Okay ukukopisha. Futhi lokho kuyinto eliphakeme ziqu level yakho?';
+			var botResponse = 'Ok het dit. En wat is jou hoogste kwalifikasie?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life income bracket';
 			var skip = false;
 			var input = {'type':'select',
-						'text':"Select a qualification level",
-						"choices": [{"value": "< Matric"},{"value": "Matric"},{"value": "Matric + further studies"},{"value": "3 year diploma"},{"value": "3 year degree"},{"value": "3 year technikon"},{"value": "4 year technikon"},{"value": "4 year degree"}]
+						'text':"Kies 'n kwalifikasie vlak",
+						"choices": [{"value": "< Matriek"},{"value": "Matriek"},{"value": "Matriek en verdere studies"},{"value": "3 jaar diploma"},{"value": "3 jaar graad"},{"value": "3 jaar technikon"},{"value": "4 jaar technikon"},{"value": "4 jaar graad"}]
 						};
 			var dataWrapper = 'DATA';
 			var createData = false;
@@ -10882,7 +10886,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Futhi ngingabubalekela ngiye uthole imali ubakaki wakho wamanje Ngicela?';
+			var botResponse = 'En wat is jou huidige inkomste groep?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life cover amount';
@@ -10912,7 +10916,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Ngiyabonga '+data['name']+'! Manje ake sixoxe ethize Credit Life Cover owufunayo';
+			var botResponse = 'Dankie '+data['name']+'! Kom ons praat nou oor die spesifieke krediet lewensversekering wat jy soek';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life cover amount 2';
@@ -10939,13 +10943,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Iyini ingqikithi ezikweletini ofuna ukuba angayisibekela for? Akukhona ukuthi lemali kudingeka sibe phakathi Rand 000 10 no-75 000 Rand';
+			var botResponse = 'Wat is die total bedrag waarvoor jy gedek wil word? Onthou dit moet tussen R10000 en R75000 wees';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life cover amount 3';
 			var skip = false;
 			var input = {'type':'select',
-						'text':"Select a cover amount",
+						'text':"Kies 'n dekkingsbedrag",
 						"choices": [{"value": "R10000"},{"value": "R15000"},{"value": "R20000"},{"value": "R25000"},{"value": "R30000"},{"value": "R35000"},{"value": "R40000"},{"value": "R45000"},{"value": "R50000"},{"value": "R55000"},{"value": "R60000"},{"value": "R65000"},{"value": "R70000"},{"value": "R75000"}]
 						};
 			var dataWrapper = 'DATA';
@@ -10969,13 +10973,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Wena ungathanda ukuba wembeswe ngo '+data['Credit life cover amount']+'. Ingabe kulungile?';
+			var botResponse = 'Jy soek dekking vir '+data['Credit life cover amount']+'. Is dit reg?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life cover amount 4';
 			var skip = false;
 			var input = {"type": 'buttons',
-						'buttons': [{'title': 'Yebo', 'response': 'Yebo'}, {'title': 'Cha', 'response': 'Cha'}]
+						'buttons': [{'title': 'Ja', 'response': 'Ja'}, {'title': 'Nee', 'response': 'Nee'}]
 						};
 			var dataWrapper = 'DATA';
 			var createData = false;
@@ -10997,20 +11001,20 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === 'Credit life cover amount 4') {
 
-			matchWord1=/(.*)yebo(.*)/i;
-			matchWord2=/(.*)cha(.*)/i;
+			matchWord1=/(.*)ja(.*)/i;
+			matchWord2=/(.*)nee(.*)/i;
 
 			if (text.match(matchWord2)) {
 
 						
 				
-				var botResponse = 'Kulungile ke ungakwazi ukhetha enye imali?';
+				var botResponse = 'Ok dan kan jy n ander bedrag kies';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life cover amount 3';
 				var skip = false;
 				var input = {"type":'select',
-							'text':"Select cover",
+							'text':"Kies 'n dekkingsbedrag",
 							"choices": [{"value": "R10000"},{"value": "R15000"},{"value": "R20000"},{"value": "R25000"},{"value": "R30000"},{"value": "R35000"},{"value": "R40000"},{"value": "R45000"},{"value": "R50000"},{"value": "R55000"},{"value": "R60000"},{"value": "R65000"},{"value": "R70000"},{"value": "R75000"}]
 							};
 				var dataWrapper = 'DATA';
@@ -11019,7 +11023,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else {
 
 				
-				var botResponse = 'Yebo kopa lokho '+data['name']+'';
+				var botResponse = 'Ok reg so '+data['name']+'';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life additional benefits';
@@ -11049,13 +11053,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Ungathanda ukwengeza eminye nesembozo ezengeziwe ukuze yakho cover credit ukuphila? Uhlelo oluyisisekelo oluthi kakhulu isikweleti iphakethe ikhokha kuphela uma kwenzeka ushona, kodwa sikhetha ukuba ukunweba inqubomgomo sakho ukumboza lezi ongakhetha kusho ukuthi thina uzokhokha phandle kwenzeka lezi kwenzekani (ezifana ukudilizwa / ukukhubazeka njll?)'
+			var botResponse = 'En wil jy enige addisionele dekking byvoeg? Die mees basiese dekking betaal net in die geval van dood uit. Maar jy het die keuse om jou dekking uit te brei en dan beteken dit ons sal uit betaal in die geval van een van die gebeurtenisse (soos afdanking of ongeskiktheid)'
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Funeral add benefits';
+			var nextBlocID = 'Credit life additional benefits 2';
 			var skip = false;
 			var input = {"type": 'buttons',
-						'buttons': [{'title': 'Yebo', 'response': 'Yebo'}, {'title': 'Cha', 'response': 'Cha'}]
+						'buttons': [{'title': 'Ja', 'response': 'Ja'}, {'title': 'Nee', 'response': 'Nee'}]
 						};
 			var dataWrapper = 'DATA';
 			var createData = false;
@@ -11077,8 +11081,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === 'Credit life additional benefits 2') {
 
-			matchWord1=/(.*)yebo(.*)/i;
-			matchWord2=/(.*)cha(.*)/i;
+			matchWord1=/(.*)ja(.*)/i;
+			matchWord2=/(.*)nee(.*)/i;
 
 			if (text.match(matchWord2)) {
 
@@ -11096,15 +11100,15 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else {
 
 				
-				var botResponse = 'Okay ke sicela usebenzise izinkinobho ngezansi ukuze ungeze izinzuzo eziningi extra ngendlela ofuna :SMILE:';
+				var botResponse = 'Ok. Gebruik dan die opsies hieronder om enige addisionele voordele by te sit :SMILE:';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life additional benefits 3';
 				var skip = false;
 				var input = {"type":"checkbox",
-							"checks":[{"value":"Temporary Disability Cover"},{"value":"Permanent Disability Cover"},{"value":"Retrenchment Cover"},{"value":"Critical Illness Cover"},{"value":"Premium Waiver Cover"}],
+							"checks":[{"value":"Tydelike ongeskiktheids dekking"},{"value":"Permanente ongeskiktheidsdekking"},{"value":"Afdanking dekking"},{"value":"Kritieke siektes dekking"},{"value":"Premiekwytskelding dekking"}],
 							}
-				var dataWrapper = 'DATA';
+				var dataWrapper = 'It would be great to add to my cover a DATA';
 				var createData = false;
 
 			}
@@ -11128,7 +11132,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 						
 			
-			var botResponse = 'Okay akukho nkinga. I wengeze la izinketho credit impilo yakho Ukusabalala';
+			var botResponse = 'Ok geen probleem. Ek sal hierdie additionele voordele by jou huidige krediet lewensversekering sit';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life finish quote';
@@ -11156,7 +11160,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 						
 			
-			var botResponse = 'Hmm ake ngicabange ...';
+			var botResponse = 'Hmmm laat ek dink';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life finish quote 2';
@@ -11185,7 +11189,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Isilinganiso senani lokuzothengwa ngokubhaliwe sakho cishe silunge. E-mail, inombolo yocingo kube siqedile. Ungakwazi yini ukufaka ikheli lakho le-e-mail ngezansi ngyacela?';
+			var botResponse = 'Jou kwotasie is amper reg. Nou net email address en telefoon nomer en dan is ons klaar. Kan jy jou email address hieronder insit aseblief?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life get email';
@@ -11215,13 +11219,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 			if (text.match(matchWord0)) {
 			
 				
-				var botResponse = 'Ingabe ikheli lakho le-e-mail lithi '+data['email']+'? Ingabe uqinisekise?';
+				var botResponse = 'Is jou email address '+data['email']+'? Kan jy dit bevestig?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life check email';
 				var skip = false;
 				var input = {'type':'buttons',
-							'buttons': [{'title':'Yebo', 'response':'Yebo!'},{'title':'Cha', 'response':'Cha'}]
+							'buttons': [{'title':'Ja', 'response':'Ja'},{'title':'Nee', 'response':'Nee'}]
 							};
 				var dataWrapper = "DATA";
 				var createData = false;
@@ -11229,10 +11233,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 			} else {
 				
-				var botResponse = 'Ngyaxolisa, angicabangi ukuthi ilona leikheli le-imeyili. Ungakwazi yini ukuphinde unginikeze futhi?';
+				var botResponse = 'Ek is jammer. Ek dink nie dit is n email address nie. Kan jy dit aseblief weer vir my gee?';
 				var image = false;
 				var inReplyto;
-				var nextBlocID = 'Car get email';
+				var nextBlocID = 'Credit life get email';
 				var skip = false;
 				var input = {'type':'text'};
 				var dataWrapper = "DATA";
@@ -11257,12 +11261,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === 'Credit life check email') {
 
-			matchWord1 = /(.*)yebo(.*)/i;
+			matchWord1 = /(.*)ja(.*)/i;
 
 			if (text.match(matchWord1)) {
 			
 				
-				var botResponse = 'Ngiyabonga . Ithini inombolo yakho yocingo? Ngicela nje ungifakele inombolo yakho yocingo';
+				var botResponse = 'Ok dankie. En wat is jou telefoon nommer ? Sit aseblief jou nommer in';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life get number';
@@ -11274,7 +11278,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 			} else {
 				
-				var botResponse = 'Ok, unganginika futhi ?';
+				var botResponse = 'Ok, kan jy dit weer vir my gee?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life get email';
@@ -11307,13 +11311,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 			if (text.match(matchWord0)) {
 			
 				
-				var botResponse = 'Ingabe inombolo yakho yocingo ithi '+data['number']+'? Ingabe uqinisekile?';
+				var botResponse = 'Is jou nommer '+data['number']+'? Kan jy dit bevestig?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life check number';
 				var skip = false;
 				var input = {'type':'buttons',
-							'buttons': [{'title':'Yebo', 'response':'Yebo Holly, kodwa uwena slow'},{'title':'Cha', 'response':'Cha'}]
+							'buttons': [{'title':'Ja', 'response':'Ja Holly'},{'title':'Nee', 'response':'Nee'}]
 							};
 				var dataWrapper = "DATA";
 				var createData = false;
@@ -11321,7 +11325,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 			} else {
 				
-				var botResponse = 'Ngyaxolisa, angicabangi ukuthi ilona leikheli le-imeyili. Ungakwazi yini ukuphinde unginikeze futhi?';
+				var botResponse = 'I\'m sorry, I don\'t think it is an email address. Can you give it again please?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Get email';
@@ -11349,12 +11353,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === 'Credit life check number') {
 
-			matchWord1 = /(.*)yes(.*)/i;
+			matchWord1 = /(.*)ja(.*)/i;
 
 			if (text.match(matchWord1)) {
 			
 				
-				var botResponse = 'Ahaha yebo '+data['name']+' kuyiqiniso, kodwa ngisafunda! Ngikhetha ukubheka kabili :SMILE:';
+				var botResponse = 'Ek leer nog en ek verkies om dubbel seker te maak :SMILE:';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life check number 2';
@@ -11366,7 +11370,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 			} else {
 				
-				var botResponse = 'Ok, unganginika futhi ?';
+				var botResponse = 'Ok, kan jy dit weer vir my gee?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life get number';
@@ -11396,14 +11400,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 			
-			var botResponse = 'Ngiyabonga, ngicabanga ukuthi nginakho konke engikudingayo! Ulungle ukubona intengo yakho?';
+			var botResponse = 'Dankie. Ek dink ek het als wat ek nodig het. Is jy reg om jou kwotasie te sien?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life get quote';
 			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title': 'Yebo', 'response': 'Yebo!'}, {'title': 'Cha', 'response': 'Cha'}]
-						};
+			var input = {'type':'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
 				
@@ -11425,35 +11427,19 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === 'Credit life get quote') {
 
-			matchWord1 = /(.*)yebo(.*)/i;
 
-			if (text.match(matchWord1)) {
 			
 				
-				var botResponse = 'Ngiyaziqhenya ukukutshela ukuthi uztholele intengo enhle kukhulu!';
-				var image = false;
-				var inReplyto;
-				var nextBlocID = 'Credit life get quote 2';
-				var skip = true;
-				var input = {'type':'none'};
-				var dataWrapper = "DATA";
-				var createData = false;
+			var botResponse = 'Wel ek is bly om jou te se jy het n goeie deal gekry!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Credit life get quote 2';
+			var skip = true;
+			var input = {'type':'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
 				
-			
-			} else {
-				
-				var botResponse = 'Isono lokho, ngikutholele lukhulu '+data['name']+'! Uqinisekile ukuthi awufuni ukubona ukuthi ngikutholeleni?';
-				var image = false;
-				var inReplyto;
-				var nextBlocID = 'Credit life no quote';
-				var skip = false;
-				var input = {'type':'buttons',
-							'buttons':[{'title':'Cha', 'response': 'Cha'}, {'title': 'Buyela emuva', 'response': 'Buyela emuva'}]
-							};
-				var dataWrapper = "DATA";
-				var createData = false;
-				
-			}
+
 
 			var json = {
 				"botResponse": botResponse,
@@ -11474,7 +11460,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 			
-			var botResponse = 'Isembezo sakho osikhethiile uzokhokhe uR251 pm kuphela ngenyanga! Ngikuthumelele ie-mail enayo yonke  imininingwane.';
+			var botResponse = 'Die dekking wat jy gekies het gaan jou R251 per maand kos. Ek het jou n email gestuur met al die inligting van die kwotasie';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life what to do next';
@@ -11506,13 +11492,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 			
-			var botResponse = 'Yini ongathanda ukuyenza manje?';
+			var botResponse = 'Wat wil jy nou doen?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life what to do next 2';
 			var skip = false;
 			var input = {'type':'buttons',
-						'buttons': [{'title': 'Thola umsebenzeli axhumane nami', 'response': 'Thola umsebenzeli axhumane nami'}, {'title': 'Buyela emuva', 'response': 'Buyela emuva'},{'title':'Ngiqedile', 'response':'Ngiqedile'}]
+						'buttons': [{'title': 'kry n agent om my te kontak', 'response': 'kry n agent om my te kontak'}, {'title': 'Gaan terug na die opsies toe', 'response': 'Gaan terug na die opsies toe'},{'title':'Ek is klaar', 'response':'Ek is klaar'}]
 						};
 			var dataWrapper = "DATA";
 			var createData = false;
@@ -11533,62 +11519,16 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Credit life no quote') {
-
-			matchWord1 = /(.*)cha(.*)/i;
-			matchWord2 = /(.*)Buyela\semuva(.*)/i;
-
-			if (text.match(matchWord1)) {
-			
-				
-				var botResponse = 'Ah, Ngiyajabula ubuyele emuva nesizathu! :SMILE: Asiwenzanga wonke lomsebenzi ngelize';
-				var image = false;
-				var inReplyto;
-				var nextBlocID = 'Credit life get quote 2';
-				var skip = true;
-				var input = {'type':'none'};
-				var dataWrapper = "DATA";
-				var createData = false;
-				
-			
-			} else if (text.match(matchWord2)) {
-				
-				var botResponse = 'Lokhu kuyafaneleka, uwena umphathi! Uzothola vele ie-mail enemininingwane yentengo yakho uma kwenzeka wena ushintshe ingqondo yakho';
-				var image = false;
-				var inReplyto;
-				var nextBlocID = 'Credit life what to do next';
-				var skip = true;
-				var input = {'type':'none'};
-				var dataWrapper = "DATA";
-				var createData = false;
-				
-			}
-
-			var json = {
-				"botResponse": botResponse,
-				"image": image,
-				"inReplyTo": inReplyto,			
-				"nextBlocID": nextBlocID,
-				"input": input,
-				"skip": skip,
-				"dataWrapper": dataWrapper,
-				"createData": createData,
-			};
-
-			
-			return json;
-		}
-
 		if (blocName === 'Credit life what to do next 2') {
 
-			matchWord1 = /(.*)Thola\sumsebenzeli\saxhumane\snami(.*)/i;
-			matchWord2 = /(.*)Buyela\semuva(.*)/i;
-			matchWord3 = /(.*)Ngiqedile(.*)/i;
+			matchWord1 = /(.*)kontak(.*)/i;
+			matchWord2 = /(.*)terug(.*)/i;
+			matchWord3 = /(.*)klaar(.*)/i;
 
 			if (text.match(matchWord1)) {
 					
 				
-				var botResponse = 'Kulungile '+data['name']+'!';
+				var botResponse = 'Ok reg '+data['name']+'!';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life contact agent';
@@ -11600,7 +11540,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else if (text.match(matchWord2)) {
 
 				
-				var botResponse = 'Kulungile '+data['name']+'!';
+				var botResponse = 'Ok reg '+data['name']+'!';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'How can I help you';
@@ -11642,15 +11582,15 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 			
-			var botResponse = 'Senginayo inombolo yakho yocingo. Esiphi isikhathi esikulungele esingakushayela ngaso ucingo?';
+			var botResponse = 'Ek het al klaar jou nommer. Wanneer moet ons jou terug skakel?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life contact agent 2';
 			var skip = false;
 			var input = {'type':'buttons',
-						'buttons': [{'title': '9h-12h', 'response': '9h no 12h'}, {'title': '12h-14h', 'response': '12h no 14h'},{'title': '14h-16h', 'response': '14h no 16h'},{'title': '16h-18h', 'response': '16h no 18h'}]
+						'buttons': [{'title': '9h-12h', 'response': '9h en 12h'}, {'title': '12h-14h', 'response': '12h en 14h'},{'title': '14h-16h', 'response': '14h en 16h'},{'title': '16h-18h', 'response': '16h en 18h'}]
 						};
-			var dataWrapper = "Kungaba kuhle ukuba ukushayelwa ucingo phakathi kuka DATA";
+			var dataWrapper = "Tussen DATA";
 			var createData = {'dataName': 'contact time'};
 				
 
@@ -11673,7 +11613,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 			
-			var botResponse = 'Ngiyitholile! An umsbenzeli uzokubiza ngokushesha ngangokunokwenzeka phakathi  kuka '+data['contact time']+' njengoba ucelile';
+			var botResponse = 'Het dit! N agent sal jou dan so gou as moontlik tussen '+data['contact time']+' terug skakel';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life what to do next';
@@ -11834,7 +11774,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 			return json;
 		}
-
 	}
+
+
+
+
+
+
+
 
 }

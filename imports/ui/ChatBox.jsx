@@ -97,18 +97,11 @@ export default class ChatBox extends Component {
 									<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
 								</div>:null
 							}
-							{this.state.language === 'zulu' ?
+							{this.state.language === 'afr' ?
 								<div id="intro-part2">
 									<h1>FinChatBot</h1>
-									<h2>Umsizi wakho siqu</h2>
-									<p onClick={this.startConversation.bind(this)}>Chofoza lapha ukuze uqale ingxoxo</p>
-								</div>:null
-							}
-							{this.state.language === 'xhosa' ?
-								<div id="intro-part2">
-									<h1>FinChatBot</h1>
-									<h2>umncedisi yakho yobuqu</h2>
-									<p onClick={this.startConversation.bind(this)}>Nqakraza apha ukuqala incoko</p>
+									<h2>Jou persoonlike assistent</h2>
+									<p onClick={this.startConversation.bind(this)}>Klik hier om die gesprek te begin</p>
 								</div>:null
 							}
 						</div> :null
