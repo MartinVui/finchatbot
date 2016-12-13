@@ -6174,7 +6174,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 				var botResponse = '';
 				var image = false;
 				var inReplyto;
-				var nextBlocID = 'Credit life insurance';
+				var nextBlocID = 'Credit life insurance 2';
 				var skip = true;
 				var input = {'type':'none'};
 				// var input = {"type":'buttons',
