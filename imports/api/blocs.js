@@ -312,7 +312,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 				var botResponse = '';
 				var image = false;
 				var inReplyto;
-				var nextBlocID = 'Type of insurance';
+				var nextBlocID = 'Credit life insurance';
 				var skip = true;
 				var input = {'type':'none'};
 				// var input = {"type":'buttons',
@@ -5178,7 +5178,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'And would you like to add any additional covers to your credit life cover? The most basic credit life package pays out only in the event of death, but choosing to extend your policy to cover these options means that we will pay out in event of these happening  (such as retrenchment/ disability etc?)'
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Funeral add benefits';
+			var nextBlocID = 'Credit life additional benefits 2';
 			var skip = false;
 			var input = {"type": 'buttons',
 						'buttons': [{'title': 'Yes', 'response': 'Yes please'}, {'title': 'No', 'response': 'No thanks'}]
@@ -5526,10 +5526,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life get quote';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title': 'Yes', 'response': 'Hell yes holly!'}, {'title': 'No', 'response': 'Nope'}]
-						};
+			var skip = true;
+			var input = {'type':'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
 				
@@ -5551,9 +5549,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (blocName === 'Credit life get quote') {
 
-			matchWord1 = /(.*)yes(.*)/i;
-
-			if (text.match(matchWord1)) {
+			
 			
 				
 				var botResponse = 'Well I am proud to tell you you got yourself a great deal!';
@@ -5566,20 +5562,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 				var createData = false;
 				
 			
-			} else {
-				
-				var botResponse = 'That\'s a shame I got you a great deal '+data['name']+'! Are you sure you don\'t see what I found you?';
-				var image = false;
-				var inReplyto;
-				var nextBlocID = 'Credit life no quote';
-				var skip = false;
-				var input = {'type':'buttons',
-							'buttons':[{'title':'Show me my quote', 'response': 'You right, show me my quote please'}, {'title': 'Go back to menu', 'response': 'Yeah, I\'m sure, go back to menu'}]
-							};
-				var dataWrapper = "DATA";
-				var createData = false;
-				
-			}
+
 
 			var json = {
 				"botResponse": botResponse,
@@ -6190,7 +6173,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 				var botResponse = '';
 				var image = false;
 				var inReplyto;
-				var nextBlocID = 'Type of insurance';
+				var nextBlocID = 'Credit life insurance 2';
 				var skip = true;
 				var input = {'type':'none'};
 				// var input = {"type":'buttons',
