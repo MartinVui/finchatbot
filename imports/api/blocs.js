@@ -6115,7 +6115,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else if (text.match(matchWord2)) {
 
 				
-				var botResponse = 'Yeah '+data['name']+', ek is bly om te sien jy is geboei deur my! :SMILE:';
+				var botResponse = 'Ja '+data['name']+', ek is bly om te sien jy is geboei deur my! :SMILE:';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Holly';
@@ -8571,7 +8571,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 						
 				
-				var botResponse = 'Met email: hello@guardrisk.com';
+				var botResponse = 'Met epos: hello@guardrisk.com';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'adiios 4';
@@ -8690,7 +8690,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 					
 				
-				var botResponse = 'Soos ek gese het my naam is Holly en ek is n robot. Ja n robot. Ek was deur n klomp nerds geskep om die digitale gebruikers ervaring meer intuitief en genotvolle te maak. In een word, meer pret!';
+				var botResponse = 'Soos ek gese het my naam is Holly en ek is n robot. Ja n robot. Ek was deur n klomp nerds geskep om die digitale gebruikers ervaring meer intuitief en genotvol te maak. In een word, meer pret!';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Holly 2';
@@ -10781,7 +10781,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else {
 
 				
-				var botResponse = 'Ok. Wondelik dankie! Ten einde vir my om n beter begrip te kry van jou behoeftse moet ek jou n paar addisionele persoonlike vrae vra';
+				var botResponse = 'Ok. Wondelik dankie! Ten einde vir my om n beter begrip te kry van jou behoeftes moet ek jou n paar addisionele persoonlike vrae vra';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life smoker';
@@ -10926,7 +10926,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Wat is die total bedrag waarvoor jy gedek wil word? Onthou dit moet tussen R10000 en R75000 wees';
+			var botResponse = 'Wat is die totaal bedrag waarvoor jy gedek wil word? Onthou dit moet tussen R10000 en R75000 wees';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life cover amount 3';
@@ -11172,7 +11172,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 			
-			var botResponse = 'Jou kwotasie is amper reg. Nou net email address en telefoon nomer en dan is ons klaar. Kan jy jou email address hieronder insit aseblief?';
+			var botResponse = 'Jou kwotasie is amper reg. Nou net epos address en telefoon nomer en dan is ons klaar. Kan jy jou epos address hieronder insit aseblief?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Credit life get email';
@@ -11202,7 +11202,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			if (text.match(matchWord0)) {
 			
 				
-				var botResponse = 'Is jou email address '+data['email']+'? Kan jy dit bevestig?';
+				var botResponse = 'Is jou epos address '+data['email']+'? Kan jy dit bevestig?';
 				var image = false;
 				var inReplyto;
 				var nextBlocID = 'Credit life check email';
