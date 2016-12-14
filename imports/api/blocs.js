@@ -11091,7 +11091,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 				var input = {"type":"checkbox",
 							"checks":[{"value":"Tydelike ongeskiktheids dekking"},{"value":"Permanente ongeskiktheidsdekking"},{"value":"Afdanking dekking"},{"value":"Kritieke siektes dekking"},{"value":"Premiekwytskelding dekking"}],
 							}
-				var dataWrapper = 'It would be great to add to my cover a DATA';
+				var dataWrapper = 'Dit noem iets groot te voeg aan my dek \'n DATA';
 				var createData = false;
 
 			}
