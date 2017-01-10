@@ -34,6 +34,11 @@ export default class Form extends Component {
 
 	handleSubmit() {
 
+		console.log("firstPlayer", this.state.firstPlayer);
+		console.log("secondPlayer", this.state.secondPlayer);
+		console.log("gamescore1", gameScore1);
+		console.log("gameScore2", gameScore2);
+
 		if (player1 === "Select a player" || player2 === "Select a player") {
 			return
 		}
@@ -45,6 +50,13 @@ export default class Form extends Component {
 			var player2 = this.props.scores[this.state.secondPlayer].name
 			var score1 = this.props.scores[this.state.firstPlayer].score
 			var score2 = this.props.scores[this.state.secondPlayer].score
+
+			console.log("firstPlayer", this.state.firstPlayer);
+			console.log("secondPlayer", this.state.secondPlayer);
+			console.log("gamescore1", gameScore1);
+			console.log("gameScore2", gameScore2);
+			console.log("score1", score1);
+			console.log("score2", score2);
 
 			Meteor.call('scores.insert', player1, score1, player2, score2, gameScore1, gameScore2);
 
