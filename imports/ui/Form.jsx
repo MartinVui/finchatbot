@@ -34,10 +34,10 @@ export default class Form extends Component {
 
 	handleSubmit() {
 
-		console.log("firstPlayer", this.state.firstPlayer);
-		console.log("secondPlayer", this.state.secondPlayer);
-		console.log("gamescore1", gameScore1);
-		console.log("gameScore2", gameScore2);
+		// console.log("firstPlayer", this.state.firstPlayer);
+		// console.log("secondPlayer", this.state.secondPlayer);
+		// console.log("gamescore1", gameScore1);
+		// console.log("gameScore2", gameScore2);
 
 		if (player1 === "Select a player" || player2 === "Select a player") {
 			return
