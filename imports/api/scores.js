@@ -30,6 +30,12 @@ Meteor.methods({
 			var winner = name1;
 			var gameScoreDif = gameScore1 - gameScore2;
 			var LeaderBoardDif = score1 - score2;
+			if (LeaderBoardDif > 10) {
+				LeaderBoardDif = 10;
+			}
+			else if (LeaderBoardDif < -10) {
+				LeaderBoardDif = -10;
+			}
 
 			var newScore1 = score1 + (1 - LeaderBoardDif/10)*gameScoreDif/5;
 			var newScore2 = score2 - (1 - LeaderBoardDif/10)*gameScoreDif/5;
