@@ -40,7 +40,7 @@ export default class MessageList extends Component {
 
 		_this = this;
 
-		for (var i = 0; i < 600; i++) {
+		for (var i = 0; i < 1000; i++) {
 
 			var TIMEOUT = setTimeout(function() {
 				_this.scrollABitToTheBottom();
