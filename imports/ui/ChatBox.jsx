@@ -12,7 +12,7 @@ import bloc from '../api/blocs.js';
 import MessageForm from './inputs/MessageForm.jsx';
 
 import MessageList from './MessageList.jsx';
-import LanguageSelector from './LanguageSelector.jsx';
+
 
 export default class ChatBox extends Component {
 
