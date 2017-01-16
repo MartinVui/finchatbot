@@ -232,6 +232,10 @@ a:visited {
 .image-message img {
   height: 50vh;
   width: auto;
+/*  border: 1px solid #a6a6a6;
+  border-radius: 10px;
+  padding-right: 20px;
+  padding-left: 20px;*/
 }
 
 .bot_text {

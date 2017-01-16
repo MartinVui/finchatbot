@@ -205,7 +205,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'Hot deals', 'response':'Let me see the Hot deals!'},{'title':'Locate a store', 'response':'Please help me finding the closest Cell C store Holly'},{'title':'Recharge', 'response':'I would like to recharge my phone services please Holly'}/*,{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}*/]
+					'buttons': [{'title':'Hot deals', 'response':'Let me see the Hot deals!'},{'title':'Locate a store', 'response':'Please help me finding the closest Cell C store Holly'},{'title':'Upgrade my contract', 'response':'I would like to upgrade my contract'},{'title':'Recharge', 'response':'I would like to recharge my phone services please Holly'}/*,{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}*/]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -230,6 +230,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		matchWord1 = /(.*)hot(.*)/i;
 		matchWord2 = /(.*)store(.*)/i;
 		matchWord3 = /(.*)recharge(.*)/i;
+		matchWord4 = /(.*)upgrade(.*)/i;
 
 		if (text.match(matchWord1)) {
 
@@ -265,6 +266,17 @@ For the links : LINKhttps://google.comTEXTyoEND
 						"choices": [{"value": "Air time"},{"value": "Data bundle"},{"value": "SMS bundle"}]
 						};
 			var dataWrapper = "I would like to buy Cell C DATA please Holly";
+			var createData = false;
+
+		} else if (text.match(matchWord4)) {
+
+			var botResponse = 'Sure no problem '+data['name']+'. In case you don’t know it yet, to be able to do so you must be in your last month contract. Enter your Cell C number below and I will check if that’s your case:';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade';
+			var skip = false;
+			var input = {"type":'text'};
+			var dataWrapper = "DATA";
 			var createData = false;
 
 		}
@@ -1373,6 +1385,875 @@ For the links : LINKhttps://google.comTEXTyoEND
 		
 		return json;
 	}
+
+
+	if (blocName === 'Upgrade') {
+
+
+		var botResponse = 'All good '+data['name']+'! Your contract expire in exactly 25 days. Good time for upgrading :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade 2';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade 2') {
+
+
+		var botResponse = 'So what’s next, would you like to keep the same contract and renew it or you want me to help you upgrade/modify as you wish?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade 3';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons':[{'title':'Renew same!', 'response': 'Renew same!'}, {'title':'Let’s get crazy Holly!', 'response': 'You get it Holly!'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade 3') {
+
+		matchWord1 = /(.*)renew(.*)/i
+
+		if (text.match(matchWord1)) {
+
+			var botResponse = 'Okay Name, almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade contract 2';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+			
+			var json = {
+				"botResponse": botResponse,
+				"image": image,
+				"inReplyTo": inReplyto,
+				"nextBlocID": nextBlocID,
+				"input": input,
+				"skip": skip,
+				"dataWrapper": dataWrapper,
+				"createData": createData,
+			};
+
+		} else {
+
+			var botResponse = 'Okay let’s do this '+data['name']+'!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade new contract';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+			
+			var json = {
+				"botResponse": botResponse,
+				"image": image,
+				"inReplyTo": inReplyto,
+				"nextBlocID": nextBlocID,
+				"input": input,
+				"skip": skip,
+				"dataWrapper": dataWrapper,
+				"createData": createData,
+			};
+
+		}
+
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade new contract') {
+
+
+		var botResponse = 'Ah yes before starting, I see that your contract currently includes 20 min air time, 100 SMS and 1GB of data per month, for a kickass price of R200/month. Just saying :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade new contract 2';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade new contract 2') {
+
+
+		var botResponse = 'Okay so, let’s start with the monthly air time. How much would you like to get?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade new contract 3';
+		var skip = false;
+		var input = {"type":'select',
+					'text':"Select air time",
+					"choices": [{"value": "No air time"},{"value": "10 minutes"},{"value": "20 minutes"},{"value": "1 hour"},{"value": "2 hours"}]
+					};
+		var dataWrapper = "DATA sounds cool!";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade new contract 3') {
+
+
+		var botResponse = 'Okay I copy that. Select no your monthly data bundle:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade new contract 4';
+		var skip = false;
+		var input = {"type":'select',
+					'text':"Select data bundle",
+					"choices": [{"value": "60 MB"},{"value": "200 MB"},{"value": "500 MB"},{"value": "1 GB"},{"value": "2 GB"},{"value": "5 GB"}]
+					};
+		var dataWrapper = "DATA please Holly!";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade new contract 4') {
+
+
+		var botResponse = 'Yes let’s do that. And maybe some SMS to text-keep in touch with your mates?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade contract';
+		var skip = false;
+		var input = {"type":'select',
+					'text':"Select amount of SMS",
+					"choices": [{"value": "Nope!"},{"value": "50 SMS"},{"value": "100 SMS"},{"value": "200 SMS"},{"value": "500 SMS"}]
+					};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade contract') {
+
+
+		var botResponse = 'Okay Name, almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade contract 2';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade contract 2') {
+
+
+		var botResponse = 'This includes itemised Billing, receiving your cellular bill statements via e-mail, data bundles, C Surance or SMS bundles etc.. Interested?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade contract 3';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool!'},{'title': 'No', 'response': 'No thanks Holly'},{'title': 'C Surance? What is that?', 'response': 'C Surance? What is that?'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade contract 3') {
+
+		matchWord1 = /(.*)cool(.*)/i;
+		matchWord2 = /(.*)no(.*)/i;
+		matchWord3 = /(.*)Surance(.*)/i;
+
+		if (text.match(matchWord1)) {
+
+			var botResponse = 'Sure! Please check below the features you would like to add to your contract:';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade contract length';
+			var skip = false;
+			var input = {"type":"checkbox",
+						"checks":[{"value": "Bill statements via e-mail"},{"value":"Itemised billing"},{"value":"C Surance"}],
+						}
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		} else if(text.match(matchWord2)) {
+
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade contract length';
+			var skip = true;
+			var input = {"type": 'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		} else if(text.match(matchWord3)) {
+
+			var botResponse = 'C Surance is Cell C cover against theft, accidental physical loss and accidental physical damage';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade C Surance';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		}
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade C Surance') {
+
+
+		var botResponse = 'So? Do you want to add features to your contract?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade contract 3';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool'},{'title': 'No', 'response': 'No thanks Holly'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade contract length') {
+
+
+		var botResponse = 'Okay. Now please precise your contract length:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade phone';
+		var skip = false;
+		var input = {"type":'select',
+					'text':"Select length",
+					"choices": [{"value": "6 months"},{"value": "12 months"},{"value": "18 months"},{"value": "24 months"}]
+					};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade phone') {
+
+
+		var botResponse = 'Glad to see you’re keen to stay with us for that long :SMILE:. Now the most exciting part.. Let’s select your new phone!! Tell me more about your wishes, any specific features/brand';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade chose phone';
+		var skip = false;
+		var input = {"type":"checkbox",
+						"checks":[{"value": "Iphone"},{"value":"Samsung"},{"value":"HD camera"},{"value":"4G"}],
+					}
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+
+	if (blocName === 'Upgrade chose phone') {
+
+
+
+		var botResponse = 'What about this Iphone 7 32Gb in black?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade chose phone 2';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade chose phone 2') {
+
+
+		var botResponse = 'IMAGE';
+		var image = 'https://www.cellc.co.za/dyn/dyn/MEDIA_ProductCatalog/m6630021_265x570.jpg';
+		var inReplyto;
+		var nextBlocID = 'Upgrade chose phone 3';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade chose phone 3') {
+
+		var botResponse = 'It is available from only R626 per months over 24 months!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade chose phone 4';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons':[{'title':'Buy it now!', 'response':'Buy it now!'}, {'title':'More hot deals', 'response':'I am not a Steeve Job fan.. Show me more hot deals please Holly!'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade chose phone 4') {
+
+		console.log('Upgrade chose phone 4')
+
+		matchWord1=/(.*)buy(.*)/i;
+		matchWord2=/(.*)more(.*)/i;
+
+		if (text.match(matchWord1)) {
+
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade buy phone';
+			var skip = true;
+			var input = {'type':'none'}
+						var dataWrapper = "DATA";
+			var createData = false;
+
+		} else if (text.match(matchWord2)) {
+
+			var botResponse = 'Okay fair enough.. What about this samsung Galaxy S7 Edge Gold then?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade chose phone 5';
+			var skip = true;
+			var input = {"type":"none"};
+			var dataWrapper = "DATA";
+			var createData = false;
+		}
+
+		
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade chose phone 5') {
+
+
+		var botResponse = 'IMAGE';
+		var image = 'https://www.cellc.co.za/dyn/dyn/MEDIA_ProductCatalog/m6500118_265x570.jpg';
+		var inReplyto;
+		var nextBlocID = 'Upgrade chose phone 6';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade chose phone 6') {
+
+		var botResponse = 'It is available now and only from R289 per month over 24 months! Unbeatable '+data['name']+'';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade chose phone 7';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons':[{'title':'Buy it now!', 'response':'Buy it now!'}, {'title':'More hot deals', 'response':'Show me more hot deals please Holly!'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade chose phone 7') {
+
+
+		matchWord1=/(.*)buy(.*)/i;
+		matchWord2=/(.*)more(.*)/i;
+
+		if (text.match(matchWord1)) {
+
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade buy phone';
+			var skip = true;
+			var input = {'type':'none'}
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		} else if (text.match(matchWord2)) {
+
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade chose phone';
+			var skip = true;
+			var input = {'type':'none'}
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		}
+
+		
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+
+	if (blocName === 'Upgrade buy phone') {
+
+		var botResponse = 'Done, this phone is yours '+data['name']+'!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade buy phone 2';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade buy phone 2') {
+
+		var botResponse = 'Do you want me to ship it to you (4-6 days) or if you can’t wait that long you can pick it up at our closest Cell C store!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade but phone 3';
+		var skip = false;
+		var input = {"type":'buttons',
+					'buttons':[{'title':'Home delivery', 'response':'Home delivery'}, {'title':'I want to pick it up, it\'s mine', 'response':'I don’t wait that long Holly, please indicate me where is the closest Cell C store'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade buy phone 3') {
+
+
+		matchWord1=/(.*)home(.*)/i;
+		matchWord2=/(.*)store(.*)/i;
+
+		if (text.match(matchWord1)) {
+
+			var botResponse = 'Ok! For this I would need your address, can you please type it here:';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade ship phone';
+			var skip = false;
+			var input = {'type':'address'}
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		} else if (text.match(matchWord2)) {
+
+			var botResponse = 'No worries! That’s simple, enter your address below and I will let you know the closest Cell C store where you will be able to fetch your new phone';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade locate store';
+			var skip = false;
+			var input = {'type':'address'}
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		}
+
+		
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade ship phone') {
+
+		var botResponse = 'All good, the shipping time is estimated at 4/5 days';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade ship phone 2';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade ship phone 2') {
+
+		var botResponse = 'To finalise the offer, just give me your e-mail address and I will send you a summary of your new cellular offer and a link to set the payment up. Simple and efficient! :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade ship phone 3';
+		var skip = false;
+		var input = {"type":'text'};
+		var dataWrapper = "DATA";
+		var createData = false;
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+			"sendEmail": sendEmail,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade ship phone 3') {
+
+		var botResponse = 'Perfect Name! Check your mail box :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'How can I help you?';
+		var skip = false;
+		var input = {"type":'buttons', 
+					"buttons":[{'title': 'Go back to menu', 'response': 'I want to go back to menu'}]};
+		var dataWrapper = "DATA";
+		var createData = false;
+		var sendEmail = "iphone";
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+			"sendEmail": sendEmail,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Upgrade locate store') {
+
+		var botResponse = 'To finalise the offer, just give me your e-mail address and I will send you a summary of your new cellular offer and a link to set the payment up. Simple and efficient! :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Upgrade ship phone 3';
+		var skip = false;
+		var input = {"type":'text'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+		
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+
+
+
+
 
 
 
