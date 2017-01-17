@@ -205,7 +205,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'Hot deals', 'response':'Let me see the Hot deals!'},{'title':'Locate a store', 'response':'Please help me finding the closest Cell C store Holly'},{'title':'Upgrade my contract', 'response':'I would like to upgrade my contract'},{'title':'Recharge', 'response':'I would like to recharge my phone services please Holly'}/*,{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}*/]
+					'buttons': [{'title':'Hot deals', 'response':'Let me see the Hot deals!'},{'title':'Locate a store', 'response':'Please help me finding the closest Cell C store Holly'},{'title':'Upgrade', 'response':'I would like to upgrade my contract'},{'title':'Recharge', 'response':'I would like to recharge my phone services please Holly'}/*,{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}*/]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -331,7 +331,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 		var botResponse = 'IMAGE';
-		var image = 'https://www.cellc.co.za/dyn/dyn/MEDIA_ProductCatalog/m6630021_265x570.jpg';
+		var image = 'images/iphone2.png';
 		var inReplyto;
 		var nextBlocID = 'Hot deals 3';
 		var skip = true;
@@ -444,7 +444,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 		var botResponse = 'IMAGE';
-		var image = 'https://www.cellc.co.za/dyn/dyn/MEDIA_ProductCatalog/m6500118_265x570.jpg';
+		var image = 'images/samsung2.png';
 		var inReplyto;
 		var nextBlocID = 'Hot deals 6';
 		var skip = true;
@@ -1462,7 +1462,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 
-			var botResponse = 'Okay Name, almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
+			var botResponse = 'Okay '+data['name']+', almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Upgrade contract 2';
@@ -1664,7 +1664,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'Upgrade contract 3';
 		var skip = false;
 		var input = {"type":'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool!'},{'title': 'No', 'response': 'No thanks Holly'},{'title': 'C Surance? What is that?', 'response': 'C Surance? What is that?'}]};
+					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool!'},{'title': 'No', 'response': 'No thanks Holly'},{'title': 'C Surance? What is that?', 'response': 'C Surance?'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1861,7 +1861,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 		var botResponse = 'IMAGE';
-		var image = 'https://www.cellc.co.za/dyn/dyn/MEDIA_ProductCatalog/m6630021_265x570.jpg';
+		var image = 'images/iphone2.png';
 		var inReplyto;
 		var nextBlocID = 'Upgrade chose phone 3';
 		var skip = true;
@@ -1961,7 +1961,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 		var botResponse = 'IMAGE';
-		var image = 'https://www.cellc.co.za/dyn/dyn/MEDIA_ProductCatalog/m6500118_265x570.jpg';
+		var image = 'images/samsung2.png';
 		var inReplyto;
 		var nextBlocID = 'Upgrade chose phone 6';
 		var skip = true;
@@ -2089,7 +2089,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'Do you want me to ship it to you (4-6 days) or if you can’t wait that long you can pick it up at our closest Cell C store!';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Upgrade but phone 3';
+		var nextBlocID = 'Upgrade buy phone 3';
 		var skip = false;
 		var input = {"type":'buttons',
 					'buttons':[{'title':'Home delivery', 'response':'Home delivery'}, {'title':'I want to pick it up, it\'s mine', 'response':'I don’t wait that long Holly, please indicate me where is the closest Cell C store'}]};
