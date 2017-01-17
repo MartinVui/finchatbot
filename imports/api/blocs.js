@@ -1448,7 +1448,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(matchWord1)) {
 
-			var botResponse = 'Okay Name, almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE';
+			var botResponse = 'Okay Name, almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Upgrade contract 2';
