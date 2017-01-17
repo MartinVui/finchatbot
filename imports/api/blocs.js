@@ -1389,6 +1389,8 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Upgrade') {
 
+		if (text.match(/(\D)*/))
+
 
 		var botResponse = 'All good '+data['name']+'! Your contract expire in exactly 25 days. Good time for upgrading :SMILE:';
 		var image = false;
