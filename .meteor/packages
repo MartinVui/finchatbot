@@ -22,3 +22,4 @@ react-meteor-data
 msavin:mongol
 session@1.1.6
 shell-server
+email

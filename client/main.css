@@ -1,240 +1,483 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
 body {
-  font-family: sans-serif;
-  font-size: 14px;
-
-  background-repeat: no-repeat;
-  z-index: -1;
-  width: 100%;
-  overflow-x: hidden;
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+     border-collapse: collapse;
+    border-spacing: 0;
 }
 
-a {
-  color: #fff;
+
+
+
+
+
+
+
+
+@font-face {
+    font-family: 'robotolight';
+    src: url('fonts/Roboto-Light-webfont.eot');
+    src: url('fonts/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/Roboto-Light-webfont.woff') format('woff'),
+         url('fonts/Roboto-Light-webfont.ttf') format('truetype'),
+         url('fonts/Roboto-Light-webfont.svg#robotolight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
-.left_part
-{
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  height: 100vh;
-  width: 73vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 
-  display: -webkit-flex;
-  -webkit-flex-direction: row;
-  -webkit-justify-content: center;
-  -webkit-align-items: center;
+
+@font-face {
+    font-family: 'CaviarDreams';
+    src: url('fonts/caviar_dreams/CaviarDreams-webfont.eot');
+    src: url('fonts/caviar_dreams/CaviarDreams-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/caviar_dreams/CaviarDreams-webfont.woff') format('woff'),
+         url('fonts/caviar_dreams/CaviarDreams-webfont.ttf') format('truetype'),
+         url('fonts/caviar_dreams/CaviarDreams-webfont.svg#caviar_dreamsregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
-.background
-{
-  width:auto;
-  height: auto;
-  max-width: 90%;
-  max-height: 90%;
+
+body {
+    font-family: 'CaviarDreams';
+    font-size: 14px;
+    background-repeat: no-repeat;
+    z-index: -1;
+    width: 100%;
 }
 
-.background2  /* The background behind the background */
-{
+a:link {
+    color: white;
+}
 
+a:visited {
+    color: white;
+}
+
+.introduction {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+}
+
+#intro-part1 {
+    height: 50%;
+    display: flex;
+    align-items: center;
+
+}
+
+.intro-logo {
+    height: 70%;
+}
+
+#intro-part2 {
+    font-family: 'CaviarDreams';
+    height: 50%;
+    width: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #42a4a7;
+}
+
+#intro-part2 h1 {
+    margin-top: 50px;
+}
+
+#intro-part2 p {
+    margin-top: 15px;
+    font-size: 15px;
+
+}
+
+#intro-part2 p:hover {
+    margin-top: 14px;
+    font-size: 17px;
+}
+
+#intro-part2 h2 {
+    font-size: 15px;
+}
+
+
+
+.typing_gif {
+    margin:5px;
+    margin-left: 20px;
+    padding:3px;
+    background-color: #2a3060;
+    height: 20px;
+    display:flex;
+    display: -webkit-flex;
+    border-radius:7px;
+}
+
+.button {
+    width: 100%;
+    margin:5px;
+    align-self: center;  
+    background-color:#fff;
+    border: 1px #2a3060 solid;
+    border-radius: 15px;
+    color: #2a3060;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: -webkit-flex;
+    -webkit-justify-content: center;
+    -webkit-align-items: center;
+
+}
+
+.button p {
+    margin: 7px;
+    word-wrap: break-word;
+}
+
+.buttonList {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    padding: 2vh;
+    width:100%;
+    display: inherit;
+}
+
+
+.user_message {
+    text-align:left;
+    margin:5px;
+    padding:3px;
     height: auto;
+    display: flex;
+    align-self: flex-end;
+    justify-content: flex-end;
+
+    display: -webkit-flex;
+    -webkit-align-self: flex-end;
+    -webkit-justify-content: flex-end;
+}
+
+.bot_message {
+    text-align:left;
+    padding:3px;
+    max-width: 100%;
+    height: auto;
+    display:flex;
+    display: -webkit-flex;
+    border-radius:4px;
+    word-wrap: break-word;
+}
+
+.bot_text {
+    height:100%;
+    font-size: 14px;
+    max-width: 70%;
+    background-color: #2a3060;
+    padding:7px;
+    border-radius:0px 12px 12px 12px;
+    color: #fff;
+    margin: 0px;
+    box-shadow: 2px 2px 4px #a1a1a1;
+}
+
+.user_text { 
+    font-size: 14px;
+    max-width: 70%;
+    background-color: #42a4a7;
+    color: #ffffff;
+    padding:7px;
+    border-radius: 12px 12px 0px 12px;
+    margin: 0px;
+    box-shadow: 2px 2px 4px #a1a1a1;
+}
+
+p {
+    word-wrap: break-word;
+}
+
+
+img.bot_message {
+    height:30px;
+    margin:0px;
+    padding:0px;
+}
+
+.container {
+    background: #f6f6f6;
+    height: 100%;
+    width: 100%;
+    padding-top:10px;
+    font-family: 'robotolight';
+    font-weight: bold;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0%;
+    left:0%;
+    z-index: 998;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    display: -webkit-flex;
+    -webkit-justify-content: flex-end;
+    -webkit-flex-direction: column;
+}
+
+.conversation {
+    height: 100%;
+    display:flex;
+    display: -webkit-flex;
+    align-items: flex-end;
+    border-radius: 10px;
+    padding-bottom: 10px;
+}
+
+.messages {
+    height: auto;
+    max-height: 100%;
     width: 100%;
     overflow: auto;
-    overflow-x: hidden;
-    margin-left: -10px;
-    
-    
-    left:0px;
-    top:0px;
-    z-index: -1;
-}
-
-.typing_gif
-{
-  margin:5px;
-  margin-left: 20px;
-  padding:3px;
-  background-color: #dfe9ef;
-  height: 20px;
-  display:flex;
-  display: -webkit-flex;
-  border-radius:7px;
-}
-
-.button
-{
-  width: auto;  
-  margin:5px;
-  align-self: center;  
-  background-color:#8b8b8b;
-  text-align: center;
-  color: #ffffff;
-  margin:3px;
-  border-radius:3px;
-  padding: 7px;
-  cursor: pointer;
-}
-
-.buttonList
-{
-  background-color:#ffffff;
-  height: auto;
-  width:100%;
-  min-height: 0px;
-  display: flex;
-  flex-wrap: wrap;  
-  justify-content: center;
-  align-content: center;
-
-  display: -webkit-flex;
-  -webkit-flex-wrap: wrap;
-  -webkit-justify-content: center;
-  -webkit-align-content: center;
-}
-
-
-.logo
-{
-  height: 100px;
-  width: 100px;
-  position: fixed;
-  right:1.5%;
-  bottom:2%;
-  z-index: 998;
-}
-
-.bulle
-{
-  height: 16%;
-  width: 7%;
-  position: fixed;
-  right:8%;
-  bottom:16%;
-  z-index: 999;
-  color:#62a8ea; 
-}
-
-.user_message
-{
-text-align:left;
-margin:5px;
-padding:3px;
-height: auto;
-display: flex;
-align-self: flex-end;
-justify-content: flex-end;
-
-display: -webkit-flex;
--webkit-align-self: flex-end;
--webkit-justify-content: flex-end;
-}
-
-.bot_message
-{
-text-align:left;
-margin:5px;
-padding:3px;
-max-width: 100%;
-height: auto;
-display:flex;
-display: -webkit-flex;
-border-radius:4px;
-word-wrap: break-word;
-}
-
-.bot_text
-{
-  font-size: 15px;
-  max-width: 70%;
-  height: auto;
-  background-color: #3e8cd5;
-  color: #fff;
-  padding:7px;
-  border-radius:4px;
-  margin: 0px;
-  margin-left: 5px;
-}
-
-.user_text
-{ 
-  font-size: 15px;
-  max-width: 70%;
-  background-color: #eef1f5;
-  color: #000;
-  padding:7px;
-  border-radius: 4px;
-  margin: 0px;
-}
-
-p
-{
-  word-wrap: break-word;
-}
-
-
-img.bot_message{
-  height:40px;
-  margin:0px;
-  padding:0px;
-}
-
-.container{
-  background: #fff;
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.3);
-  height: 70%;
-  width: 25%;
-  padding-top:10px;
-  font-family: arial,sans-serif;
-  font-size: 14px;
-  position: fixed;
-  right:2%;
-  bottom:0%;
-  z-index: 998;
-  border-radius: 10px 10px 20px 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-
-  display: -webkit-flex;
-  -webkit-justify-content: flex-end;
-  -webkit-flex-direction: column;
-}
-
-.conversation{
-  height:auto;
-  display:flex;
-  display: -webkit-flex;
-  border-radius: 10px;
-}
-
-.messages
-{
-  height: auto;
-  width: 100%;
-  overflow: auto;
 }
  
-.message_form
-{
-  width: 100%;
+.message_form {
+    outline: 0px solid white;
+    box-shadow: 0px 1px 3px #a1a1a1;
+    background-color: white;
+    width: 100%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: -webkit-flex;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
 }
 
-input
-{
-  width:100%;
+.SelectInput {
+    display: flex;
+    justify-content: center;
+    display: -webkit-flex;
+    -webkit-justify-content: center;
+}
+
+.SelectInput select {
+    margin-right: 10px;
+}
+
+.SelectInput div {
+    border-radius: 5px;
+}
+
+select {
+    background-color: #fff;
+    border-radius: 10px;
+    outline: none !important;
+    font-size: 16px;
+}
+
+select :focus {
+    outline: none !important;
+}
+
+input {
+    width:100%;
+    padding: 3px;
+    padding-left: 10px;
+    margin: 3px;
+    border-radius: 10px;
+    border: none;
+    outline: none !important;
+    border: 1px solid #a6a6a6;
+    font-size: 16px !important;
+}
+
+input :focus {
+    outline: none !important;
+}
+
+.submit {
+    width: 50%;
+    background-color: #fff;
+    border-color: #000;
+    border-width: 1px;
+    border-style: solid;
 }
 
 form {
-  
-  padding:10px;
-  background: #616161;
-  display: flex;
-  display: -webkit-flex;
+    padding:10px;
+    display: flex;
+    display: -webkit-flex;
+    width: 100%;
+}
+
+.scroll-input {
+    box-sizing: content-box;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+
+.send-icon {
+    height:0px;
+    width:0px;
+    margin-left: 15px;
+    align-self: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.send-icon-mobile {
+    height:30px;
+    width: auto;
+    margin-left: 15px;
+    align-self: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.send-icon:active {
+    opacity:0.7;
+}
+
+#newMessageForm {
+    font-size: 16px;
+}
+
+
+#checkbox-input {
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 40%;
+}
+
+.one-checkbox {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.one-checkbox input {
+    width: 10% !important;
+}
+
+
+#car-propositions {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 40vh;
+}
+
+
+
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-thumb {
+    background: #bababa;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #bababa;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #9a9a9a;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+    background: #ffffff;
+}
+::-webkit-scrollbar-track:active {
+    background: #ffffff;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
+
+
+#map {
+    height: 50vh;
+    width: 70%;
+}
+
+#render-target + div {
+    bottom: 10vh !important;
+    top: auto !important;
 }
 
 
@@ -245,22 +488,111 @@ form {
 /* -------------- All the CSS below is used for the animations --------------- */
 
 .example-enter {
-  opacity: 0;
+    opacity: 0;
 }
 
 .example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+    opacity: 1;
+    transition: opacity 300ms ease-in;
 }
+
+
+
+.footer-appear {
+    margin-bottom: -25%;
+}
+
+.footer-appear.footer-appear-active {
+    margin-bottom: 0;
+    transition: margin-bottom 300ms ease-in;
+}
+
+
+.footer-enter {
+    margin-bottom: -25%;
+}
+
+.footer-enter.footer-enter-active {
+    margin-bottom: 0;
+    transition: margin-bottom 300ms ease-in;
+}
+
+
+.footer-leave {
+    margin-bottom: 0;
+}
+
+.footer-leave.footer-leave-active {
+    margin-bottom: -25%;
+    transition: margin-bottom 300ms ease-in;
+}
+
+
 
 
 
 .example2-enter {
-  opacity: 0;
+    opacity: 0;
 }
 
 .example2-enter.example2-enter-active {
-  opacity: 1;
-  transition: opacity 600ms ease-in;
+    opacity: 1;
+    transition: opacity 600ms ease-in;
 }
 
+
+
+
+.introduction-enter {
+    opacity: 1;
+}
+
+.introduction-enter.introduction-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+
+.introduction-leave {
+    margin-bottom:  0vh;
+}
+
+.introduction-leave.introduction-leave-active {
+    margin-bottom:  100vh;
+    transition: margin-bottom 500ms ease-out;
+}
+
+
+
+
+/*
+
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    user-select: text;
+    cursor: auto;
+    padding: 1px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+}
+user agent stylesheet
+input, textarea, keygen, select, button {
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    margin: 0em 0em 0em 0em;
+    font: 13.3333px Arial;
+}
+user agent stylesheet
+input, textarea, keygen, select, button, meter, progress {
+    -webkit-writing-mode: horizontal-tb;
+}*/
