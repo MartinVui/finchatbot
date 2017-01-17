@@ -16,7 +16,7 @@ Meteor.methods({
 	},
 
 
-	'messages.insert'(text, author, sessionId) {
+	'messages.insert'(text, author, sessionId, image) {
 		// Insert a single message in the conversation. The author (bot or user) has to be specified to create
 		// a distinction bot message / user message
 		check(text, String);
@@ -25,6 +25,7 @@ Meteor.methods({
 			text,
 			author,
 			sessionId,
+			image,
 			createdAt: new Date(),
 		});
 	},

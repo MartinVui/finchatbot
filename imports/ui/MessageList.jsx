@@ -84,7 +84,7 @@ export default class MessageList extends Component {
 					</div>
 
 					{this.props.messages.map((message, i) => (
-					<Message key={"message"+i} text={message.text} author={message.author}/>
+					<Message key={"message"+i} text={message.text} author={message.author} image={message.image}/>
 					))
 					}
 				</ReactCSSTransitionGroup>

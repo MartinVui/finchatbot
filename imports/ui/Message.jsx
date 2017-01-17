@@ -96,7 +96,7 @@ export default class Message extends Component {
 			if(this.props.text === 'IMAGE') {	// Check if the message is an image
 				return (
 					<div className="bot_message img_message">
-						<img src={Session.get('image')}/>
+						<img src={this.props.image}/>
 					</div>
 				);
 

@@ -362,7 +362,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'Hot deals 4';
 		var skip = false;
 		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'Buy it now!'}, {'title':'More hot deals', 'response':'I am not a Steeve Job fan.. Show me more hot deals please Holly!'}, {'title':'Go back to menu', 'response':'I want to go back to menu'}]};
+					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'I am not a Steeve Job fan.. Show me more hot deals please Holly!'}, {'title':'Go back to menu', 'response':'I want to go back to menu'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -475,7 +475,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'Hot deals 7';
 		var skip = false;
 		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'Buy it now!'}, {'title':'More hot deals', 'response':'Show me more hot deals please Holly!'}, {'title':'Go back to menu', 'response':'I want to go back to menu'}]};
+					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'Show me more hot deals please Holly!'}, {'title':'Go back to menu', 'response':'I want to go back to menu'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1892,7 +1892,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'Upgrade chose phone 4';
 		var skip = false;
 		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'Buy it now!'}, {'title':'More hot deals', 'response':'I am not a Steeve Job fan.. Show me more hot deals please Holly!'}]};
+					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'I am not a Steeve Job fan.. Show me more hot deals please Holly!'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1992,7 +1992,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'Upgrade chose phone 7';
 		var skip = false;
 		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'Buy it now!'}, {'title':'More hot deals', 'response':'Show me more hot deals please Holly!'}]};
+					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'Show me more hot deals please Holly!'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
