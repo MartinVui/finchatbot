@@ -1389,17 +1389,29 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Upgrade') {
 
-		if (text.match(/(\D)*/))
+		if (text.match(/(\D)*/)) {
 
 
-		var botResponse = 'All good '+data['name']+'! Your contract expire in exactly 25 days. Good time for upgrading :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
+			var botResponse = 'All good '+data['name']+'! Your contract expire in exactly 25 days. Good time for upgrading :SMILE:';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade 2';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		} else {
+
+			var botResponse = 'I don\'t think this is a phone number, can you give it again please?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Upgrade';
+			var skip = false;
+			var input = {"type":'text'};
+			var dataWrapper = "DATA";
+			var createData = false;
+		}
 
 		
 		var json = {
