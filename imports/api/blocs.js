@@ -1631,7 +1631,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === 'Upgrade contract') {
 
 
-		var botResponse = 'Okay Name, almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
+		var botResponse = 'Okay '+data['name']+', almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Upgrade contract 2';
@@ -1772,7 +1772,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === 'Upgrade contract length') {
 
 
-		var botResponse = 'Okay. Now please precise your contract length:';
+		var botResponse = 'Okay. Now please select your contract length';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Upgrade phone';
@@ -1808,7 +1808,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'Upgrade chose phone';
 		var skip = false;
 		var input = {"type":"checkbox",
-						"checks":[{"value": "Iphone"},{"value":"Samsung"},{"value":"HD camera"},{"value":"4G"}],
+						"checks":[{"value": "Iphone"},{"value":"Samsung"},{"value":"HD camera"},{"value":"4G"},{"value":"No"}],
 					}
 		var dataWrapper = "DATA";
 		var createData = false;
