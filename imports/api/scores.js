@@ -18,10 +18,10 @@ Meteor.methods({
 			var gameScoreDif = gameScore2 - gameScore1;
 			var LeaderBoardDif = score2 - score1;
 			if (LeaderBoardDif > 10) {
-				LeaderBoardDif = 10;
+				var LeaderBoardDif = 10;
 			}
 			else if (LeaderBoardDif < -10) {
-				LeaderBoardDif = -10;
+				var LeaderBoardDif = -10;
 			}
 
 			var newScore2 = score2 + (1 - LeaderBoardDif/10)*gameScoreDif/5;
@@ -31,11 +31,14 @@ Meteor.methods({
 			var gameScoreDif = gameScore1 - gameScore2;
 			var LeaderBoardDif = score1 - score2;
 			if (LeaderBoardDif > 10) {
-				LeaderBoardDif = 10;
+				var LeaderBoardDif = 10;
 			}
 			else if (LeaderBoardDif < -10) {
-				LeaderBoardDif = -10;
+				var LeaderBoardDif = -10;
 			}
+			console.log('Winner: ', winner);
+			console.log('LeaderBoardDif: ', LeaderBoardDif);
+			console.log('gameScoreDif: ', gameScoreDif);
 
 			var newScore1 = score1 + (1 - LeaderBoardDif/10)*gameScoreDif/5;
 			var newScore2 = score2 - (1 - LeaderBoardDif/10)*gameScoreDif/5;
