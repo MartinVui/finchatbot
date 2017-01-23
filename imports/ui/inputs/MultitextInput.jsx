@@ -105,8 +105,8 @@ export default class TextInput extends Component {
 
 		return(
 			<form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-				<input type="text" ref="textInput1" placeholder="Name" required/>
-				<input type="text" ref="textInput2" placeholder="Surname" required/>
+				<input type="text" ref="textInput1" placeholder="Name"/>
+				<input type="text" ref="textInput2" placeholder="Surname"/>
 				{Session.get('isMobile') === true ?
 	              	<input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
 	            }

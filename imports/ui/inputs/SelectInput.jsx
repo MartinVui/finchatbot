@@ -9,19 +9,6 @@ import bloc from '../../api/blocs.js';
 export default class SelectInput extends Component {
 
 
-	constructor() {
-		super();
-		this.state = {
-			value: Session.get('botResponseJSON').input.text,
-		};
-	}
-
-
-	handleChange(event) {
-    	this.setState({value: event.target.value});
-  	}
-
-
 	sendBotMessage(json) {
 		// See AddressInput for more details
 
@@ -75,41 +62,30 @@ export default class SelectInput extends Component {
 
 
 	onButtonClick() {
-
-
-
 		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
-		//var data = ReactDOM.findDOMNode(this.refs.content).value.trim();
-		var data = this.state.value;
-
-		if (data == Session.get('botResponseJSON').input.text) {
-			return;
-		}
-
-		else {
+		var data = ReactDOM.findDOMNode(this.refs.content).value.trim();
 		
-			if (Session.get('botResponseJSON').createData !== false) {
-	      		var dataName = Session.get('botResponseJSON').createData.dataName;
-	      		var allData = Session.get('allData');
-	      		allData[dataName] = data;
-	      		Session.set('allData',allData);
-	    	}
+		if (Session.get('botResponseJSON').createData !== false) {
+      		var dataName = Session.get('botResponseJSON').createData.dataName;
+      		var allData = Session.get('allData');
+      		allData[dataName] = data;
+      		Session.set('allData',allData);
+    	}
 
-	   		var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
+   		var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
 
-			if(data === "") {
-		      var data = "no_text";
-		    }
-		    else {
-		    	var text = dataWrapper.replace(/DATA/, data);
-		    	Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-		    }
+		if(data === "") {
+	      var data = "no_text";
+	    }
+	    else {
+	    	var text = dataWrapper.replace(/DATA/, data);
+	    	Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+	    }
 
-		    // Insert the bot message
-		    Session.set('showGif', true);
-		    
-		    this.sendBotMessage(json);
-		}
+	    // Insert the bot message
+	    Session.set('showGif', true);
+	    
+	    this.sendBotMessage(json);
 	}
 
 
@@ -125,9 +101,8 @@ export default class SelectInput extends Component {
 
 		return(
 			<div className="SelectInput">
- 				
- 				<select value={this.state.value} onChange={this.handleChange.bind(this)} className="scroll-input">
- 					<option value={Session.get('botResponseJSON').input.text} disabled>{Session.get('botResponseJSON').input.text}</option>
+ 				<select ref='content' data-validation="required" className="scroll-input">
+ 					<option value="0" disabled selected>{Session.get('botResponseJSON').input.text}</option>
  		            {options}
 				</select>
  		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>

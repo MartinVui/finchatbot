@@ -6,7 +6,7 @@ export default function bloc(text, blocName, data) {
 
 // Generic template of a bloc: 
 
-/*	if (blocName === 'Hi') {
+/*	if (blocName==='Hi') {
 
 		matchWord=/(.*)start(.*)/;
 
@@ -105,7 +105,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// And here are the blocs
 
-	if (blocName === 'Hi') {
+	if (blocName==='Hi') {
 
 		matchWord=/(.*)start(.*)/;
 
@@ -137,13 +137,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'What is your name') {
+	if (blocName==='What is your name') {
 
 
 		
 		var botResponse = 'And you what\'s your name?';
 		var image = false;
 		var inReplyto;
+		//var nextBlocID = 'Car what to do next';
 		var nextBlocID = 'Nice to meet you';
 		var skip = false;
 		var input = {'type':'multitext',
@@ -168,7 +169,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Nice to meet you') {
+	if (blocName==='Nice to meet you') {
 
 		
 		var botResponse = 'Great to meet you too '+data['name']+'!';
@@ -195,7 +196,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'How can I help you') {
+	if (blocName==='How can I help you') {
 
 
 		
@@ -205,7 +206,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},{'title':'I am interested in a credit life insurance', 'response':'I am interested in a credit life insurance'}/*,{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}*/]
+					'buttons': [{'title':'I am interested in a funeral cover', 'response':'I am interested in a funeral cover'},/*{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},*/{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -225,13 +226,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'How can I help you 2') {
+	if (blocName==='How can I help you 2') {
 
 		matchWord1 = /(.*)cover(.*)/i;
 		matchWord2 = /(.*)about\syourself(.*)/i;
 		matchWord3 = /(.*)called\sback(.*)/i;
 		matchWord4 = /(.*)insurance(.*)/i;
-		matchWord5 = /(.*)credit(.*)/i;
 
 		if (text.match(matchWord1)) {
 
@@ -268,7 +268,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var dataWrapper = "DATA";
 			var createData = false;
 
-		} else if (text.match(matchWord4) && text.match(matchWord5) === false) {
+		} else if (text.match(matchWord4)) {
 
 			var botResponse = '';
 			var image = false;
@@ -281,23 +281,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var dataWrapper = "DATA";
 			var createData = false;
 
-
-		} else if (text.match(matchWord5)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life insurance';
-			var skip = true;
-			var input = {'type':'none'};
-			// var input = {"type":'buttons',
-			// 			'buttons':[{"title": "Car cover", "response": "I am looking for a Car cover"}, {"title": "Life insurance", "response": "I am interseted in a life insurance"}, {"title": "Car and home", "response": "I am looking for an insurance for my car or my home"}, {"title": "Other", "response": "I am intersted in an other type of insurance"}]};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		
-
-		} else {
+			} else {
 
 			var botResponse = '';
 			var image = false;
@@ -325,7 +309,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Type of insurance') {
+	if (blocName==='Type of insurance') {
 
 		matchWord1 = /(.*)(.*)/i;
 		matchWord2 = /(.*)life(.*)/i;
@@ -395,7 +379,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 // Funeral cover
 
-	if (blocName === 'Funeral cover') {
+	if (blocName==='Funeral cover') {
 
 		matchWord1 = /(.*)FAQ(.*)/i;
 		matchWord2 = /(.*)more\sinfo(.*)/i;
@@ -453,7 +437,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral quote') {
+	if (blocName==='Funeral quote') {
 
 		matchWord1=/(.*)cool(.*)/i;
 		matchWord2=/(.*)no(.*)/i;
@@ -501,7 +485,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral check if south african') {
+	if (blocName==='Funeral check if south african') {
 
 		matchWord1=/(.*)yes(.*)/i;
 		matchWord2=/(.*)no(.*)/i;
@@ -546,7 +530,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral check if permanent resident') {
+	if (blocName==='Funeral check if permanent resident') {
 
 		matchWord1=/(.*)yes(.*)/i;
 		matchWord2=/(.*)no(.*)/i;
@@ -590,7 +574,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral get address') {
+	if (blocName==='Funeral get address') {
 
 
 		var botResponse = 'Thanks, do you have a bank account?';
@@ -619,7 +603,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral check bank account') {
+	if (blocName==='Funeral check bank account') {
 
 		matchWord1=/(.*)yes(.*)/i;
 		matchWord2=/(.*)no(.*)/i;
@@ -666,7 +650,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral get birth date') {
+	if (blocName==='Funeral get birth date') {
 
 
 		var botResponse = 'Okay great! That\'s a good one, good choice';
@@ -693,7 +677,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral get birth date 2') {
+	if (blocName==='Funeral get birth date 2') {
 
 		var botResponse = 'Now I would need your date of birth. Please enter it below :SMILE:';
 		var image = false;
@@ -719,7 +703,34 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral cover amount 2') {
+	// if (blocName==='Funeral cover amount') {
+
+
+	// 	var botResponse = 'Oh cool! You are a capricorn tho!';
+	// 	var image = false;
+	// 	var inReplyto;
+	// 	var nextBlocID = 'Funeral cover amount 2';
+	// 	var skip = true;
+	// 	var input = {'type':'none'};
+	// 	var dataWrapper = 'DATA';
+	// 	var createData = false;
+
+
+	// 	var json = {
+	// 		"botResponse": botResponse,
+	// 		"image": image,
+	// 		"inReplyTo": inReplyto,
+	// 		"nextBlocID": nextBlocID,
+	// 		"input": input,
+	// 		"skip": skip,
+	// 		"dataWrapper": dataWrapper,
+	// 		"createData": createData,
+	// 	};
+
+	// 	return json;
+	// }
+
+	if (blocName==='Funeral cover amount 2') {
 
 		console.log(data['birthday']);
 		console.log(typeof data['birthday']);
@@ -768,7 +779,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral cover amount 3') {
+	if (blocName==='Funeral cover amount 3') {
 
 		if(text.match(/(.*)continue(.*)/i)) {
 
@@ -813,10 +824,11 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral check cover amount') {
+
+	if (blocName==='Funeral check cover amount') {
 
 
-		var botResponse = 'You would like to be covered for '+data['cover amount']+'. Is that right?';
+		var botResponse = 'You would like to be cover for '+data['cover amount']+'. Is that right?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Funeral add family members';
@@ -842,7 +854,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral add family members') {
+	if (blocName==='Funeral add family members') {
 
 		matchWord1=/(.*)yes(.*)/i;
 		matchWord2=/(.*)no(.*)/i;
@@ -890,7 +902,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral add family members 2') {
+	if (blocName==='Funeral add family members 2') {
 
 
 		var botResponse = 'And would you like to add any family members on your funeral cover (such as your partner or children)?'
@@ -920,7 +932,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral add family members 3') {
+	if (blocName==='Funeral add family members 3') {
 
 		matchWord1=/(.*)yes(.*)/i;
 		matchWord2=/(.*)no(.*)/i;
@@ -966,7 +978,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral add benefits') {
+	if (blocName==='Funeral add benefits') {
 
 		matchWord1=/(.*)yes(.*)/i;
 
@@ -1011,7 +1023,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral get email') {
+	if (blocName==='Funeral get email') {
 
 		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
 
@@ -1056,7 +1068,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral check email') {
+	if (blocName==='Funeral check email') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
@@ -1099,7 +1111,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral get number') {
+	if (blocName==='Funeral get number') {
 
 		matchWord0=/(.*)/i;
 
@@ -1144,7 +1156,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral check number') {
+	if (blocName==='Funeral check number') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
@@ -1187,7 +1199,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral check number 2') {
+	if (blocName==='Funeral check number 2') {
 
 				
 		var botResponse = 'Thanks '+data['name']+', I think I have everything I need! Ready to see your quote?';
@@ -1217,7 +1229,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral get quote') {
+	if (blocName==='Funeral get quote') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
@@ -1262,7 +1274,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral get quote 2') {
+	if (blocName==='Funeral get quote 2') {
 
 				
 		var botResponse = 'Your chosen cover will cost you only R251 pm! I sent you an e-mail with all the details of your quote';
@@ -1293,7 +1305,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral what to do next') {
+	if (blocName==='Funeral what to do next') {
 
 				
 		var botResponse = 'What would you like to do now?';
@@ -1323,7 +1335,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral no quote') {
+	if (blocName==='Funeral no quote') {
 
 		matchWord1 = /(.*)quote(.*)/i;
 		matchWord2 = /(.*)menu(.*)/i;
@@ -1367,7 +1379,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral what to do next 2') {
+	if (blocName==='Funeral what to do next 2') {
 
 		matchWord1 = /(.*)contact(.*)/i;
 		matchWord2 = /(.*)menu(.*)/i;
@@ -1423,7 +1435,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral contact agent') {
+	if (blocName==='Funeral contact agent') {
 
 				
 		var botResponse = 'I have already your phone number. When it is the more convenient for your to be called back?';
@@ -1453,7 +1465,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Funeral contact agent 2') {
+	if (blocName==='Funeral contact agent 2') {
 
 				
 		var botResponse = 'Got it! An agent will call you back as soon as possible between '+data['contact time']+' as you requested';
@@ -1484,7 +1496,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	// bloc double check if SA
 
-		if (blocName === 'Funeral double check if south african') {
+		if (blocName==='Funeral double check if south african') {
 
 					
 			var botResponse = 'Unfortunately you can not subscribe to our funeral cover if you are not South African';
@@ -1512,7 +1524,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral double check if south african 2') {
+		if (blocName==='Funeral double check if south african 2') {
 
 					
 			var botResponse = 'Would you like to continue the quotation anyway or do you prefer going back to the menu?';
@@ -1541,7 +1553,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral double check if south african 3') {
+		if (blocName==='Funeral double check if south african 3') {
 
 
 			matchWord1 = /(.*)continue(.*)/i;
@@ -1594,7 +1606,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	// bloc double check if permanent resident
 
-		if (blocName === 'Funeral double check if permanent resident') {
+		if (blocName==='Funeral double check if permanent resident') {
 
 					
 			var botResponse = 'Unfortunately you can not subscribe to our funeral cover if you don\'t have your permanent residency in South Africa...';
@@ -1622,7 +1634,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral double check if permanent resident 2') {
+		if (blocName==='Funeral double check if permanent resident 2') {
 
 					
 			var botResponse = 'Would you like to continue the quotation anyway or do you prefer going back to the menu?';
@@ -1651,7 +1663,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral double check if permanent resident 3') {
+		if (blocName==='Funeral double check if permanent resident 3') {
 
 
 			matchWord1 = /(.*)continue(.*)/i;
@@ -1704,7 +1716,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	// bloc double check bank account
 
-		if (blocName === 'Funeral double check bank account') {
+		if (blocName==='Funeral double check bank account') {
 
 					
 			var botResponse = 'Unfortunately you can not subscribe to our funeral cover if you don\'t have a bank account...';
@@ -1732,7 +1744,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral double check bank account 2') {
+		if (blocName==='Funeral double check bank account 2') {
 
 					
 			var botResponse = 'Would you like to continue the quotation anyway or do you prefer going back to the menu?';
@@ -1761,7 +1773,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral double check bank account 3') {
+		if (blocName==='Funeral double check bank account 3') {
 
 
 			matchWord1 = /(.*)continue(.*)/i;
@@ -1812,7 +1824,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	// bloc family member
 		
-		if (blocName === 'Funeral bloc family member') {
+		if (blocName==='Funeral bloc family member') {
 
 					
 			var botResponse = 'Choosing to cover your family members means that if any of them passes away, we will pay out a lump sum for a valid claim to help cover their funeral expenses';
@@ -1840,7 +1852,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral bloc family member 2') {
+		if (blocName==='Funeral bloc family member 2') {
 
 					
 			var botResponse = 'Would you like to add your partner?';
@@ -1870,7 +1882,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral bloc family member 3') {
+		if (blocName==='Funeral bloc family member 3') {
 
 			matchWord1=/(.*)yes(.*)/i;
 
@@ -1915,7 +1927,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add partner') {
+		if (blocName==='Funeral add partner') {
 
 			matchWord1=/(.*)/i;
 
@@ -1963,7 +1975,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add partner 2') {
+		if (blocName==='Funeral add partner 2') {
 
 					
 			var botResponse = 'You would like your partner to be covered for '+data['partner cover amount']+', is that\'s right '+data['name']+'?';
@@ -1993,7 +2005,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add partner 3') {
+		if (blocName==='Funeral add partner 3') {
 
 			matchWord1=/(.*)no(.*)/i;
 
@@ -2041,7 +2053,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add children') {
+		if (blocName==='Funeral add children') {
 
 
 			if (text.match(/(.*)yes(.*)/i)) {
@@ -2086,7 +2098,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add children 2') {
+		if (blocName==='Funeral add children 2') {
 
 
 			var botResponse = 'How many children would you like to add on your cover then?';
@@ -2117,7 +2129,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral first child birth') {
+		if (blocName==='Funeral first child birth') {
 
 
 			//var botResponse = 'Okay! Please enter your first child\'s date of birth';
@@ -2151,7 +2163,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral second child birth') {
+		if (blocName==='Funeral second child birth') {
 
 
 			var botResponse = 'Please enter your second child\'s date of birth';
@@ -2183,7 +2195,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral third child birth') {
+		if (blocName==='Funeral third child birth') {
 
 
 			var botResponse = 'Please enter your third child\'s date of birth';
@@ -2215,7 +2227,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral fourth child birth') {
+		if (blocName==='Funeral fourth child birth') {
 
 
 			var botResponse = 'Yeah, that\'s boring... Please enter your 4th child\'s date of birth';
@@ -2247,7 +2259,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral 5th child birth') {
+		if (blocName==='Funeral 5th child birth') {
 
 
 			var botResponse = 'Almost done! Please enter your 5th child\'s date of birth';
@@ -2275,7 +2287,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add child cover') {
+		if (blocName==='Funeral add child cover') {
 
 
 			var botResponse = 'Thanks! Finally we need to decide on the amount of their cover. That\'s the trickiest part so stay focus!';
@@ -2303,7 +2315,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add children 5') {
+		if (blocName==='Funeral add children 5') {
 
 
 			var botResponse = 'Your children can be insured for 50% of your partner benefit amount, with a maximum of R20 000 for each insured child';
@@ -2331,7 +2343,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral first child cover') {
+		if (blocName==='Funeral first child cover') {
 
 
 			//var botResponse = 'Okay let\'s do this! I just need the amount you want your children to be covered for please';
@@ -2368,7 +2380,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral second child cover') {
+		if (blocName==='Funeral second child cover') {
 
 
 			var botResponse = 'Now I need the amount you want your second child to be covered for please';
@@ -2403,7 +2415,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral third child cover') {
+		if (blocName==='Funeral third child cover') {
 
 
 			var botResponse = 'Now for your third child';
@@ -2438,7 +2450,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral 4th child cover') {
+		if (blocName==='Funeral 4th child cover') {
 
 
 			var botResponse = 'Okay almost done! I need the amount you want your 4th child to be covered for please';
@@ -2473,7 +2485,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral 5th child cover') {
+		if (blocName==='Funeral 5th child cover') {
 
 
 			var botResponse = 'And finally, for your 5th child';
@@ -2504,7 +2516,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral add children 7') {
+		if (blocName==='Funeral add children 7') {
 
 
 			var botResponse = 'Okay thanks your quote is almost done! One last question';
@@ -2536,7 +2548,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	// bloc adiios
 
-		if (blocName === 'adiios') {
+		if (blocName==='adiios') {
 
 					
 			var botResponse = 'Are you sure you want to leave '+data['name']+'?';
@@ -2565,7 +2577,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'adiios 2') {
+		if (blocName==='adiios 2') {
 
 			if(text.match(/(.*)yes(.*)/i)) {
 					
@@ -2606,7 +2618,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'adiios 3') {
+		if (blocName==='adiios 3') {
 
 					
 			var botResponse = 'By e-mail: hello@finchat.com';
@@ -2634,7 +2646,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'adiios 4') {
+		if (blocName==='adiios 4') {
 
 					
 			var botResponse = 'Or by phone where one of our agent will be pleased to help you: 07835527293';
@@ -2662,7 +2674,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'adiios 5') {
+		if (blocName==='adiios 5') {
 
 					
 			var botResponse = 'Have a good day '+data['name']+', take care and see you soon! :SMILE:';
@@ -2690,7 +2702,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'End') {
+		if (blocName==='End') {
 
 					
 			var botResponse = '';
@@ -2721,7 +2733,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	// bloc Holly
 
-		if (blocName === 'Holly') {
+		if (blocName==='Holly') {
 
 				
 			var botResponse = 'As I said my name is Holly and I am a robot. Yes a robot... I was created by a bunch of nerds aspiring to make the digital user experience more intuitive and enjoyable. In a word, more fun!';
@@ -2749,7 +2761,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Holly 2') {
+		if (blocName==='Holly 2') {
 
 				
 			var botResponse = 'Me and my robot friends can answer to a lot of your questions. Okay fair enough, don\'t ask me chocolate cake recipes though, even if I would be able to answer this :SMILE:';
@@ -2777,7 +2789,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Holly 3') {
+		if (blocName==='Holly 3') {
 
 				
 			var botResponse = 'For example today I can help you getting a quote in whatever the type of insurance you interested in. I can help you to understand more clearly what we have to offer you. Would you like to try?';
@@ -2807,7 +2819,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Holly 4') {
+		if (blocName==='Holly 4') {
 
 			if (text.match(/(.*)no(.*)/i)) {
 
@@ -2851,7 +2863,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	// bloc funeral info
 
-		if (blocName === 'Funeral info') {
+		if (blocName==='Funeral info') {
 
 					
 			var botResponse = 'A lump sum will be paid to you or you family within 48 hours - provided all the required documents have been received and the claim is valid';
@@ -2879,7 +2891,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral info 2') {
+		if (blocName==='Funeral info 2') {
 
 					
 			var botResponse = 'Do you want me to show you more information about the type of funeral cover we propose?';
@@ -2908,7 +2920,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral info 3') {
+		if (blocName==='Funeral info 3') {
 
 			if (text.match(/(.*)yes(.*)/i)) {
 					
@@ -2950,7 +2962,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral info 4') {
+		if (blocName==='Funeral info 4') {
 
 					
 			var botResponse = 'Enjoy have a good read! :SMILE:';
@@ -2978,7 +2990,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral info 5') {
+		if (blocName==='Funeral info 5') {
 
 					
 			var botResponse = 'Ok '+data['name']+', want to see how much it will cost you for a funeral cover? Would you want me to get you a quote?';
@@ -3007,7 +3019,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			return json;
 		}
 
-		if (blocName === 'Funeral info 6') {
+		if (blocName==='Funeral info 6') {
 
 			if (text.match(/(.*)yes(.*)/i)) {
 					
@@ -3852,7 +3864,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		} else {
 
-			var botResponse = 'Now tell me about your previous car insurance';
+			var botResponse = 'Now tell me about the your previous car insurance';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Car other driver comprehensive insurance';
@@ -3964,7 +3976,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 
-	if (blocName === 'Car get email') {
+	if (blocName==='Car get email') {
 
 		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
 
@@ -4009,7 +4021,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car check email') {
+	if (blocName==='Car check email') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
@@ -4052,7 +4064,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car get number') {
+	if (blocName==='Car get number') {
 
 		matchWord0=/(.*)/i;
 
@@ -4097,7 +4109,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car check number') {
+	if (blocName==='Car check number') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
@@ -4140,7 +4152,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car check number 2') {
+	if (blocName==='Car check number 2') {
 
 				
 		var botResponse = 'Thanks '+data['name']+', I think I have everything I need! Ready to see your quote?';
@@ -4170,7 +4182,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car get quote') {
+	if (blocName==='Car get quote') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
@@ -4215,7 +4227,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car get quote 2') {
+	if (blocName==='Car get quote 2') {
 
 				
 		var botResponse = 'Your chosen cover will cost you only R251 pm! I sent you an e-mail with all the details of your quote';
@@ -4246,7 +4258,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car what to do next') {
+	if (blocName==='Car what to do next') {
 
 				
 		var botResponse = 'What would you like to do now?';
@@ -4276,7 +4288,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car no quote') {
+	if (blocName==='Car no quote') {
 
 		matchWord1 = /(.*)quote(.*)/i;
 		matchWord2 = /(.*)menu(.*)/i;
@@ -4320,7 +4332,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car what to do next 2') {
+	if (blocName==='Car what to do next 2') {
 
 		matchWord1 = /(.*)contact(.*)/i;
 		matchWord2 = /(.*)menu(.*)/i;
@@ -4376,7 +4388,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car contact agent') {
+	if (blocName==='Car contact agent') {
 
 				
 		var botResponse = 'I have already your phone number. When it is the more convenient for your to be called back?';
@@ -4406,7 +4418,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car contact agent 2') {
+	if (blocName==='Car contact agent 2') {
 
 				
 		var botResponse = 'Got it! An agent will call you back as soon as possible between '+data['contact time']+' as you requested';
@@ -4437,7 +4449,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 
-	if (blocName === 'Car comprehensive insurance') {
+	if (blocName==='Car comprehensive insurance') {
 
 				
 		var botResponse = 'By comprehensive insurance you need to see the full package '+data['name']+'! That’s the more complete car insurance you can get';
@@ -4465,7 +4477,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car comprehensive insurance 2') {
+	if (blocName==='Car comprehensive insurance 2') {
 
 				
 		var botResponse = 'Basically, It covers for accident damage, theft or hi-jacking, as well as for the small oopsies that you accidentally caused to other parties and/or their property as a result of an accident';
@@ -4494,7 +4506,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car comprehensive insurance 3') {
+	if (blocName==='Car comprehensive insurance 3') {
 
 		matchWord1 = /(.*)got\sit(.*)/i;
 
@@ -4540,7 +4552,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	}
 
 
-	if (blocName === 'Car other driver comprehensive insurance') {
+	if (blocName==='Car other driver comprehensive insurance') {
 
 				
 		var botResponse = 'By comprehensive insurance you need to see the full package '+data['name']+'! That’s the more complete car insurance you can get';
@@ -4568,7 +4580,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car other driver comprehensive insurance 2') {
+	if (blocName==='Car other driver comprehensive insurance 2') {
 
 				
 		var botResponse = 'Basically, It covers for accident damage, theft or hi-jacking, as well as for the small oopsies that you accidentally caused to other parties and/or their property as a result of an accident';
@@ -4597,7 +4609,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Car other driver comprehensive insurance 3') {
+	if (blocName==='Car other driver comprehensive insurance 3') {
 
 		matchWord1 = /(.*)got\sit(.*)/i;
 
@@ -4644,965 +4656,72 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 
-
-
-	if (blocName === "Credit life insurance") {
-
-		var botResponse = 'Ok got it! And what would you like to do? Choose between the different buttons below';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life insurance 2';
-		var skip = false;
-		var input = {'type':'buttons',
-					'buttons': [{'title': 'Get a quote', 'response': 'Would it be possible to get a quote please?'}, {'title': 'Credit life insurance, what is this?', 'response':'Credit life insurance, what is this?'}]};
-		var dataWrapper = 'DATA';
-		var createData = false;
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Credit life insurance 2") {
-
-		matchWord1 = /(.*)what(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Yes sure '+data['name']+'! A Car cover is an insurance protecting you against the financial pressure in case you or one of you loved ones pass away';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Car info';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'Yes of course! For the next few minutes, I will ask you questions in order to understand what could be the insurance suiting you the best. So, ready to go?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life start quote';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title': 'Yes', 'response': 'Yes, let\'s go!'}, {'title': 'No', 'response':'No'}]};
-			var dataWrapper = 'DATA';
-			var createData = false;			
-
-		}
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Credit life start quote") {
-
-		matchWord1 = /(.*)no(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Ok, how can I help you then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you 2';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title':'I am interested in a Car cover', 'response':'I am interested in a Car cover'},{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}]
-						};
-			var dataWrapper = 'DATA';
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'Ok great thanks! Now in order for me get a better understanding of your requirements, I just need to ask some additional personal questions';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life smoker';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = 'DATA';
-			var createData = false;			
-
-		}
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Credit life smoker") {
-
-
-		var botResponse = 'Are you a smoker?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life qualification level';
-		var skip = false;
-		var input = {'type':'buttons',
-					'buttons': [{'title':'Yes', 'response':'Yes Holly'},{'title':'No', 'response': 'No Holly'}]
-					};
-		var dataWrapper = 'DATA';
-		var createData = false;
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Credit life qualification level") {
-
-
-		var botResponse = 'Okay copy that. And what is your highest qualification level?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life income bracket';
-		var skip = false;
-		var input = {'type':'select',
-					'text':"Select a qualification level",
-					"choices": [{"value": "< Matric"},{"value": "Matric"},{"value": "Matric + further studies"},{"value": "3 year diploma"},{"value": "3 year degree"},{"value": "3 year technikon"},{"value": "4 year technikon"},{"value": "4 year degree"}]
-					};
-		var dataWrapper = 'DATA';
-		var createData = false;
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Credit life income bracket") {
-
-
-		var botResponse = 'And can I get your current income bracket please?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life cover amount';
-		var skip = false;
-		var input = {'type':'select',
-					'text':"Select an income bracket",
-					"choices": [{"value": "3000 - 6000"},{"value": "6000 - 12000"},{"value": "12000 - 16000"},{"value": "16000 - 20000"},{"value": "20000 - 24000"},{"value": "24000 +"}]
-					};
-		var dataWrapper = 'DATA';
-		var createData = false;
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Credit life cover amount") {
-
-
-		var botResponse = 'Thanks '+data['name']+'! Now let’s talk about the specific Credit Life Cover you are looking for';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life cover amount 2';
-		var skip = true;
-		var input = {'type':'none'};
-		var dataWrapper = 'DATA';
-		var createData = false;
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Credit life cover amount 2") {
-
-
-		var botResponse = 'What is the total amount of debt you want to be covered for? Not that the amount need to be between 10 000 Rand and 75 000 Rand';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life cover amount 3';
-		var skip = false;
-		var input = {'type':'select',
-					'text':"Select a cover amount",
-					"choices": [{"value": "R10000"},{"value": "R15000"},{"value": "R20000"},{"value": "R25000"},{"value": "R30000"},{"value": "R35000"},{"value": "R40000"},{"value": "R45000"},{"value": "R50000"},{"value": "R55000"},{"value": "R60000"},{"value": "R65000"},{"value": "R70000"},{"value": "R75000"}]
-					};
-		var dataWrapper = 'I would like to be covered for DATA';
-		var createData = {"dataName": "Credit life cover amount"};
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === 'Credit life cover amount 3') {
-
-
-		var botResponse = 'You would like to be covered for '+data['Credit life cover amount']+'. Is that right?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life cover amount 4';
-		var skip = false;
-		var input = {"type": 'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Yes'}, {'title': 'No', 'response': 'No'}]
-					};
-		var dataWrapper = 'DATA';
-		var createData = false;
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Credit life cover amount 4') {
-
-		matchWord1=/(.*)yes(.*)/i;
-		matchWord2=/(.*)no(.*)/i;
-
-		if (text.match(matchWord2)) {
-
-					
-			var botResponse = 'Ok then can you select an other amount?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life cover amount 3';
-			var skip = false;
-			var input = {"type":'select',
-						'text':"Select cover",
-						"choices": [{"value": "R10000"},{"value": "R15000"},{"value": "R20000"},{"value": "R25000"},{"value": "R30000"},{"value": "R35000"},{"value": "R40000"},{"value": "R45000"},{"value": "R50000"},{"value": "R55000"},{"value": "R60000"},{"value": "R65000"},{"value": "R70000"},{"value": "R75000"}]
-						};
-			var dataWrapper = 'DATA';
-			var createData = {"dataName": "Credit life cover amount"};		
-
-		} else {
-
-			var botResponse = 'Ok I copy that '+data['name']+'';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life additional benefits';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = 'DATA';
-			var createData = false;
-
-		}
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Credit life additional benefits') {
-
-
-		var botResponse = 'And would you like to add any additional covers to your credit life cover? The most basic credit life package pays out only in the event of death, but choosing to extend your policy to cover these options means that we will pay out in event of these happening  (such as retrenchment/ disability etc?)'
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Funeral add benefits';
-		var skip = false;
-		var input = {"type": 'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Yes please'}, {'title': 'No', 'response': 'No thanks'}]
-					};
-		var dataWrapper = 'DATA';
-		var createData = false;
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Credit life additional benefits 2') {
-
-		matchWord1=/(.*)yes(.*)/i;
-		matchWord2=/(.*)no(.*)/i;
-
-		if (text.match(matchWord2)) {
-
-					
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life finish quote';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = 'DATA';
-			var createData = false;		
-
-		} else {
-
-			var botResponse = 'Okay then please use the buttons below to add as many extra benefits as you want :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life additional benefits 3';
-			var skip = false;
-			var input = {"type":"checkbox",
-						"checks":[{"value":"Temporary Disability Cover"},{"value":"Permanent Disability Cover"},{"value":"Retrenchment Cover"},{"value":"Critical Illness Cover"},{"value":"Premium Waiver Cover"}],
-						}
-			var dataWrapper = 'It would be great to add to my cover a DATA';
-			var createData = false;
-
-		}
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Credit life additional benefits 3') {
-
-					
-		var botResponse = 'Okay no problem '+data['name']+'. I add these options to your credit life coverage';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life finish quote';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = 'DATA';
-		var createData = false;		
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Credit life finish quote') {
-
-					
-		var botResponse = 'Hmm let me think...';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life finish quote 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = 'DATA';
-		var createData = false;		
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-	if (blocName === "Credit life finish quote 2") {
-
-
-		var botResponse = 'Okay '+data['name']+'! Your quote is almost ready. E-mail, phone number and we are done. Can you enter your e-mail address below please?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life get email';
-		var skip = false;
-		var input = {'type':'text'};
-		var dataWrapper = 'DATA';
-		var createData = {'dataName': 'email'};
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === 'Credit life get email') {
-
-		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
-
-		if (text.match(matchWord0)) {
-		
-			var botResponse = 'Is your e-mail address '+data['email']+'? Do you confirm?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life check email';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
-						};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else {
-			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Car get email';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life check email') {
-
-		matchWord1 = /(.*)yes(.*)/i;
-
-		if (text.match(matchWord1)) {
-		
-			var botResponse = 'Ok thanks. And what\'s you phone number? Please just enter your number';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life get number';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'number'};
-			
-		
-		} else {
-			var botResponse = 'Ok, can you give it again?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life get email';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life get number') {
-
-		matchWord0=/(.*)/i;
-
-		if (text.match(matchWord0)) {
-		
-			var botResponse = 'Is your phone number '+data['number']+'? Do you confirm?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life check number';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title':'Yes', 'response':'Yes Holly, but you\'re slow'},{'title':'No', 'response':'No'}]
-						};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else {
-			var botResponse = 'I\'m sorry, I don\'t think it is an email address. Can you give it again please?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Get email';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life check number') {
-
-		matchWord1 = /(.*)yes(.*)/i;
-
-		if (text.match(matchWord1)) {
-		
-			var botResponse = 'Ahaha yes that\'s true '+data['name']+', but I am learning! I prefer to double check :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life check number 2';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else {
-			var botResponse = 'Ok. Can you give it again please?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life get number';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'number'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life check number 2') {
-
-				
-		var botResponse = 'Thanks '+data['name']+', I think I have everything I need! Ready to see your quote?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life get quote';
-		var skip = false;
-		var input = {'type':'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Hell yes holly!'}, {'title': 'No', 'response': 'Nope'}]
-					};
-		var dataWrapper = "DATA";
-		var createData = false;
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life get quote') {
-
-		matchWord1 = /(.*)yes(.*)/i;
-
-		if (text.match(matchWord1)) {
-		
-			var botResponse = 'Well I am proud to tell you you got yourself a great deal!';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life get quote 2';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else {
-			var botResponse = 'That\'s a shame I got you a great deal '+data['name']+'! Are you sure you don\'t see what I found you?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life no quote';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons':[{'title':'Show me my quote', 'response': 'You right, show me my quote please'}, {'title': 'Go back to menu', 'response': 'Yeah, I\'m sure, go back to menu'}]
-						};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life get quote 2') {
-
-				
-		var botResponse = 'Your chosen cover will cost you only R251 pm! I sent you an e-mail with all the details of your quote';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life what to do next';
-		var skip = true;
-		var input = {'type':'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-		var sendEmail = "Credit life";
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-			"sendEmail": sendEmail,
-		};
-
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life what to do next') {
-
-				
-		var botResponse = 'What would you like to do now?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life what to do next 2';
-		var skip = false;
-		var input = {'type':'buttons',
-					'buttons': [{'title': 'Get an agent to contact me', 'response': 'Can you get an agent to contact me please?'}, {'title': 'Go back to menu', 'response': 'I would like to go back to menu'},{'title':'I am done', 'response':'Nothing, I am done, thanks!'}]
-					};
-		var dataWrapper = "DATA";
-		var createData = false;
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life no quote') {
-
-		matchWord1 = /(.*)quote(.*)/i;
-		matchWord2 = /(.*)menu(.*)/i;
-
-		if (text.match(matchWord1)) {
-		
-			var botResponse = 'Ah, I am glad you came back to reason :SMILE:! We haven\'t done all this work together for nothing though';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life get quote 2';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else if (text.match(matchWord2)) {
-			var botResponse = 'Fair enough, you\'re the boss '+data['name']+'! You will receive anyway an e-mail with the detail of your quote if ever you change your mind';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life what to do next';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life what to do next 2') {
-
-		matchWord1 = /(.*)contact(.*)/i;
-		matchWord2 = /(.*)menu(.*)/i;
-		matchWord3 = /(.*)nothing(.*)/i;
-
-		if (text.match(matchWord1)) {
-				
-			var botResponse = 'Okay sure '+data['name']+'!';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Credit life contact agent';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord2)) {
-
-			var botResponse = 'Okay sure '+data['name']+'!';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord3)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'adiios';
-			var skip = true;
-			var input = {'type':'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-		}
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life contact agent') {
-
-				
-		var botResponse = 'I have already your phone number. When it is the more convenient for your to be called back?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life contact agent 2';
-		var skip = false;
-		var input = {'type':'buttons',
-					'buttons': [{'title': '9h-12h', 'response': '9h and 12h'}, {'title': '12h-14h', 'response': '12h and 14h'},{'title': '14h-16h', 'response': '14h and 16h'},{'title': '16h-18h', 'response': '16h and 18h'}]
-					};
-		var dataWrapper = "Would be great to be called between DATA";
-		var createData = {'dataName': 'contact time'};
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Credit life contact agent 2') {
-
-				
-		var botResponse = 'Got it! An agent will call you back as soon as possible between '+data['contact time']+' as you requested';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Credit life what to do next';
-		var skip = true;
-		var input = {'type':'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-
-
 }
+
+
+
+
+
+
+/*
+if (blocName==='Hi') {
+
+		matchWord=/(.*)start(.*)/;
+
+		if (text.match(matchWord)) {		// Define the response JSON if there is a match
+			var botResponse = 'Hey there! My name is Chris, I am here to help you get a quote. How much would you like to be covered for';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Cover';
+			var quickReplies = [];
+			var input = 'text';
+			var dataWrapper = 'I would like to be covered for RDATA'
+			var skip = false;
+			
+			
+		} else {							// Define the error JSON  (no match)
+			var botResponse = 'sorry';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Hi';
+			var quickReplies = [];
+			var input = 'text';
+			var dataWrapper = null
+			var skip = false;
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"quickReplies": quickReplies,
+			"input": input,
+			"dataWrapper": dataWrapper,
+			"skip": skip,
+		};
+
+		return json;
+	}
+
+	Different inputs : 
+
+						var input = {"type":'select',
+									'text':"Select cover",
+									"choices": [{"value": "R10000"},{"value": "R15000"},{"value": "R20000"}]
+									};
+
+						var input = {"type":"date"};
+
+						var input = {"type":"text"};
+
+						var input = {"type":"buttons"
+									"buttons":[{"title":"Yes", "response": "Yes, please"}, {"title":"No", "response":"No thanks"}]
+									}
+
+						var input = {"type":"multitext",
+									"inputs":[{"title":"name"},{"title":"surname"}]
+									};
+
+
+	*/

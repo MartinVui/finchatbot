@@ -57,7 +57,7 @@ export default class Message extends Component {
 
 				} else if (word.match(/:SMILE:/)) {	// We can add any emoji we want
 
-					return <span key={i}>{emoji('😀')}</span>;
+					return <span>{emoji('😀')}</span>;
 
 				}
 
