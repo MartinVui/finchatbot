@@ -12,6 +12,13 @@ Meteor.methods({
 
 	'scores.insert'(name1, score1, name2, score2, gameScore1, gameScore2) {
 
+		if(score1 === 0) {
+			score1 = 70;
+		}
+
+		if (score2 === 0) {
+			score2 = 70;
+		}
 
 		if (gameScore1 < gameScore2) {
 			var winner = name2;
