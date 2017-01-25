@@ -1,28 +1,22 @@
 import { Mongo } from 'meteor/mongo';
 
-new Mongo.Collection("questions");
+export const Questions = new Mongo.Collection("questions");
 
 Meteor.methods({
 
-  'movies.insert'(text) {
+  'questions.insert'(text) {
     check(text, String);
 
-    var result = HTTP.call(
-      "GET",
-      "http://www.omdbapi.com/?t="+text+"&plot=short&r=json",
-      function (error, result) {
-        if (!error) {
-          console.log(result);
-          Movies.insert(JSON.parse(result.content));
-        }
-      }
-    );
+    Questions.insert({
+      text
+    });
 
   },
 
-  'movies.remove'(movieId) {
-    check(movieId, String);
-    Movies.remove(movieId);
-  },
+  'questions.remove'(questionId) {
+    check(questionId, String);
 
-});
+    const task = Tasks.findOne(questionId);
+  }
+
+})
