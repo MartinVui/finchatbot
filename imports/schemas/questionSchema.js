@@ -1,6 +1,6 @@
-export const QuestionSchema = new SimpleSchema({
+export var QuestionSchema = new SimpleSchema({
   text: {
     type: String,
-    metadata: Object
-  },
+    label: "text"
+  }
 });

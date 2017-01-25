@@ -1,0 +1,38 @@
+<body>
+  <h1>Welcome to Meteor!</h1>
+
+  <h2>Questions</h2>
+
+  <form class="new-question">
+    <input type="text" name="text" placeholder="Type to add new questions" />
+  </form>
+
+  <ul>
+    {{#each questions}}
+      {{> question}}
+    {{/each}}
+  </ul>
+
+
+  <h2>Answers</h2>
+
+  <form class="new-answer">
+    <input type="text" name="text" placeholder="Type to add new answers" />
+  </form>
+
+  <ul>
+    {{#each answers}}
+      {{> answer}}
+    {{/each}}
+  </ul>
+
+</body>
+
+
+<template name="question">
+  <li>{{text}}</li>
+</template>
+
+<template name="answer">
+  <li>{{default_content}}</li>
+</template>

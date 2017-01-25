@@ -1,22 +1,39 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
+import { Questions } from '../imports/api/questions.js';
+import { Answers } from '../imports/api/answers.js';
 
-import './main.html';
+Template.body.helpers({
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+  questions() {
+  return Questions.find({});
+  },
+
+  answers() {
+  return Answers.find({});
+  },
+
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
+Template.body.events({
 
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
+  'submit .new-question'(event) {
+    event.preventDefault();
+    const target = event.target;
+    const text = target.text.value;
+
+    Meteor.call('question.insert', {"text": text});
+
+    target.text.value = '';
   },
+
+  'submit .new-answer'(event) {
+    event.preventDefault();
+    const target = event.target;
+    const text = target.text.value;
+
+    Meteor.call('answer.default-insert', text);
+
+    target.text.value = '';
+  },
+
 });
