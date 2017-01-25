@@ -1,4 +1,4 @@
-AnswerSchema = new SimpleSchema({
+export const AnswerSchema = new SimpleSchema({
 	user_content: {
 		type: String,
 	},
