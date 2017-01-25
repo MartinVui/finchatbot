@@ -5,7 +5,7 @@ export const Questions = new Mongo.Collection("questions");
 Meteor.methods({
 
   'questions.insert'(text) {
-    check(text, String);
+    check(text, QuestionSchema);
 
     Questions.insert({
       text
