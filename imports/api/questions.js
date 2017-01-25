@@ -4,19 +4,16 @@ export const Questions = new Mongo.Collection("questions");
 
 Meteor.methods({
 
-  'questions.insert'(text) {
-    check(text, QuestionSchema);
+  'questions.insert'(question) {
+    check(question, QuestionSchema);
 
-    Questions.insert({
-      text
-    });
-
+    Questions.insert(question);
   },
 
   'questions.remove'(questionId) {
     check(questionId, String);
 
-    const task = Tasks.findOne(questionId);
+    Questions.remove(questionId);
   }
 
 })

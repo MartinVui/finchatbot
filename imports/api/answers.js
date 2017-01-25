@@ -21,5 +21,4 @@ Meteor.methods({
         Answers.remove(taskId);
     },
     }
-})
-
+);
