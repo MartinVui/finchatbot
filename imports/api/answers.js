@@ -1,3 +1,3 @@
 import { Mongo } from 'meteor/mongo';
 
-new Mongo.Collection("answer");
+new Mongo.Collection("answers");
