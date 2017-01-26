@@ -25,15 +25,14 @@ Template.body.helpers({
   return Scenarios.find({});
   },
 
-<<<<<<< HEAD
-  json() {
-  return this.state.json;
-  },
-=======
+
   discussions(){
     return Discussions.find({});
   }
->>>>>>> origin/finchatbotnew
+
+  json() {
+    return this.state.json;
+  },
 
 });
 
