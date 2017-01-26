@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating';
 import { Questions } from '../imports/api/questions.js';
 import { Answers } from '../imports/api/answers.js';
 import { Scenarios } from '../imports/api/scenarios.js';
+import { Discussions } from '../imports/api/discussions.js';
 
 Template.body.helpers({
 
@@ -16,6 +17,10 @@ Template.body.helpers({
   scenarios() {
   return Scenarios.find({});
   },
+
+  discussions(){
+    return Discussions.find({});
+  }
 
 });
 
@@ -38,7 +43,7 @@ Template.body.events({
 
     Meteor.call('answer.insert', {"userContent":text});
 
-    target.text.value = '';
+    target.text.value = 'default';
   },
 
   'submit .new-scenario'(event) {
@@ -54,5 +59,15 @@ Template.body.events({
     target.idQuestion.value = '';
     // target.idChild.value = '';
   },
+
+  'submit .new-discussion'(event){
+    event.preventDefault();
+    const target = event.target;
+    const idScenario = target.idScenario.value;
+
+    Meteor.call('discussion.insert', {"idScenario": idScenario});
+
+    target.idScenario.value = '';
+  }
 
 });
