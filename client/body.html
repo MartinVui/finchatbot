@@ -26,6 +26,19 @@
     {{/each}}
   </ul>
 
+  <h2>Scenarios</h2>
+
+  <form class="new-scenario">
+    <input type="text" name="idQuestion"/>
+    <!-- <input type="text" name="idChild"/> -->
+  </form>
+
+  <ul>
+    {{#each scenarios}}
+      {{> scenario}}
+    {{/each}}
+  </ul>
+
 </body>
 
 
@@ -35,4 +48,8 @@
 
 <template name="answer">
   <li>{{default_content}}</li>
+</template>
+
+<template name="scenario">
+  <li>{{idQuestion}} // {{children}}</li>
 </template>
