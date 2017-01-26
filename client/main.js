@@ -61,14 +61,14 @@ Template.body.events({
     event.preventDefault();
     const target = event.target;
     const idQuestion = target.idQuestion.value;
-    const idChild = target.idChild.value;
-
+    const idAnswer = target.idAnswer.value;
+    console.log(idAnswer);
     console.log("Inserting")
 
-    Meteor.call('scenario.insert', {"idQuestion":idQuestion, "children":[{"idAnswer":idAnswer, "idScenario":0}]});
+    Meteor.call('scenario.insert', {"idQuestion":idQuestion, "children":["idAnswer":idAnswer, "idScenario":""]});
 
     target.idQuestion.value = '';
-    target.idChild.value = '';
+    target.idAnswer.value = '';
   },
 
   'submit .new-discussion'(event){

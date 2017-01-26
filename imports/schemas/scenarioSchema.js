@@ -3,7 +3,10 @@ export var ScenarioSchema = new SimpleSchema({
     type: String,
   },
   children: {
-    type: [ChildSchema],
+    type: Array,
+  },
+  'children.$': {
+    type: ChildSchema
   }
 });
 
