@@ -6,7 +6,7 @@ import { AnswerSchema } from '../schemas/answerSchema.js';
 export const Answers = new Mongo.Collection("answers");
 
 Meteor.methods({
-    'answer.user-insert' (answer) {
+    'answer.insert' (answer) {
         check(answer , answerSchema);
         Answers.insert(answer);
     },
