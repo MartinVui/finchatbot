@@ -4,7 +4,6 @@ export var AnswerSchema = new SimpleSchema({
 		optional : true
 	},
 	defaultContent: {
-		type: String,
-		optional : true
+		type: Object
 	}
 });
