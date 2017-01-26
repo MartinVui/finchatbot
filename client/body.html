@@ -29,8 +29,15 @@
   <h2>Scenarios</h2>
 
   <form class="new-scenario">
-    <input type="text" name="idQuestion"/>
-    <input type="text" name="idChild"/>
+
+    <select name="idQuestion">
+      <option value = ""> - </option>
+      {{#each questions}}
+        {{> questionPicker}}
+      {{/each}}
+    </select>
+    <button type="submit">Envoyer</button>
+
   </form>
 
   <ul>
@@ -39,6 +46,7 @@
     {{/each}}
   </ul>
 
+<<<<<<< HEAD
   <h2>JSON</h2>
 
   <form class="jsonInput">
@@ -46,6 +54,25 @@
   </form>
 
   {{json}}
+=======
+<h2>Discussion</h2>
+
+  <form class="new-discussion">
+    <select name='idScenario'>
+      <option value="default"> - </option>
+      {{#each scenarios}}
+        {{> scenarioPicker}}
+      {{/each}}
+    </select>
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <ul>
+    {{#each discussions}}
+      {{> discussion}}
+    {{/each}}
+  </ul>
+>>>>>>> origin/finchatbotnew
 
 </body>
 
@@ -60,4 +87,16 @@
 
 <template name="scenario">
   <li>{{idQuestion}} // {{children}}</li>
+</template>
+
+<template name="scenarioPicker">
+  <option value={{_id}}>{{_id}}</option>
+</template>
+
+<template name="questionPicker">
+  <option value={{_id}}>{{text}}</option>
+</template>
+
+<template name='discussion'>
+  <li>Le scénario {{idScenario}} a été proposé au cours de cette discussion</li>
 </template>

@@ -4,6 +4,7 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Questions } from '../imports/api/questions.js';
 import { Answers } from '../imports/api/answers.js';
 import { Scenarios } from '../imports/api/scenarios.js';
+import { Discussions } from '../imports/api/discussions.js';
 
 
 Template.body.onCreated(function bodyOnCreated() {
@@ -24,9 +25,15 @@ Template.body.helpers({
   return Scenarios.find({});
   },
 
+<<<<<<< HEAD
   json() {
   return this.state.json;
   },
+=======
+  discussions(){
+    return Discussions.find({});
+  }
+>>>>>>> origin/finchatbotnew
 
 });
 
@@ -49,7 +56,7 @@ Template.body.events({
 
     Meteor.call('answer.insert', {"userContent":text});
 
-    target.text.value = '';
+    target.text.value = 'default';
   },
 
   'submit .new-scenario'(event) {
@@ -66,8 +73,20 @@ Template.body.events({
     target.idChild.value = '';
   },
 
+<<<<<<< HEAD
   'change .jsonInput textarea'(event, instance) {
     instance.state.set('json', event.target.value);
   },
+=======
+  'submit .new-discussion'(event){
+    event.preventDefault();
+    const target = event.target;
+    const idScenario = target.idScenario.value;
+
+    Meteor.call('discussion.insert', {"idScenario": idScenario});
+
+    target.idScenario.value = '';
+  }
+>>>>>>> origin/finchatbotnew
 
 });

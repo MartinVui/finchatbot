@@ -7,7 +7,7 @@ export const Answers = new Mongo.Collection("answers");
 
 Meteor.methods({
     'answer.insert' (answer) {
-        //check(answer , answerSchema);
+        check(answer , AnswerSchema);
         Answers.insert(answer);
     },
     'answer.remove' (answerId){

@@ -13,5 +13,4 @@ Meteor.methods({
         check(userId, String);
         Users.remove(userId);
     },
-    }
-})
+});
