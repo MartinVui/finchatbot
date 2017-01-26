@@ -1,8 +1,11 @@
 export var AnswerSchema = new SimpleSchema({
-	user_content: {
-		type: String,
+	idUser : {
+		type : String,
 	},
-	default_content: {
-		type: String,
+	idScenario : {
+		type : String,
+	},
+	answersPile : {
+		type : Object
 	}
 })

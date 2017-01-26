@@ -1,10 +1,10 @@
 export var AnswerSchema = new SimpleSchema({
-	user_content: {
+	userContent: {
 		type: String,
-		optionnal : true,
+		optional : true
 	},
-	default_content: {
+	defaultContent: {
 		type: String,
-		optionnal : true,
+		optional : true
 	}
 })

@@ -36,7 +36,7 @@ Template.body.events({
     const target = event.target;
     const text = target.text.value;
 
-    Meteor.call('answer.insert', {"user_content":text});
+    Meteor.call('answer.insert', {"userContent":text});
 
     target.text.value = '';
   },

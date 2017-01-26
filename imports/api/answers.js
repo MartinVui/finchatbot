@@ -7,12 +7,11 @@ export const Answers = new Mongo.Collection("answers");
 
 Meteor.methods({
     'answer.insert' (answer) {
-        check(answer , answerSchema);
+        //check(answer , answerSchema);
         Answers.insert(answer);
     },
     'answer.remove' (answerId){
         check(answerId, String);
         Answers.remove(answerId);
-    },
-    }
-);
+    },    
+});
