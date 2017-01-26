@@ -1,7 +1,14 @@
 import { Template } from 'meteor/templating';
+import { ReactiveDict } from 'meteor/reactive-dict';
+
 import { Questions } from '../imports/api/questions.js';
 import { Answers } from '../imports/api/answers.js';
 import { Scenarios } from '../imports/api/scenarios.js';
+
+
+Template.body.onCreated(function bodyOnCreated() {
+  this.state = new ReactiveDict();
+});
 
 Template.body.helpers({
 
@@ -15,6 +22,10 @@ Template.body.helpers({
 
   scenarios() {
   return Scenarios.find({});
+  },
+
+  json() {
+  return this.state.json;
   },
 
 });
@@ -53,6 +64,10 @@ Template.body.events({
 
     target.idQuestion.value = '';
     target.idChild.value = '';
+  },
+
+  'change .jsonInput textarea'(event, instance) {
+    instance.state.set('json', event.target.value);
   },
 
 });
