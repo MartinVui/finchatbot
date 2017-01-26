@@ -7,4 +7,4 @@ export var AnswerSchema = new SimpleSchema({
 		type: String,
 		optional : true
 	}
-})
+});
