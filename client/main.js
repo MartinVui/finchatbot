@@ -25,12 +25,11 @@ Template.body.helpers({
   return Scenarios.find({});
   },
 
-
   discussions(){
     return Discussions.find({});
-  }
+  },
 
-  json() {
+  json(){
     return this.state.json;
   },
 
@@ -72,11 +71,6 @@ Template.body.events({
     target.idChild.value = '';
   },
 
-<<<<<<< HEAD
-  'change .jsonInput textarea'(event, instance) {
-    instance.state.set('json', event.target.value);
-  },
-=======
   'submit .new-discussion'(event){
     event.preventDefault();
     const target = event.target;
@@ -85,7 +79,10 @@ Template.body.events({
     Meteor.call('discussion.insert', {"idScenario": idScenario});
 
     target.idScenario.value = '';
-  }
->>>>>>> origin/finchatbotnew
+  },
+
+  'change .jsonInput textarea'(event, instance) {
+    instance.state.set('json', event.target.value);
+  },
 
 });
