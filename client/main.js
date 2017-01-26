@@ -6,9 +6,14 @@ import { Answers } from '../imports/api/answers.js';
 import { Scenarios } from '../imports/api/scenarios.js';
 import { Discussions } from '../imports/api/discussions.js';
 
+import { interpretJSON } from '../imports/processes/scenarioCreation.js';
+
 
 Template.body.onCreated(function bodyOnCreated() {
   this.state = new ReactiveDict();
+
+  defaultJSON = "{}";
+  this.state.set('json', defaultJSON);
 });
 
 Template.body.helpers({
@@ -30,7 +35,10 @@ Template.body.helpers({
   },
 
   json(){
-    return this.state.json;
+    const instance = Template.instance();
+    text = instance.state.get('json');
+    output = interpretJSON(text);
+    return output;
   },
 
 });
@@ -62,8 +70,6 @@ Template.body.events({
     const target = event.target;
     const idQuestion = target.idQuestion.value;
     const idAnswer = target.idAnswer.value;
-    console.log(idAnswer);
-    console.log("Inserting")
 
     Meteor.call('scenario.insert', {"idQuestion":idQuestion, "children":["idAnswer":idAnswer, "idScenario":""]});
 
