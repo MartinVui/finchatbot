@@ -1,13 +1,14 @@
 
 export function interpretJSON(inputText) {
 
-  // output = inputText;
+  var output
 
   try {
-    
-    obj = JSON.parse(inputText);
+
+    var obj = JSON.parse(inputText);
 
     //Process
+    obj = processObject(obj, [], []);
     console.log(obj);
 
     output = JSON.stringify(obj, {indent: true});
@@ -19,4 +20,24 @@ export function interpretJSON(inputText) {
   }
 
   return output;
+}
+
+
+function processObject(obj) {
+
+  if (obj.hasOwnProperty('question')) {
+    console.log(obj['question']);
+  }
+
+  for (var answer of obj['answers']) {
+
+    if (answer.hasOwnProperty('answer')) {
+      console.log(answer['answer']);
+    }
+    if (answer.hasOwnProperty('next')) {
+      processObject(answer['next']);
+    }
+  }
+
+  return {};
 }
