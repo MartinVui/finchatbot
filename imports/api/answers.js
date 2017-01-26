@@ -1,25 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { AnswerSchema } from '../schemas/answerSchema.js';
 
 export const Answers = new Mongo.Collection("answers");
 
 Meteor.methods({
-    'answer.user-insert' (text) {
-        check(text , String);
-        Answers.insert({
-            user_content : text,
-        })
-    },
-    'answer.default-insert' (text){
-        check(text , String);
-        Answers.insert({
-            default_content : text,
-        })
+    'answer.user-insert' (answer) {
+        check(answer , answerSchema);
+        Answers.insert(answer);
     },
     'answer.remove' (answerId){
         check(answerId, String);
-        Answers.remove(taskId);
+        Answers.remove(answerId);
     },
     }
 );
