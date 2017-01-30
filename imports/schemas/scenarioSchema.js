@@ -6,8 +6,14 @@ export var ScenarioSchema = new SimpleSchema({
     type: Array,
   },
   'children.$': {
-    type: ChildSchema
-  }
+    type: ChildSchema,
+  },
+  skip:{
+    type: boolean,
+  },
+  input:{
+    type: String,
+  },
 });
 
 var ChildSchema = new SimpleSchema({

@@ -70,6 +70,8 @@ Template.body.events({
     const target = event.target;
     const idQuestion = target.idQuestion.value;
     const idAnswer = target.idAnswer.value;
+    skip = true;
+    input = "texte";
 
     Meteor.call('scenario.insert', {"idQuestion":idQuestion, "children":["idAnswer":idAnswer, "idScenario":""]});
 
