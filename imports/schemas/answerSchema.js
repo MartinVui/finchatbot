@@ -4,8 +4,9 @@ export var AnswerSchema = new SimpleSchema({
   },
 	content: {
 		type: Object,
+    blackbox: true
 	},
-	date: {
-		type: Object
+	createdAt: {
+		type: Date
 	}
 });

@@ -60,9 +60,9 @@ Template.body.events({
     const target = event.target;
     const text = target.text.value;
 
-    Meteor.call('answer.insert', {"defaultContent":{text}});
+    Meteor.call('answer.insert', {"content":{"text": text}, "idFormGenerator":"test"});
 
-    target.text.value = 'default';
+    target.text.value = '';
   },
 
   'submit .new-scenario'(event) {

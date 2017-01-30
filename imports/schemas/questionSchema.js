@@ -1,16 +1,10 @@
 
-var TextSchema = new SimpleSchema({
-  text: {
-    type: String
-  }
-})
-
-
 export var QuestionSchema = new SimpleSchema({
   content: {
-    type: [TextSchema]
+    type: [Object]
   },
-  // 'content.$': {
-  //   type: TextSchema
-  // }
+  'content.$': {
+    type: Object,
+    blackbox: true
+  }
 });
