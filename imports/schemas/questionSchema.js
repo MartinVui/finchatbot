@@ -1,6 +1,16 @@
-export var QuestionSchema = new SimpleSchema({
+
+var TextSchema = new SimpleSchema({
   text: {
-    type: String,
-    label: "text"
+    type: String
   }
+})
+
+
+export var QuestionSchema = new SimpleSchema({
+  content: {
+    type: [TextSchema]
+  },
+  // 'content.$': {
+  //   type: TextSchema
+  // }
 });
