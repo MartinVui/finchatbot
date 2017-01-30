@@ -13,5 +13,5 @@ Meteor.methods({
     'answer.remove' (answerId){
         check(answerId, String);
         Answers.remove(answerId);
-    },    
+    },
 });
