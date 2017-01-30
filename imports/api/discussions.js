@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
-import { discussionSchema } from '../schemas/discussionSchema.js';
+import { discussionSchema } from './schemas/discussionSchema.js';
 
 export const Discussions = new Mongo.Collection("discussions");
 

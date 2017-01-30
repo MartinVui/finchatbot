@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
-import { formGeneratorSchema } from '../schemas/formGeneratorSchema.js';
+import { formGeneratorSchema } from './schemas/formGeneratorSchema.js';
 
 
 export const FormGenerator = new Mongo.Collection('formGenerators');
