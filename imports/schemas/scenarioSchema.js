@@ -9,7 +9,7 @@ export var ScenarioSchema = new SimpleSchema({
     type: ChildSchema,
   },
   skip:{
-    type: boolean,
+    type: Boolean,
   },
   input:{
     type: String,
