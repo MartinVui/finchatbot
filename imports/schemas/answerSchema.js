@@ -1,9 +1,11 @@
 export var AnswerSchema = new SimpleSchema({
-	userContent: {
-		type: String,
-		optional : true
+  idFormGenerator: {
+    type: String,
+  },
+	content: {
+		type: Object,
 	},
-	defaultContent: {
+	date: {
 		type: Object
 	}
 });

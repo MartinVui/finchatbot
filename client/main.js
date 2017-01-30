@@ -50,7 +50,7 @@ Template.body.events({
     const target = event.target;
     const text = target.text.value;
 
-    Meteor.call('question.insert', {"text": text});
+    Meteor.call('question.insert', {"content":[{"text": text}]});
 
     target.text.value = '';
   },
@@ -60,7 +60,7 @@ Template.body.events({
     const target = event.target;
     const text = target.text.value;
 
-    Meteor.call('answer.insert', {"defaultContent":text});
+    Meteor.call('answer.insert', {"defaultContent":{text}});
 
     target.text.value = 'default';
   },
