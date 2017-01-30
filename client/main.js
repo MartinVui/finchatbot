@@ -50,7 +50,7 @@ Template.body.events({
     const target = event.target;
     const text = target.text.value;
 
-    Meteor.call('question.insert', {"text": text});
+    Meteor.call('question.insert', {"content":[{"text": text}]});
 
     target.text.value = '';
   },
@@ -60,9 +60,9 @@ Template.body.events({
     const target = event.target;
     const text = target.text.value;
 
-    Meteor.call('answer.insert', {"defaultContent":text});
+    Meteor.call('answer.insert', {"content":{"text": text}, "idFormGenerator":"test"});
 
-    target.text.value = 'default';
+    target.text.value = '';
   },
 
   'submit .new-scenario'(event) {
@@ -70,6 +70,8 @@ Template.body.events({
     const target = event.target;
     const idQuestion = target.idQuestion.value;
     const idAnswer = target.idAnswer.value;
+    skip = true;
+    input = "texte";
 
     Meteor.call('scenario.insert', {"idQuestion":idQuestion, "children":["idAnswer":idAnswer, "idScenario":""]});
 

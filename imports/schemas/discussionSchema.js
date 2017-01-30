@@ -9,6 +9,6 @@ export var AnswerSchema = new SimpleSchema({
 	},
 	answersPile : {
 		type : Object,
-		optional : true,
+		blackbox : true,
 	}
 })
