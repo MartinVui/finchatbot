@@ -2,19 +2,20 @@ export var FormGeneratorSchema = new SimpleSchema({
 	input : {
 		type : String,
 	},
-	multiAnswers : {
-		type : Array(),
+	answers : {
+		type : Array,
 	},
-	'multiAnswers.$':{
-		type : MultiAnswersSchema
+	'answers.$':{
+		type : Object,
+    blackbox: true
 	},
 });
-
-var MultiAnswersSchema = new SimpleSchema({
-	content : {
-		type : String,
-	},
-	idScenario : {
-		type : String,
-	}
-});
+// 
+// var MultiAnswersSchema = new SimpleSchema({
+// 	content : {
+// 		type : String,
+// 	},
+// 	idScenario : {
+// 		type : String,
+// 	}
+// });
