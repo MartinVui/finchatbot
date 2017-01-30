@@ -8,16 +8,10 @@ export var ScenarioSchema = new SimpleSchema({
   'children.$': {
     type: ChildSchema,
   },
-  skip:{
-    type: boolean,
-  },
-  input:{
-    type: String,
-  },
 });
 
 var ChildSchema = new SimpleSchema({
-  idAnswer: {
+  idFormGenerator: {
     type: String,
   },
   idScenario: {
