@@ -26,6 +26,8 @@ export default class MessageForm extends Component {
     render() {
     // Decides the type of input that has to be displayed
 
+    //adding a mapper that links this.props.scenarioChildren and the proper UI form element
+
     return(
 
 
