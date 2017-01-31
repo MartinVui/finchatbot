@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import Message from './Message.jsx';
 import ChatBox from './ChatBox.jsx';
 
 
