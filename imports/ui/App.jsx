@@ -3,10 +3,7 @@ import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-
-import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
-
 import ChatBox from './ChatBox.jsx';
 
 
@@ -30,7 +27,10 @@ App.propTypes = {
 
 
 export default createContainer(() => {
+
+  var discussion = Discussion.find({_id:Session.get('discussionId')});
+
 	return {
-		messages: Discussion.find({_id: Session.get('discussionId')}),
+		messages: scanDiscussion(discussion),
 	};
 }, App);
