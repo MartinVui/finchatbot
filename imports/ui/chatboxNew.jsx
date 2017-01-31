@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import { Users } from './api/users.js';
@@ -44,12 +45,22 @@ export default class ChatBox extends Component {
   nextStep(scenarioId) {
 
     // Find scenario in DB
-
+    scenario = Scenarios.findOne({_id:scenarioId});
     // Find question(s)
+    question = Questions.findOne({_id:scenario['idQuestion']});
+
     // Ask question(s)
 
-    // Find formGenerator
-    // Display formGenerator, with the idScenario 
+    // Find formGenerators
+    forms = FormGenerators.find({
+      _id:{
+        $in: scenario['children'].map((x) => {
+          x['idFormGenerator']
+        })
+      }
+    }).fetch();
+
+    // Display formGenerators, with the idScenario
 
     // The form subcomponent will use a callback to nextStep with the right scenario
 
