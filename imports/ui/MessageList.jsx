@@ -18,8 +18,6 @@ export default class MessageList extends Component {
 		this.setState({imageLoaded: true});
 	}
 
-
-
 	componentDidUpdate() {
 		this.scrollDown()
 	}
@@ -71,8 +69,8 @@ export default class MessageList extends Component {
 
 			<div className='messages' ref="messageList">
 				<ReactCSSTransitionGroup                // Animation when the messages appear
-				transitionName="example" 
-				transitionEnterTimeout={400} 
+				transitionName="example"
+				transitionEnterTimeout={400}
 				transitionLeaveTimeout={3}>
 
 					<div className="bot_message">
@@ -80,7 +78,7 @@ export default class MessageList extends Component {
 
 					{this.state.imageLoaded  ?	// Only shows the text when the image is loaded. It's ugly otherwise
 						<p className="bot_text">{Session.get('first_message')}</p> :null
-					}  
+					}
 					</div>
 
 					{this.props.messages.map((message, i) => (
