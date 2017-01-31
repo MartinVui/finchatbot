@@ -9,7 +9,7 @@ export const FormGenerator = new Mongo.Collection('formGenerators');
 Meteor.methods({
 	'formGenerators.insert'(formGenerator){
 		check(formGenerator , FormGeneratorSchema);
-		FormGenerator.insert(formGenerator);
+		return FormGenerator.insert(formGenerator);
 	},
 	'formGenerators.remove'(formGeneratorId){
 		FormGenerator.remove(formGeneratorId);

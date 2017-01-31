@@ -7,7 +7,7 @@ export const Users = new Mongo.Collection("users");
 Meteor.methods({
     'user.insert' () {
         check(user , UserSchema);
-        Users.insert(user);
+        return Users.insert(user);
     },
     'user.remove' (userId){
         check(userId, String);

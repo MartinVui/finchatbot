@@ -9,7 +9,7 @@ Meteor.methods({
 
   'question.insert'(question) {
     check(question, QuestionSchema);
-    Questions.insert(question);
+    return Questions.insert(question);
   },
 
   'question.remove'(questionId) {

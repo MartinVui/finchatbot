@@ -9,7 +9,7 @@ Meteor.methods({
 
   'scenario.insert'(scenario) {
     check(scenario, ScenarioSchema);
-    Scenarios.insert(scenario);
+    return Scenarios.insert(scenario);
   },
 
   'scenario.remove'(scenarioId) {
