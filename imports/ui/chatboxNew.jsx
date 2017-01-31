@@ -10,6 +10,7 @@ import { Questions } from './api/questions.js';
 import { FormGenerators } from './api/formgenerators.js';
 import { Messages } from './api/messages.js';
 
+import scenarioPicker from './processes/scenarioPicker.js';
 import Message from './Message.jsx';
 import MessageForm from './inputs/MessageForm.jsx';
 import MessageList from './MessageList.jsx';
@@ -32,14 +33,15 @@ export default class ChatBox extends Component {
     this.setState({showIntro:false});
 
     // Create User in DB
-
+    var user = Meteor.call('user-insert',{});
     // Choose scenario
-
+    var initScenario = scenarioPicker();
     // Create discussion in DB
+    var discussion = Meteor.call('discussion-insert',{'idUser':user._id});
     // Add discussion id to the session
-
-    // Return scenario id
-
+    Session.set('SessionId' , discussion._id);
+    // Return scenario Id
+    return initScenario;
 	}
 
   nextStep(scenarioId) {
