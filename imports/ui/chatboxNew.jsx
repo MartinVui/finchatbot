@@ -2,16 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Users } from './api/users.js';
+import { Discussions } from './api/discussions.js';
+import { Scenarios } from './api/scenarios.js';
+import { Questions } from './api/questions.js';
+import { FormGenerators } from './api/formgenerators.js';
+import { Messages } from './api/messages.js';
 
-
-import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
-import bloc from '../api/blocs.js';
-
 import MessageForm from './inputs/MessageForm.jsx';
-
 import MessageList from './MessageList.jsx';
+
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class ChatBox extends Component {
 
@@ -47,7 +49,7 @@ export default class ChatBox extends Component {
     // Ask question(s)
 
     // Find formGenerator
-    // Display formGenerator, with idScenario "field"
+    // Display formGenerator, with the idScenario 
 
     // The form subcomponent will use a callback to nextStep with the right scenario
 
