@@ -110,14 +110,15 @@ For the links : LINKhttps://google.comTEXTyoEND
 		matchWord=/(.*)start(.*)/;
 
 		if (text.match(matchWord)) {		// Define the response JSON if there is a match
-			var botResponse = 'Hey! My name is Holly and I am your personal robot assistant';
+			var botResponse = 'Hey! My name is Holly, your personal robot assistant. Give me 5min and I will craft the perfect gadget insurance for you. It’s fast and easy, true story. So, ready to go?';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'What is your name';
 			var quickReplies = [];
-			var input = {"type":"none"};							
+			var input = {"type":"buttons", 
+						"buttons":[{"title": "Sounds good!", "response": "Sounds good! You have my attention Holly"}]};							
 			var dataWrapper = 'DATA';
-			var skip = true;
+			var skip = false;
 			var createData = false;
 		}
 			
@@ -139,20 +140,21 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'What is your name') {
 
-
+		if (text.match(/.*good.*/i)) {
 		
-		var botResponse = 'And you what\'s your name?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Nice to meet you';
-		var skip = false;
-		var input = {'type':'multitext',
-					'inputs': [{'title':'Name', 'createData':'name'},{'title':'Surname', 'createData':'surname'}]
-					};
-		//var input = {'type':'carmake'};
-		var dataWrapper = 'Hello Holly! My name is DATA, nice to meet you';
-		var createData = {"dataName": "name"}; 
+			var botResponse = 'Cool! Let’s start with the beginning. What’s your name?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Nice to meet you';
+			var skip = false;
+			var input = {'type':'multitext',
+						'inputs': [{'title':'Name', 'createData':'name'},{'title':'Surname', 'createData':'surname'}]
+						};
+			//var input = {'type':'carmake'};
+			var dataWrapper = 'My name is DATA, nice to meet you';
+			var createData = {"dataName": "name"}; 
 
+		}
 
 		var json = {
 			"botResponse": botResponse,
@@ -174,7 +176,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var botResponse = 'Great to meet you too '+data['name']+'!';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'How can I help you';
+		var nextBlocID = 'Gadget type';
 		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
@@ -195,17 +197,276 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'How can I help you') {
-
-
+	if (blocName === 'Gadget type') {
 		
-		var botResponse = 'How can I help you today?';
+		var botResponse = 'So, you might be interested in a YouCovered gadget insurance. What type of device would you like to insure? Please use the menu below :SMILE:';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'How can I help you 2';
+		var nextBlocID = 'Gadget age';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'Hot deals', 'response':'Let me see the Hot deals!'},/*{'title':'Locate a store', 'response':'Please help me finding the closest Cell C store Holly'},*/{'title':'Upgrade', 'response':'I would like to upgrade my contract'},{'title':'Recharge', 'response':'I would like to recharge my phone services please Holly'},{'title':'C surance', 'response': 'Hey Holly, I would like to get my new phone insured'}]
+					'buttons': [{'title':'Handset', 'response':'handset'},{'title':'Tablet', 'response':'tablet'},{'title':'Laptop', 'response':'laptop'}]
+					};
+		var dataWrapper = 'My device is a DATA';
+		var createData = {"dataName": "gadget type"};
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget age') {
+		
+		var botResponse = 'Oh, lucky you :SMILE: Those devices are precious, you’re right to get them insured';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Gadget age 2';
+		var skip = true;
+		var input = {'type':'none'};
+		var dataWrapper = 'DATA';
+		var createData = false;
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget age 2') {
+		
+		var botResponse = 'And when did you get this new '+data['gadget type']+'? We only insure device less than 3 months old';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Gadget proof of purchase';
+		var skip = false;
+		var input = {'type':'buttons',
+					'buttons': [{'title':'Less than 3 months ago', 'response':'Quite recently, less than 3 months ago'},{'title':'More than 3 months ago', 'response':'More than 3 months ago'}]
+					};
+		var dataWrapper = 'DATA';
+		var createData = {"dataName": "gadget age"};
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget proof of purchase') {
+
+		if (text.match(/.*less.*/i)) {
+		
+			var botResponse = 'Okay I see. And do you have a proof of purchase? This document is essential to get your device insured';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget value';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons': [{'title':'Yes', 'response':'Yes, I do!'},{'title':'No', 'response':'No, I don\'t...'}]
+						};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		} else {
+
+			var botResponse = 'Sorry, we only insure devices that are less than 3 months old...';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget age';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		}
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget value') {
+
+		if (text.match(/.*yes.*/i)) {
+		
+			var botResponse = 'Great! And could you precise its approximate value please?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget premium';
+			var skip = false;
+			if (data['gadget type'] === 'handset') {
+				var input = {'type':'select',
+						'text':"Select value",
+						"choices": [{"value": "R0 - R1000"},{"value": "R1001 - R2500"},{"value": "R2501 - R5000"},{"value": "R5001 - R7000"},{"value": "R7001 - R9500"},{"value": "R9501 - R12000"},{"value": "R12001 - R15000"}]
+						};
+			} else {
+				var input = {'type':'select',
+						'text':"Select value",
+						"choices": [{"value": "R0 - R750"},{"value": "R751 - R2500"},{"value": "R2501 - R5000"},{"value": "R5001 - R7000"},{"value": "R7001 - R9500"},{"value": "R9501 - R12000"},{"value": "R12001 - R15000"}]
+						};
+			}
+			var dataWrapper = 'Between DATA Holly';
+			var createData = {"dataName": "gadget value"};
+
+		} else {
+
+			var botResponse = 'The proof of purchase is necessary to insure your device... Come back when you have it!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget age';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = {"dataName": "gadget age"};
+
+		}
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget premium') {
+		
+		var botResponse = 'Okay '+data['name']+' I copy that :SMILE: Let me see what premium I can get you...';
+		var image = false;
+		var inReplyto;
+
+		var aRandomNumber = Math.floor(Math.random()*3) +1;
+		if (aRandomNumber === 3) {
+			var nextBlocID = 'Ask weather';
+		} else {
+			var nextBlocID = "Gadget premium 2";
+		}
+		var skip = true;
+		var input = {'type':'none'};
+		var dataWrapper = 'DATA';
+		var createData = false;
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Ask weather') {
+		
+		var botResponse = 'Oh by the way, how’s the weather where you at?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Gadget premium 2';
+		var skip = false;
+		var input = {'type':'buttons',
+					'buttons':[{'title': 'Sunny!', 'response': 'Sunny!'}, {'title': 'Rainy...', 'response': 'Rainy...'}, {'title': 'So so...', 'response': 'So so...'}]};
+		var dataWrapper = 'DATA';
+		var createData = false;
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget premium 2') {
+		
+		var botResponse = 'Okay done, I got you the greatest deal ever. Your monthly premium is only at Rxxp/month. It’s just an estimation '+data['name']+': the cost could vary a little :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Gadget premium 3';
+		var skip = true;
+		var input = {'type':'none'};
+		var dataWrapper = 'DATA';
+		var createData = false;
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget premium 3') {
+		
+		var botResponse = 'And don’t worry, at this price your '+data['gadget type']+' is covered for theft, loss and damage. So '+data['name']+', might you be interested? ';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Gadget interested';
+		var skip = false;
+		var input = {'type':'buttons',
+					'buttons': [{'title': 'Yes', 'response': 'Yes I am interested Holly! Let’s continue!'}, {'title': 'No', 'response': 'No thanks, I am not interested'}]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -225,219 +486,75 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'How can I help you 2') {
+	if (blocName === 'Gadget interested') {
 
-		matchWord1 = /(.*)hot(.*)/i;
-		matchWord2 = /(.*)store(.*)/i;
-		matchWord3 = /(.*)recharge(.*)/i;
-		matchWord4 = /(.*)upgrade(.*)/i;
-		matchWord5 = /(.*)insured(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Ok great! Let me see the latest deals that I can get you...';
+		if (text.match(/.*no.*/i)) {
+		
+			var botResponse = 'Are you sure you want to leave and you are not interested by this quote?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Hot deals';
+			var nextBlocID = 'Gadget finish quote';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons':[{'title': 'Yes', 'response': 'Yes I am sure, good bye!'},{'title': 'No', 'response': 'I changed my mind, let’s finish this quote'}]};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		} else {
+
+			var botResponse = 'Awesome! I just need to quickly create the policy for you.. Let’s do this together it won’t be long. I would need you to re-enter your full name and surname please:';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Create policy';
+			var skip = false;
+			var input = {'type':'multitext'};
+			var dataWrapper = 'My full name is DATA';
+			var createData = false;
+
+		}
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Gadget finish quote') {
+
+		if (text.match(/.*mind.*/i)) {
+		
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget interested';
 			var skip = true;
 			var input = {'type':'none'};
-			var dataWrapper = "DATA";
+			var dataWrapper = 'DATA';
 			var createData = false;
 
-		} else if (text.match(matchWord2)) {
+		} else {
 
-			var botResponse = 'Yes sure, nothing more easy '+data['name']+'!';
+			var botResponse = 'Okay no problem! It was nice to e-meet you '+data['name']+'. Do not hesitate to come back and say hi if you change your mind. Have a good day!';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Find store';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord3)) {
-
-			var botResponse = 'Yes sure, that’s very quick and easy! Just select the your purchase below';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Recharge';
+			var nextBlocID = 'Gadget premium';
 			var skip = false;
-			var input = {"type":'select',
-						'text':"Select your purchase",
-						"choices": [{"value": "Air time"},{"value": "Data bundle"},{"value": "SMS bundle"}]
-						};
-			var dataWrapper = "I would like to buy Cell C DATA please Holly";
-			var createData = false;
-
-		} else if (text.match(matchWord4)) {
-
-			var botResponse = 'Sure no problem '+data['name']+'. In case you don’t know it yet, to be able to do so you must be in your last month contract. Enter your Cell C number below and I will check if that’s your case:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade';
-			var skip = false;
-			var input = {"type":'text'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord5)) {
-
-			var botResponse = 'Yes no problem '+data['name']+'! Let’s process the C-surance quotation, and then you will be able to get crazy! :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'C surance';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		}
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-
-
-
-	if (blocName === 'Hot deals') {
-
-
-
-		var botResponse = 'What about this Iphone 7 32Gb in black?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Hot deals 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Hot deals 2') {
-
-
-		var botResponse = 'IMAGE';
-		var image = 'images/iphone2.png';
-		var inReplyto;
-		var nextBlocID = 'Hot deals 3';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Hot deals 3') {
-
-		var botResponse = 'It is available from only R626 per months over 24 months!';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Hot deals 4';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'I am not a Steeve Job fan.. Show me more hot deals please Holly!'}, {'title':'Go back to menu', 'response':'I want to go back to menu'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Hot deals 4') {
-
-		console.log('hot deals 4')
-
-		matchWord1=/(.*)buy(.*)/i;
-		matchWord2=/(.*)more(.*)/i;
-		matchWord3=/(.*)menu(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default iphone email';
-			var skip = true;
-			var input = {'type':'none'}
-						var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord2)) {
-
-			var botResponse = 'Okay fair enough.. What about this samsung Galaxy S7 Edge Gold then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Hot deals 5';
-			var skip = true;
-			var input = {"type":"none"};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord3)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
 			var createData = false;
 
 		}
 
-		
-		
+
 		var json = {
 			"botResponse": botResponse,
 			"image": image,
@@ -452,19 +569,18 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Hot deals 5') {
-
-
-		var botResponse = 'IMAGE';
-		var image = 'images/samsung2.png';
+	if (blocName === 'Create policy') {
+		
+		var botResponse = 'And your gender is...?';
+		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Hot deals 6';
+		var nextBlocID = 'Ask gender';
 		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
+		var input = {'type':'none'};
+		var dataWrapper = 'DATA';
 		var createData = false;
 
-		
+
 		var json = {
 			"botResponse": botResponse,
 			"image": image,
@@ -479,291 +595,19 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Hot deals 6') {
-
-		var botResponse = 'It is available now and only from R289 per month over 24 months! Unbeatable '+data['name']+'';
+	if (blocName === 'Ask gender') {
+		
+		var botResponse = 'Sorry I am not good with gender :SMILE:';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Hot deals 7';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'Show me more hot deals please Holly!'}, {'title':'Go back to menu', 'response':'I want to go back to menu'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Hot deals 7') {
-
-
-		matchWord1=/(.*)buy(.*)/i;
-		matchWord2=/(.*)more(.*)/i;
-		matchWord3=/(.*)menu(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default samsung email';
-			var skip = true;
-			var input = {'type':'none'}
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord2)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default text';
-			var skip = true;
-			var input = {'type':'none'}
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord3)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		}
-
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-
-	if (blocName === 'Find store') {
-
-		var botResponse = 'Can you enter your address below please and I will tell you where is it :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Find store 2';
-		var skip = false;
-		var input = {'type':'address'}
-		var dataWrapper = "My address is DATA";
-		var createData = false;
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Find store 2') {
-
-		var botResponse = 'Okay cool got it!';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Find store 3';
-		var skip = true;
-		var input = {'type':'none'}
-		var dataWrapper = "DATA";
-		var createData = false;
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Find store 3') {
-
-		var botResponse = 'The closest Cell C branch is only at 10 km from your place, located on 28 Melle St Shop 4, North City House , Braamfontein, Johannesburg 2001';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Find store 4';
-		var skip = true;
-		var input = {'type':'none'}
-		var dataWrapper = "DATA";
-		var createData = false;
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Find store 4') {
-
-		var botResponse = 'Don’t need to rush '+data['name']+', the store is open until 6pm today :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default text';
-		var skip = true;
-		var input = {'type':'none'}
-		var dataWrapper = "DATA";
-		var createData = false;
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-
-
-	if (blocName === 'Recharge') {
-
-		var botResponse = 'Okay let’s do that! Enter the Rand amount you wish to recharge below please';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Recharge 2';
-		var skip = false;
-		var input = {'type':'text'}
-		var dataWrapper = "I would like to recharge for RDATA";
-		var createData = false;
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Recharge 2') {
-
-		var botResponse = 'Okay this correspond to 1h of air time';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Recharge 3';
-		var skip = true;
-		var input = {'type':'none'}
-		var dataWrapper = "DATA";
-		var createData = false;
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Recharge 3') {
-
-		var botResponse = 'Can you please now enter the Cell C number you wish to recharge?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Recharge 4';
-		var skip = false;
-		var input = {'type':'text'}
-		var dataWrapper = "The Cell C number I want to recharge is DATA";
-		var createData = false;
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Recharge 4') {
-
-		var botResponse = 'Okay cool! Do you want to load the 1h air time now?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default text email';
+		var nextBlocID = 'Get email';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons':[{'title':'Load now', 'response': 'Load now!'}, {'title':'Later', 'response':'Load later'}]}
-		var dataWrapper = "DATA";
-		var createData = false;
-		
-		
+						'buttons':[{'title': 'Male', 'response': 'I\'m a male'},{'title': 'Female', 'response': 'I\'m a female'}]};
+		var dataWrapper = 'DATA';
+		var createData = {"dataName": "gender"};
+
+
 		var json = {
 			"botResponse": botResponse,
 			"image": image,
@@ -778,1841 +622,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-
-
-	if (blocName === 'Default text') {
-
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself..  So that’s all for me today';
+	if (blocName === 'Get email') {
+		
+		var botResponse = 'I knew it '+data['name']+'! Can I get your email address please?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Default text 2';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'You are cool anyway Holly', 'response':'You are cool anyway Holly'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default text 2') {
-
-		var botResponse = 'Oh sweet, thanks '+data['name']+'! Glad you recognize my potential for your business just with this simple demo of myself :SMILE:  We can achieve great things together :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'How can I help you';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Go back to menu', 'response':'I would like to go back to menu'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-
-	if (blocName === 'Default text email') {
-
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself..  So that’s all for me today';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default text email 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default text email 2') {
-
-		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through Cell C website! Sounds good?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default text email 3';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default text email 3') {
-
-		if (text.match(/(.*)no(.*)/i)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'What’s your e-mail address then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default text email 4';
-			var skip = false;
-			var input = {"type":'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName':'email'};
-
-		}
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default text email 4') {
-
-		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
-
-		if (text.match(matchWord0)) {
-		
-			var botResponse = 'Is your e-mail address '+data['email']+'? Do you confirm?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default text email 5';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
-						};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else {
-			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default text email 4';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Default text email 5') {
-
-		matchWord1 = /(.*)yes(.*)/i;
-
-		if (text.match(matchWord1)) {
-		
-			var botResponse = 'Okay perfect! I have just sent you an e-mail with all the details of the offer, enjoy :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons':[{'title':'Go back to menu', 'response': 'I would like to go back to menu'}]};
-			var dataWrapper = "DATA";
-			var createData = false;
-			var sendEmail = "airtime";
-			
-		
-		} else {
-
-			var botResponse = 'Ok, can you give it again?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default text email 4';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-			"sendEmail": sendEmail,
-		};
-
-		
-		return json;
-	}
-
-
-
-	if (blocName === 'Default samsung email') {
-
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default samsung email 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default samsung email 2') {
-
-		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through Cell C website! Sounds good?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default samsung email 3';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default samsung email 3') {
-
-		if (text.match(/(.*)no(.*)/i)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'What’s your e-mail address then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default samsung email 4';
-			var skip = false;
-			var input = {"type":'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName':'email'};
-
-		}
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default samsung email 4') {
-
-		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
-
-		if (text.match(matchWord0)) {
-		
-			var botResponse = 'Is your e-mail address '+data['email']+'? Do you confirm?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default samsung email 5';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
-						};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else {
-			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default samsung email 4';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Default samsung email 5') {
-
-		matchWord1 = /(.*)yes(.*)/i;
-
-		if (text.match(matchWord1)) {
-		
-			var botResponse = 'Okay perfect! I have just sent you an e-mail with all the details of the offer, enjoy :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons':[{'title':'Go back to menu', 'response': 'I would like to go back to menu'}]};
-			var dataWrapper = "DATA";
-			var createData = false;
-			var sendEmail = "samsung";
-			
-		
-		} else {
-
-			var botResponse = 'Ok, can you give it again?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default samsung email 4';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-			"sendEmail": sendEmail,
-		};
-
-		
-		return json;
-	}
-
-
-
-	if (blocName === 'Default iphone email') {
-
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default iphone email 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default iphone email 2') {
-
-		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through Cell C website! Sounds good?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Default iphone email 3';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title':'Yes', 'response': 'Sounds great let’s do this Holly!'}, {'title': 'No','response':'No'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default iphone email 3') {
-
-		if (text.match(/(.*)no(.*)/i)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'What’s your e-mail address then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default iphone email 4';
-			var skip = false;
-			var input = {"type":'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName':'email'};
-
-		}
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Default iphone email 4') {
-
-		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
-
-		if (text.match(matchWord0)) {
-		
-			var botResponse = 'Is your e-mail address '+data['email']+'? Do you confirm?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default iphone email 5';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
-						};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		
-		} else {
-			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default iphone email 4';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'Default iphone email 5') {
-
-		matchWord1 = /(.*)yes(.*)/i;
-
-		if (text.match(matchWord1)) {
-		
-			var botResponse = 'Okay perfect! I have just sent you an e-mail with all the details of the offer, enjoy :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {'type':'buttons',
-						'buttons':[{'title':'Go back to menu', 'response': 'I would like to go back to menu'}]};
-			var dataWrapper = "DATA";
-			var createData = false;
-			var sendEmail = "iphone";
-			
-		
-		} else {
-
-			var botResponse = 'Ok, can you give it again?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Default iphone email 4';
-			var skip = false;
-			var input = {'type':'text'};
-			var dataWrapper = "DATA";
-			var createData = {'dataName': 'email'};
-			
-		}
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-			"sendEmail": sendEmail,
-		};
-
-		
-		return json;
-	}
-
-
-	if (blocName === 'Upgrade') {
-
-		if (text.match(/(\D)*/)) {
-
-
-			var botResponse = 'All good '+data['name']+'! Your contract expire in exactly 25 days. Good time for upgrading :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade 2';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'I don\'t think this is a phone number, can you give it again please?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade';
-			var skip = false;
-			var input = {"type":'text'};
-			var dataWrapper = "DATA";
-			var createData = false;
-		}
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade 2') {
-
-
-		var botResponse = 'So what’s next, would you like to keep the same contract and renew it or you want me to help you upgrade/modify as you wish?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade 3';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Renew same!', 'response': 'Renew same!'}, {'title':'Let’s get crazy Holly!', 'response': 'You get it Holly!'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade 3') {
-
-		matchWord1 = /(.*)renew(.*)/i
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Okay '+data['name']+', almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade contract 2';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-			
-			var json = {
-				"botResponse": botResponse,
-				"image": image,
-				"inReplyTo": inReplyto,
-				"nextBlocID": nextBlocID,
-				"input": input,
-				"skip": skip,
-				"dataWrapper": dataWrapper,
-				"createData": createData,
-			};
-
-		} else {
-
-			var botResponse = 'Okay let’s do this '+data['name']+'!';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade new contract';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-			
-			var json = {
-				"botResponse": botResponse,
-				"image": image,
-				"inReplyTo": inReplyto,
-				"nextBlocID": nextBlocID,
-				"input": input,
-				"skip": skip,
-				"dataWrapper": dataWrapper,
-				"createData": createData,
-			};
-
-		}
-
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade new contract') {
-
-
-		var botResponse = 'Ah yes before starting, I see that your contract currently includes 20 min air time, 100 SMS and 1GB of data per month, for a kickass price of R200/month. Just saying :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade new contract 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-			
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade new contract 2') {
-
-
-		var botResponse = 'Okay so, let’s start with the monthly air time. How much would you like to get?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade new contract 3';
-		var skip = false;
-		var input = {"type":'select',
-					'text':"Select air time",
-					"choices": [{"value": "No air time"},{"value": "10 minutes"},{"value": "20 minutes"},{"value": "1 hour"},{"value": "2 hours"}]
-					};
-		var dataWrapper = "DATA sounds cool!";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade new contract 3') {
-
-
-		var botResponse = 'Okay I copy that. Select no your monthly data bundle:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade new contract 4';
-		var skip = false;
-		var input = {"type":'select',
-					'text':"Select data bundle",
-					"choices": [{"value": "60 MB"},{"value": "200 MB"},{"value": "500 MB"},{"value": "1 GB"},{"value": "2 GB"},{"value": "5 GB"}]
-					};
-		var dataWrapper = "DATA please Holly!";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade new contract 4') {
-
-
-		var botResponse = 'Yes let’s do that. And maybe some SMS to text-keep in touch with your mates?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade contract';
-		var skip = false;
-		var input = {"type":'select',
-					'text':"Select amount of SMS",
-					"choices": [{"value": "Nope!"},{"value": "50 SMS"},{"value": "100 SMS"},{"value": "200 SMS"},{"value": "500 SMS"}]
-					};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade contract') {
-
-
-		var botResponse = 'Okay '+data['name']+', almost done. Don’t miss the opportunity to subscribe to some value added services :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade contract 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade contract 2') {
-
-
-		var botResponse = 'This includes itemised Billing, receiving your cellular bill statements via e-mail, data bundles, C Surance or SMS bundles etc.. Interested?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade contract 3';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool!'},{'title': 'No', 'response': 'No thanks Holly'},{'title': 'C Surance? What is that?', 'response': 'C Surance?'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade contract 3') {
-
-		matchWord1 = /(.*)cool(.*)/i;
-		matchWord2 = /(.*)no(.*)/i;
-		matchWord3 = /(.*)Surance(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Sure! Please check below the features you would like to add to your contract:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade contract length';
-			var skip = false;
-			var input = {"type":"checkbox",
-						"checks":[{"value": "Bill statements via e-mail"},{"value":"Itemised billing"},{"value":"C Surance"}],
-						}
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if(text.match(matchWord2)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade contract length';
-			var skip = true;
-			var input = {"type": 'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if(text.match(matchWord3)) {
-
-			var botResponse = 'C Surance is Cell C cover against theft, accidental physical loss and accidental physical damage';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade C Surance';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-			
-		}
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade C Surance') {
-
-
-		var botResponse = 'So? Do you want to add features to your contract?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade contract 3';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool'},{'title': 'No', 'response': 'No thanks Holly'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade contract length') {
-
-
-		var botResponse = 'Okay. Now please select your contract length';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade phone';
-		var skip = false;
-		var input = {"type":'select',
-					'text':"Select length",
-					"choices": [{"value": "6 months"},{"value": "12 months"},{"value": "18 months"},{"value": "24 months"}]
-					};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade phone') {
-
-
-		var botResponse = 'Glad to see you’re keen to stay with us for that long :SMILE:. Now the most exciting part.. Let’s select your new phone!! Tell me more about your wishes, any specific features/brand';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade chose phone';
-		var skip = false;
-		var input = {"type":"checkbox",
-						"checks":[{"value": "Iphone"},{"value":"Samsung"},{"value":"HD camera"},{"value":"4G"},{"value":"No"}],
-					}
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-	if (blocName === 'Upgrade chose phone') {
-
-
-
-		var botResponse = 'What about this Iphone 7 32Gb in black?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade chose phone 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade chose phone 2') {
-
-
-		var botResponse = 'IMAGE';
-		var image = 'images/iphone2.png';
-		var inReplyto;
-		var nextBlocID = 'Upgrade chose phone 3';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade chose phone 3') {
-
-		var botResponse = 'It is available from only R626 per months over 24 months!';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade chose phone 4';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'I am not a Steeve Job fan.. Show me more hot deals please Holly!'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade chose phone 4') {
-
-		console.log('Upgrade chose phone 4')
-
-		matchWord1=/(.*)buy(.*)/i;
-		matchWord2=/(.*)more(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade buy phone';
-			var skip = true;
-			var input = {'type':'none'}
-						var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord2)) {
-
-			var botResponse = 'Okay fair enough.. What about this samsung Galaxy S7 Edge Gold then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade chose phone 5';
-			var skip = true;
-			var input = {"type":"none"};
-			var dataWrapper = "DATA";
-			var createData = false;
-		}
-
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade chose phone 5') {
-
-
-		var botResponse = 'IMAGE';
-		var image = 'images/samsung2.png';
-		var inReplyto;
-		var nextBlocID = 'Upgrade chose phone 6';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade chose phone 6') {
-
-		var botResponse = 'It is available now and only from R289 per month over 24 months! Unbeatable '+data['name']+'';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade chose phone 7';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Buy it now!', 'response':'I\'d like to buy it now!'}, {'title':'More hot deals', 'response':'Show me more hot deals please Holly!'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade chose phone 7') {
-
-
-		matchWord1=/(.*)buy(.*)/i;
-		matchWord2=/(.*)more(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade buy phone';
-			var skip = true;
-			var input = {'type':'none'}
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord2)) {
-
-			var botResponse = '';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade chose phone';
-			var skip = true;
-			var input = {'type':'none'}
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		}
-
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-	if (blocName === 'Upgrade buy phone') {
-
-		var botResponse = 'Done, this phone is yours '+data['name']+'!';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade buy phone 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade buy phone 2') {
-
-		var botResponse = 'Do you want me to ship it to you (4-6 days) or if you can’t wait that long you can pick it up at our closest Cell C store!';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade buy phone 3';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Home delivery', 'response':'Home delivery'}, {'title':'I want to pick it up, it\'s mine', 'response':'I don’t wait that long Holly, please indicate me where is the closest Cell C store'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade buy phone 3') {
-
-
-		matchWord1=/(.*)home(.*)/i;
-		matchWord2=/(.*)store(.*)/i;
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Ok! For this I would need your address, can you please type it here:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade ship phone';
-			var skip = false;
-			var input = {'type':'address'}
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord2)) {
-
-			var botResponse = 'No worries! That’s simple, enter your address below and I will let you know the closest Cell C store where you will be able to fetch your new phone';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'Upgrade locate store';
-			var skip = false;
-			var input = {'type':'address'}
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		}
-
-		
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade ship phone') {
-
-		var botResponse = 'All good, the shipping time is estimated at 4/5 days';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade ship phone 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade ship phone 2') {
-
-		var botResponse = 'To finalise the offer, just give me your e-mail address and I will send you a summary of your new cellular offer and a link to set the payment up. Simple and efficient! :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade ship phone 3';
-		var skip = false;
-		var input = {"type":'text'};
-		var dataWrapper = "DATA";
-		var createData = false;
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-			"sendEmail": sendEmail,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade ship phone 3') {
-
-		var botResponse = 'Perfect Name! Check your mail box :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'How can I help you?';
-		var skip = false;
-		var input = {"type":'buttons', 
-					"buttons":[{'title': 'Go back to menu', 'response': 'I want to go back to menu'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-		var sendEmail = "iphone";
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-			"sendEmail": sendEmail,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'Upgrade locate store') {
-
-		var botResponse = 'To finalise the offer, just give me your e-mail address and I will send you a summary of your new cellular offer and a link to set the payment up. Simple and efficient! :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Upgrade ship phone 3';
-		var skip = false;
-		var input = {"type":'text'};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-
-
-	if (blocName === 'C surance') {
-
-		var botResponse = 'Before starting anything, can you please tell me when did you get this new phone?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance 2';
-		var skip = false;
-		var input = {"type":'buttons', 
-					'buttons':[{'title':'Less than 3 months','response': 'I got my phone less than 3 months ago'}, {'title': 'More than 3 months','response': 'I gotmy phone morethan 3 months ago'}]};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance 2') {
-
-		matchWord1 = /(.*)more(.*)/i;
-		matchWord2 = /(.*)less(.*)/i;
-
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Unfortunately, we only insure your phone if it has been bought less than 3 months ago... What do you want to do?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {"type":'buttons',
-					'buttons':[{'title':'Go back to menu', 'response':'I would like to go back to menu'}]};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else if (text.match(matchWord2)) {
-
-			var botResponse = 'Okay great! We only insure your phone if it has been bought less than 3 months ago. Tell me more about your phone now, what’s the make?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'C surance phone make';
-			var skip = false;
-			var input = {"type":'select',
-						'text':"Select your purchase",
-						"choices": [{"value": "Samsung"},{"value": "Apple"},{"value": "Huawei"},{"value": "LG"},{"value": "Cat"},{"value": "Cell C"},{"value": "LTE"},{"value": "Other"}]
-						};
-			var dataWrapper = "My phone is a DATA";
-			var createData = false;
-
-		}
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance phone make') {
-
-		matchWord1 = /(.*)other(.*)/i;
-
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Can you specify the make then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'C surance phone make';
-			var skip = false;
-			var input = {"type":'text'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'Okay and what is the model? Please enter the model in the field below';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'C surance phone value';
-			var skip = false;
-			var input = {"type":'text'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		}
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance phone value') {
-
-		var botResponse = 'Okay that’s a nice one, you\'re lucky :SMILE: Could you please specify the device value? Find the best price interval below';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance 3';
-		var skip = false;
-		var input = {"type":'select',
-						'text':"Select phone value",
-						"choices": [{"value": "Up to R1000"},{"value": "R1001 - R2500"},{"value": "R2501 - R5000"},{"value": "R5001 - R7500"},{"value": "R7501 - R10000"},{"value": "R10001 - R15000"},{"value": "R15001 - R20000"},{"value": "More than R20000"}]
-						};
-		var dataWrapper = "DATA";
-		var createData = {'dataName':'phone value'};
-	
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance 3') {
-
-		var botResponse = 'All good '+data['name']+', I copy that! Hmmm, let me see what I can get you...';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance 4';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-	
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance 4') {
-
-		if (data['phone value'] === 'Up to R1000') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R35/month!';
-		} else if (data['phone value'] === 'R1001 - R2500') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R45/month!';
-		} else if (data['phone value'] === 'R2501 - R5000') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R69/month!';
-		} else if (data['phone value'] === 'R5001 - R7500') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R119/month!';
-		} else if (data['phone value'] === 'R7501 - R10000') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R149/month!';
-		} else if (data['phone value'] === 'R10001 - R15000') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R189/month!';
-		} else if (data['phone value'] === 'R15001 - R20000') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R239/month!';
-		} else if (data['phone value'] === 'More than R20000') {
-			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R375/month!';
-		} else 
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance 5';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-	
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance 5') {
-
-		var botResponse = 'And at this price, we cover accidental physical loss, theft or accidental physical damage of your mobile equipment and loss of SIM card, as long as the two are used together! Is that not crazy '+data['name']+'?!';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance TCs';
-		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title': 'I am in Holly, let’s proceed!', 'response': 'I am in Holly, let’s proceed!'}, {'title': 'Not interested', 'response': 'I\'m not interested, sorry'}]
-					};
-		var dataWrapper = "DATA";
-		var createData = false;
-	
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance TCs') {
-
-		matchWord1 = /(.*)proceed(.*)/i
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Sure let’s do that! Before proceeding, would you like to see the T&Cs? I can show them to you now but don’t worry, I will send them to you via email anyway';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'C surance TCs 2';
-			var skip = false;
-			var input = {"type":'buttons',
-						'buttons':[{'title': 'Yes', 'response': 'Yes Holly, show me the T&Cs'}, {'title': 'No', 'response': 'Thanks but I\'ll read them later!'}]
-						};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'What do you want to do then?';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'How can I help you';
-			var skip = false;
-			var input = {"type":'buttons',
-					'buttons':[{'title':'Go back to menu', 'response':'I would like to go back to menu'}]};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		}
-	
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance TCs 2') {
-
-		matchWord1 = /(.*)yes(.*)/i
-
-		if (text.match(matchWord1)) {
-
-			var botResponse = 'Ok! You can find our terms and conditions on this link: thelink.com';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'C surance TCs 2';
-			var skip = true;
-			var input = {"type":'none'};
-			var dataWrapper = "DATA";
-			var createData = false;
-
-		} else {
-
-			var botResponse = 'Almost done, I just need to quickly create the policy for you.. I would need you to re-enter your full name and surname please:';
-			var image = false;
-			var inReplyto;
-			var nextBlocID = 'C surance email';
-			var skip = false;
-			var input = {"type":'multitext'};
-			var dataWrapper = "I already toldyou that Holly! My name is DATA";
-			var createData = false;
-
-		}
-	
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === 'C surance email') {
-
-
-		var botResponse = 'I know but I prefer to double check :SMILE: What about your email address?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance email 2';
+		var nextBlocID = 'Get email 2';
 		var skip = false;
 		var input = {"type":'text'};
 		var dataWrapper = "My email address is DATA";
@@ -2633,7 +648,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance email 2') {
+	if (blocName === 'Get email 2') {
 
 		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
 
@@ -2642,7 +657,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Is your e-mail address '+data['email']+'? Do you confirm?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance email 3';
+			var nextBlocID = 'Get email 3';
 			var skip = false;
 			var input = {'type':'buttons',
 						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
@@ -2655,7 +670,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance email 2';
+			var nextBlocID = 'Get email 2';
 			var skip = false;
 			var input = {'type':'text'};
 			var dataWrapper = "DATA";
@@ -2678,16 +693,16 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance email 3') {
+	if (blocName === 'Get email 3') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
 		if (text.match(matchWord1)) {
 		
-			var botResponse = 'Good! Now can you please enter your Cell C phone number?';
+			var botResponse = 'Good! Now can you please enter your phone number?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance phone number 1';
+			var nextBlocID = 'Get phone number 1';
 			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "DATA";
@@ -2699,7 +714,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Ok, can you give it again?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance email 2';
+			var nextBlocID = 'Get email 2';
 			var skip = false;
 			var input = {'type':'text'};
 			var dataWrapper = "DATA";
@@ -2716,20 +731,19 @@ For the links : LINKhttps://google.comTEXTyoEND
 			"skip": skip,
 			"dataWrapper": dataWrapper,
 			"createData": createData,
-			"sendEmail": sendEmail,
 		};
 
 		
 		return json;
 	}
 
-	if (blocName === 'C surance phone number 1') {
+	if (blocName === 'Get phone number 1') {
 
 		
 		var botResponse = 'Is your phone number '+data['phone number']+'? Do you confirm?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance phone number 2';
+		var nextBlocID = 'Get phone number 2';
 		var skip = false;
 		var input = {'type':'buttons',
 					'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
@@ -2753,32 +767,16 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance phone number 2') {
+	if (blocName === 'Get phone number 2') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
 		if (text.match(matchWord1)) {
 		
-			if (data['phone value'] === 'Up to R1000') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R35/month!';
-			} else if (data['phone value'] === 'R1001 - R2500') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R45/month!';
-			} else if (data['phone value'] === 'R2501 - R5000') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R69/month!';
-			} else if (data['phone value'] === 'R5001 - R7500') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R119/month!';
-			} else if (data['phone value'] === 'R7501 - R10000') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R149/month!';
-			} else if (data['phone value'] === 'R10001 - R15000') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R189/month!';
-			} else if (data['phone value'] === 'R15001 - R20000') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R239/month!';
-			} else if (data['phone value'] === 'More than R20000') {
-				var botResponse = 'Okay everything is perfect for me! :SMILE: As said previously, I am glad to confirm you that the monthly premium will be R375/month!';
-			} else 
+			var botResponse = 'Thank you '+data['name']+'. Almost done, don’t worry :SMILE:';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance payment';
+			var nextBlocID = 'Get ID';
 			var skip = true;
 			var input = {"type":'none'};
 			var dataWrapper = "DATA";
@@ -2790,7 +788,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Ok, can you give it again?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance phone number 1';
+			var nextBlocID = 'Get phone number 1';
 			var skip = false;
 			var input = {'type':'text'};
 			var dataWrapper = "DATA";
@@ -2807,23 +805,139 @@ For the links : LINKhttps://google.comTEXTyoEND
 			"skip": skip,
 			"dataWrapper": dataWrapper,
 			"createData": createData,
-			"sendEmail": sendEmail,
 		};
 
 		
 		return json;
 	}
 
-	if (blocName === 'C surance payment') {
+	if (blocName === 'Get ID') {
 
 		
-		var botResponse = 'Do you want to process the payment now?';
+		var botResponse = 'To finilize the insurance policy, I would need your South African ID number. Please enter only the 13 digits below';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 2';
+		var nextBlocID = 'Get ID 2';
+		var skip = false;
+		var input = {'type':'text'};
+		var dataWrapper = "My South African ID number is DATA";
+		var createData = {"dataName": "ID"};
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Get ID 2') {
+
+		matchWord0=/[0-9A-Za-z]{13}/i;
+
+		if (text.match(matchWord0)) {
+		
+			var botResponse = 'Is your ID number '+data['ID']+'? Do you confirm?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get ID 3';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
+						};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+			var botResponse = 'I\'m sorry, this is not a 13 digits ID number. Can you give it again please?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get ID 2';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = "My South African ID number is DATA";
+			var createData = {'dataName': 'ID'};
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Get ID 3') {
+
+		matchWord1 = /(.*)yes(.*)/i;
+
+		if (text.match(matchWord1)) {
+		
+			var botResponse = 'All good '+data['name']+', I have everything I need to complete your YouCovered Gadget insurance policy';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get policy';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+
+			var botResponse = 'Ok, can you give it again?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get ID 2';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = "My South African ID number is DATA";
+			var createData = {'dataName': 'ID'};
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Get policy') {
+
+		
+		var botResponse = 'Before taking any decision, would you like to see the T&Cs? I can show them to you now but don’t worry I will send it to you via email anyway if ever you subscribe to this policy :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'T&Cs';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'Yes', 'response':'Yes, let\'s do it'},{'title':'No', 'response':'I prefer to do it later on'}]
+					'buttons': [{'title':'Yes', 'response':'Please show it to me'},{'title':'No', 'response':'No thanks'}]
 					};
 		var dataWrapper = "DATA";
 		var createData = false;
@@ -2844,31 +958,110 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 2') {
+	if (blocName === 'T&Cs') {
 
-		if (text.match(/.*yes.*/i)) {
+		matchWord1 = /(.*)show(.*)/i;
+
+		if (text.match(matchWord1)) {
 		
-			var botResponse = 'Let’s do this! You have 2 solutions:';
+			var botResponse = 'Here we go. You can find the T&Cs by clicking on this LINKhttp://www.youcovered.co.za/forms/gadget/You-Covered-Gadget-Insurance-v2.pdfTEXTlinkEND: ';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance payment 3';
+			var nextBlocID = 'T&Cs';
 			var skip = true;
-			var input = {'type':'none'};
+			var input = {"type":'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
-
+			
+		
 		} else {
 
-			var botResponse = 'Okay sure! I just sent you an e-mail with all the details of your policy and with a link to process the payment. Do not hesitate to keep in touch with us! Have a nice day '+data['name']+'!';
+			var botResponse = 'Okay cool! So '+data['name']+', you know everything. Would you like to subscribe to this YouCovered insurance now?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'How can I help you?';
+			var nextBlocID = 'Legal stuff';
 			var skip = false;
-			var input = {"type":'buttons', 
-					"buttons":[{'title': 'Go back to menu', 'response': 'I want to go back to menu'}]};
+			var input = {'type':'buttons',
+						'buttons': [{'title':'Process payment', 'response':'Process payment'},{'title':'No thanks', 'response':'No thanks'}]
+						};
+			var dataWrapper = "DATA";
+			var createData = {'dataName': 'ID'};
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Legal stuff') {
+
+		matchWord1 = /(.*)process(.*)/i;
+
+		if (text.match(matchWord1)) {
+		
+			var botResponse = 'Before proceeding to the payment, I need to check a few thing...';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Legal stuff 2';
+			var skip = true;
+			var input = {"type":'none'};
 			var dataWrapper = "DATA";
 			var createData = false;
+			
+		
+		} else {
+
+			var botResponse = 'Are you sure you want to leave and you are not interested by this quote?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget no payment';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons':[{'title': 'Yes', 'response': 'Yes I am sure, good bye!'},{'title': 'No', 'response': 'I changed my mind, let’s finish this quote'}]};
+			var dataWrapper = 'DATA';
+			var createData = false;
+			
 		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Legal stuff 2') {
+
+		
+		var botResponse = 'Do you confirm that you have an official proof ofpurchase, that your gadget is less than 3 months old, and that you have read the LINKhttp://www.youcovered.co.za/forms/gadget/You-Covered-Gadget-Insurance-v2.pdfTEXTT&CsEND';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Legal stuff 3';
+		var skip = false;
+		var input = {"type":"checkbox",
+						"checks":[{"value":"I have a proof of purchase"},{"value":"My gadget is less than 3 months old"},{"value":"I have read the T&Cs"}],
+						}
+			var dataWrapper = 'I confirm that DATA';
+		var createData = false;
 			
 
 		var json = {
@@ -2886,13 +1079,216 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 3') {
+	if (blocName === 'Legal stuff 3') {
+
+		matchWord1 = /(.*)proof.*months.*T&Cs.*/i;
+
+		if (text.match(matchWord1)) {
+		
+			var botResponse = 'Cool thanks!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Process payment';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+
+			var botResponse = 'Sorry I really need you to confirm these points to process the payment... Do you want to cancel the quote?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Legal stuff 4';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons':[{'title': 'No', 'response': 'No, I want to continue'},{'title': 'Yes', 'response': 'Yes, cancel the quote...'}]};
+			var dataWrapper = 'DATA';
+			var createData = false;
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Legal stuff 4') {
+
+		matchWord1 = /(.*)no.*/i;
+
+		if (text.match(matchWord1)) {
+		
+			var botResponse = 'Ok let\'s do it again then!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Legal stuff 2';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+
+			var botResponse = 'Okay no problem! It was nice to e-meet you '+data['name']+'. Do not hesitate to come back and say hi if you change your mind. Have a good day!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget premium';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Payment') {
+
+		matchWord1 = /(.*)process(.*)/i;
+
+		if (text.match(matchWord1)) {
+		
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Process payment';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+
+			var botResponse = 'Are you sure you want to leave and you are not interested by this quote?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget no payment';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons':[{'title': 'Yes', 'response': 'Yes I am sure, good bye!'},{'title': 'No', 'response': 'I changed my mind, let’s finish this quote'}]};
+			var dataWrapper = 'DATA';
+			var createData = false;
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Gadget no payment') {
+
+		if (text.match(/.*mind.*/i)) {
+		
+			var botResponse = '';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Legal stuff';
+			var skip = true;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		} else {
+
+			var botResponse = 'Okay no problem! It was nice to e-meet you '+data['name']+'. Do not hesitate to come back and say hi if you change your mind. Have a good day!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Gadget premium';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		}
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Process payment') {
+		
+		var botResponse = 'Let’s do this! You have 2 solutions:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Process payment 2';
+		var skip = true;
+		var input = {'type':'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Process payment 2') {
 
 		
 		var botResponse = '1/ Credit card: it’s immediate and your insurance will be activated immediately';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 4';
+		var nextBlocID = 'Process payment 3';
 		var skip = true;
 		var input = {'type':'none'};
 		var dataWrapper = "DATA";
@@ -2914,13 +1310,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 4') {
+	if (blocName === 'Process payment 3') {
 
 		
 		var botResponse = '2/ Debit order: we had this policy to your existing monthly contract. Your cover will be activated as soon as the next monthly payment will be received';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 5';
+		var nextBlocID = 'Process payment 4';
 		var skip = true;
 		var input = {'type':'none'};
 		var dataWrapper = "DATA";
@@ -2942,13 +1338,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 5') {
+	if (blocName === 'Process payment 4') {
 
 		
 		var botResponse = 'Which option would you prefer?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 6';
+		var nextBlocID = 'Process payment 5';
 		var skip = false;
 		var input = {'type':'buttons',
 					'buttons':[{'title': 'Credit Card', 'response': 'I\'d like to pay by credit card'}, {'title': 'Debit Order', 'response': 'I\'d like to pay by debit order'}]};
@@ -2971,14 +1367,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 6') {
+	if (blocName === 'Process payment 5') {
 
 		if (text.match(/.*card.*/i)) {
 			
 			var botResponse = 'Ok fine '+data['name']+', I have to gather information to proceed to the payment. Don’t worry, all our converstion is encrypted and completely safe and secure';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance card payment';
+			var nextBlocID = 'Card payment';
 			var skip = true;
 			var input = {'type':'none'};
 			var dataWrapper = "DATA";
@@ -2986,10 +1382,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 		} else {
 
-			var botResponse = 'Roger that Name! You will receive a confirmation on your email address shortly :SMILE:';
+			var botResponse = 'Ok fine '+data['name']+', I have to gather information to proceed to the payment. Don’t worry, all our converstion is encrypted and completely safe and secure';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance debit order';
+			var nextBlocID = 'Debit order';
 			var skip = true;
 			var input = {'type':'none'};
 			var dataWrapper = "DATA";
@@ -3012,13 +1408,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment') {
+	if (blocName === 'Card payment') {
 
 		
 		var botResponse = 'First of all, what is your card type?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance card payment 2';
+		var nextBlocID = 'Card payment 2';
 		var skip = false;
 		var input = {"type":'select',
 						'text':"Select card type",
@@ -3043,13 +1439,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment 2') {
+	if (blocName === 'Card payment 2') {
 
 		
 		var botResponse = 'Perfect. The first step is done! Now, can you please enter you card number?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance card payment 3';
+		var nextBlocID = 'Card payment 3';
 		var skip = false;
 		var input = {"type":'text'};
 		var dataWrapper = "My card number is DATA";
@@ -3071,14 +1467,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment 3') {
+	if (blocName === 'Card payment 3') {
 
 		if (text.match(/([0-9]{4}\s*){4}/)) {
 		
 			var botResponse = 'Got it! We almost done :SMILE: Can you please enter the name on the card?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance card payment 4';
+			var nextBlocID = 'Card payment 4';
 			var skip = false;
 			var input = {"type":'multitext'};
 			var dataWrapper = "The name on the card is DATA";
@@ -3113,13 +1509,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment 4') {
+	if (blocName === 'Card payment 4') {
 
 				
 		var botResponse = 'Last but not least: can you please enter your CCV Number? (The 3 digit code at the back of your card)';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance accept card payment';
+		var nextBlocID = 'Accept card payment';
 		var skip = false;
 		var input = {"type":'text'};
 		var dataWrapper = "My CCV number is DATA";
@@ -3141,17 +1537,31 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance accept card payment') {
+	if (blocName === 'Accept card payment') {
 
+		if (text.match(/.*[0-9]{3}.*/)) {
 		
-		var botResponse = 'That is perfect '+data['name']+', let me few seconds to proceed to the payment. You might be redirected toward your bank website to confirm the payment';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance accept card payment 2';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
+			var botResponse = 'That is perfect '+data['name']+', let me few seconds to proceed to the payment. You might be redirected toward your bank website to confirm the payment';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Accept card payment 2';
+			var skip = true;
+			var input = {"type":'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		} else {
+
+			var botResponse = 'I don\'t think this is a CCV number. Can you type it again?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Accept card payment';
+			var skip = false;
+			var input = {"type":'text'};
+			var dataWrapper = "DATA";
+			var createData = false;
+
+		}
 			
 
 		var json = {
@@ -3169,44 +1579,15 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance accept card payment 2') {
-
-		
-		var botResponse = 'That is perfect '+data['name']+', let me few seconds to proceed to the payment. You might be redirected toward your bank website to confirm the payment';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'C surance accept card payment 3';
-		var skip = true;
-		var input = {"type":'none'};
-		var dataWrapper = "DATA";
-		var createData = false;
-			
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,			
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		
-		return json;
-	}
-
-	if (blocName === 'C surance accept card payment 3') {
+	if (blocName === 'Accept card payment 2') {
 
 		
 		var botResponse = 'I hope I helped you '+data['name']+', see you soon! :SMILE:';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'How can I help you?';
+		var nextBlocID = 'Gadget type';
 		var skip = false;
-		var input = {"type":'buttons', 
-				"buttons":[{'title': 'Go back to menu', 'response': 'I want to go back to menu'}]};
+		var input = {"type":'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
 			
@@ -3226,16 +1607,46 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance debit order') {
+	if (blocName === 'Debit order') {
 
 		
-		var botResponse = 'What do you want to do now?';
+		var botResponse = 'First of all, can you please find your bank in the tab below? :SMILE:';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'How can I help you';
+		var nextBlocID = 'Debit order 2';
 		var skip = false;
-		var input = {"type":'buttons',
-					'buttons':[{'title':'Go back to menu', 'response':'I would like to go back to menu'}]};
+		var input = {'type':'select',
+						'text':"Select your bank",
+						"choices": [{"value": "Standard Bank"},{"value": "ABSA"},{"value": "NedBank"},{"value": "Capitec"},{"value": "First National Bank"}]
+						};
+		var dataWrapper = "My bank is DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Debit order 2') {
+
+		
+		var botResponse = 'Okay great! That’s a good one, good choice';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Debit order 3';
+		var skip = true;
+		var input = {'type':'none'};
 		var dataWrapper = "DATA";
 		var createData = false;
 			
@@ -3255,6 +1666,147 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
+	if (blocName === 'Debit order 3') {
 
+		
+		var botResponse = 'And what is the account holder’s name then? :SMILE:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Debit order 4';
+		var skip = false;
+		var input = {"type":'multitext'};
+		var dataWrapper = "The account holder is DATA";
+		var createData = {"dataName": "account holder"};
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Debit order 4') {
+
+		if (data['account holder'] === data['name']) {
+			var botResponse = 'Oh yeah! I should have guessed that you would have been the owner of the account!';
+		} else {
+			var botResponse = 'Noted '+data['name']+'!';
+		}		
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Debit order 5';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Debit order 5') {
+
+		
+		var botResponse = 'Can you please give me your sort code? Your bank needs it to setup the debit order!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Debit order 6';
+		var skip = false;
+		var input = {"type":'text'};
+		var dataWrapper = "My sort code is DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Debit order 6') {
+
+		
+		var botResponse = 'Thank you '+data['name']+', you’re very patient. One last question and I leave you alone, I promise! :SMILE: What’s your account number please?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Debit order 7';
+		var skip = false;
+		var input = {"type":'text'};
+		var dataWrapper = "My account number is DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName === 'Debit order 7') {
+
+		
+		var botResponse = 'Thank you for your time! I will transfer all these info to your bank and ask them to authorize a monthly debit of Rxxx!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Debit order 7';
+		var skip = false;
+		var input = {"type":'text'};
+		var dataWrapper = "My account number is DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
 
 }

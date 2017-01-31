@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
 import bloc from '../../api/blocs.js';
-import cars from '../../api/carSample.js';
 
 export default class Button extends Component {
 // See AddressInput for more info. I won't write all this twice
