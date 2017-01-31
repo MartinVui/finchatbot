@@ -41,7 +41,7 @@ export default class ChatBox extends Component {
     // Add discussion id to the session
     Session.set('SessionId' , discussion._id);
     // Return scenario Id
-    return initScenario;
+    this.nextStep(initScenario._id);
 	}
 
   nextStep(scenarioId) {
@@ -63,7 +63,7 @@ export default class ChatBox extends Component {
     }).fetch();
 
     // Display formGenerators, with the idScenario
-
+    return scenario.children
     // The form subcomponent will use a callback to nextStep with the right scenario
 
   }

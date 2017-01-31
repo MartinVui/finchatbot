@@ -18,7 +18,11 @@ import YearInput from './YearInput.jsx';
 
 export default class MessageForm extends Component {
 
-  
+    constructor(props) {
+        super(props);
+    };
+    
+
     render() {
     // Decides the type of input that has to be displayed
 

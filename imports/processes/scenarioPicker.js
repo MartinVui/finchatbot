@@ -3,6 +3,6 @@ import { Random } from 'meteor/random';
 
 export function scenarioPicker(){
 	const InitScenarios = Scenarios.find({'initiate' : true }).fetch();
-	return Random.choice(InitScenarios);
+	return Random.choice(InitScenarios)._id;
 };
 
