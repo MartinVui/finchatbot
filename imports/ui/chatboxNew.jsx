@@ -23,6 +23,7 @@ export default class ChatBox extends Component {
 		super();
 		this.state = {
 			showIntro: true,
+			children: [],
 		};
 	}
 
@@ -63,7 +64,7 @@ export default class ChatBox extends Component {
     }).fetch();
 
     // Display formGenerators, with the idScenario
-    return scenario.children
+    this.state.children = scenario.children;
     // The form subcomponent will use a callback to nextStep with the right scenario
 
   }
@@ -113,7 +114,7 @@ export default class ChatBox extends Component {
 
 
 			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>:null
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren=this.state.children />:null
 			        }
 
 
