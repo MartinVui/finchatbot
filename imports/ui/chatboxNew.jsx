@@ -32,8 +32,8 @@ export default class ChatBox extends Component {
     // Set show messages instead of intro
     this.setState({showIntro:false});
 
-    console.log(this.state);
     var user = Meteor.call('user.insert',{"data":{"test":true}});
+    console.log(user);
 
     // Choose scenario
     var initScenario = scenarioPicker();
