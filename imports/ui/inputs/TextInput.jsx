@@ -25,8 +25,11 @@ export default class TextInput extends Component {
     
         const answer = Meteor.call('answer.insert',{'idFormGenerator':this.props.FormGenerators, 'content':text});
 
+
+        answerPile = Discussions.findOne({'_id' : Session.get('SessionId')});
+        answerPile.push(answer._id);
         Discussions.update(Session.get('SessionId'),
-                $set : {AnswerPile : AnswerPile.push(text)}   
+                $set : {answerPile : answerPile}   
             );
     
 
