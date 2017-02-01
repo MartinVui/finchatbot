@@ -38,6 +38,9 @@ export default class MessageForm extends Component {
 
     var inputType = forms[0].inputType;
 
+    //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...
+    //SHOULD MAYBE LIMIT THE FORM UI TO ELEMENTARY COMPONENTS THAT ARE ADDED TO THE FINAL FORM
+
     return(
 
 
