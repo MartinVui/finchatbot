@@ -4,14 +4,14 @@ import { check } from 'meteor/check';
 import { formGeneratorSchema } from './schemas/formGeneratorSchema.js';
 
 
-export const FormGenerator = new Mongo.Collection('formGenerators');
+export const FormGenerators = new Mongo.Collection('formGenerators');
 
 Meteor.methods({
 	'formGenerators.insert'(formGenerator){
 		check(formGenerator , FormGeneratorSchema);
-		return FormGenerator.insert(formGenerator);
+		return FormGenerators.insert(formGenerator);
 	},
 	'formGenerators.remove'(formGeneratorId){
-		FormGenerator.remove(formGeneratorId);
+		FormGenerators.remove(formGeneratorId);
 	}
 })

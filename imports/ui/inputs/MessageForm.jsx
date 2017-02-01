@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Session } from 'meteor/session';
 
 // import { Messages } from '../../api/messages.js';
+import { FormGenerators } from '../../api/formgenerators.js'
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
@@ -37,6 +38,7 @@ export default class MessageForm extends Component {
       }
     }).fetch();
 
+    // console.log(forms);
     var inputType = forms[0].inputType;
 
     //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...

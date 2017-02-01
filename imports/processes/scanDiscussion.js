@@ -31,5 +31,3 @@ export function scanDiscussion(discussion) {
   return messages;
 
 }
-
-}
