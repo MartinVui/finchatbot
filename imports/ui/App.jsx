@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import ChatBox from './ChatBox.jsx';
+import ChatBox from './chatBoxNew.jsx';
 
 
 class App extends Component {
