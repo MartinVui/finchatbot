@@ -205,7 +205,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'Hot deals', 'response':'Let me see the Hot deals!'},/*{'title':'Locate a store', 'response':'Please help me finding the closest Cell C store Holly'},*/{'title':'Upgrade', 'response':'I would like to upgrade my contract'},{'title':'Recharge', 'response':'I would like to recharge my phone services please Holly'},{'title':'C surance', 'response': 'Hey Holly, I would like to get my new phone insured'}]
+					'buttons': [{'title':'Hot deals', 'response':'Let me see the Hot deals!'},/*{'title':'Locate a store', 'response':'Please help me finding the closest MTN store Holly'},*/{'title':'Upgrade', 'response':'I would like to upgrade my contract'},{'title':'Recharge', 'response':'I would like to recharge my phone services please Holly'},{'title':'MTN Insurance', 'response': 'Hey Holly, I would like to get my new phone insured'}]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -266,12 +266,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 						'text':"Select your purchase",
 						"choices": [{"value": "Air time"},{"value": "Data bundle"},{"value": "SMS bundle"}]
 						};
-			var dataWrapper = "I would like to buy Cell C DATA please Holly";
+			var dataWrapper = "I would like to buy MTN DATA please Holly";
 			var createData = false;
 
 		} else if (text.match(matchWord4)) {
 
-			var botResponse = 'Sure no problem '+data['name']+'. In case you don’t know it yet, to be able to do so you must be in your last month contract. Enter your Cell C number below and I will check if that’s your case:';
+			var botResponse = 'Sure no problem '+data['name']+'. In case you don’t know it yet, to be able to do so you must be in your last month contract. Enter your MTN number below and I will check if that’s your case:';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Upgrade';
@@ -282,10 +282,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		} else if (text.match(matchWord5)) {
 
-			var botResponse = 'Yes no problem '+data['name']+'! Let’s process the C-surance quotation, and then you will be able to get crazy! :SMILE:';
+			var botResponse = 'Yes no problem '+data['name']+'! Let’s process the MTN insurance quotation, and then you will be able to get crazy! :SMILE:';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance';
+			var nextBlocID = 'MTN Insurance';
 			var skip = true;
 			var input = {"type":'none'};
 			var dataWrapper = "DATA";
@@ -620,7 +620,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Find store 3') {
 
-		var botResponse = 'The closest Cell C branch is only at 10 km from your place, located on 28 Melle St Shop 4, North City House , Braamfontein, Johannesburg 2001';
+		var botResponse = 'The closest MTN branch is only at 10 km from your place, located on 28 Melle St Shop 4, North City House , Braamfontein, Johannesburg 2001';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Find store 4';
@@ -727,13 +727,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Recharge 3') {
 
-		var botResponse = 'Can you please now enter the Cell C number you wish to recharge?';
+		var botResponse = 'Can you please now enter the MTN number you wish to recharge?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Recharge 4';
 		var skip = false;
 		var input = {'type':'text'}
-		var dataWrapper = "The Cell C number I want to recharge is DATA";
+		var dataWrapper = "The MTN number I want to recharge is DATA";
 		var createData = false;
 		
 		
@@ -864,7 +864,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Default text email 2') {
 
-		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through Cell C website! Sounds good?';
+		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through MTN website! Sounds good?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default text email 3';
@@ -1026,7 +1026,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Default samsung email') {
 
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
+		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy MTN services directly by me, I promise you';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default samsung email 2';
@@ -1052,7 +1052,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Default samsung email 2') {
 
-		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through Cell C website! Sounds good?';
+		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through MTN website! Sounds good?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default samsung email 3';
@@ -1214,7 +1214,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Default iphone email') {
 
-		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy Cell C services directly by me, I promise you';
+		var botResponse = 'Apologize '+data['name']+', I am only the beta version of the demo version of the pilot of myself... But soon you will be able to buy MTN services directly by me, I promise you';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default iphone email 2';
@@ -1240,7 +1240,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Default iphone email 2') {
 
-		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through Cell C website! Sounds good?';
+		var botResponse = 'By now, give me your e-mail address and I will send you a summary of the offer and you will be able to buy it through MTN website! Sounds good?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Default iphone email 3';
@@ -1670,13 +1670,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === 'Upgrade contract 2') {
 
 
-		var botResponse = 'This includes itemised Billing, receiving your cellular bill statements via e-mail, data bundles, C Surance or SMS bundles etc.. Interested?';
+		var botResponse = 'This includes itemised Billing, receiving your cellular bill statements via e-mail, data bundles, MTN Insurance or SMS bundles etc.. Interested?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Upgrade contract 3';
 		var skip = false;
 		var input = {"type":'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool!'},{'title': 'No', 'response': 'No thanks Holly'},{'title': 'C Surance? What is that?', 'response': 'C Surance?'}]};
+					'buttons': [{'title': 'Yes', 'response': 'Sounds like super cool!'},{'title': 'No', 'response': 'No thanks Holly'},{'title': 'MTN Insurance? What is that?', 'response': 'MTN Insurance?'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -1709,7 +1709,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var nextBlocID = 'Upgrade contract length';
 			var skip = false;
 			var input = {"type":"checkbox",
-						"checks":[{"value": "Bill statements via e-mail"},{"value":"Itemised billing"},{"value":"C Surance"}],
+						"checks":[{"value": "Bill statements via e-mail"},{"value":"Itemised billing"},{"value":"MTN Insurance"}],
 						}
 			var dataWrapper = "DATA";
 			var createData = false;
@@ -1727,10 +1727,10 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		} else if(text.match(matchWord3)) {
 
-			var botResponse = 'C Surance is Cell C cover against theft, accidental physical loss and accidental physical damage';
+			var botResponse = 'MTN Insurance is MTN cover against theft, accidental physical loss and accidental physical damage';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'Upgrade C Surance';
+			var nextBlocID = 'Upgrade MTN Insurance';
 			var skip = true;
 			var input = {"type":'none'};
 			var dataWrapper = "DATA";
@@ -1753,7 +1753,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'Upgrade C Surance') {
+	if (blocName === 'Upgrade MTN Insurance') {
 
 
 		var botResponse = 'So? Do you want to add features to your contract?';
@@ -2098,13 +2098,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 	if (blocName === 'Upgrade buy phone 2') {
 
-		var botResponse = 'Do you want me to ship it to you (4-6 days) or if you can’t wait that long you can pick it up at our closest Cell C store!';
+		var botResponse = 'Do you want me to ship it to you (4-6 days) or if you can’t wait that long you can pick it up at our closest MTN store!';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Upgrade buy phone 3';
 		var skip = false;
 		var input = {"type":'buttons',
-					'buttons':[{'title':'Home delivery', 'response':'Home delivery'}, {'title':'I want to pick it up, it\'s mine', 'response':'I don’t wait that long Holly, please indicate me where is the closest Cell C store'}]};
+					'buttons':[{'title':'Home delivery', 'response':'Home delivery'}, {'title':'I want to pick it up, it\'s mine', 'response':'I don’t wait that long Holly, please indicate me where is the closest MTN store'}]};
 		var dataWrapper = "DATA";
 		var createData = false;
 
@@ -2142,7 +2142,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		} else if (text.match(matchWord2)) {
 
-			var botResponse = 'No worries! That’s simple, enter your address below and I will let you know the closest Cell C store where you will be able to fetch your new phone';
+			var botResponse = 'No worries! That’s simple, enter your address below and I will let you know the closest MTN store where you will be able to fetch your new phone';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Upgrade locate store';
@@ -2278,12 +2278,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 
 
-	if (blocName === 'C surance') {
+	if (blocName === 'MTN Insurance') {
 
 		var botResponse = 'Before starting anything, can you please tell me when did you get this new phone?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance 2';
+		var nextBlocID = 'MTN Insurance 2';
 		var skip = false;
 		var input = {"type":'buttons', 
 					'buttons':[{'title':'Less than 3 months','response': 'I got my phone less than 3 months ago'}, {'title': 'More than 3 months','response': 'I gotmy phone morethan 3 months ago'}]};
@@ -2305,7 +2305,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance 2') {
+	if (blocName === 'MTN Insurance 2') {
 
 		matchWord1 = /(.*)more(.*)/i;
 		matchWord2 = /(.*)less(.*)/i;
@@ -2328,13 +2328,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Okay great! We only insure your phone if it has been bought less than 3 months ago. Tell me more about your phone now, what’s the make?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance phone make';
+			var nextBlocID = 'MTN Insurance phone make';
 			var skip = false;
 			var input = {"type":'select',
 						'text':"Select your purchase",
-						"choices": [{"value": "Samsung"},{"value": "Apple"},{"value": "Huawei"},{"value": "LG"},{"value": "Cat"},{"value": "Cell C"},{"value": "LTE"},{"value": "Other"}]
+						"choices": [{"value": "Samsung"},{"value": "Apple"},{"value": "Huawei"},{"value": "LG"},{"value": "Cat"},{"value": "MTN"},{"value": "LTE"},{"value": "Other"}]
 						};
-			var dataWrapper = "My phone is a DATA";
+			var dataWrapper = "DATA";
 			var createData = false;
 
 		}
@@ -2354,7 +2354,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance phone make') {
+	if (blocName === 'MTN Insurance phone make') {
 
 		matchWord1 = /(.*)other(.*)/i;
 
@@ -2364,7 +2364,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Can you specify the make then?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance phone make';
+			var nextBlocID = 'MTN Insurance phone make';
 			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "DATA";
@@ -2375,7 +2375,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Okay and what is the model? Please enter the model in the field below';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance phone value';
+			var nextBlocID = 'MTN Insurance phone value';
 			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "DATA";
@@ -2398,12 +2398,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance phone value') {
+	if (blocName === 'MTN Insurance phone value') {
 
 		var botResponse = 'Okay that’s a nice one, you\'re lucky :SMILE: Could you please specify the device value? Find the best price interval below';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance 3';
+		var nextBlocID = 'MTN Insurance 3';
 		var skip = false;
 		var input = {"type":'select',
 						'text':"Select phone value",
@@ -2426,12 +2426,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance 3') {
+	if (blocName === 'MTN Insurance 3') {
 
 		var botResponse = 'All good '+data['name']+', I copy that! Hmmm, let me see what I can get you...';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance 4';
+		var nextBlocID = 'MTN Insurance 4';
 		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
@@ -2451,7 +2451,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance 4') {
+	if (blocName === 'MTN Insurance 4') {
 
 		if (data['phone value'] === 'Up to R1000') {
 			var botResponse = 'Okay done, I got you the greatest deal. Your monthly premium is only R35/month!';
@@ -2472,7 +2472,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		} else 
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance 5';
+		var nextBlocID = 'MTN Insurance 5';
 		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
@@ -2492,12 +2492,12 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance 5') {
+	if (blocName === 'MTN Insurance 5') {
 
 		var botResponse = 'And at this price, we cover accidental physical loss, theft or accidental physical damage of your mobile equipment and loss of SIM card, as long as the two are used together! Is that not crazy '+data['name']+'?!';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance TCs';
+		var nextBlocID = 'MTN Insurance TCs';
 		var skip = false;
 		var input = {"type":'buttons',
 					'buttons':[{'title': 'I am in Holly, let’s proceed!', 'response': 'I am in Holly, let’s proceed!'}, {'title': 'Not interested', 'response': 'I\'m not interested, sorry'}]
@@ -2519,7 +2519,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance TCs') {
+	if (blocName === 'MTN Insurance TCs') {
 
 		matchWord1 = /(.*)proceed(.*)/i
 
@@ -2528,7 +2528,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Sure let’s do that! Before proceeding, would you like to see the T&Cs? I can show them to you now but don’t worry, I will send them to you via email anyway';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance TCs 2';
+			var nextBlocID = 'MTN Insurance TCs 2';
 			var skip = false;
 			var input = {"type":'buttons',
 						'buttons':[{'title': 'Yes', 'response': 'Yes Holly, show me the T&Cs'}, {'title': 'No', 'response': 'Thanks but I\'ll read them later!'}]
@@ -2564,7 +2564,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance TCs 2') {
+	if (blocName === 'MTN Insurance TCs 2') {
 
 		matchWord1 = /(.*)yes(.*)/i
 
@@ -2573,7 +2573,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Ok! You can find our terms and conditions on this link: thelink.com';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance TCs 2';
+			var nextBlocID = 'MTN Insurance TCs 2';
 			var skip = true;
 			var input = {"type":'none'};
 			var dataWrapper = "DATA";
@@ -2584,7 +2584,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Almost done, I just need to quickly create the policy for you.. I would need you to re-enter your full name and surname please:';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance email';
+			var nextBlocID = 'MTN Insurance email';
 			var skip = false;
 			var input = {"type":'multitext'};
 			var dataWrapper = "I already toldyou that Holly! My name is DATA";
@@ -2606,13 +2606,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance email') {
+	if (blocName === 'MTN Insurance email') {
 
 
 		var botResponse = 'I know but I prefer to double check :SMILE: What about your email address?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance email 2';
+		var nextBlocID = 'MTN Insurance email 2';
 		var skip = false;
 		var input = {"type":'text'};
 		var dataWrapper = "My email address is DATA";
@@ -2633,7 +2633,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance email 2') {
+	if (blocName === 'MTN Insurance email 2') {
 
 		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
 
@@ -2642,7 +2642,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Is your e-mail address '+data['email']+'? Do you confirm?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance email 3';
+			var nextBlocID = 'MTN Insurance email 3';
 			var skip = false;
 			var input = {'type':'buttons',
 						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
@@ -2655,7 +2655,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance email 2';
+			var nextBlocID = 'MTN Insurance email 2';
 			var skip = false;
 			var input = {'type':'text'};
 			var dataWrapper = "DATA";
@@ -2678,16 +2678,16 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance email 3') {
+	if (blocName === 'MTN Insurance email 3') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
 		if (text.match(matchWord1)) {
 		
-			var botResponse = 'Good! Now can you please enter your Cell C phone number?';
+			var botResponse = 'Good! Now can you please enter your MTN phone number?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance phone number 1';
+			var nextBlocID = 'MTN Insurance phone number 1';
 			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "DATA";
@@ -2699,7 +2699,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Ok, can you give it again?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance email 2';
+			var nextBlocID = 'MTN Insurance email 2';
 			var skip = false;
 			var input = {'type':'text'};
 			var dataWrapper = "DATA";
@@ -2723,13 +2723,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance phone number 1') {
+	if (blocName === 'MTN Insurance phone number 1') {
 
 		
 		var botResponse = 'Is your phone number '+data['phone number']+'? Do you confirm?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance phone number 2';
+		var nextBlocID = 'MTN Insurance phone number 2';
 		var skip = false;
 		var input = {'type':'buttons',
 					'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
@@ -2753,7 +2753,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance phone number 2') {
+	if (blocName === 'MTN Insurance phone number 2') {
 
 		matchWord1 = /(.*)yes(.*)/i;
 
@@ -2778,7 +2778,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			} else 
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance payment';
+			var nextBlocID = 'MTN Insurance payment';
 			var skip = true;
 			var input = {"type":'none'};
 			var dataWrapper = "DATA";
@@ -2790,7 +2790,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Ok, can you give it again?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance phone number 1';
+			var nextBlocID = 'MTN Insurance phone number 1';
 			var skip = false;
 			var input = {'type':'text'};
 			var dataWrapper = "DATA";
@@ -2814,13 +2814,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment') {
+	if (blocName === 'MTN Insurance payment') {
 
 		
 		var botResponse = 'Do you want to process the payment now?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 2';
+		var nextBlocID = 'MTN Insurance payment 2';
 		var skip = false;
 		var input = {'type':'buttons',
 					'buttons': [{'title':'Yes', 'response':'Yes, let\'s do it'},{'title':'No', 'response':'I prefer to do it later on'}]
@@ -2844,14 +2844,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 2') {
+	if (blocName === 'MTN Insurance payment 2') {
 
 		if (text.match(/.*yes.*/i)) {
 		
 			var botResponse = 'Let’s do this! You have 2 solutions:';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance payment 3';
+			var nextBlocID = 'MTN Insurance payment 3';
 			var skip = true;
 			var input = {'type':'none'};
 			var dataWrapper = "DATA";
@@ -2886,13 +2886,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 3') {
+	if (blocName === 'MTN Insurance payment 3') {
 
 		
 		var botResponse = '1/ Credit card: it’s immediate and your insurance will be activated immediately';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 4';
+		var nextBlocID = 'MTN Insurance payment 4';
 		var skip = true;
 		var input = {'type':'none'};
 		var dataWrapper = "DATA";
@@ -2914,13 +2914,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 4') {
+	if (blocName === 'MTN Insurance payment 4') {
 
 		
 		var botResponse = '2/ Debit order: we had this policy to your existing monthly contract. Your cover will be activated as soon as the next monthly payment will be received';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 5';
+		var nextBlocID = 'MTN Insurance payment 5';
 		var skip = true;
 		var input = {'type':'none'};
 		var dataWrapper = "DATA";
@@ -2942,13 +2942,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 5') {
+	if (blocName === 'MTN Insurance payment 5') {
 
 		
 		var botResponse = 'Which option would you prefer?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance payment 6';
+		var nextBlocID = 'MTN Insurance payment 6';
 		var skip = false;
 		var input = {'type':'buttons',
 					'buttons':[{'title': 'Credit Card', 'response': 'I\'d like to pay by credit card'}, {'title': 'Debit Order', 'response': 'I\'d like to pay by debit order'}]};
@@ -2971,14 +2971,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance payment 6') {
+	if (blocName === 'MTN Insurance payment 6') {
 
 		if (text.match(/.*card.*/i)) {
 			
 			var botResponse = 'Ok fine '+data['name']+', I have to gather information to proceed to the payment. Don’t worry, all our converstion is encrypted and completely safe and secure';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance card payment';
+			var nextBlocID = 'MTN Insurance card payment';
 			var skip = true;
 			var input = {'type':'none'};
 			var dataWrapper = "DATA";
@@ -2989,7 +2989,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Roger that Name! You will receive a confirmation on your email address shortly :SMILE:';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance debit order';
+			var nextBlocID = 'MTN Insurance debit order';
 			var skip = true;
 			var input = {'type':'none'};
 			var dataWrapper = "DATA";
@@ -3012,13 +3012,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment') {
+	if (blocName === 'MTN Insurance card payment') {
 
 		
 		var botResponse = 'First of all, what is your card type?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance card payment 2';
+		var nextBlocID = 'MTN Insurance card payment 2';
 		var skip = false;
 		var input = {"type":'select',
 						'text':"Select card type",
@@ -3043,13 +3043,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment 2') {
+	if (blocName === 'MTN Insurance card payment 2') {
 
 		
 		var botResponse = 'Perfect. The first step is done! Now, can you please enter you card number?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance card payment 3';
+		var nextBlocID = 'MTN Insurance card payment 3';
 		var skip = false;
 		var input = {"type":'text'};
 		var dataWrapper = "My card number is DATA";
@@ -3071,14 +3071,14 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment 3') {
+	if (blocName === 'MTN Insurance card payment 3') {
 
 		if (text.match(/([0-9]{4}\s*){4}/)) {
 		
 			var botResponse = 'Got it! We almost done :SMILE: Can you please enter the name on the card?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance card payment 4';
+			var nextBlocID = 'MTN Insurance card payment 4';
 			var skip = false;
 			var input = {"type":'multitext'};
 			var dataWrapper = "The name on the card is DATA";
@@ -3089,7 +3089,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'This does not look like a card number. Can you type it again?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance card payment 3';
+			var nextBlocID = 'MTN Insurance card payment 3';
 			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "My card number is DATA";
@@ -3113,13 +3113,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance card payment 4') {
+	if (blocName === 'MTN Insurance card payment 4') {
 
 				
 		var botResponse = 'Last but not least: can you please enter your CCV Number? (The 3 digit code at the back of your card)';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance accept card payment';
+		var nextBlocID = 'MTN Insurance accept card payment';
 		var skip = false;
 		var input = {"type":'text'};
 		var dataWrapper = "My CCV number is DATA";
@@ -3141,13 +3141,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance accept card payment') {
+	if (blocName === 'MTN Insurance accept card payment') {
 
 		
 		var botResponse = 'That is perfect '+data['name']+', let me few seconds to proceed to the payment. You might be redirected toward your bank website to confirm the payment';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance accept card payment 2';
+		var nextBlocID = 'MTN Insurance accept card payment 2';
 		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
@@ -3169,13 +3169,13 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance accept card payment 2') {
+	if (blocName === 'MTN Insurance accept card payment 2') {
 
 		
 		var botResponse = 'That is perfect '+data['name']+', let me few seconds to proceed to the payment. You might be redirected toward your bank website to confirm the payment';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'C surance accept card payment 3';
+		var nextBlocID = 'MTN Insurance accept card payment 3';
 		var skip = true;
 		var input = {"type":'none'};
 		var dataWrapper = "DATA";
@@ -3197,7 +3197,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance accept card payment 3') {
+	if (blocName === 'MTN Insurance accept card payment 3') {
 
 		
 		var botResponse = 'I hope I helped you '+data['name']+', see you soon! :SMILE:';
@@ -3226,7 +3226,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === 'C surance debit order') {
+	if (blocName === 'MTN Insurance debit order') {
 
 		
 		var botResponse = 'What do you want to do now?';
