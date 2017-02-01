@@ -37,7 +37,7 @@ export default class ChatBox extends Component {
     // Choose scenario
     var initScenario = scenarioPicker();
     // Create discussion in DB
-    var discussion = Meteor.call('discussion-insert',{'idUser':user._id});
+    var discussion = Meteor.call('discussion-insert',{'idUser':user._id , 'idScenario':initScenario});
     // Add discussion id to the session
     Session.set('SessionId' , discussion._id);
     // Return scenario Id
@@ -51,7 +51,10 @@ export default class ChatBox extends Component {
     // Find question(s)
     question = Questions.findOne({_id:scenario['idQuestion']});
 
-    // Ask question(s)
+    //Ask question
+
+    Session.set('showGif' , true);  
+
 
     // Find formGenerators
     forms = FormGenerators.find({
@@ -67,6 +70,7 @@ export default class ChatBox extends Component {
     // The form subcomponent will use a callback to nextStep with the right scenario
 
   }
+
 
   newAnswer(data) {
 
@@ -113,7 +117,7 @@ export default class ChatBox extends Component {
 
 
 			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={this.state.children} />:null
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={this.state.children} nextStep={this.nextStep} />:null
 			        }
 
 

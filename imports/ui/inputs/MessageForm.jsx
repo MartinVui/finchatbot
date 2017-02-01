@@ -60,28 +60,28 @@ export default class MessageForm extends Component {
             <div className='message_form'>
 
             {inputType === 'text' ?
-                <TextInput formGenerators={forms}/>: null
+                <TextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'buttons' ?
-                <ButtonList formGenerators={forms}/>: null
+                <ButtonList formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'select' ?
-                <SelectInput formGenerators={forms}/>: null
+                <SelectInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'date' ?
-                <DateInput formGenerators={forms}/>: null
+                <DateInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'multitext' ?
-                <MultitextInput formGenerators={forms}/>: null
+                <MultitextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'address' ?
-                <AddressInput formGenerators={forms}/>: null
+                <AddressInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'checkbox' ?
-                <CheckBoxInput formGenerators={forms}/>: null
+                <CheckBoxInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'year' ?
-                <YearInput formGenerators={forms}/>: null
+                <YearInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {/*Session.get('botResponseJSON').input.type === 'carmake' ?
                 <CarMakeInput/>: null
