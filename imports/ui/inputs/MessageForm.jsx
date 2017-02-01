@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 import ButtonList from './ButtonList.jsx';
 import DateInput from './DateInput.jsx';
@@ -21,7 +21,7 @@ export default class MessageForm extends Component {
     constructor(props) {
         super(props);
     };
-    
+
 
     render() {
     // Decides the type of input that has to be displayed
@@ -48,8 +48,8 @@ export default class MessageForm extends Component {
         <footer>
 
         {/*<ReactCSSTransitionGroup                // Animation when the messages appear
-            transitionName="footer" 
-            transitionEnterTimeout={500} 
+            transitionName="footer"
+            transitionEnterTimeout={500}
             transitionAppearTimeout={500}
             transitionLeaveTimeout={1500}>*/}
 
@@ -57,7 +57,7 @@ export default class MessageForm extends Component {
         {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappear. Quite smart.
 
             <div className='message_form'>
-             
+
             {inputType === 'text' ?
                 <TextInput formGenerators={forms}/>: null
             }

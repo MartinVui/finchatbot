@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import cars from '../../api/carMake.js';
+// import cars from '../../api/carMake.js';
 
 
 export default class CarPropositions extends Component {

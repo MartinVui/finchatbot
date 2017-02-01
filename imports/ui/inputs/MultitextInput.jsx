@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 
 export default class TextInput extends Component {
@@ -19,7 +19,7 @@ export default class TextInput extends Component {
 
 		setTimeout(function() {
 
-		
+
 			Session.set('botResponseJSON', json);
 
 
@@ -35,13 +35,13 @@ export default class TextInput extends Component {
 
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
-				
+
 				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
 
 				Session.set('showGif', true);
 
 				_this.sendBotMessage(newJson);
-					
+
 			} else {
 
 				Session.set('showGif', false);
@@ -49,7 +49,7 @@ export default class TextInput extends Component {
 
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
-					
+
 			}
 
 		}, typingTime)
@@ -93,7 +93,7 @@ export default class TextInput extends Component {
 
 		// Insert the bot message
 		Session.set('showGif', true);
-		
+
 		this.sendBotMessage(json);
 
 	}

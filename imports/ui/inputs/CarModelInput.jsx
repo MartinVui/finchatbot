@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 
 export default class TextInput extends Component {
@@ -34,7 +34,7 @@ export default class TextInput extends Component {
 
                 // Set the new state of the bot
                 Session.set('nextBlocName', json.nextBlocID);
-                
+
                 var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
 
                 Session.set('showGif', true);
@@ -84,13 +84,13 @@ export default class TextInput extends Component {
         else {
             Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
         }
-          
+
 
         ReactDOM.findDOMNode(this.refs.textInput).value = '';
 
         // Insert the bot message
         Session.set('showGif', true);
-        
+
         this.sendBotMessage(json);
 
     }

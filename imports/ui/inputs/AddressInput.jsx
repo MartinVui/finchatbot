@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 
 export default class AddressInput extends Component {
@@ -23,7 +23,7 @@ export default class AddressInput extends Component {
         var typingTime = 300+json.botResponse.length*20;  // The longer the text, the longer typing time. Cool too !
 
         setTimeout(function() {
-        
+
             Session.set('botResponseJSON', json); // I have to investigate if this line is really useful
 
 
@@ -40,13 +40,13 @@ export default class AddressInput extends Component {
 
                 // Set the new state of the bot
                 Session.set('nextBlocName', json.nextBlocID);
-                
+
                 var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
 
                 Session.set('showGif', true);
 
                 _this.sendBotMessage(newJson); // skip = true, so we send the second message
-              
+
             } else {    // Do exactly the same but only send one message
 
                 Session.set('showGif', false);
@@ -59,7 +59,7 @@ export default class AddressInput extends Component {
 
                 // Set the new state of the bot
                 Session.set('nextBlocName', json.nextBlocID);
-                  
+
             }
 
         }, typingTime)
@@ -70,7 +70,7 @@ export default class AddressInput extends Component {
     handleSubmit(event) {
 
         event.preventDefault();     // I think this line is useful
-     
+
         var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
         if (Session.get('botResponseJSON').createData !== false) {      // If we want the bot to remember the address of the guy
@@ -88,15 +88,15 @@ export default class AddressInput extends Component {
         Session.set('address',text);
         Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
         Meteor.call('messages.insert',"MAP", 'user', Session.get('sessionId'));
-        
 
-        
+
+
 
 
         ReactDOM.findDOMNode(this.refs.textInput).value = '';   // Empty the text field
 
         Session.set('showGif', true);   // Show the typing gif
-        
+
         this.sendBotMessage(json);      // Send the bot message
 
     }
@@ -118,7 +118,7 @@ export default class AddressInput extends Component {
     render() {
 
         return(
-          
+
             <form className="new_message address" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
                 <input id="address-input" ref="textInput" type="text" placeholder="Enter a location" required/>
                 {Session.get('isMobile') ?

@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import emoji from 'react-easy-emoji';
 
-import MapMessage from './MapMessage.jsx';
+import MapMessage from './inputs/MapMessage.jsx';
 
 
 export default class Message extends Component {
@@ -26,7 +26,7 @@ export default class Message extends Component {
 
 		if (this.props.text === "") {
 			return(null);
-		}    
+		}
 
 
 		// Check if content is a  string
@@ -62,7 +62,7 @@ export default class Message extends Component {
 				}
 
 
-				else {                                                  
+				else {
 
 					return word + separator;
 				}
@@ -85,7 +85,7 @@ export default class Message extends Component {
 				return (
 
 					<div className="user_message">
-						<p className="user_text">{this.props.text}</p>       
+						<p className="user_text">{this.props.text}</p>
 					</div>
 				);
 			}
@@ -107,7 +107,7 @@ export default class Message extends Component {
 						<img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
 						{this.state.imageLoaded  ?
 							<p className="bot_text">{contents}</p> :null
-						}  
+						}
 					</div>
 				);
 			}

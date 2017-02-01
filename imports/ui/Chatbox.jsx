@@ -5,9 +5,9 @@ import { createContainer } from 'meteor/react-meteor-data';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 
-import { Messages } from '../api/messages.js';
+// import { Messages } from '../api/messages.js';
 import Message from './Message.jsx';
-import bloc from '../api/blocs.js';
+// import bloc from '../api/blocs.js';
 
 import MessageForm from './inputs/MessageForm.jsx';
 
@@ -72,11 +72,11 @@ export default class ChatBox extends Component {
 		    var TIMEOUT2 = setTimeout(function() {
 		        Session.set('botResponseJSON', json2);
 		        Session.set('showGif', false);
-		        
+
 
 				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-				
-		        
+
+
 
 		        // Set the new state of the bot
 		        Session.set('nextBlocName', json2.nextBlocID);
@@ -86,16 +86,16 @@ export default class ChatBox extends Component {
 
 
 
-	render() {			
-	
+	render() {
+
 		return(
 			<div>
 				<div className="container">
 
 
 				<ReactCSSTransitionGroup                // Animation when the messages appear
-					transitionName="introduction" 
-					transitionEnterTimeout={1} 
+					transitionName="introduction"
+					transitionEnterTimeout={1}
 					transitionLeaveTimeout={1000}>
 
 					{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
@@ -112,7 +112,7 @@ export default class ChatBox extends Component {
 					}
 
 				</ReactCSSTransitionGroup>
-		        	
+
 		        	{/*this.state.showIntro === false ?
 			        	<div className="conversation">
 			        		<MessageList messages={this.props.messages}/>

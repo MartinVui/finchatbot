@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 export default class CheckBox extends Component {
 
@@ -29,7 +29,7 @@ export default class CheckBox extends Component {
 	      	this.props.onUpdate(this.state.checked, checkedValue);
 	    }
 
-      	
+
   	}
 
 
