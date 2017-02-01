@@ -10,6 +10,7 @@ Meteor.methods({
 	'formGenerators.insert'(formGenerator){
 		check(formGenerator , FormGeneratorSchema);
 		var newFormGenerator = FormGenerators.insert(formGenerator);
+		console.log(newFormGenerator);
 		return formGenerator;
 	},
 	'formGenerators.remove'(formGeneratorId){

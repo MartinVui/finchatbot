@@ -32,13 +32,13 @@ export default class ChatBox extends Component {
     // Set show messages instead of intro
     this.setState({showIntro:false});
 
-    console.log(this.state);
     var user = Meteor.call('user.insert',{"data":{"test":true}});
+    console.log(user);
 
     // Choose scenario
     var initScenario = scenarioPicker();
     // Create discussion in DB
-    var discussion = Meteor.call('discussion-insert',{'idUser':user , 'idScenario':initScenario});
+    var discussion = Meteor.call('discussion.insert',{'idUser':user , 'idScenario':initScenario});
     // Add discussion id to the session
     Session.set('SessionId' , discussion);
     // Return scenario Id
