@@ -1485,7 +1485,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'This does not look like a card number. Can you type it again?';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'C surance card payment 3';
+			var nextBlocID = 'Card payment 3';
 			var skip = false;
 			var input = {"type":'text'};
 			var dataWrapper = "My card number is DATA";
