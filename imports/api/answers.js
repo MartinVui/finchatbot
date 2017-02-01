@@ -9,7 +9,8 @@ Meteor.methods({
     'answer.insert' (answer) {
         answer['createdAt'] = new Date();
         check(answer , AnswerSchema);
-        return Answers.insert(answer);
+        var newAnswer =  Answers.insert(answer);
+        return newAnswer;
     },
     'answer.remove' (answerId){
         check(answerId, String);
