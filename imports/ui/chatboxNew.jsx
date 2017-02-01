@@ -3,19 +3,17 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Users } from './api/users.js';
-import { Discussions } from './api/discussions.js';
-import { Scenarios } from './api/scenarios.js';
-import { Questions } from './api/questions.js';
-import { FormGenerators } from './api/formgenerators.js';
-import { Messages } from './api/messages.js';
+import { Users } from '../api/users.js';
+import { Discussions } from '../api/discussions.js';
+import { Scenarios } from '../api/scenarios.js';
+import { Questions } from '../api/questions.js';
+import { FormGenerators } from '../api/formgenerators.js';
 
-import scenarioPicker from './processes/scenarioPicker.js';
+import scenarioPicker from '../processes/scenarioPicker.js';
+
 import Message from './Message.jsx';
 import MessageForm from './inputs/MessageForm.jsx';
 import MessageList from './MessageList.jsx';
-
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class ChatBox extends Component {
 
@@ -114,7 +112,7 @@ export default class ChatBox extends Component {
 
 
 			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren=this.state.children />:null
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={this.state.children} />:null
 			        }
 
 
