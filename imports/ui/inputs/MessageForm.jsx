@@ -56,28 +56,28 @@ export default class MessageForm extends Component {
             <div className='message_form'>
              
             {inputType === 'text' ?
-                <TextInput/>: null
+                <TextInput formGenerators={forms}/>: null
             }
             {inputType === 'buttons' ?
-                <ButtonList/>: null
+                <ButtonList formGenerators={forms}/>: null
             }
             {inputType === 'select' ?
-                <SelectInput/>: null
+                <SelectInput formGenerators={forms}/>: null
             }
             {inputType === 'date' ?
-                <DateInput/>: null
+                <DateInput formGenerators={forms}/>: null
             }
             {inputType === 'multitext' ?
-                <MultitextInput/>: null
+                <MultitextInput formGenerators={forms}/>: null
             }
             {inputType === 'address' ?
-                <AddressInput/>: null
+                <AddressInput formGenerators={forms}/>: null
             }
             {inputType === 'checkbox' ?
-                <CheckBoxInput/>: null
+                <CheckBoxInput formGenerators={forms}/>: null
             }
             {inputType === 'year' ?
-                <YearInput/>: null
+                <YearInput formGenerators={forms}/>: null
             }
             {/*Session.get('botResponseJSON').input.type === 'carmake' ?
                 <CarMakeInput/>: null
