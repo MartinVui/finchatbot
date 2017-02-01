@@ -1313,7 +1313,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 	if (blocName === 'Process payment 3') {
 
 		
-		var botResponse = '2/ Debit order: we had this policy to your existing monthly contract. Your cover will be activated as soon as the next monthly payment will be received';
+		var botResponse = '2/ Debit order: we add this policy to your existing monthly contract. Your cover will be activated as soon as the next monthly payment will be received';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'Process payment 4';
@@ -1371,7 +1371,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 
 		if (text.match(/.*card.*/i)) {
 			
-			var botResponse = 'Ok fine '+data['name']+', I have to gather information to proceed to the payment. Don’t worry, all our converstion is encrypted and completely safe and secure';
+			var botResponse = 'Ok fine '+data['name']+', I have to gather information to proceed to the payment. Don’t worry, all our conversation is encrypted and completely safe and secure';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Card payment';
@@ -1382,7 +1382,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			
 		} else {
 
-			var botResponse = 'Ok fine '+data['name']+', I have to gather information to proceed to the payment. Don’t worry, all our converstion is encrypted and completely safe and secure';
+			var botResponse = 'Ok fine '+data['name']+', I have to gather information to proceed to the payment. Don’t worry, all our conversation is encrypted and completely safe and secure';
 			var image = false;
 			var inReplyto;
 			var nextBlocID = 'Debit order';
