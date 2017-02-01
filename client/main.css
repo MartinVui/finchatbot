@@ -121,7 +121,8 @@ a:visited {
 }
 
 .intro-logo {
-    height: 90%;
+    max-height: 90%;
+    max-width: 90%;
 }
 
 #intro-part2 {
@@ -286,9 +287,9 @@ img.bot_message {
 }
 
 .container {
-    background-image: url("images/cellc-bakground.jpg");
-    background-size: 100% 100%;
-    /*background: #f6f6f6;*/
+    /*background-image: url("images/cellc-bakground.jpg");
+    background-size: 100% 100%;*/
+    background: #f6f6f6;
     height: 100%;
     width: 100%;
     padding-top:10px;
