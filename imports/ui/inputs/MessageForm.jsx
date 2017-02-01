@@ -26,7 +26,17 @@ export default class MessageForm extends Component {
     render() {
     // Decides the type of input that has to be displayed
 
-    //adding a mapper that links this.props.scenarioChildren and the proper UI form element
+    //adding a mapper that links this.props.scenarioChildren to the proper UI form element
+
+    forms = FormGenerators.find({
+      _id:{
+        $in: this.props.scenarioChildren.map((x) => {
+          x['idFormGenerator']
+        })
+      }
+    }).fetch();
+
+    var inputType = forms[0].inputType;
 
     return(
 
@@ -45,28 +55,28 @@ export default class MessageForm extends Component {
 
             <div className='message_form'>
              
-            {Session.get('botResponseJSON').input.type === 'text' ?
+            {inputType === 'text' ?
                 <TextInput/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'buttons' ?
+            {inputType === 'buttons' ?
                 <ButtonList/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'select' ?
+            {inputType === 'select' ?
                 <SelectInput/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'date' ?
+            {inputType === 'date' ?
                 <DateInput/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'multitext' ?
+            {inputType === 'multitext' ?
                 <MultitextInput/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'address' ?
+            {inputType === 'address' ?
                 <AddressInput/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'checkbox' ?
+            {inputType === 'checkbox' ?
                 <CheckBoxInput/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'year' ?
+            {inputType === 'year' ?
                 <YearInput/>: null
             }
             {/*Session.get('botResponseJSON').input.type === 'carmake' ?

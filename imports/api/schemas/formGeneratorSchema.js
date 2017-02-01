@@ -1,5 +1,5 @@
 export var FormGeneratorSchema = new SimpleSchema({
-	input : {
+	inputType : {
 		type : String,
 	},
 	answer : {
