@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Session } from 'meteor/session';
 
 // import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';

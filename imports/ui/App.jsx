@@ -1,9 +1,13 @@
+import { Session } from 'meteor/session'
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import ChatBox from './chatboxNew.jsx';
+
+import { Discussions } from '../api/discussions.js';
+import { scanDiscussion } from '../processes/scanDiscussion.js'
 
 
 class App extends Component {
@@ -27,7 +31,7 @@ App.propTypes = {
 
 export default createContainer(() => {
 
-  var discussion = Discussion.find({_id:Session.get('discussionId')});
+  var discussion = Discussions.find({_id:Session.get('discussionId')});
 
 	return {
 		messages: scanDiscussion(discussion),

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Session } from 'meteor/session';
 
 
 export default class MapMessage extends Component {

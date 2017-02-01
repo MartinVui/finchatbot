@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Session } from 'meteor/session';
 
 // import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';

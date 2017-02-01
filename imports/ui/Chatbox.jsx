@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
-
+import { Session } from 'meteor/session';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 

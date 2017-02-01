@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import emoji from 'react-easy-emoji';
+import { Session } from 'meteor/session';
 
 import MapMessage from './inputs/MapMessage.jsx';
 
