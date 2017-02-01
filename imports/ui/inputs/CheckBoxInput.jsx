@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Session } from 'meteor/session';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 import CheckBox from './CheckBox.jsx';
 
@@ -16,7 +17,7 @@ export default class CheckBoxInput extends Component {
 			checksValue: [],
 		}
 	}
-	
+
 
 	sendBotMessage(json) {		// Always the same function - See AddressInput
 
@@ -26,7 +27,7 @@ export default class CheckBoxInput extends Component {
 
 		setTimeout(function() {
 
-		
+
 			Session.set('botResponseJSON', json);
 
 			if (json.skip === true) {
@@ -36,14 +37,14 @@ export default class CheckBoxInput extends Component {
 
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
-				
+
 				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
 
 				Session.set('showGif', true);
 
 				_this.sendBotMessage(newJson);
 
-					
+
 			} else {
 
 				Session.set('showGif', false);
@@ -51,7 +52,7 @@ export default class CheckBoxInput extends Component {
 
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
-					
+
 			}
 
 		}, typingTime)
@@ -107,16 +108,16 @@ export default class CheckBoxInput extends Component {
 
 
 		text = dataWrapper.replace(/DATA/, text);
-		
+
 		Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
 
 
 		// Insert the bot message
 		Session.set('showGif', true);
-		
+
 		this.sendBotMessage(json);
 
-	}	
+	}
 
 
 
@@ -131,8 +132,8 @@ export default class CheckBoxInput extends Component {
 
 		var checkbox = [];
 
-		this.state.checksValue = []	
-		
+		this.state.checksValue = []
+
 		for (var i = 0; i < Session.get('botResponseJSON').input.checks.length; i++) {
 	     	checkbox.push(<CheckBox value={Session.get('botResponseJSON').input.checks[i].value} key={"check"+i} onUpdate={this.onUpdate.bind(this)}/>);
 

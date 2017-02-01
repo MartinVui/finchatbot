@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
-import { ScenarioSchema } from '../schemas/scenarioSchema.js';
+import { ScenarioSchema } from './schemas/scenarioSchema.js';
 
 export const Scenarios = new Mongo.Collection("scenarios");
 
@@ -9,7 +9,7 @@ Meteor.methods({
 
   'scenario.insert'(scenario) {
     check(scenario, ScenarioSchema);
-    Scenarios.insert(scenario);
+    return Scenarios.insert(scenario);
   },
 
   'scenario.remove'(scenarioId) {

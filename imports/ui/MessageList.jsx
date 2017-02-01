@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
-
-import { Messages } from '../api/messages.js';
-import Message from './Message.jsx';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Session } from 'meteor/session';
+
+// import { Messages } from '../api/messages.js';
+import Message from './Message.jsx';
 
 export default class MessageList extends Component {
 
@@ -17,8 +18,6 @@ export default class MessageList extends Component {
 	handleImageLoad() {
 		this.setState({imageLoaded: true});
 	}
-
-
 
 	componentDidUpdate() {
 		this.scrollDown()
@@ -71,8 +70,8 @@ export default class MessageList extends Component {
 
 			<div className='messages' ref="messageList">
 				<ReactCSSTransitionGroup                // Animation when the messages appear
-				transitionName="example" 
-				transitionEnterTimeout={400} 
+				transitionName="example"
+				transitionEnterTimeout={400}
 				transitionLeaveTimeout={3}>
 
 					<div className="bot_message">
@@ -80,7 +79,7 @@ export default class MessageList extends Component {
 
 					{this.state.imageLoaded  ?	// Only shows the text when the image is loaded. It's ugly otherwise
 						<p className="bot_text">{Session.get('first_message')}</p> :null
-					}  
+					}
 					</div>
 
 					{this.props.messages.map((message, i) => (

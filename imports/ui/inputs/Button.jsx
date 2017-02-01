@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Session } from 'meteor/session';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
-import cars from '../../api/carSample.js';
+// import bloc from '../../api/blocs.js';
+// import cars from '../../api/carSample.js';
 
 export default class Button extends Component {
 // See AddressInput for more info. I won't write all this twice
@@ -19,7 +20,7 @@ export default class Button extends Component {
 
         setTimeout(function() {
 
-        
+
             Session.set('botResponseJSON', json);
 
             // Check if there is a mail to send. Also check the kind of mail. We don't need it on other inputs yet
@@ -43,13 +44,13 @@ export default class Button extends Component {
 
                 // Set the new state of the bot
                 Session.set('nextBlocName', json.nextBlocID);
-                
+
                 var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
 
                 Session.set('showGif', true);
 
                 _this.sendBotMessage(newJson);
-                  
+
             } else {
 
                 Session.set('showGif', false);
@@ -62,7 +63,7 @@ export default class Button extends Component {
 
                 // Set the new state of the bot
                 Session.set('nextBlocName', json.nextBlocID);
-                  
+
             }
 
         }, typingTime)
@@ -73,7 +74,7 @@ export default class Button extends Component {
     onButtonClick() {
 
         const data = this.props.response;   // With the buttons, each button correspond to a response. Yes -> Hell yes Holly!
-                                            // We send this response, not the button text 
+                                            // We send this response, not the button text
 
         if (Session.get('botResponseJSON').createData !== false) {
             var dataName = Session.get('botResponseJSON').createData.dataName;
@@ -83,7 +84,7 @@ export default class Button extends Component {
         }
 
         var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
-        
+
         // The dataWrapper is something cool. If the guy click on the car insurance button, we can write "I am inerested in a car insurance"
         var dataWrapper = Session.get('botResponseJSON').dataWrapper;
 
@@ -92,7 +93,7 @@ export default class Button extends Component {
         Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
 
         Session.set('showGif', true);
-        
+
         this.sendBotMessage(json);
 
     }
@@ -102,9 +103,9 @@ export default class Button extends Component {
 
         if (this.props.buttonText == undefined) {       // That's quite useless now
             return(null);                               // Totally useless
-        }    
+        }
 
-        return( 
+        return(
             <div className="button" //id={this.props.buttonKey}
             onClick={this.onButtonClick.bind(this)}>
             <p>{this.props.buttonText}</p>

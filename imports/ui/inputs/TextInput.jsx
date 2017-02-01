@@ -1,9 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Session } from 'meteor/session';
 
-import { Messages } from '../../api/messages.js';
+import { Answers } from '../../api/answers.js';
+import { Questions } from '../../api/questions.js';
+import { Discussions } from '../../api/discussions.js';
+import { Scenarios } from '../../api/scenarios.js';
+import { FormGenerators } from '../../api/formgenerators.js';
+import { Users } from '../../api/users.js';
+
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 
 export default class TextInput extends Component {
@@ -11,53 +18,6 @@ export default class TextInput extends Component {
 
 
     sendBotMessage(json) {
-        // See AddressInput for more details
-
-        var _this = this;
-
-        var typingTime = 300+json.botResponse.length*20;
-
-        setTimeout(function() {
-
-    
-            Session.set('botResponseJSON', json);
-
-
-            if (json.skip === true) {
-
-                Session.set('showGif', false);
-                Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-
-                if(json.image !== false) {
-                    Session.set('image', json.image);
-                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
-                }
-
-                // Set the new state of the bot
-                Session.set('nextBlocName', json.nextBlocID);
-                
-                var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
-
-                Session.set('showGif', true);
-
-                _this.sendBotMessage(newJson);
-                  
-            } else {
-
-                Session.set('showGif', false);
-                Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-
-                if(json.image !== false) {
-                    Session.set('image', json.image);
-                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
-                }
-
-                // Set the new state of the bot
-                Session.set('nextBlocName', json.nextBlocID);
-              
-            }
-
-        }, typingTime)
 
     }
 
@@ -65,35 +25,23 @@ export default class TextInput extends Component {
 	handleSubmit(event) {
 
         event.preventDefault();
-     
-        var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    
+        const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+        var formGeneratorId = this.props.formGenerators[0]._id;
+    
+        const answer = Meteor.call('answer.insert',{'idFormGenerator':this.props.FormGenerators, 'content':text});
 
-        if (Session.get('botResponseJSON').createData !== false) {
-            var dataName = Session.get('botResponseJSON').createData.dataName;
-            var allData = Session.get('allData');
-            allData[dataName] = text;
-            Session.set('allData',allData);
-        }
 
-        var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
+        answerPile = Discussions.findOne({'_id' : Session.get('SessionId')});
+        answerPile.push(answer._id);
+        Discussions.update(Session.get('SessionId'),
+                $set : {answerPile : answerPile}   
+            );
+    
 
-        Session.set('botResponseJSON', {"quickReplies":[]});
-
-        if(text === "") {
-            var text = "no_text"
-        }
-        else {
-            Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-        }
-      
-
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';
-
-        // Insert the bot message
-        Session.set('showGif', true);
-        
-        this.sendBotMessage(json);
-
+        //nextStep Callback here
+        currentScenario = Scenarios.find({'_id' : this.props.formGenerator[0]._id}).fetchOne();
+        this.props.nextStep(currentScenario._id);
     }
 
 
@@ -101,7 +49,7 @@ export default class TextInput extends Component {
 
 		return(
 			<form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-		       	<input type="text" ref="textInput" placeholder="Write a new message" required/>
+		       	<input type="text" ref="textInput" placeholder={this.props.formGenerator[0].placeholder} required/>
                 {Session.get('isMobile') === true ?
                     <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
                 }

@@ -1,9 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import { Session } from 'meteor/session';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 
 export default class YearInput extends Component {
@@ -19,7 +20,7 @@ export default class YearInput extends Component {
 
 		setTimeout(function() {
 
-		
+
 			Session.set('botResponseJSON', json);
 
 
@@ -35,13 +36,13 @@ export default class YearInput extends Component {
 
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
-				
+
 				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
 
 				Session.set('showGif', true);
 
 				_this.sendBotMessage(newJson);
-					
+
 			} else {
 
 				Session.set('showGif', false);
@@ -54,7 +55,7 @@ export default class YearInput extends Component {
 
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
-					
+
 			}
 
 		}, typingTime)
@@ -90,7 +91,7 @@ export default class YearInput extends Component {
 
 	    // Insert the bot message
 	    Session.set('showGif', true);
-	    
+
 	    this.sendBotMessage(json);
 
 	}
@@ -98,7 +99,7 @@ export default class YearInput extends Component {
 
 	render() {
 
-		
+
 
 		var date = new Date();
 		var year = date.getFullYear();
@@ -107,7 +108,7 @@ export default class YearInput extends Component {
 		for (var i=year; i>=1900; i--) {
 			i=i.toString();
 			years.push(<option key={'year'+i} value={i}>{i}</option>);
-		}		
+		}
 
 		return (
 			<div className="SelectInput">

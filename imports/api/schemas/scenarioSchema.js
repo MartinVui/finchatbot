@@ -1,4 +1,7 @@
 export var ScenarioSchema = new SimpleSchema({
+  initiate : {
+    type : Boolean,
+  },
   idQuestion: {
     type: String,
   },

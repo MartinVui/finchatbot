@@ -1,10 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { Session } from 'meteor/session';
 
-import { Messages } from '../../api/messages.js';
+// import { Messages } from '../../api/messages.js';
+import { Answers } from '../../api/answers.js';
+import { Questions } from '../../api/questions.js';
+import { Discussions } from '../../api/discussions.js';
+import { Scenarios } from '../../api/scenarios.js';
+import { FormGenerators } from '../../api/formgenerators.js';
+import { Users } from '../../api/users.js';
+
 import Message from '../Message.jsx';
-import bloc from '../../api/blocs.js';
+// import bloc from '../../api/blocs.js';
 
 import ButtonList from './ButtonList.jsx';
 import DateInput from './DateInput.jsx';
@@ -18,9 +26,29 @@ import YearInput from './YearInput.jsx';
 
 export default class MessageForm extends Component {
 
-  
+    constructor(props) {
+        super(props);
+    };
+
+
     render() {
     // Decides the type of input that has to be displayed
+
+    //adding a mapper that links this.props.scenarioChildren to the proper UI form element
+
+    forms = FormGenerators.find({
+      _id:{
+        $in: this.props.scenarioChildren.map((x) => {
+          x['idFormGenerator']
+        })
+      }
+    }).fetch();
+
+    console.log(forms);
+    var inputType = forms[0].inputType;
+
+    //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...
+    //SHOULD MAYBE LIMIT THE FORM UI TO ELEMENTARY COMPONENTS THAT ARE ADDED TO THE FINAL FORM
 
     return(
 
@@ -29,8 +57,8 @@ export default class MessageForm extends Component {
         <footer>
 
         {/*<ReactCSSTransitionGroup                // Animation when the messages appear
-            transitionName="footer" 
-            transitionEnterTimeout={500} 
+            transitionName="footer"
+            transitionEnterTimeout={500}
             transitionAppearTimeout={500}
             transitionLeaveTimeout={1500}>*/}
 
@@ -38,30 +66,30 @@ export default class MessageForm extends Component {
         {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappear. Quite smart.
 
             <div className='message_form'>
-             
-            {Session.get('botResponseJSON').input.type === 'text' ?
-                <TextInput/>: null
+
+            {inputType === 'text' ?
+                <TextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'buttons' ?
-                <ButtonList/>: null
+            {inputType === 'buttons' ?
+                <ButtonList formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'select' ?
-                <SelectInput/>: null
+            {inputType === 'select' ?
+                <SelectInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'date' ?
-                <DateInput/>: null
+            {inputType === 'date' ?
+                <DateInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'multitext' ?
-                <MultitextInput/>: null
+            {inputType === 'multitext' ?
+                <MultitextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'address' ?
-                <AddressInput/>: null
+            {inputType === 'address' ?
+                <AddressInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'checkbox' ?
-                <CheckBoxInput/>: null
+            {inputType === 'checkbox' ?
+                <CheckBoxInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {Session.get('botResponseJSON').input.type === 'year' ?
-                <YearInput/>: null
+            {inputType === 'year' ?
+                <YearInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {/*Session.get('botResponseJSON').input.type === 'carmake' ?
                 <CarMakeInput/>: null

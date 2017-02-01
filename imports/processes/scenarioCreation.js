@@ -8,8 +8,9 @@ export function interpretJSON(inputText) {
     var obj = JSON.parse(inputText);
 
     //Process
-    obj = processObject(obj, [], []);
-    console.log(obj);
+    var newObjects = {"questions":[], "forms":[]};
+    obj = processObject(obj, newObjects);
+    console.log(newObjects);
 
     output = JSON.stringify(obj, {indent: true});
 
@@ -23,19 +24,21 @@ export function interpretJSON(inputText) {
 }
 
 
-function processObject(obj) {
+function processObject(obj, newObjects) {
 
   if (obj.hasOwnProperty('question')) {
+    newObjects["questions"].push(obj['question'])
     console.log(obj['question']);
   }
 
   for (var answer of obj['answers']) {
 
     if (answer.hasOwnProperty('answer')) {
+      newObjects["forms"].push(answer['answer'])
       console.log(answer['answer']);
     }
     if (answer.hasOwnProperty('next')) {
-      processObject(answer['next']);
+      processObject(answer['next'], newObjects);
     }
   }
 
