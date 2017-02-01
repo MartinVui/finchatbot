@@ -6,6 +6,10 @@ export var FormGeneratorSchema = new SimpleSchema({
 		type : String,
 		optional : true
 	},
+	options : {
+		type : Array,
+		optional : true
+	},
 	answer : {
     type : AnswerDataSchema,
 	}

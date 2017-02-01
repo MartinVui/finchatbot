@@ -2,6 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
+import { Answers } from '../../api/answers.js';
+import { Questions } from '../../api/questions.js';
+import { Discussions } from '../../api/discussions.js';
+import { Scenarios } from '../../api/scenarios.js';
+import { FormGenerators } from '../../api/formgenerators.js';
+import { Users } from '../../api/users.js';
+
 // import { Messages } from '../../api/messages.js';
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
@@ -13,7 +20,7 @@ export default class SelectInput extends Component {
 	constructor() {
 		super();
 		this.state = {
-			value: Session.get('botResponseJSON').input.text,
+			value: this.props.forms[0].placeholder,
 		};
 	}
 
@@ -23,95 +30,26 @@ export default class SelectInput extends Component {
   	}
 
 
-	sendBotMessage(json) {
-		// See AddressInput for more details
-
-		var _this = this;
-
-		var typingTime = 300+json.botResponse.length*20;
-
-		setTimeout(function() {
-
-
-			Session.set('botResponseJSON', json);
-
-
-			if (json.skip === true) {
-
-				Session.set('showGif', false);
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-
-				if(json.image !== false) {
-		          	Session.set('image', json.image);
-		          	Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
-		        }
-
-				// Set the new state of the bot
-				Session.set('nextBlocName', json.nextBlocID);
-
-				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
-
-				Session.set('showGif', true);
-
-				_this.sendBotMessage(newJson);
-
-			} else {
-
-				Session.set('showGif', false);
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-
-				if(json.image !== false) {
-		         	Session.set('image', json.image);
-		          	Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
-		        }
-
-				// Set the new state of the bot
-				Session.set('nextBlocName', json.nextBlocID);
-
-			}
-
-		}, typingTime)
-
-	}
 
 
 	onButtonClick() {
+			const text = ReactDOM.findDOMNode(this.refs.selectInput).value;
+        	var formGeneratorId = this.props.formGenerators[0]._id;
+		
+        	const answer = Meteor.call('answer.insert',{'idFormGenerator':this.props.FormGenerators, 'content':text});
 
+        	answerPile = Discussions.findOne({'_id' : Session.get('SessionId')});
+        	answerPile.push(answer._id);
+        	Discussions.update(Session.get('SessionId'),
+                $set : {answerPile : answerPile}   
+            );
 
+            currentScenario = Scenarios.find({'_id' : this.props.formGenerator[0]._id}).fetchOne();
+        	this.props.nextStep(currentScenario._id);
 
-		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
-		//var data = ReactDOM.findDOMNode(this.refs.content).value.trim();
-		var data = this.state.value;
-
-		if (data == Session.get('botResponseJSON').input.text) {
-			return;
+        	//Saving several times the same answer value if several users choose the same for now
 		}
-
-		else {
-
-			if (Session.get('botResponseJSON').createData !== false) {
-	      		var dataName = Session.get('botResponseJSON').createData.dataName;
-	      		var allData = Session.get('allData');
-	      		allData[dataName] = data;
-	      		Session.set('allData',allData);
-	    	}
-
-	   		var json = bloc(data, Session.get('nextBlocName'), Session.get('allData'));
-
-			if(data === "") {
-		      var data = "no_text";
-		    }
-		    else {
-		    	var text = dataWrapper.replace(/DATA/, data);
-		    	Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-		    }
-
-		    // Insert the bot message
-		    Session.set('showGif', true);
-
-		    this.sendBotMessage(json);
-		}
-	}
+	
 
 
 
@@ -119,17 +57,18 @@ export default class SelectInput extends Component {
 	render() {
 		// Shows a select input with the values we decided
 
-		var options = [];
-		for (var i=0; i<Session.get('botResponseJSON').input.choices.length; i++) {
-			options.push(<option key={'select'+i} value={Session.get('botResponseJSON').input.choices[i].value}>{Session.get('botResponseJSON').input.choices[i].value}</option>);
+		var options = this.props.forms[0].options;
+		var optionsUi = [];
+		for (option in options) {
+			optionsUi.push(<option value={option}>{option}</option>);
 		}
 
 		return(
 			<div className="SelectInput">
 
- 				<select value={this.state.value} onChange={this.handleChange.bind(this)} className="scroll-input">
- 					<option value={Session.get('botResponseJSON').input.text} disabled>{Session.get('botResponseJSON').input.text}</option>
- 		            {options}
+ 				<select ref='selectInput' onChange={this.handleChange.bind(this)} className="scroll-input">
+ 					<option value={this.state.value} disabled>{this.state.value}</option>
+ 		            {optionsUi}
 				</select>
  		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>
  		    </div>
