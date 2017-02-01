@@ -110,7 +110,7 @@ a:visited {
     align-items: center;
     justify-content: center;
     cursor: default;
-    background-color: black;
+    background-color: #fc0000;
 }
 
 #intro-part1 {
@@ -286,9 +286,9 @@ img.bot_message {
 }
 
 .container {
-    background-image: url("images/cellc-bakground.jpg");
-    background-size: 100% 100%;
-    /*background: #f6f6f6;*/
+    /*background-image: url("images/cellc-bakground.jpg");
+    background-size: 100% 100%;*/
+    background: #f6f6f6;
     height: 100%;
     width: 100%;
     padding-top:10px;
