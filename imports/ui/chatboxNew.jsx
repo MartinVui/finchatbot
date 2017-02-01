@@ -38,9 +38,9 @@ export default class ChatBox extends Component {
     // Choose scenario
     var initScenario = scenarioPicker();
     // Create discussion in DB
-    var discussion = Meteor.call('discussion-insert',{'idUser':user._id , 'idScenario':initScenario});
+    var discussion = Meteor.call('discussion-insert',{'idUser':user , 'idScenario':initScenario});
     // Add discussion id to the session
-    Session.set('SessionId' , discussion._id);
+    Session.set('SessionId' , discussion);
     // Return scenario Id
     this.nextStep(initScenario._id);
 	}
