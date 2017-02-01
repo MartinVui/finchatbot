@@ -32,8 +32,9 @@ export default class ChatBox extends Component {
     // Set show messages instead of intro
     this.setState({showIntro:false});
 
-    // Create User in DB
-    var user = Meteor.call('user-insert',{});
+    console.log(this.state);
+    var user = Meteor.call('user.insert',{"data":{"test":true}});
+
     // Choose scenario
     var initScenario = scenarioPicker();
     // Create discussion in DB
@@ -53,7 +54,7 @@ export default class ChatBox extends Component {
 
     //Ask question
 
-    Session.set('showGif' , true);  
+    Session.set('showGif' , true);
 
 
     // Find formGenerators

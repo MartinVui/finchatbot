@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { UserSchema } from './schemas/userSchema.js';
 
 export const Users = new Mongo.Collection("users");
 
 Meteor.methods({
-    'user.insert' () {
-        check(user , UserSchema);
+    'user.insert' (user) {
+        check(user, UserSchema);
         return Users.insert(user);
     },
     'user.remove' (userId){
