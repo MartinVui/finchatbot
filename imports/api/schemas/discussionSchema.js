@@ -1,4 +1,4 @@
-export var AnswerSchema = new SimpleSchema({
+export var DiscussionSchema = new SimpleSchema({
 	idUser : {
 		type : String,
 		optional : true,

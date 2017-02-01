@@ -63,7 +63,7 @@ export default class TextInput extends Component {
 		event.preventDefault();
 
 
-		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
+/*		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
 
 		var text1 = ReactDOM.findDOMNode(this.refs.textInput1).value.trim();
 		var text2 = ReactDOM.findDOMNode(this.refs.textInput2).value.trim();
@@ -95,7 +95,9 @@ export default class TextInput extends Component {
 		// Insert the bot message
 		Session.set('showGif', true);
 
-		this.sendBotMessage(json);
+		this.sendBotMessage(json); 
+*/
+	
 
 	}
 

@@ -10,8 +10,10 @@ export function scanDiscussion(discussion) {
 
   if (discussion.hasOwnProperty('answers')) {
     for (var answerId of discussion['answers']) {
-
-      messages.push(Questions.findOne({_id:scenario['idQuestion']}));
+      var questions = Questions.findOne({_id:scenario['idQuestion']});
+      for (question of questions.content) {
+        messages.push(question);
+      }
       messages.push(Answers.findOne({_id:answerId}));
 
       var chosenAnswer = scenario['children'].filter(function ( obj ) {
@@ -27,5 +29,7 @@ export function scanDiscussion(discussion) {
   }
 
   return messages;
+
+}
 
 }

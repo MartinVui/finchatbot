@@ -1,7 +1,7 @@
 export var AnswerSchema = new SimpleSchema({
-  idFormGenerator: {
-    type: String,
-  },
+  	idFormGenerator: {
+    	type: String,
+  	},
 	content: {
 		type: Object,
     blackbox: true
