@@ -10,7 +10,7 @@ import { Scenarios } from '../api/scenarios.js';
 import { Questions } from '../api/questions.js';
 import { FormGenerators } from '../api/formgenerators.js';
 
-import scenarioPicker from '../processes/scenarioPicker.js';
+import {scenarioPicker} from '../processes/scenarioPicker.js';
 
 import Message from './Message.jsx';
 import MessageForm from './inputs/MessageForm.jsx';
