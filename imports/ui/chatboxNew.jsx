@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
+import { Meteor } from '../../../metor/meteor';
 
 import { Users } from '../api/users.js';
 import { Discussions } from '../api/discussions.js';
@@ -32,13 +33,30 @@ export default class ChatBox extends Component {
     // Set show messages instead of intro
     this.setState({showIntro:false});
 
-    var user = Meteor.call('user.insert',{"data":{"test":true}});
+    var user = Meteor.call('user.insert',{"data":{"test":true}},
+    	, 
+    	function(error, result)
+    	{
+    		if (error) {
+    			console.log(error);
+    		}
+    		return;
+    	}
+    );
     console.log(user);
 
     // Choose scenario
     var initScenario = scenarioPicker();
     // Create discussion in DB
-    var discussion = Meteor.call('discussion.insert',{'idUser':user , 'idScenario':initScenario});
+    var discussion = Meteor.call('discussion.insert',{'idUser':user , 'idScenario':initScenario}, 
+    	function(error, result)
+    	{
+    		if (error) {
+    			console.log(error);
+    		}
+    		return;
+    	}
+    );
     // Add discussion id to the session
     Session.set('SessionId' , discussion);
     // Return scenario Id
