@@ -34,13 +34,13 @@ export default class ChatBox extends Component {
     this.setState({showIntro:false});
 
     var user = Meteor.call('user.insert',{"data":{"test":true}},
-    	, 
     	function(error, result)
     	{
     		if (error) {
     			console.log(error);
+    			return;
     		}
-    		return;
+    		return result;
     	}
     );
     console.log(user);
@@ -53,8 +53,9 @@ export default class ChatBox extends Component {
     	{
     		if (error) {
     			console.log(error);
+    			return;
     		}
-    		return;
+    		return result;
     	}
     );
     // Add discussion id to the session
