@@ -44,11 +44,11 @@ export default class ChatBox extends Component {
 
         // Choose scenario
         var initScenario = scenarioPicker();
-        console.log(initScenario);
+        console.log(initScenario._id);
 
 
         // Create discussion in DB
-        var discussion = Meteor.call('discussion.insert',{'idUser':userId , 'idScenario':initScenario},
+        var discussion = Meteor.call('discussion.insert',{'idUser':userId , 'idScenario':initScenario._id},
         	function(error, discussionId)
         	{
         		if (error) {
@@ -60,6 +60,9 @@ export default class ChatBox extends Component {
 
             // Add discussion id to the session
             Session.set('SessionId' , discussionId);
+            console.log(Session);
+
+
             // Return scenario Id
             this.nextStep(initScenario._id);
 
