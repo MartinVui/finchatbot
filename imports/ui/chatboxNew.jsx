@@ -48,7 +48,13 @@ export default class ChatBox extends Component {
 
 
         // Create discussion in DB
-        var discussion = Meteor.call('discussion.insert',{'idUser':userId , 'idScenario':initScenario._id},
+        var discussion = Meteor.call(
+          'discussion.insert',
+          {
+            'idUser':userId ,
+            'idScenario':initScenario._id,
+            'answersPile':[{}]
+          },
         	function(error, discussionId)
         	{
         		if (error) {
