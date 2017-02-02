@@ -35,21 +35,21 @@ export default class SelectInput extends Component {
 	onButtonClick() {
 			const text = ReactDOM.findDOMNode(this.refs.selectInput).value;
         	var formGeneratorId = this.props.formGenerators[0]._id;
-		
+
         	const answer = Meteor.call('answer.insert',{'idFormGenerator':this.props.FormGenerators, 'content':text});
 
         	answerPile = Discussions.findOne({'_id' : Session.get('SessionId')});
         	answerPile.push(answer._id);
         	Discussions.update(Session.get('SessionId'),
-                $set : {answerPile : answerPile}   
+                $set : {answerPile : answerPile}
             );
 
-            currentScenario = Scenarios.find({'_id' : this.props.formGenerator[0]._id}).fetchOne();
+            currentScenario = Scenarios.findOne({'_id' : this.props.formGenerator[0]._id});
         	this.props.nextStep(currentScenario._id);
 
         	//Saving several times the same answer value if several users choose the same for now
 		}
-	
+
 
 
 
