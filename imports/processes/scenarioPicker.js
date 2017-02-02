@@ -7,7 +7,7 @@ export function scenarioPicker(){
   if (InitScenarios.length != 0) {
 
 	  choice = Random.choice(InitScenarios);
-	  console.log(choice);
+	  // console.log(choice);
 	  return choice;
 
   } else {

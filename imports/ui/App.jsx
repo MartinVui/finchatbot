@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import ChatBox from './chatboxNew.jsx';
+import ChatBox from './Chatbox.jsx';
 
 import { Discussions } from '../api/discussions.js';
 import { scanDiscussion } from '../processes/scanDiscussion.js'

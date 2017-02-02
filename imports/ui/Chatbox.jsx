@@ -1,16 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
+import { Users } from '../api/users.js';
+import { Discussions } from '../api/discussions.js';
+import { Scenarios } from '../api/scenarios.js';
+import { Questions } from '../api/questions.js';
+import { FormGenerators } from '../api/formgenerators.js';
 
-// import { Messages } from '../api/messages.js';
+import {scenarioPicker} from '../processes/scenarioPicker.js';
+
 import Message from './Message.jsx';
-// import bloc from '../api/blocs.js';
-
 import MessageForm from './inputs/MessageForm.jsx';
-
 import MessageList from './MessageList.jsx';
 
 export default class ChatBox extends Component {
@@ -19,71 +22,96 @@ export default class ChatBox extends Component {
 		super();
 		this.state = {
 			showIntro: true,
+			children: [],
 		};
 	}
 
 
-	// hideIntro() {
+	startConversation() {
 
-	// 	var introduction = ReactDOM.findDOMNode(this.refs.introduction);
+    // Set show messages instead of intro
+    this.setState({showIntro:false});
 
-	// 	console.log('yoyo');
-	// 	console.log(introduction.style.top);
+    Meteor.call('user.insert',{"data":{"test":true}},
+    	function(error, userId)
+    	{
+    		if (error) {
+    			console.log(error);
+    			return;
+    		}
 
-	// 	result = introduction.style.top = parseFloat(introduction.style.top) + 1 + "vh";
+        console.log(userId);
 
-	// 	if (parseFloat(result) < 100) {
-	// 		setTimeout(hideIntro,10);
-	// 	}
-	// 	else {
-	// 		this.setState({showIntro: false});
-	// 	}
-	// }
-
-
-	startConversation() {	// I think it sends the first message. I did this a loooong time ago
-
-		this.setState({showIntro:false});
-
-		// Get the first JSON response of the bot
-		var json = bloc('start', 'Hi');
+        // Choose scenario
+        var initScenario = scenarioPicker();
+        console.log(initScenario._id);
 
 
-		Session.set('botResponseJSON', json);
+        // Create discussion in DB
+        Meteor.call(
+          'discussion.insert',
+          {
+            'idUser':userId ,
+            'idScenario':initScenario._id,
+            'answersPile':[{}]
+          },
+        	function(error, discussionId)
+        	{
+        		if (error) {
+        			console.log(error);
+        			return;
+        		}
 
-		// I didn't want to store the first message in the db. It would create a doc every time someone visit the website, without even using the bot
-		// Delete this when we stop storing the bot messages in the db
+            console.log(discussionId);
 
-		Session.set('first_message', json.botResponse);
-
-
-		// Set the next state of the bot
-		Session.set('nextBlocName', json.nextBlocID);
-
-		var text = "Yo that's a text!";
-
-		if (json.skip === true) {
-
-
-		    // var json = bloc(text, Session.get('nextBlocName'));
-		    var json2 = bloc(text, Session.get('nextBlocName'));
-
-		    Session.set('showGif', true);
-		    var TIMEOUT2 = setTimeout(function() {
-		        Session.set('botResponseJSON', json2);
-		        Session.set('showGif', false);
-
-
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+            // Add discussion id to the session
+            Session.set('SessionId' , discussionId);
 
 
 
-		        // Set the new state of the bot
-		        Session.set('nextBlocName', json2.nextBlocID);
-		    },2500);
+            // Return scenario Id
+            this.nextStep(initScenario._id);
+
+        	}
+        );
+    	}
+    );
+	};
+
+  nextStep(scenarioId) {
+
+    // Find scenario in DB
+    scenario = Scenarios.findOne({_id:scenarioId});
+    // Find question(s)
+    question = Questions.findOne({_id:scenario['idQuestion']});
+
+    //Ask question
+
+    Session.set('showGif' , true);
+    console.log(Session);
+
+    // Find formGenerators
+    forms = FormGenerators.find({
+      _id:{
+        $in: scenario['children'].map((x) => {
+          x['idFormGenerator']
+        })
       }
-	}
+    }).fetch();
+    console.log(forms);
 
+    // Display formGenerators, with the idScenario
+    this.state.children = scenario.children;
+    // The form subcomponent will use a callback to nextStep with the right scenario
+
+  }
+
+
+  newAnswer(data) {
+
+    // The form subcomponent will use a callback to newAnswer to save user generated content
+
+  }
 
 
 	render() {
@@ -124,7 +152,7 @@ export default class ChatBox extends Component {
 
 
 			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit}/>:null
+			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={this.state.children} nextStep={this.nextStep} />:null
 			        }
 
 

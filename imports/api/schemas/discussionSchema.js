@@ -8,7 +8,10 @@ export var DiscussionSchema = new SimpleSchema({
 		optional : true,
 	},
 	answersPile : {
-		type : Object,
+		type : Array
+	},
+  'answersPile.$' : {
+    type : Object,
 		blackbox : true,
-	}
+  }
 })
