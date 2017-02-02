@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
-import { Meteor } from '../../../metor/meteor';
 
 import { Users } from '../api/users.js';
 import { Discussions } from '../api/discussions.js';
