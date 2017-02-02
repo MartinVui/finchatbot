@@ -18,27 +18,28 @@ import MessageList from './MessageList.jsx';
 
 export default class ChatBox extends Component {
 
-	constructor() {
-		super();
-		this.state = {
-			showIntro: true,
-			children: [],
-		};
-	}
+  constructor() {
+    super();
+    this.state = {
+      showIntro: true,
+      children: [],
+    };
+  }
 
 
-	startConversation() {
+  startConversation() {
 
     // Set show messages instead of intro
     this.setState({showIntro:false});
-
+    var test0 = this.nextStep("1");
+    console.log(test0);
     Meteor.call('user.insert',{"data":{"test":true}},
-    	function(error, userId)
-    	{
-    		if (error) {
-    			console.log(error);
-    			return;
-    		}
+      function(error, userId)
+      {
+        if (error) {
+          console.log(error);
+          return;
+        }
 
         console.log(userId);
 
@@ -55,28 +56,28 @@ export default class ChatBox extends Component {
             'idScenario':initScenario._id,
             'answersPile':[{}]
           },
-        	function(error, discussionId)
-        	{
-        		if (error) {
-        			console.log(error);
-        			return;
-        		}
+          function(error, discussionId)
+          {
+            if (error) {
+              console.log(error);
+              return;
+            }
 
             console.log(discussionId);
 
             // Add discussion id to the session
             Session.set('SessionId' , discussionId);
-
+            console.log(Session);
 
 
             // Return scenario Id
             this.nextStep(initScenario._id);
 
-        	}
+          }
         );
-    	}
+      }
     );
-	};
+  };
 
   nextStep(scenarioId) {
 
@@ -88,23 +89,26 @@ export default class ChatBox extends Component {
     //Ask question
 
     Session.set('showGif' , true);
-    console.log(Session);
+    
 
     // Find formGenerators
     forms = FormGenerators.find({
       _id:{
-        $in: scenario['children'].map((x) => {
-          x['idFormGenerator']
+        $in: scenario.children.map((x) => {
+          return x.idFormGenerator;
         })
       }
     }).fetch();
+
     console.log(forms);
 
     // Display formGenerators, with the idScenario
     this.state.children = scenario.children;
+    return scenario.children;
     // The form subcomponent will use a callback to nextStep with the right scenario
 
   }
+  
 
 
   newAnswer(data) {
@@ -114,50 +118,50 @@ export default class ChatBox extends Component {
   }
 
 
-	render() {
+  render() {
 
-		return(
-			<div>
-				<div className="container">
-
-
-				<ReactCSSTransitionGroup                // Animation when the messages appear
-					transitionName="introduction"
-					transitionEnterTimeout={1}
-					transitionLeaveTimeout={1000}>
-
-					{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
-						<div className="introduction" >
-							<div id="intro-part1">
-								<img src="images/logo.png" className="intro-logo"/>
-							</div>
-							<div id="intro-part2">
-								<h1>FinChatBot</h1>
-								<h2>Your personal assisant</h2>
-								<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
-							</div>
-						</div> :null
-					}
-
-				</ReactCSSTransitionGroup>
-
-		        	{/*this.state.showIntro === false ?
-			        	<div className="conversation">
-			        		<MessageList messages={this.props.messages}/>
-			        	</div>:null
-			        */}
-			        	<div className="conversation">
-			        		<MessageList messages={this.props.messages}/>
-			        	</div>
+    return(
+      <div>
+        <div className="container">
 
 
-			        {this.state.showIntro === false ?
-			        	<MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={this.state.children} nextStep={this.nextStep} />:null
-			        }
+        <ReactCSSTransitionGroup                // Animation when the messages appear
+          transitionName="introduction"
+          transitionEnterTimeout={1}
+          transitionLeaveTimeout={1000}>
+
+          {this.state.showIntro ?   // Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
+            <div className="introduction" >
+              <div id="intro-part1">
+                <img src="images/logo.png" className="intro-logo"/>
+              </div>
+              <div id="intro-part2">
+                <h1>FinChatBot</h1>
+                <h2>Your personal assisant</h2>
+                <p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
+              </div>
+            </div> :null
+          }
+
+        </ReactCSSTransitionGroup>
+
+              {/*this.state.showIntro === false ?
+                <div className="conversation">
+                  <MessageList messages={this.props.messages}/>
+                </div>:null
+              */}
+                <div className="conversation">
+                  <MessageList messages={this.props.messages}/>
+                </div>
 
 
-	     		</div>
-     		</div>
-	    );
-	}
+              {this.state.showIntro === false ?
+                <MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={this.state.children} nextStep={this.nextStep} />:null
+              }
+
+
+          </div>
+        </div>
+      );
+  }
 }
