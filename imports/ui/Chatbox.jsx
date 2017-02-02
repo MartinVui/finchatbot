@@ -66,7 +66,7 @@ export default class ChatBox extends Component {
 
             // Add discussion id to the session
             Session.set('SessionId' , discussionId);
-            
+
 
 
             // Return scenario Id
