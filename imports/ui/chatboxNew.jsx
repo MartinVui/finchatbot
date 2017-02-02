@@ -33,34 +33,40 @@ export default class ChatBox extends Component {
     this.setState({showIntro:false});
 
     var user = Meteor.call('user.insert',{"data":{"test":true}},
-    	function(error, result)
+    	function(error, userId)
     	{
     		if (error) {
     			console.log(error);
     			return;
     		}
-    		return result;
-    	}
-    );
-    console.log(user);
 
-    // Choose scenario
-    var initScenario = scenarioPicker();
-    // Create discussion in DB
-    var discussion = Meteor.call('discussion.insert',{'idUser':user , 'idScenario':initScenario}, 
-    	function(error, result)
-    	{
-    		if (error) {
-    			console.log(error);
-    			return;
-    		}
-    		return result;
+        console.log(userId);
+
+        // Choose scenario
+        var initScenario = scenarioPicker();
+        console.log(initScenario);
+
+
+        // Create discussion in DB
+        var discussion = Meteor.call('discussion.insert',{'idUser':userId , 'idScenario':initScenario},
+        	function(error, discussionId)
+        	{
+        		if (error) {
+        			console.log(error);
+        			return;
+        		}
+
+            console.log(discussionId);
+
+            // Add discussion id to the session
+            Session.set('SessionId' , discussionId);
+            // Return scenario Id
+            this.nextStep(initScenario._id);
+
+        	}
+        );
     	}
     );
-    // Add discussion id to the session
-    Session.set('SessionId' , discussion);
-    // Return scenario Id
-    this.nextStep(initScenario._id);
 	}
 
   nextStep(scenarioId) {
