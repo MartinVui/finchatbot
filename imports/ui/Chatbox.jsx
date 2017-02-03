@@ -18,7 +18,7 @@ import MessageList from './MessageList.jsx';
 
 
 
-function nextStepExt(instance, scenarioId) {
+function nextStepExt(scenarioId) {
 
   // Find scenario in DB
   scenario = Scenarios.findOne({_id:scenarioId});
@@ -76,8 +76,6 @@ export default class ChatBox extends Component {
 
         // Choose scenario
         var initScenario = scenarioPicker();
-        // console.log(initScenario._id);
-
 
         // Create discussion in DB
         Meteor.call(
@@ -101,9 +99,10 @@ export default class ChatBox extends Component {
             // console.log(Session);
 
             // Return scenario Id
-            children = nextStepExt(this, initScenario._id);
+            children = nextStepExt(initScenario._id);
+            console.log(children);
             // this.setState({children:children});
-
+            Session.set('children', children);
           }
         );
       }
@@ -112,8 +111,9 @@ export default class ChatBox extends Component {
 
   nextStep(scenarioId) {
 
-    children = nextStepExt(this, scenarioId);
-    this.setState({children:children});
+    children = nextStepExt(scenarioId);
+    Session.set('children', children);
+
 
     // // Find scenario in DB
     // scenario = Scenarios.findOne({_id:scenarioId});
@@ -142,15 +142,6 @@ export default class ChatBox extends Component {
     // // The form subcomponent will use a callback to nextStep with the right scenario
 
   }
-
-
-
-  newAnswer(data) {
-
-    // The form subcomponent will use a callback to newAnswer to save user generated content
-
-  }
-
 
   render() {
 
@@ -190,7 +181,7 @@ export default class ChatBox extends Component {
 
 
               {this.state.showIntro === false ?
-                <MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={this.state.children} nextStep={this.nextStep} />:null
+                <MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={Session.get('children')} nextStep={this.nextStep} />:null
               }
 
 
