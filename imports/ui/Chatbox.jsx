@@ -16,6 +16,42 @@ import Message from './Message.jsx';
 import MessageForm from './inputs/MessageForm.jsx';
 import MessageList from './MessageList.jsx';
 
+
+
+function nextStepExt(instance, scenarioId) {
+
+  console.log("Fuck");
+
+  // Find scenario in DB
+  scenario = Scenarios.findOne({_id:scenarioId});
+  // Find question(s)
+  question = Questions.findOne({_id:scenario['idQuestion']});
+
+  //Ask question
+
+  Session.set('showGif' , true);
+
+
+  // Find formGenerators
+  forms = FormGenerators.find({
+    _id:{
+      $in: scenario.children.map((x) => {
+        return x.idFormGenerator;
+      })
+    }
+  }).fetch();
+
+  console.log(forms);
+
+  // Display formGenerators, with the idScenario
+  instance.setState({children:scenario.children});
+  console.log('test');
+  return scenario.children;
+  // The form subcomponent will use a callback to nextStep with the right scenario
+
+}
+
+
 export default class ChatBox extends Component {
 
   constructor() {
@@ -31,9 +67,8 @@ export default class ChatBox extends Component {
 
     // Set show messages instead of intro
     this.setState({showIntro:false});
-    var test0 = this.nextStep("1");
-    console.log(test0);
-    Meteor.call('user.insert',{"data":{"test":true}},
+
+    Meteor.call('user.insert',{"data":{}},
       function(error, userId)
       {
         if (error) {
@@ -69,9 +104,8 @@ export default class ChatBox extends Component {
             Session.set('SessionId' , discussionId);
             console.log(Session);
 
-
             // Return scenario Id
-            this.nextStep(initScenario._id);
+            nextStepExt(this, initScenario._id);
 
           }
         );
@@ -81,34 +115,36 @@ export default class ChatBox extends Component {
 
   nextStep(scenarioId) {
 
-    // Find scenario in DB
-    scenario = Scenarios.findOne({_id:scenarioId});
-    // Find question(s)
-    question = Questions.findOne({_id:scenario['idQuestion']});
+    nextStepExt(this, scenarioId);
 
-    //Ask question
-
-    Session.set('showGif' , true);
-    
-
-    // Find formGenerators
-    forms = FormGenerators.find({
-      _id:{
-        $in: scenario.children.map((x) => {
-          return x.idFormGenerator;
-        })
-      }
-    }).fetch();
-
-    console.log(forms);
-
-    // Display formGenerators, with the idScenario
-    this.state.children = scenario.children;
-    return scenario.children;
-    // The form subcomponent will use a callback to nextStep with the right scenario
+    // // Find scenario in DB
+    // scenario = Scenarios.findOne({_id:scenarioId});
+    // // Find question(s)
+    // question = Questions.findOne({_id:scenario['idQuestion']});
+    //
+    // //Ask question
+    //
+    // Session.set('showGif' , true);
+    //
+    //
+    // // Find formGenerators
+    // forms = FormGenerators.find({
+    //   _id:{
+    //     $in: scenario.children.map((x) => {
+    //       return x.idFormGenerator;
+    //     })
+    //   }
+    // }).fetch();
+    //
+    // console.log(forms);
+    //
+    // // Display formGenerators, with the idScenario
+    // this.state.children = scenario.children;
+    // return scenario.children;
+    // // The form subcomponent will use a callback to nextStep with the right scenario
 
   }
-  
+
 
 
   newAnswer(data) {

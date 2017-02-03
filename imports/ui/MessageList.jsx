@@ -65,6 +65,8 @@ export default class MessageList extends Component {
 
 
 	render() {
+		console.log("messages");
+    console.log(this.props.messages);
 
 		return (
 
