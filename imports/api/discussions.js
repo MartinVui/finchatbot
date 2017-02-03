@@ -8,8 +8,8 @@ export const Discussions = new Mongo.Collection("discussions");
 Meteor.methods({
 	'discussion.insert'(discussion){
 		check(discussion , DiscussionSchema);
-		var newDiscussion = Discussions.insert(discussion);
-		return newDiscussion;
+     	var newDiscussion = Discussions.insert(discussion);
+     	return newDiscussion;
 	},
 	'discussion.remove'(discussionId){
 		check(discussionId , String);

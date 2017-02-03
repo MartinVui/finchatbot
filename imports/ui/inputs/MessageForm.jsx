@@ -39,12 +39,14 @@ export default class MessageForm extends Component {
     forms = FormGenerators.find({
       _id:{
         $in: this.props.scenarioChildren.map((x) => {
-          x['idFormGenerator']
+          return x['idFormGenerator'];
         })
       }
     }).fetch();
 
-    // console.log(forms);
+
+
+    //console.log(forms);
     var inputType = forms[0].inputType;
 
     //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...

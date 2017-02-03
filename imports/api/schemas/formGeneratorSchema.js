@@ -6,6 +6,10 @@ export var FormGeneratorSchema = new SimpleSchema({
 		type : String,
 		optional : true
 	},
+	value : {
+		type : String,
+		optional : true
+	},
 	options : {
 		type : Array,
 		optional : true
@@ -15,7 +19,7 @@ export var FormGeneratorSchema = new SimpleSchema({
 		blackbox : true
 	},
 	answer : {
-    type : AnswerDataSchema,
+    	type : AnswerDataSchema,
 	}
 });
 

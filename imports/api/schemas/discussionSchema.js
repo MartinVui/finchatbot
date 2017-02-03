@@ -11,7 +11,6 @@ export var DiscussionSchema = new SimpleSchema({
 		type : Array
 	},
   'answersPile.$' : {
-    type : Object,
-		blackbox : true,
+    type : String,
   }
 })
