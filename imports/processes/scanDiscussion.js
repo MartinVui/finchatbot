@@ -16,20 +16,25 @@ export function scanDiscussion(discussion) {
     //console.log(questions);
 
     for (question of questions.content) {
-      //console.log(question);
-      messages.push({"text":question, "author":"bot"});
+      if (question != {}) {
+        messages.push({"text":question, "author":"bot"});
+      }
     }
 
-    //console.log(messages);
+    if (answerId !== "") {
 
-    var chosenAnswer = scenario['children'].filter(function ( obj ) {
-      return obj['idFormGenerator'] === Answers.findOne({_id:answerId})['idFormGenerator'];
-    })[0];
+      var chosenAnswerId = scenario['children'].filter(function ( obj ) {
+        return obj['idFormGenerator'] === Answers.findOne({_id:answerId})['idFormGenerator'];
+      })[0];
+      var chosenAnswer = Answers.findOne({_id:chosenAnswerId});
 
-    if (typeof chosenAnswer === "undefined") {
-      console.log("Problem in discussion");
-    } else {
-      scenario = Scenarios.findOne({_id:chosenAnswer['idScenario']});
+
+      if (typeof chosenAnswer === "undefined") {
+        console.log("Problem in discussion");
+      } else {
+        messages.push({"text":chosenAnswer.content.text, "author":"user"});
+        scenario = Scenarios.findOne({_id:chosenAnswer['idScenario']});
+      }
     }
   }
   console.log(messages);

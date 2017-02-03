@@ -83,7 +83,7 @@ export default class ChatBox extends Component {
           {
             'idUser':userId ,
             'idScenario':initScenario._id,
-            'answersPile':[{}]
+            'answersPile':[""]
           },
           function(error, discussionId)
           {
