@@ -8,17 +8,17 @@ export function scanDiscussion(discussion) {
   var scenario = Scenarios.findOne({'_id':discussion.idScenario});
   var messages = [];
 
-  console.log(discussion);
+  //console.log(discussion);
 
   var questions = Questions.findOne({_id:scenario['idQuestion']});
-  console.log(questions);
+  //console.log(questions);
 
   for (question of questions.content) {
-    console.log(question);
+    //console.log(question);
     messages.push({"text":question, "author":"bot"});
   }
 
-  console.log(messages);
+  //console.log(messages);
 
   //   for (var answerId of discussion['answersPile']) {
   //   var chosenAnswer = scenario['children'].filter(function ( obj ) {
@@ -31,7 +31,7 @@ export function scanDiscussion(discussion) {
   //     scenario = Scenarios.findOne({_id:chosenAnswer['idScenario']});
   //   }
   // }
-
+  console.log(messages);
   return messages;
 
 }

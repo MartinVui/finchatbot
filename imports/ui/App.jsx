@@ -32,9 +32,9 @@ App.propTypes = {
 export default createContainer(() => {
 
 	var discussionId = Session.get('SessionId');
-  var discussion = Discussions.findOne({_id:discussionId});
+  	var discussion = Discussions.findOne({_id:discussionId});
 
-	var messages = []
+	var messages = [];
 	if (typeof(discussion) !== 'undefined') {
 		messages = scanDiscussion(discussion);
 		// console.log(messages);

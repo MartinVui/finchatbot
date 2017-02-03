@@ -46,7 +46,7 @@ export default class MessageForm extends Component {
 
 
 
-    console.log(forms);
+    //console.log(forms);
     var inputType = forms[0].inputType;
 
     //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...

@@ -76,13 +76,7 @@ export default class MessageList extends Component {
 				transitionEnterTimeout={400}
 				transitionLeaveTimeout={3}>
 
-					<div className="bot_message">
-					<img src='images/logo.png' className="bot_message" onLoad={this.handleImageLoad.bind(this)}/>
-
-					{this.state.imageLoaded  ?	// Only shows the text when the image is loaded. It's ugly otherwise
-						<p className="bot_text">{Session.get('first_message')}</p> :null
-					}
-					</div>
+					
 
 					{this.props.messages.map((message, i) => (
 					<Message key={"message"+i} text={message.text} author={message.author}/>
