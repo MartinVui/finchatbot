@@ -39,7 +39,7 @@ export default class MessageForm extends Component {
     forms = FormGenerators.find({
       _id:{
         $in: this.props.scenarioChildren.map((x) => {
-          x['idFormGenerator']
+          return x['idFormGenerator'];
         })
       }
     }).fetch();

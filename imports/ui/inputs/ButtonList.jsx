@@ -10,11 +10,11 @@ import Button from './Button.jsx';
 
 export default class ButtonList extends Component {
 
-    render() {  // Just display the button list...
+    render() {  
 
         var ButtonList = [];
-        for (var i = 0; i < Session.get('botResponseJSON').input.buttons.length; i++) {
-            ButtonList.push(<Button buttonText={Session.get('botResponseJSON').input.buttons[i].title} response={Session.get('botResponseJSON').input.buttons[i].response} key={i} buttonKey={i}/>);
+        for (formGenerator of this.props.formGenerators) {
+            ButtonList.push(<Button formGenerator={formGenerator} nextStep={this.props.nextStep}/>);
         }
 
         return (

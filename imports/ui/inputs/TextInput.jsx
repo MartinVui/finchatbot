@@ -17,11 +17,6 @@ export default class TextInput extends Component {
 
 
 
-    sendBotMessage(json) {
-
-    }
-
-
 	handleSubmit(event) {
 
         event.preventDefault();
