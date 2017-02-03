@@ -31,9 +31,17 @@ App.propTypes = {
 
 export default createContainer(() => {
 
-  var discussion = Discussions.find({_id:Session.get('discussionId')});
+	console.log(Session);
+
+  var discussion = Discussions.findOne({_id:Session.get('discussionId')});
+	// console.log(discussion);
+
+	var messages = []
+	if (typeof(discussion) !== 'undefined') {
+		messages = scanDiscussion(discussion);
+	}
 
 	return {
-		messages: scanDiscussion(discussion),
+		messages: messages,
 	};
 }, App);

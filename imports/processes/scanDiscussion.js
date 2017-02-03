@@ -6,6 +6,7 @@ import { Answers } from '../api/answers.js';
 export function scanDiscussion(discussion) {
 
   var scenario = Discussions.findOne({_id:discussion['idScenario']});
+  console.log(discussion);
   var messages = [];
 
   if (discussion.hasOwnProperty('answers')) {

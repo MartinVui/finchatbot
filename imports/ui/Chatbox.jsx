@@ -20,8 +20,6 @@ import MessageList from './MessageList.jsx';
 
 function nextStepExt(instance, scenarioId) {
 
-  console.log("Fuck");
-
   // Find scenario in DB
   scenario = Scenarios.findOne({_id:scenarioId});
   // Find question(s)
@@ -41,11 +39,9 @@ function nextStepExt(instance, scenarioId) {
     }
   }).fetch();
 
-  console.log(forms);
+  // console.log(forms);
 
   // Display formGenerators, with the idScenario
-  instance.setState({children:scenario.children});
-  console.log('test');
   return scenario.children;
   // The form subcomponent will use a callback to nextStep with the right scenario
 
@@ -76,11 +72,11 @@ export default class ChatBox extends Component {
           return;
         }
 
-        console.log(userId);
+        // console.log(userId);
 
         // Choose scenario
         var initScenario = scenarioPicker();
-        console.log(initScenario._id);
+        // console.log(initScenario._id);
 
 
         // Create discussion in DB
@@ -98,14 +94,15 @@ export default class ChatBox extends Component {
               return;
             }
 
-            console.log(discussionId);
+            // console.log(discussionId);
 
             // Add discussion id to the session
             Session.set('SessionId' , discussionId);
-            console.log(Session);
+            // console.log(Session);
 
             // Return scenario Id
-            nextStepExt(this, initScenario._id);
+            children = nextStepExt(this, initScenario._id);
+            // this.setState({children:children});
 
           }
         );
@@ -115,7 +112,8 @@ export default class ChatBox extends Component {
 
   nextStep(scenarioId) {
 
-    nextStepExt(this, scenarioId);
+    children = nextStepExt(this, scenarioId);
+    this.setState({children:children});
 
     // // Find scenario in DB
     // scenario = Scenarios.findOne({_id:scenarioId});
