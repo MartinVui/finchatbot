@@ -31,14 +31,14 @@ App.propTypes = {
 
 export default createContainer(() => {
 
-	console.log(Session);
-
-  var discussion = Discussions.findOne({_id:Session.get('discussionId')});
-	// console.log(discussion);
+	var discussionId = Session.get('SessionId');
+  var discussion = Discussions.findOne({_id:discussionId});
 
 	var messages = []
 	if (typeof(discussion) !== 'undefined') {
 		messages = scanDiscussion(discussion);
+		// console.log(messages);
+
 	}
 
 	return {

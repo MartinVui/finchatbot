@@ -5,29 +5,32 @@ import { Answers } from '../api/answers.js';
 
 export function scanDiscussion(discussion) {
 
-  var scenario = Discussions.findOne({_id:discussion['idScenario']});
-  console.log(discussion);
+  var scenario = Scenarios.findOne({'_id':discussion.idScenario});
   var messages = [];
 
-  if (discussion.hasOwnProperty('answers')) {
-    for (var answerId of discussion['answers']) {
-      var questions = Questions.findOne({_id:scenario['idQuestion']});
-      for (question of questions.content) {
-        messages.push(question);
-      }
-      messages.push(Answers.findOne({_id:answerId}));
+  console.log(discussion);
 
-      var chosenAnswer = scenario['children'].filter(function ( obj ) {
-        return obj['idFormGenerator'] === Answers.findOne({_id:answerId})['idFormGenerator'];
-      })[0];
+  var questions = Questions.findOne({_id:scenario['idQuestion']});
+  console.log(questions);
 
-      if (typeof chosenAnswer === "undefined") {
-        console.log("Problem in discussion");
-      } else {
-        scenario = Scenarios.findOne({_id:chosenAnswer['idScenario']});
-      }
-    }
+  for (question of questions.content) {
+    console.log(question);
+    messages.push({"text":question, "author":"bot"});
   }
+
+  console.log(messages);
+
+  //   for (var answerId of discussion['answersPile']) {
+  //   var chosenAnswer = scenario['children'].filter(function ( obj ) {
+  //     return obj['idFormGenerator'] === Answers.findOne({_id:answerId})['idFormGenerator'];
+  //   })[0];
+  //
+  //   if (typeof chosenAnswer === "undefined") {
+  //     console.log("Problem in discussion");
+  //   } else {
+  //     scenario = Scenarios.findOne({_id:chosenAnswer['idScenario']});
+  //   }
+  // }
 
   return messages;
 
