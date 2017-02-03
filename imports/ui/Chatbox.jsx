@@ -61,6 +61,8 @@ export default class ChatBox extends Component {
 
   startConversation() {
 
+    Session.set('children', [])
+
     // Set show messages instead of intro
     this.setState({showIntro:false});
 
