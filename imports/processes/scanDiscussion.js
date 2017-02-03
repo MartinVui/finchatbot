@@ -10,27 +10,28 @@ export function scanDiscussion(discussion) {
 
   //console.log(discussion);
 
-  var questions = Questions.findOne({_id:scenario['idQuestion']});
-  //console.log(questions);
+  for (var answerId of discussion['answersPile']) {
 
-  for (question of questions.content) {
-    //console.log(question);
-    messages.push({"text":question, "author":"bot"});
+    var questions = Questions.findOne({_id:scenario['idQuestion']});
+    //console.log(questions);
+
+    for (question of questions.content) {
+      //console.log(question);
+      messages.push({"text":question, "author":"bot"});
+    }
+
+    //console.log(messages);
+
+    var chosenAnswer = scenario['children'].filter(function ( obj ) {
+      return obj['idFormGenerator'] === Answers.findOne({_id:answerId})['idFormGenerator'];
+    })[0];
+
+    if (typeof chosenAnswer === "undefined") {
+      console.log("Problem in discussion");
+    } else {
+      scenario = Scenarios.findOne({_id:chosenAnswer['idScenario']});
+    }
   }
-
-  //console.log(messages);
-
-  //   for (var answerId of discussion['answersPile']) {
-  //   var chosenAnswer = scenario['children'].filter(function ( obj ) {
-  //     return obj['idFormGenerator'] === Answers.findOne({_id:answerId})['idFormGenerator'];
-  //   })[0];
-  //
-  //   if (typeof chosenAnswer === "undefined") {
-  //     console.log("Problem in discussion");
-  //   } else {
-  //     scenario = Scenarios.findOne({_id:chosenAnswer['idScenario']});
-  //   }
-  // }
   console.log(messages);
   return messages;
 
