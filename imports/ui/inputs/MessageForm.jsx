@@ -44,10 +44,15 @@ export default class MessageForm extends Component {
       }
     }).fetch();
 
-
-
-    //console.log(forms);
-    var inputType = forms[0].inputType;
+    console.log(forms);
+    if (forms.length > 0) {
+        //console.log(forms);
+        Session.set('showGif', false);
+        var inputType = forms[0].inputType;
+    } else {
+        Session.set('showGif', true);
+    }
+    console.log(Session);
 
     //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...
     //SHOULD MAYBE LIMIT THE FORM UI TO ELEMENTARY COMPONENTS THAT ARE ADDED TO THE FINAL FORM
