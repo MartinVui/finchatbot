@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
-import Discussions from '../../api/discussions.js';
-import Answers from '../../api/answers.js';
-import Scenarios from '../../api/scenarios.js';
-import Users from '../../api/users.js';
-import Message from '../Message.jsx';
+import {Discussions} from '../../api/discussions.js';
+import {Answers} from '../../api/answers.js';
+import {Scenarios} from '../../api/scenarios.js';
+import {Users} from '../../api/users.js';
+import {Message} from '../Message.jsx';
 
 
 export default class Button extends Component {
@@ -26,12 +26,19 @@ export default class Button extends Component {
                 console.log(error);
             return;
             }
-            answerPile = Discussions.findOne({'_id' : Session.get('SessionId')}).answerPile;
-            answerPile.push(answerId);
+
+
+            var answerPile = Discussions.findOne({'_id' : Session.get('SessionId')}).answersPile;
             console.log(answerPile);
-            Discussions.update(Session.get('SessionId'),
-                $set : {answerPile : answerPile}
-              );
+
+            answerPile.push(answerId);
+            // console.log(answerPile);
+
+            Discussions.update({"_id":Session.get('SessionId')},
+                $set : {"answersPile" : answerPile}
+            );
+            console.log("test");
+
           }
         );
 
