@@ -70,7 +70,7 @@ export default class MessageList extends Component {
         return (
 
             <div className='messages' ref="messageList">
-                <ReactCSSTransitionGroup // Animation when the messages appear
+                <ReactCSSTransitionGroup
                     transitionName="example" transitionEnterTimeout={400} transitionLeaveTimeout={3}>
 
                     {this

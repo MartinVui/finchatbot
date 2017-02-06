@@ -9,7 +9,7 @@ import { Users } from '../../api/users.js';
 import { Message } from '../Message.jsx';
 
 export default class Button extends Component {
-    // See AddressInput for more info. I won't write all this twice
+
     onButtonClick( event ) {
         event.preventDefault( );
 
@@ -35,7 +35,7 @@ export default class Button extends Component {
                 answerPile = [ ];
             }
             answerPile.push( answerId );
-            
+
             Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
 
         });
