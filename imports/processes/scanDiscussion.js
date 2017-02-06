@@ -30,7 +30,7 @@ export function scanDiscussion(discussion) {
             console.log(chosenAnswer);
 
             if (typeof(chosenAnswer) !== "undefined") {
-                messages.push({ "text": chosenAnswer.content.text, "author": "user" });
+                messages.push({ "text": answerObject.content.text, "author": "user" });
                 scenario = Scenarios.findOne({ _id: chosenAnswer['idScenario'] });
             }
         }
