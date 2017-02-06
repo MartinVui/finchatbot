@@ -48,11 +48,50 @@ export default class MessageForm extends Component {
     if (forms.length > 0) {
         //console.log(forms);
         Session.set('showGif', false);
-        var inputType = forms[0].inputType;
     } else {
         Session.set('showGif', true);
     }
     console.log(Session);
+
+    var outputList = [];
+    for (form of forms) {
+
+        switch (form.inputType) {
+
+            case 'text':
+                outputList.push(<TextInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+            case 'button':
+                outputList.push(<Button formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+            case 'select':
+                outputList.push(<SelectInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+            case 'date':
+                outputList.push(<DateInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+            case 'multitext':
+                outputList.push(<MultitextInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+            case 'adress':
+                outputList.push(<AddressInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+            case 'checkbox':
+                outputList.push(<CheckBoxInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+            case 'year':
+                outputList.push(<YearInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                break;
+
+        }
+    }
 
     //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...
     //SHOULD MAYBE LIMIT THE FORM UI TO ELEMENTARY COMPONENTS THAT ARE ADDED TO THE FINAL FORM
@@ -70,39 +109,11 @@ export default class MessageForm extends Component {
         //     transitionLeaveTimeout={1500}>*/}
 
 
-        {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappear. Quite smart.
+        {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappears. Quite smart.
 
             <div className='message_form'>
 
-            for (form of forms) {
-
-            }
-
-            {inputType === 'text' ?
-                <TextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'button' ?
-                <Button formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'select' ?
-                <SelectInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'date' ?
-                <DateInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'multitext' ?
-                <MultitextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'address' ?
-                <AddressInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'checkbox' ?
-                <CheckBoxInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'year' ?
-                <YearInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-
+            {outputList}
 
             </div>:null
         }
