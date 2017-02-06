@@ -100,7 +100,7 @@ export default class ChatBox extends Component {
 
         children = nextStepExt( scenarioId );
         Session.set( 'children', children );
-        console.log( Session );
+        // console.log( Session );
 
         // // Find scenario in DB
         // scenario = Scenarios.findOne({_id:scenarioId});
