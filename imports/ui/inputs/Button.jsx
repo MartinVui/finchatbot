@@ -2,10 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
-// import { Messages } from '../../api/messages.js';
+import Discussions from '../../api/discussions.js';
+import Answers from '../../api/answers.js';
+import Scenarios from '../../api/scenarios.js';
+import Users from '../../api/users.js';
 import Message from '../Message.jsx';
-// import bloc from '../../api/blocs.js';
-// import cars from '../../api/carSample.js';
+
 
 export default class Button extends Component {
 // See AddressInput for more info. I won't write all this twice
@@ -14,7 +16,6 @@ export default class Button extends Component {
     onButtonClick() {
         event.preventDefault();
         var text = this.props.formGenerator.value;
-        console.log(text);
         var formGeneratorId = this.props.formGenerator._id;
         
         Meteor.call('answer.insert',{'idFormGenerator':formGeneratorId, 'content':text},
@@ -34,8 +35,7 @@ export default class Button extends Component {
         );
 
         //nextStep Callback here
-        currentScenario = Scenarios.findOne({'_id' : this.props.formGenerator.answer.idScenario});
-        this.props.nextStep(currentScenario._id);
+        this.props.nextStep(formGeneratorId);
     }
 
 
