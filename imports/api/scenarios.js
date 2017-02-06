@@ -7,15 +7,15 @@ export const Scenarios = new Mongo.Collection("scenarios");
 
 Meteor.methods({
 
-  'scenario.insert'(scenario) {
-    check(scenario, ScenarioSchema);
-    var newScenario = Scenarios.insert(scenario);
-  	return newScenario;
-  },
+    'scenario.insert' (scenario) {
+        check(scenario, ScenarioSchema);
+        var newScenario = Scenarios.insert(scenario);
+        return newScenario;
+    },
 
-  'scenario.remove'(scenarioId) {
-    check(scenarioId, String);
-    Scenarios.remove(scenarioId);
-  }
+    'scenario.remove' (scenarioId) {
+        check(scenarioId, String);
+        Scenarios.remove(scenarioId);
+    }
 
 })

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -10,16 +10,16 @@ import Button from './Button.jsx';
 
 export default class ButtonList extends Component {
 
-    render() {  
+    render( ) {
 
-        var ButtonList = [];
-        for (formGenerator of this.props.formGenerators) {
-            ButtonList.push(<Button formGenerator={formGenerator} nextStep={this.props.nextStep}/>);
+        var ButtonList = [ ];
+        for ( formGenerator of this.props.formGenerators ) {
+            ButtonList.push( <Button formGenerator={formGenerator} nextStep={this.props.nextStep}/> );
         }
 
         return (
             <div className="buttonList">
-            {ButtonList}
+                {ButtonList}
             </div>
         );
     }

@@ -8,11 +8,11 @@ export const Answers = new Mongo.Collection("answers");
 Meteor.methods({
     'answer.insert' (answer) {
         answer['createdAt'] = new Date();
-        check(answer , AnswerSchema);
-        var newAnswer =  Answers.insert(answer);
+        check(answer, AnswerSchema);
+        var newAnswer = Answers.insert(answer);
         return newAnswer;
     },
-    'answer.remove' (answerId){
+    'answer.remove' (answerId) {
         check(answerId, String);
         Answers.remove(answerId);
     },

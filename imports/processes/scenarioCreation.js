@@ -1,46 +1,45 @@
-
 export function interpretJSON(inputText) {
 
-  var output
+    var output
 
-  try {
+    try {
 
-    var obj = JSON.parse(inputText);
+        var obj = JSON.parse(inputText);
 
-    //Process
-    var newObjects = {"questions":[], "forms":[]};
-    obj = processObject(obj, newObjects);
-    console.log(newObjects);
+        //Process
+        var newObjects = { "questions": [], "forms": [] };
+        obj = processObject(obj, newObjects);
+        console.log(newObjects);
 
-    output = JSON.stringify(obj, {indent: true});
+        output = JSON.stringify(obj, { indent: true });
 
-  } catch (e) {
+    } catch (e) {
 
-    output = e;
+        output = e;
 
-  }
+    }
 
-  return output;
+    return output;
 }
 
 
 function processObject(obj, newObjects) {
 
-  if (obj.hasOwnProperty('question')) {
-    newObjects["questions"].push(obj['question'])
-    console.log(obj['question']);
-  }
-
-  for (var answer of obj['answers']) {
-
-    if (answer.hasOwnProperty('answer')) {
-      newObjects["forms"].push(answer['answer'])
-      console.log(answer['answer']);
+    if (obj.hasOwnProperty('question')) {
+        newObjects["questions"].push(obj['question'])
+        console.log(obj['question']);
     }
-    if (answer.hasOwnProperty('next')) {
-      processObject(answer['next'], newObjects);
-    }
-  }
 
-  return {};
+    for (var answer of obj['answers']) {
+
+        if (answer.hasOwnProperty('answer')) {
+            newObjects["forms"].push(answer['answer'])
+            console.log(answer['answer']);
+        }
+        if (answer.hasOwnProperty('next')) {
+            processObject(answer['next'], newObjects);
+        }
+    }
+
+    return {};
 }

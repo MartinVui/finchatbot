@@ -1,50 +1,53 @@
-import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component, PropTypes, } from 'react';
+import { ReactDOM } from 'react-dom';
 import { Session } from 'meteor/session';
 
-// import { Messages } from '../../api/messages.js';
-import Message from '../Message.jsx';
-// import bloc from '../../api/blocs.js';
-// import cars from '../../api/carSample.js';
+import { Discussions } from '../../api/discussions.js';
+import { Answers } from '../../api/answers.js';
+import { Scenarios } from '../../api/scenarios.js';
+import { Users } from '../../api/users.js';
+import { Message } from '../Message.jsx';
 
 export default class Button extends Component {
-// See AddressInput for more info. I won't write all this twice
-
-
-    onButtonClick() {
-        event.preventDefault();
+    // See AddressInput for more info. I won't write all this twice
+    onButtonClick( event ) {
+        event.preventDefault( );
         var text = this.props.formGenerator.value;
-        console.log(text);
         var formGeneratorId = this.props.formGenerator._id;
-        
-        Meteor.call('answer.insert',{'idFormGenerator':formGeneratorId, 'content':text},
-          function(error, answerId)
-            {
-            if (error) {
-                console.log(error);
-            return;
+        Meteor.call( 'answer.insert', {
+            'idFormGenerator': formGeneratorId,
+            'content': {
+                'text': text
+            },
+        }, function ( error, answerId ) {
+            if ( error ) {
+                console.log( error );
+                return;
             }
-            answerPile = Discussions.findOne({'_id' : Session.get('SessionId')}).answerPile;
-            answerPile.push(answerId);
-            console.log(answerPile);
-            Discussions.update(Session.get('SessionId'),
-                $set : {answerPile : answerPile}
-              );
-          }
-        );
+            var answerPile = Discussions
+                .findOne({
+                '_id': Session.get( 'SessionId' )
+            })
+                .answersPile;
+            if ( answerPile[0] === "" && answerPile.length === 1 ) {
+                answerPile = [ ];
+            }
+            answerPile.push( answerId );
+            // console.log(answerPile);
+            Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
 
+        });
         //nextStep Callback here
-        currentScenario = Scenarios.findOne({'_id' : this.props.formGenerator.answer.idScenario});
-        this.props.nextStep(currentScenario._id);
+        this
+            .props
+            .nextStep( formGeneratorId );
     }
-
-
-    render() {
-
-        return(
-            <div className="button"
-            onClick={this.onButtonClick.bind(this)}>
-            <p>{this.props.formGenerator.value}</p>
+    render( ) {
+        return (
+            <div className="button" onClick={this
+                .onButtonClick
+                .bind( this )}>
+                <p>{this.props.formGenerator.value}</p>
             </div>
         );
     }

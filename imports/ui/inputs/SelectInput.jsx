@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -13,73 +13,77 @@ import { Users } from '../../api/users.js';
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
-
 export default class SelectInput extends Component {
 
+    constructor( ) {
+        super( );
+        this.state = {
+            value: this.props.forms[0].placeholder
+        };
+    }
 
-	constructor() {
-		super();
-		this.state = {
-			value: this.props.forms[0].placeholder,
-		};
-	}
+    handleChange( event ) {
+        this.setState({ value: event.target.value });
+    }
 
+    onButtonClick( ) {
+        const text = ReactDOM
+            .findDOMNode( this.refs.selectInput )
+            .value;
+        var formGeneratorId = this.props.formGenerators[0]._id;
 
-	handleChange(event) {
-    	this.setState({value: event.target.value});
-  	}
-
-
-
-
-	onButtonClick() {
-			const text = ReactDOM.findDOMNode(this.refs.selectInput).value;
-        	var formGeneratorId = this.props.formGenerators[0]._id;
-
-        	Meteor.call('answer.insert',{'idFormGenerator':formGeneratorId, 'content':text},
-          	function(error, answerId)
-            {
-            if (error) {
-                console.log(error);
-            return;
+        Meteor.call( 'answer.insert', {
+            'idFormGenerator': formGeneratorId,
+            'content': text,
+        }, function ( error, answerId ) {
+            if ( error ) {
+                console.log( error );
+                return;
             }
-            answerPile = Discussions.findOne({'_id' : Session.get('SessionId')}).answerPile;
-            answerPile.push(answerId);
-            Discussions.update(Session.get('SessionId'),
-                $set : {answerPile : answerPile}
-              );
-          }
-        );
+            answerPile = Discussions
+                .findOne({
+                '_id': Session.get( 'SessionId' )
+            })
+                .answerPile;
+            answerPile.push( answerId );
+            Discussions.update(Session.get( 'SessionId' ), $set : {
+                answerPile: answerPile
+            });
+        });
 
-            currentScenario = Scenarios.findOne({'_id' : this.props.formGenerators[0].answer.idScenario});
-        	this.props.nextStep(currentScenario._id);
+        currentScenario = Scenarios.findOne({ '_id': this.props.formGenerators[0].answer.idScenario });
+        this
+            .props
+            .nextStep( currentScenario._id );
 
-        	//Saving several times the same answer value if several users choose the same for now
-		}
+        //Saving several times the same answer value if several users choose the same for now
+    }
 
+    render( ) {
+        // Shows a select input with the values we decided
 
+        var options = this.props.forms[0].options;
+        var optionsUi = [ ];
+        for ( option in options ) {
+            optionsUi.push(
+                <option value={option}>{option}</option>
+            );
+        }
 
+        return (
+            <div className="SelectInput">
 
-
-	render() {
-		// Shows a select input with the values we decided
-
-		var options = this.props.forms[0].options;
-		var optionsUi = [];
-		for (option in options) {
-			optionsUi.push(<option value={option}>{option}</option>);
-		}
-
-		return(
-			<div className="SelectInput">
-
- 				<select ref='selectInput' onChange={this.handleChange.bind(this)} className="scroll-input">
- 					<option value={this.state.value} disabled>{this.state.value}</option>
- 		            {optionsUi}
-				</select>
- 		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>
- 		    </div>
- 		)
-	}
+                <select ref='selectInput' onChange={this
+                    .handleChange
+                    .bind( this )} className="scroll-input">
+                    <option value={this.state.value} disabled>{this.state.value}</option>
+                    {optionsUi}
+                </select>
+                <img src="images/send.png" className="send-icon-mobile" onClick={this
+                    .onButtonClick
+                    .bind( this )}/>
+            </div>
+        )
+    }
 
 }

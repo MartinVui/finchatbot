@@ -1,18 +1,19 @@
 import { Scenarios } from '../api/scenarios.js';
 import { Random } from 'meteor/random';
 
-export function scenarioPicker(){
+export function scenarioPicker() {
 
-	var InitScenarios = Scenarios.find({'initiate' : true}).fetch();
-  if (InitScenarios.length != 0) {
+    var InitScenarios = Scenarios.find({ 'initiate': true })
+        .fetch();
+    if (InitScenarios.length != 0) {
 
-	  choice = Random.choice(InitScenarios);
-	  // console.log(choice);
-	  return choice;
+        choice = Random.choice(InitScenarios);
+        // console.log(choice);
+        return choice;
 
-  } else {
+    } else {
 
-    throw "No initial scenario. Please define one."
+        throw "No initial scenario. Please define one."
 
-  }
+    }
 };

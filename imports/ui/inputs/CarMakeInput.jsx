@@ -8,67 +8,62 @@ import CarPropositions from './CarPropositions.jsx';
 // import bloc from '../../api/blocs.js';
 // import cars from '../../api/carMake.js';
 
-
 export default class CarMakeInput extends Component {
 
-    constructor() {
-        super();
+    constructor( ) {
+        super( );
         this.state = {
-            make: undefined,
+            make: undefined
         };
     }
 
-
-    handleChange(event) {
+    handleChange( event ) {
 
         //var make = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-        this.setState({make: event.target.value});
+        this.setState({ make: event.target.value });
     }
 
-
-    sendBotMessage(json) {
+    sendBotMessage( json ) {
 
         var _this = this;
 
-        var typingTime = 300+json.botResponse.length*20;
+        var typingTime = 300 + json.botResponse.length * 20;
 
-        setTimeout(function() {
+        setTimeout( function ( ) {
 
+            Session.set( 'botResponseJSON', json );
 
-            Session.set('botResponseJSON', json);
+            if ( json.skip === true ) {
 
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
 
-            if (json.skip === true) {
-
-                Session.set('showGif', false);
-                Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
-
-                if(json.image !== false) {
-                    Session.set('image', json.image);
-                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
                 }
 
                 // Set the new state of the bot
-                Session.set('nextBlocName', json.nextBlocID);
+                Session.set( 'nextBlocName', json.nextBlocID );
 
-                var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
+                var newJson = bloc(" ", Session.get( 'nextBlocName' ), Session.get( 'allData' ));
 
-                Session.set('showGif', true);
+                Session.set( 'showGif', true );
 
-                _this.sendBotMessage(newJson);
+                _this.sendBotMessage( newJson );
 
             } else {
 
-                Session.set('showGif', false);
-                Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
 
-                if(json.image !== false) {
-                    Session.set('image', json.image);
-                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
                 }
 
                 // Set the new state of the bot
-                Session.set('nextBlocName', json.nextBlocID);
+                Session.set( 'nextBlocName', json.nextBlocID );
 
             }
 
@@ -76,56 +71,66 @@ export default class CarMakeInput extends Component {
 
     }
 
+    handleSubmit( event ) {
 
-    handleSubmit(event) {
+        event.preventDefault( );
 
-        event.preventDefault();
+        var text = ReactDOM
+            .findDOMNode( this.refs.textInput )
+            .value
+            .trim( );
 
-        var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-
-        if (Session.get('botResponseJSON').createData !== false) {
-            var dataName = Session.get('botResponseJSON').createData.dataName;
-            var allData = Session.get('allData');
+        if ( Session.get( 'botResponseJSON' ).createData !== false ) {
+            var dataName = Session
+                .get( 'botResponseJSON' )
+                .createData
+                .dataName;
+            var allData = Session.get( 'allData' );
             allData[dataName] = text;
-            Session.set('allData',allData);
+            Session.set( 'allData', allData );
         }
 
-        var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
+        var json = bloc(text, Session.get( 'nextBlocName' ), Session.get( 'allData' ));
 
-        Session.set('botResponseJSON', {"quickReplies":[]});
+        Session.set('botResponseJSON', {"quickReplies": [ ]});
 
-        if(text === "") {
+        if ( text === "" ) {
             var text = "no_text"
-        }
-        else {
-            Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
+        } else {
+            Meteor.call('messages.insert', text, 'user', Session.get( 'sessionId' ));
         }
 
-
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';
+        ReactDOM
+            .findDOMNode( this.refs.textInput )
+            .value = '';
 
         // Insert the bot message
-        Session.set('showGif', true);
+        Session.set( 'showGif', true );
 
-        this.sendBotMessage(json);
+        this.sendBotMessage( json );
 
     }
 
+    render( ) {
 
-    render() {
+        return (
+            <form className="new_message" id="newMessageForm" onSubmit={this
+                .handleSubmit
+                .bind( this )}>
 
-        return(
-            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-            <input type="text" ref="textInput" placeholder="Write a new message" onChange={this.handleChange.bind(this)}/>
-            {this.state.make!== undefined ?
-                <CarPropositions make={this.state.make}/>:null
-            }
-            {Session.get('isMobile') === true ?
-                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
-            }
-            {Session.get('isMobile') !== true ?
-                <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>:null
-            }
+                <input type="text" ref="textInput" placeholder="Write a new message" onChange={this
+                    .handleChange
+                    .bind( this )}/> {this.state.make !== undefined
+                    ? <CarPropositions make={this.state.make}/>
+                    : null}
+
+                {Session.get( 'isMobile' ) === true
+                    ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                    : null}
+
+                {Session.get( 'isMobile' ) !== true
+                    ? <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>
+                    : null}
             </form>
         )
     }
