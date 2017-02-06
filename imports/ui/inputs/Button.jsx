@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { ReactDOM } from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -12,13 +12,15 @@ export default class Button extends Component {
     // See AddressInput for more info. I won't write all this twice
     onButtonClick( event ) {
         event.preventDefault( );
+
         var text = this.props.formGenerator.value;
         var formGeneratorId = this.props.formGenerator._id;
+
         Meteor.call( 'answer.insert', {
             'idFormGenerator': formGeneratorId,
             'content': {
                 'text': text
-            },
+            }
         }, function ( error, answerId ) {
             if ( error ) {
                 console.log( error );
@@ -37,7 +39,9 @@ export default class Button extends Component {
             Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
 
         });
+
         //nextStep Callback here
+        console.log( );
         this
             .props
             .nextStep( this.props.nextScenario );
