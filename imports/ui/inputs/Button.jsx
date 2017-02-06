@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import { ReactDOM } from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -18,7 +18,7 @@ export default class Button extends Component {
             'idFormGenerator': formGeneratorId,
             'content': {
                 'text': text
-            }
+            },
         }, function ( error, answerId ) {
             if ( error ) {
                 console.log( error );

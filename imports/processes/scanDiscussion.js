@@ -21,6 +21,9 @@ export function scanDiscussion(discussion) {
 
         if (answerId !== "") {
 
+            var answerObject = Answers.findOne({ _id: answerId });
+            console.log(answerObject);
+
             var chosenAnswer = scenario['children'].filter(function(obj) {
                 return obj['idFormGenerator'] === Answers.findOne({ _id: answerId })['idFormGenerator'];
             })[0];
