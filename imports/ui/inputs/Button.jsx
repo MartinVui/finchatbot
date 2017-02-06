@@ -33,16 +33,16 @@ export default class Button extends Component {
                 answerPile = [ ];
             }
             answerPile.push( answerId );
-            // console.log(answerPile);
+            
             Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
 
         });
         //nextStep Callback here
         this
             .props
-            .nextStep( formGeneratorId );
+            .nextStep( this.props.nextScenario );
     }
-    render( ) {
+    render() {
         return (
             <div className="button" onClick={this
                 .onButtonClick
