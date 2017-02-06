@@ -1,15 +1,7 @@
-import {
-    Meteor
-} from 'meteor/meteor';
-import {
-    Mongo
-} from 'meteor/mongo';
-import {
-    check
-} from 'meteor/check';
-import {
-    AnswerSchema
-} from './schemas/answerSchema.js';
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
+import { AnswerSchema } from './schemas/answerSchema.js';
 
 export const Answers = new Mongo.Collection("answers");
 

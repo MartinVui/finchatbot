@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -6,60 +6,57 @@ import { Session } from 'meteor/session';
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
-
 export default class AddressInput extends Component {
 
-  // Display a text input with address autocomplete using the google map API
-  // When the guy type is address, also shows the place on a map (useless but cool !) - See MapMessage
+    // Display a text input with address autocomplete using the google map API
+    // When the guy type is address, also shows the place on a map (useless but cool !) - See MapMessage
 
-    componentDidMount() {
-        this.initMap();     // I can't remember why we need this...
+    componentDidMount( ) {
+        this.initMap( ); // I can't remember why we need this...
     }
 
+    sendBotMessage( json ) {
 
-    sendBotMessage(json) {
+        var _this = this; // save the context (for the timeout functions)
 
-        var _this = this;  // save the context (for the timeout functions)
+        var typingTime = 300 + json.botResponse.length * 20; // The longer the text, the longer typing time. Cool too !
 
-        var typingTime = 300+json.botResponse.length*20;  // The longer the text, the longer typing time. Cool too !
+        setTimeout( function ( ) {
 
-        setTimeout(function() {
+            Session.set( 'botResponseJSON', json ); // I have to investigate if this line is really useful
 
-            Session.set('botResponseJSON', json); // I have to investigate if this line is really useful
+            if ( json.skip === true ) { // Check if the next message has to be send directly
 
+                Session.set( 'showGif', false ); // Hide the typing gif
 
-            if (json.skip === true) {       // Check if the next message has to be send directly
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' )); // Insert the bot message in the database
 
-                Session.set('showGif', false);      // Hide the typing gif
-
-                Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId')); // Insert the bot message in the database
-
-                if(json.image !== false) {      // Check if there is an image to send. We don't use it yet bet it would be nice
-                    Session.set('image', json.image);
-                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
+                if ( json.image !== false ) { // Check if there is an image to send. We don't use it yet bet it would be nice
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
                 }
 
                 // Set the new state of the bot
-                Session.set('nextBlocName', json.nextBlocID);
+                Session.set( 'nextBlocName', json.nextBlocID );
 
-                var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
+                var newJson = bloc(" ", Session.get( 'nextBlocName' ), Session.get( 'allData' ));
 
-                Session.set('showGif', true);
+                Session.set( 'showGif', true );
 
-                _this.sendBotMessage(newJson); // skip = true, so we send the second message
+                _this.sendBotMessage( newJson ); // skip = true, so we send the second message
 
-            } else {    // Do exactly the same but only send one message
+            } else { // Do exactly the same but only send one message
 
-                Session.set('showGif', false);
-                Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
 
-                if(json.image !== false) {
-                    Session.set('image', json.image);
-                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
                 }
 
                 // Set the new state of the bot
-                Session.set('nextBlocName', json.nextBlocID);
+                Session.set( 'nextBlocName', json.nextBlocID );
 
             }
 
@@ -67,67 +64,76 @@ export default class AddressInput extends Component {
 
     }
 
+    handleSubmit( event ) {
 
-    handleSubmit(event) {
+        event.preventDefault( ); // I think this line is useful
 
-        event.preventDefault();     // I think this line is useful
+        var text = ReactDOM
+            .findDOMNode( this.refs.textInput )
+            .value
+            .trim( );
 
-        var text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-
-        if (Session.get('botResponseJSON').createData !== false) {      // If we want the bot to remember the address of the guy
-            var dataName = Session.get('botResponseJSON').createData.dataName;
-            var allData = Session.get('allData');
+        if ( Session.get( 'botResponseJSON' ).createData !== false ) { // If we want the bot to remember the address of the guy
+            var dataName = Session
+                .get( 'botResponseJSON' )
+                .createData
+                .dataName;
+            var allData = Session.get( 'allData' );
             allData[dataName] = text;
-            Session.set('allData',allData);
+            Session.set( 'allData', allData );
         }
 
-        var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
-
+        var json = bloc(text, Session.get( 'nextBlocName' ), Session.get( 'allData' ));
 
         // Insert the message in the database
         // Also insert the map! See MapMessage
-        Session.set('address',text);
-        Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-        Meteor.call('messages.insert',"MAP", 'user', Session.get('sessionId'));
+        Session.set( 'address', text );
+        Meteor.call('messages.insert', text, 'user', Session.get( 'sessionId' ));
+        Meteor.call('messages.insert', "MAP", 'user', Session.get( 'sessionId' ));
 
+        ReactDOM
+            .findDOMNode( this.refs.textInput )
+            .value = ''; // Empty the text field
 
+        Session.set( 'showGif', true ); // Show the typing gif
 
-
-
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';   // Empty the text field
-
-        Session.set('showGif', true);   // Show the typing gif
-
-        this.sendBotMessage(json);      // Send the bot message
+        this.sendBotMessage( json ); // Send the bot message
 
     }
 
+    initMap( ) { // address autocomplete - Very complicated algorithms
 
+        var input = ( document.getElementById( 'address-input' )/*,{types: ['south africa']}*/);
+        var options = {
+            componentRestrictions: {
+                country: 'ZA'
+            },
+            types: [
+                'geocode', 'establishment',
+            ],
+        };
 
-  initMap() {       // address autocomplete - Very complicated algorithms
+        var autocomplete = new google
+            .maps
+            .places
+            .Autocomplete( input, options );
+    }
 
-    var input = ( document.getElementById('address-input')/*,{types: ['south africa']}*/);
-    var options = {
-              componentRestrictions: {country: 'ZA'},
-              types: ['geocode', 'establishment']
-          };
+    render( ) {
 
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
-  }
+        return (
 
-
-    render() {
-
-        return(
-
-            <form className="new_message address" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-                <input id="address-input" ref="textInput" type="text" placeholder="Enter a location" required/>
-                {Session.get('isMobile') ?
-                    <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
-                }
-                {Session.get('isMobile') !== true ?
-                    <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>:null
-                }
+            <form className="new_message address" id="newMessageForm" onSubmit={this
+                .handleSubmit
+                .bind( this )}>
+                <input id="address-input" ref="textInput" type="text" placeholder="Enter a location" required/> {Session.get( 'isMobile' )
+                    ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                    : null
+}
+                {Session.get( 'isMobile' ) !== true
+                    ? <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>
+                    : null
+}
             </form>
         )
     }

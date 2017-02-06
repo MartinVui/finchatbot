@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -6,64 +6,58 @@ import { Session } from 'meteor/session';
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
-
 export default class TextInput extends Component {
 
-	// This one is really shitty. It only works for name + surname input. It only add the name to the data. That's shit, really
+    // This one is really shitty. It only works for name + surname input. It only add the name to the data. That's shit, really
 
+    sendBotMessage( json ) {
 
-	sendBotMessage(json) {
+        var _this = this;
 
-		var _this = this;
+        var typingTime = 300 + json.botResponse.length * 20;
 
-		var typingTime = 300+json.botResponse.length*20;
+        setTimeout( function ( ) {
 
-		setTimeout(function() {
+            Session.set( 'botResponseJSON', json );
 
+            if ( json.skip === true ) {
 
-			Session.set('botResponseJSON', json);
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
 
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
+                }
 
-			if (json.skip === true) {
+                // Set the new state of the bot
+                Session.set( 'nextBlocName', json.nextBlocID );
 
-				Session.set('showGif', false);
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+                var newJson = bloc(" ", Session.get( 'nextBlocName' ), Session.get( 'allData' ));
 
-				if(json.image !== false) {
-		          	Session.set('image', json.image);
-		          	Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
-		        }
+                Session.set( 'showGif', true );
 
-				// Set the new state of the bot
-				Session.set('nextBlocName', json.nextBlocID);
+                _this.sendBotMessage( newJson );
 
-				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
+            } else {
 
-				Session.set('showGif', true);
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
 
-				_this.sendBotMessage(newJson);
+                // Set the new state of the bot
+                Session.set( 'nextBlocName', json.nextBlocID );
 
-			} else {
+            }
 
-				Session.set('showGif', false);
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+        }, typingTime)
 
-				// Set the new state of the bot
-				Session.set('nextBlocName', json.nextBlocID);
+    }
 
-			}
+    handleSubmit( event ) {
 
-		}, typingTime)
+        event.preventDefault( );
 
-	}
-
-
-	handleSubmit(event) {
-
-		event.preventDefault();
-
-
-/*		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
+        /*		var dataWrapper = Session.get('botResponseJSON').dataWrapper;
 
 		var text1 = ReactDOM.findDOMNode(this.refs.textInput1).value.trim();
 		var text2 = ReactDOM.findDOMNode(this.refs.textInput2).value.trim();
@@ -95,28 +89,27 @@ export default class TextInput extends Component {
 		// Insert the bot message
 		Session.set('showGif', true);
 
-		this.sendBotMessage(json); 
+		this.sendBotMessage(json);
 */
-	
 
-	}
+    }
 
+    render( ) {
 
-
-	render() {
-
-
-		return(
-			<form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-				<input type="text" ref="textInput1" placeholder="Name" required/>
-				<input type="text" ref="textInput2" placeholder="Surname" required/>
-				{Session.get('isMobile') === true ?
-	              	<input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>:null
-	            }
-	            {Session.get('isMobile') !== true ?
-	              	<input type="image" src="images/send.png" alt="Submit" className='send-icon'/>:null
-	            }
-			</form>
-		)
-	}
+        return (
+            <form className="new_message" id="newMessageForm" onSubmit={this
+                .handleSubmit
+                .bind( this )}>
+                <input type="text" ref="textInput1" placeholder="Name" required/>
+                <input type="text" ref="textInput2" placeholder="Surname" required/> {Session.get( 'isMobile' ) === true
+                    ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                    : null
+}
+                {Session.get( 'isMobile' ) !== true
+                    ? <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>
+                    : null
+}
+            </form>
+        )
+    }
 }

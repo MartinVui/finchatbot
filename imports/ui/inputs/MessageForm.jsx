@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Session } from 'meteor/session';
@@ -26,93 +26,83 @@ import YearInput from './YearInput.jsx';
 
 export default class MessageForm extends Component {
 
-    constructor(props) {
-        super(props);
+    constructor( props ) {
+        super( props );
     };
 
+    render( ) {
+        // Decides the type of input that has to be displayed
 
-    render() {
-    // Decides the type of input that has to be displayed
+        //adding a mapper that links this.props.scenarioChildren to the proper UI form element
 
-    //adding a mapper that links this.props.scenarioChildren to the proper UI form element
+        forms = FormGenerators.find({
+            _id: {
+                $in: this
+                    .props
+                    .scenarioChildren
+                    .map(( x ) => {
+                        return x['idFormGenerator'];
+                    })
+            }
+        }).fetch( );
 
-    forms = FormGenerators.find({
-      _id:{
-        $in: this.props.scenarioChildren.map((x) => {
-          return x['idFormGenerator'];
-        })
-      }
-    }).fetch();
+        if ( forms.length > 0 ) {
 
-
-    if (forms.length > 0) {
-
-        Session.set('showGif', false);
-    } else {
-        Session.set('showGif', true);
-    }
-
-    var outputList = [];
-    for (form of forms) {
-
-        switch (form.inputType) {
-
-            case 'text':
-                outputList.push(<TextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-            case 'button':
-                outputList.push(<Button formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-            case 'select':
-                outputList.push(<SelectInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-            case 'date':
-                outputList.push(<DateInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-            case 'multitext':
-                outputList.push(<MultitextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-            case 'adress':
-                outputList.push(<AddressInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-            case 'checkbox':
-                outputList.push(<CheckBoxInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-            case 'year':
-                outputList.push(<YearInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
-                break;
-
-        }
-    }
-
-
-
-    return(
-
-
-
-        <footer>
-
-
-        {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappears. Quite smart.
-
-            <div className='message_form'>
-
-            {outputList}
-
-            </div>:null
+            Session.set( 'showGif', false );
+        } else {
+            Session.set( 'showGif', true );
         }
 
+        var outputList = [ ];
+        for ( form of forms ) {
 
-        </footer>
+            switch ( form.inputType ) {
 
+                case 'text':
+                    outputList.push( <TextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+                case 'button':
+                    outputList.push( <Button formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+                case 'select':
+                    outputList.push( <SelectInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+                case 'date':
+                    outputList.push( <DateInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+                case 'multitext':
+                    outputList.push( <MultitextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+                case 'adress':
+                    outputList.push( <AddressInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+                case 'checkbox':
+                    outputList.push( <CheckBoxInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+                case 'year':
+                    outputList.push( <YearInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    break;
+
+            }
+        }
+
+        return (
+
+            <footer>
+
+                {Session.get( 'showGif' ) !== true
+                    ? // Shows the input field when the typing gif disappears. Quite smart. < div className = 'message_form' > {
+                        outputList
+                    } < /div>:null}
+
+            </footer>
 
         );
     }

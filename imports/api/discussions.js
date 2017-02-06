@@ -1,15 +1,7 @@
-import {
-    Meteor
-} from 'meteor/meteor';
-import {
-    Mongo
-} from 'meteor/mongo';
-import {
-    check
-} from 'meteor/check';
-import {
-    DiscussionSchema
-} from './schemas/discussionSchema.js';
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { check } from 'meteor/check';
+import { DiscussionSchema } from './schemas/discussionSchema.js';
 
 export const Discussions = new Mongo.Collection("discussions");
 

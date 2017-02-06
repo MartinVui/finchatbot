@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -6,122 +6,122 @@ import { Session } from 'meteor/session';
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
-
 export default class YearInput extends Component {
-	// Exactly the same as DateInput, but only with the year
+    // Exactly the same as DateInput, but only with the year
 
+    sendBotMessage( json ) {
 
+        var _this = this;
 
-	sendBotMessage(json) {
+        var typingTime = 300 + json.botResponse.length * 20;
 
-		var _this = this;
+        setTimeout( function ( ) {
 
-		var typingTime = 300+json.botResponse.length*20;
+            Session.set( 'botResponseJSON', json );
 
-		setTimeout(function() {
+            if ( json.skip === true ) {
 
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
 
-			Session.set('botResponseJSON', json);
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
+                }
 
+                // Set the new state of the bot
+                Session.set( 'nextBlocName', json.nextBlocID );
 
-			if (json.skip === true) {
+                var newJson = bloc(" ", Session.get( 'nextBlocName' ), Session.get( 'allData' ));
 
-				Session.set('showGif', false);
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+                Session.set( 'showGif', true );
 
-				if(json.image !== false) {
-		          	Session.set('image', json.image);
-		          	Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
-		        }
+                _this.sendBotMessage( newJson );
 
-				// Set the new state of the bot
-				Session.set('nextBlocName', json.nextBlocID);
+            } else {
 
-				var newJson = bloc(" ", Session.get('nextBlocName'), Session.get('allData'));
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
 
-				Session.set('showGif', true);
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
+                }
 
-				_this.sendBotMessage(newJson);
+                // Set the new state of the bot
+                Session.set( 'nextBlocName', json.nextBlocID );
 
-			} else {
+            }
 
-				Session.set('showGif', false);
-				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+        }, typingTime)
 
-				if(json.image !== false) {
-		          	Session.set('image', json.image);
-		          	Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'));
-		        }
+    }
 
-				// Set the new state of the bot
-				Session.set('nextBlocName', json.nextBlocID);
+    onButtonClick( ) {
 
-			}
+        var year = ReactDOM
+            .findDOMNode( this.refs.year )
+            .value
+            .trim( );
 
-		}, typingTime)
+        var text = year
 
-	}
+        if ( Session.get( 'botResponseJSON' ).createData !== false ) {
+            var dataName = Session
+                .get( 'botResponseJSON' )
+                .createData
+                .dataName;
+            var allData = Session.get( 'allData' );
+            if ( Session.get( 'botResponseJSON' ).createData.data !== undefined ) {
 
+                allData[dataName] = Session
+                    .get( 'botResponseJSON' )
+                    .createData
+                    .data;
+            } else {
+                allData[dataName] = text;
+            }
+            Session.set( 'allData', allData );
+        }
 
+        var json = bloc(text, Session.get( 'nextBlocName' ), Session.get( 'allData' ));
 
-	onButtonClick() {
+        Meteor.call('messages.insert', text, 'user', Session.get( 'sessionId' ));
 
-		var year = ReactDOM.findDOMNode(this.refs.year).value.trim();
+        // Insert the bot message
+        Session.set( 'showGif', true );
 
-		var text = year
+        this.sendBotMessage( json );
 
+    }
 
-		if (Session.get('botResponseJSON').createData !== false) {
-      		var dataName = Session.get('botResponseJSON').createData.dataName;
-      		var allData = Session.get('allData');
-      		if (Session.get('botResponseJSON').createData.data !== undefined) {
+    render( ) {
 
-      			allData[dataName] = Session.get('botResponseJSON').createData.data;
-      		} else {
-      			allData[dataName] = text;
-      		}
-      		Session.set('allData',allData);
-    	}
+        var date = new Date( );
+        var year = date.getFullYear( );
 
-    	var json = bloc(text, Session.get('nextBlocName'), Session.get('allData'));
+        var years = [ ];
+        for ( var i = year; i >= 1900; i-- ) {
+            i = i.toString( );
+            years.push(
+                <option key={'year' + i} value={i}>{i}</option>
+            );
+        }
 
+        return (
+            <div className="SelectInput">
+                <select ref='year' data-validation="required" className="scroll-input">
+                    <option value="0" disabled selected>Year</option>
+                    {years}
+                </select>
+                <img src="images/send.png" className="send-icon-mobile" onClick={this
+                    .onButtonClick
+                    .bind( this )}/>
+            </div>
+        )
+    }
 
-	    Meteor.call('messages.insert',text, 'user', Session.get('sessionId'));
-
-
-	    // Insert the bot message
-	    Session.set('showGif', true);
-
-	    this.sendBotMessage(json);
-
-	}
-
-
-	render() {
-
-
-
-		var date = new Date();
-		var year = date.getFullYear();
-
-		var years = [];
-		for (var i=year; i>=1900; i--) {
-			i=i.toString();
-			years.push(<option key={'year'+i} value={i}>{i}</option>);
-		}
-
-		return (
-			<div className="SelectInput">
-		        <select ref='year' data-validation="required" className="scroll-input">
-		            <option value="0" disabled selected>Year</option>
-		            {years}
-		        </select>
-		        <img src="images/send.png" className="send-icon-mobile" onClick={this.onButtonClick.bind(this)}/>
-		    </div>
-		)
-	}
-
-	/*render() {
+    /*render() {
 
 		return(
 			<form className="new_message" id="newMessageForm">
