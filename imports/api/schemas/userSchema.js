@@ -1,6 +1,6 @@
 export var UserSchema = new SimpleSchema({
-	data : {
-    type : Object,
-    blackbox: true
-  }
+    data: {
+        type: Object,
+        blackbox: true
+    }
 })
