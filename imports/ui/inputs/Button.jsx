@@ -29,12 +29,15 @@ export default class Button extends Component {
 
 
             var answerPile = Discussions.findOne({'_id' : Session.get('SessionId')}).answersPile;
-            console.log(answerPile);
+
+            if (answerPile[0] === "" && answerPile.length === 1) {
+                answerPile = [];
+            }
 
             answerPile.push(answerId);
             // console.log(answerPile);
 
-            Discussions.update({"_id":Session.get('SessionId')},
+            Discussions.update(Session.get('SessionId'),
                 $set : {"answersPile" : answerPile}
             );
             console.log("test");
