@@ -56,13 +56,10 @@ export default class TextInput extends Component {
             <form className="new_message" id="newMessageForm" onSubmit={this
                 .handleSubmit
                 .bind( this )}>
+
                 <input type="text" ref="textInput" placeholder={this.props.formGenerator[0].placeholder} required/> {Session.get( 'isMobile' ) === true
                     ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
-                    : null
-}
-                {Session.get( 'isMobile' ) !== true
-                    ? // Only shows the send icon when the user is on mobile < input type = "image" src = "images/send.png" alt = "Submit" className = 'send-icon' />: null
-}
+                    : null}
             </form>
         )
     }
