@@ -58,7 +58,7 @@ export default class TextInput extends Component {
                 .handleSubmit
                 .bind( this )}>
 
-                <input type="text" ref="textInput" placeholder={this.props.formGenerator[0].placeholder} required/> {Session.get( 'isMobile' ) === true
+                <input type="text" ref="textInput" placeholder={this.props.formGenerator.placeholder} required/> {Session.get( 'isMobile' ) === true
                     ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
                     : null}
             </form>
