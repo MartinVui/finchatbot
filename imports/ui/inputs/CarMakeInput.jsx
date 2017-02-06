@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -117,20 +117,20 @@ export default class CarMakeInput extends Component {
             <form className="new_message" id="newMessageForm" onSubmit={this
                 .handleSubmit
                 .bind( this )}>
+
                 <input type="text" ref="textInput" placeholder="Write a new message" onChange={this
                     .handleChange
                     .bind( this )}/> {this.state.make !== undefined
                     ? <CarPropositions make={this.state.make}/>
-                    : null
-}
+                    : null}
+
                 {Session.get( 'isMobile' ) === true
                     ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
-                    : null
-}
+                    : null}
+
                 {Session.get( 'isMobile' ) !== true
                     ? <input type="image" src="images/send.png" alt="Submit" className='send-icon'/>
-                    : null
-}
+                    : null}
             </form>
         )
     }
