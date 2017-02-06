@@ -1,0 +1,116 @@
+db.formGenerators.insert({
+    "_id": "0",
+    "input": "textfield",
+    "placeholder": "Write something here !"
+});
+
+db.formGenerators.insert({
+    "_id": "1",
+    "inputType": "button",
+    "value": "Sounds good !"
+});
+
+db.formGenerators.insert({
+    "_id": "2",
+    "inputType": "button",
+    "value": "No thanks."
+});
+
+db.formGenerators.insert({
+    "_id": "3",
+    "inputType": "textfield",
+    "placeholder": "Name"
+});
+
+db.formGenerators.insert({
+    "_id": "4",
+    "inputType": "textfield",
+    "placeholder": "Surname"
+});
+
+
+
+
+
+db.scenarios.insert({
+    "_id": "1",
+    "initiate": true,
+    "idQuestion": "1",
+    "children": [
+        {
+            "idFormGenerator": "1",
+            "idScenario": "2"
+        },
+        {
+            "idFormGenerator": "2",
+            "idScenario": "3"
+        }
+    ]
+})
+
+db.scenarios.insert({
+    "_id": "2",
+    "idQuestion": "2",
+    "children": [
+        {
+            "idFormGenerator": "0",
+            "idScenario": "2"
+        }
+    ]
+})
+
+db.scenarios.insert({
+    "_id": "3",
+    "idQuestion": "3",
+    "children": [
+        {
+            "idFormGenerator": "3",
+            "idScenario": "4"
+        },
+        {
+            "idFormGenerator": "4",
+            "idScenario": "4"
+        }
+    ]
+})
+
+db.scenarios.insert({
+    "_id": "4",
+    "idQuestion": "4",
+    "children": [
+        {
+            "idFormGenerator": "5",
+            "idScenario": "5"
+        }
+    ]
+})
+
+
+db.questions.insert({
+    "_id": "1",
+    "content": [
+        "Hey! My name is Holly, your personal robot assistant. Give me 5min and I will craft the perfect gadget insurance for you. It\u2019s fast and easy, true story. So, ready to go?"
+    ]
+})
+
+db.questions.insert({
+    "_id": "2",
+    "content": [
+        "GFYS"
+    ]
+})
+
+db.questions.insert({
+    "_id": "3",
+    "content": [
+        "Cool! Let's start with the beginning. What's your name?"
+    ]
+})
+
+db.questions.insert({
+    "_id": "4",
+    "content": [
+        "Great to meet you too {{ user.name }}.",
+        "So, you might be interested in an YouCovered gadget insurance. What type of device would you like to insure? Please use the menu below"
+    ]
+})
