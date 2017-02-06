@@ -8,8 +8,6 @@ export function scanDiscussion(discussion) {
     var scenario = Scenarios.findOne({ '_id': discussion.idScenario });
     var messages = [];
 
-    console.log(discussion.answersPile);
-
     for (var answerId of discussion['answersPile']) {
 
         var questions = Questions.findOne({ _id: scenario['idQuestion'] });

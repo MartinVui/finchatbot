@@ -135,28 +135,48 @@ export default class ChatBox extends Component {
             <div>
                 <div className="container">
 
-                    <ReactCSSTransitionGroup // Animation when the messages appear
-                        transitionName="introduction" transitionEnterTimeout={1} transitionLeaveTimeout={1000}>
+                    <ReactCSSTransitionGroup transitionName="introduction" transitionEnterTimeout={1} transitionLeaveTimeout={1000}>
 
                         {this.state.showIntro
-                            ? // Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool < div className = "introduction" > <div id="intro-part1">
-                                <img src="images/logo.png" className="intro-logo"/>
-                            </div> < div id = "intro-part2" > <h1>FinChatBot</h1> < h2 > Your personal assisant < /h2>
-                <p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p > </div> < /div> :null
-          }
+                            ? <div className="introduction">
+                                    <div id="intro-part1">
+                                        < img src="images/logo.png" className="intro-logo"/>
+                                    </div>
+                                    <div id="intro-part2">
 
-        </ReactCSSTransitionGroup > {/*this.state.showIntro === false ?
-                <div className="conversation">
-                  <MessageList messages={this.props.messages}/>
-                </div>:null
-              */
-                            } < div className = "conversation" > <MessageList messages={this.props.messages}/> < /div>
+                                        <h1>FinChatBot</h1>
+                                        <h2>
+                                            Your personal assisant
+                                        </h2>
 
+                                        <p onClick={this
+                                            .startConversation
+                                            .bind( this )}>
+                                            Click here to start the conversation
+                                        </p>
 
-              {this.state.showIntro === false ?
-                <MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={Session.get('children')} nextStep={this.nextStep} / >: null
-                    } < /div>
-        </div}
+                                    </div>
+                                </div>
+                            : null}
+
+                    </ReactCSSTransitionGroup>
+
+                    // this.state.showIntro === false ? //
+                    <div className="conversation">
+                        //
+                        <MessageList messages={this.props.messages}/>
+                        //
+                    </div>:null
+
+                    <div className="conversation">
+                        <MessageList messages={this.props.messages}/>
+                    </div>
+
+                    {this.state.showIntro === false
+                        ? <MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={Session.get( 'children' )} nextStep={this.nextStep}/>
+}
+                </div>
+            </div>
         );
     }
 }
