@@ -8,7 +8,7 @@ export function scanDiscussion(discussion) {
     var scenario = Scenarios.findOne({ '_id': discussion.idScenario });
     var messages = [];
 
-
+    console.log(discussion.answersPile);
 
     for (var answerId of discussion['answersPile']) {
 
@@ -23,15 +23,12 @@ export function scanDiscussion(discussion) {
 
         if (answerId !== "") {
 
-            var chosenAnswerId = scenario['children'].filter(function(obj) {
+            var chosenAnswer = scenario['children'].filter(function(obj) {
                 return obj['idFormGenerator'] === Answers.findOne({ _id: answerId })['idFormGenerator'];
             })[0];
-            var chosenAnswer = Answers.findOne({ _id: chosenAnswerId });
+            console.log(chosenAnswer);
 
-
-            if (typeof chosenAnswer === "undefined") {
-
-            } else {
+            if (typeof(chosenAnswer) !== "undefined") {
                 messages.push({ "text": chosenAnswer.content.text, "author": "user" });
                 scenario = Scenarios.findOne({ _id: chosenAnswer['idScenario'] });
             }

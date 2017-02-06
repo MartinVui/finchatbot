@@ -35,8 +35,7 @@ export default class Button extends Component {
             answerPile.push( answerId );
             // console.log(answerPile);
             Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
-            // Discussions.update(Session.get('SessionId'), { $set : {"answersPile" : answerPile}});
-            console.log( "test" );
+
         });
         //nextStep Callback here
         this
