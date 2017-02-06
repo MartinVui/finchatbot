@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -47,7 +47,7 @@ export default class ChatBox extends Component {
         super( );
         this.state = {
             showIntro: true,
-            children: [ ]
+            children: [],
         };
     }
 
@@ -75,7 +75,7 @@ export default class ChatBox extends Component {
             Meteor.call( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,
-                'answersPile': [""],
+                'answersPile': [ "" ]
             }, function ( error, discussionId ) {
                 if ( error ) {
                     console.log( error );
@@ -161,20 +161,15 @@ export default class ChatBox extends Component {
 
                     </ReactCSSTransitionGroup>
 
-                    // this.state.showIntro === false ? //
-                    <div className="conversation">
-                        //
-                        <MessageList messages={this.props.messages}/>
-                        //
-                    </div>:null
-
                     <div className="conversation">
                         <MessageList messages={this.props.messages}/>
                     </div>
 
                     {this.state.showIntro === false
                         ? <MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={Session.get( 'children' )} nextStep={this.nextStep}/>
+                        : null
 }
+
                 </div>
             </div>
         );
