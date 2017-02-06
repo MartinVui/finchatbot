@@ -63,22 +63,26 @@ export default class MessageForm extends Component {
 
         <footer>
 
-        {/*<ReactCSSTransitionGroup                // Animation when the messages appear
-            transitionName="footer"
-            transitionEnterTimeout={500}
-            transitionAppearTimeout={500}
-            transitionLeaveTimeout={1500}>*/}
+        // {/*<ReactCSSTransitionGroup                // Animation when the messages appear
+        //     transitionName="footer"
+        //     transitionEnterTimeout={500}
+        //     transitionAppearTimeout={500}
+        //     transitionLeaveTimeout={1500}>*/}
 
 
         {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappear. Quite smart.
 
             <div className='message_form'>
 
+            for (form of forms) {
+
+            }
+
             {inputType === 'text' ?
                 <TextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {inputType === 'buttons' ?
-                <ButtonList formGenerators={forms} nextStep={this.props.nextStep}/>: null
+            {inputType === 'button' ?
+                <Button formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
             {inputType === 'select' ?
                 <SelectInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
@@ -98,15 +102,12 @@ export default class MessageForm extends Component {
             {inputType === 'year' ?
                 <YearInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
             }
-            {/*Session.get('botResponseJSON').input.type === 'carmake' ?
-                <CarMakeInput/>: null
-            */}
 
 
             </div>:null
         }
 
-        {/*</ReactCSSTransitionGroup>*/}
+        // {/*</ReactCSSTransitionGroup>*/}
 
         </footer>
 
