@@ -41,7 +41,6 @@ export default class Button extends Component {
         });
 
         //nextStep Callback here
-        console.log( );
         this
             .props
             .nextStep( this.props.nextScenario );
