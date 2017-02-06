@@ -18,16 +18,4 @@ export var FormGeneratorSchema = new SimpleSchema({
 		type : Object,
 		blackbox : true
 	},
-	answer : {
-    	type : AnswerDataSchema,
-	}
-});
-
-var AnswerDataSchema = new SimpleSchema({
-	content : {
-		type : String,
-	},
-	idScenario : {
-		type : String,
-	}
 });

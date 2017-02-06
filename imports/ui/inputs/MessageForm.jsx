@@ -14,7 +14,7 @@ import { Users } from '../../api/users.js';
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
-import ButtonList from './ButtonList.jsx';
+import Button from './Button.jsx';
 import DateInput from './DateInput.jsx';
 import TextInput from './TextInput.jsx';
 import SelectInput from './SelectInput.jsx';
@@ -44,13 +44,55 @@ export default class MessageForm extends Component {
       }
     }).fetch();
 
+    
+    if (forms.length > 0) {
+        
+        Session.set('showGif', false);
+    } else {
+        Session.set('showGif', true);
+    }
 
+    var outputList = [];
+    for (form of forms) {
 
-    //console.log(forms);
-    var inputType = forms[0].inputType;
+        switch (form.inputType) {
 
-    //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...
-    //SHOULD MAYBE LIMIT THE FORM UI TO ELEMENTARY COMPONENTS THAT ARE ADDED TO THE FINAL FORM
+            case 'text':
+                outputList.push(<TextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+            case 'button':
+                outputList.push(<Button formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+            case 'select':
+                outputList.push(<SelectInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+            case 'date':
+                outputList.push(<DateInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+            case 'multitext':
+                outputList.push(<MultitextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+            case 'adress':
+                outputList.push(<AddressInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+            case 'checkbox':
+                outputList.push(<CheckBoxInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+            case 'year':
+                outputList.push(<YearInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
+                break;
+
+        }
+    }
+
+   
 
     return(
 
@@ -58,51 +100,17 @@ export default class MessageForm extends Component {
 
         <footer>
 
-        {/*<ReactCSSTransitionGroup                // Animation when the messages appear
-            transitionName="footer"
-            transitionEnterTimeout={500}
-            transitionAppearTimeout={500}
-            transitionLeaveTimeout={1500}>*/}
 
-
-        {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappear. Quite smart.
+        {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappears. Quite smart.
 
             <div className='message_form'>
 
-            {inputType === 'text' ?
-                <TextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'buttons' ?
-                <ButtonList formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'select' ?
-                <SelectInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'date' ?
-                <DateInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'multitext' ?
-                <MultitextInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'address' ?
-                <AddressInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'checkbox' ?
-                <CheckBoxInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {inputType === 'year' ?
-                <YearInput formGenerators={forms} nextStep={this.props.nextStep}/>: null
-            }
-            {/*Session.get('botResponseJSON').input.type === 'carmake' ?
-                <CarMakeInput/>: null
-            */}
-
+            {outputList}
 
             </div>:null
         }
 
-        {/*</ReactCSSTransitionGroup>*/}
-
+        
         </footer>
 
 
