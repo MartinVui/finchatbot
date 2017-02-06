@@ -8,6 +8,7 @@ export const Answers = new Mongo.Collection("answers");
 Meteor.methods({
     'answer.insert' (answer) {
         answer['createdAt'] = new Date();
+        console.log(answer);
         check(answer , AnswerSchema);
         var newAnswer =  Answers.insert(answer);
         return newAnswer;

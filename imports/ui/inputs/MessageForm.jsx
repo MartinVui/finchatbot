@@ -44,9 +44,9 @@ export default class MessageForm extends Component {
       }
     }).fetch();
 
-    
+
     if (forms.length > 0) {
-        
+
         Session.set('showGif', false);
     } else {
         Session.set('showGif', true);
@@ -92,7 +92,7 @@ export default class MessageForm extends Component {
         }
     }
 
-   
+
 
     return(
 
@@ -110,7 +110,7 @@ export default class MessageForm extends Component {
             </div>:null
         }
 
-        
+
         </footer>
 
 

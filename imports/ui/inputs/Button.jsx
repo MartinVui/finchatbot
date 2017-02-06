@@ -13,12 +13,13 @@ export default class Button extends Component {
 // See AddressInput for more info. I won't write all this twice
 
 
-    onButtonClick() {
+    onButtonClick(event) {
         event.preventDefault();
+
         var text = this.props.formGenerator.value;
         var formGeneratorId = this.props.formGenerator._id;
-        
-        Meteor.call('answer.insert',{'idFormGenerator':formGeneratorId, 'content':text},
+
+        Meteor.call('answer.insert',{'idFormGenerator':formGeneratorId, 'content':{'text':text}},
           function(error, answerId)
             {
             if (error) {
