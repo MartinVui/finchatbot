@@ -1,4 +1,4 @@
-import React, { Component, PropTypes, } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Session } from 'meteor/session';
@@ -98,9 +98,10 @@ export default class MessageForm extends Component {
             <footer>
 
                 {Session.get( 'showGif' ) !== true
-                    ? // Shows the input field when the typing gif disappears. Quite smart. < div className = 'message_form' > {
-                        outputList
-                    } < /div>:null}
+                    ? <div className='message_form'>
+                            {outputList}
+                        </div>
+                    : null}
 
             </footer>
 
