@@ -37,9 +37,7 @@ export default class Button extends Component {
             answerPile.push(answerId);
             // console.log(answerPile);
 
-            Discussions.update(Session.get('SessionId'),
-                $set : {"answersPile" : answerPile}
-            );
+            Discussions.update(Session.get('SessionId'), { $set : {"answersPile" : answerPile}});
             console.log("test");
 
           }
