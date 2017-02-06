@@ -58,7 +58,7 @@ export default class MessageForm extends Component {
             var nextScenario = this.props.scenarioChildren.filter(function(obj) {
                 return obj['idFormGenerator'] === form._id;
             })[0].idScenario;
-            
+
             switch ( form.inputType ) {
 
                 case 'text':

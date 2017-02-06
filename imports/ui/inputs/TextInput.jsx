@@ -18,15 +18,14 @@ export default class TextInput extends Component {
 
         event.preventDefault( );
 
-        const text = ReactDOM
-            .findDOMNode( this.refs.textInput )
-            .value
-            .trim( );
-        var formGeneratorId = this.props.formGenerators[0]._id;
+        const text =  this.props.formGenerator.placeholder;
+        var formGeneratorId = this.props.formGenerators._id;
 
         Meteor.call( 'answer.insert', {
             'idFormGenerator': formGeneratorId,
-            'content': text,
+            'content': {
+                "text": text
+            },
         }, function ( error, answerId ) {
             if ( error ) {
                 console.log( error );
@@ -37,17 +36,19 @@ export default class TextInput extends Component {
                 '_id': Session.get( 'SessionId' )
             })
                 .answerPile;
+            if ( answerPile[0] === "" && answerPile.length === 1 ) {
+                answerPile = [ ];
+            }
             answerPile.push( answerId );
-            Discussions.update(Session.get( 'SessionId' ), $set : {
-                answerPile: answerPile
-            });
+
+            Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+
         });
 
         //nextStep Callback here
-        currentScenario = Scenarios.findOne({ '_id': this.props.formGenerators[0].answer.idScenario });
         this
             .props
-            .nextStep( currentScenario._id );
+            .nextStep( this.props.nextScenario );
     }
 
     render( ) {
