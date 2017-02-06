@@ -8,18 +8,19 @@ export function scanDiscussion(discussion) {
     var scenario = Scenarios.findOne({ '_id': discussion.idScenario });
     var messages = [];
 
+    // console.log("scanning");
+
     for (var answerId of discussion['answersPile']) {
 
-        var questions = Questions.findOne({ _id: scenario['idQuestion'] });
-
-
-        for (question of questions.content) {
-            if (question != {}) {
-                messages.push({ "text": question, "author": "bot" });
-            }
-        }
-
         if (answerId !== "") {
+
+            var questions = Questions.findOne({ _id: scenario['idQuestion'] });
+
+            for (question of questions.content) {
+                if (question != {}) {
+                    messages.push({ "text": question, "author": "bot" });
+                }
+            }
 
             var answerObject = Answers.findOne({ _id: answerId });
             // console.log(answerObject);
@@ -27,7 +28,7 @@ export function scanDiscussion(discussion) {
             var chosenAnswer = scenario['children'].filter(function(obj) {
                 return obj['idFormGenerator'] === Answers.findOne({ _id: answerId })['idFormGenerator'];
             })[0];
-            console.log(chosenAnswer);
+            // console.log(chosenAnswer);
 
             if (typeof(chosenAnswer) !== "undefined") {
                 messages.push({ "text": answerObject.content.text, "author": "user" });
@@ -35,6 +36,16 @@ export function scanDiscussion(discussion) {
             }
         }
     }
+
+    var questions = Questions.findOne({ _id: scenario['idQuestion'] });
+
+    for (question of questions.content) {
+        if (question != {}) {
+            messages.push({ "text": question, "author": "bot" });
+        }
+    }
+
+    var questions = Questions.findOne({ _id: scenario['idQuestion'] });
 
     return messages;
 

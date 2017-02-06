@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Session } from 'meteor/session';
@@ -55,39 +55,42 @@ export default class MessageForm extends Component {
 
         var outputList = [ ];
         for ( form of forms ) {
-
+            var nextScenario = this.props.scenarioChildren.filter(function(obj) {
+                return obj['idFormGenerator'] === form._id;
+            })[0].idScenario;
+            
             switch ( form.inputType ) {
 
                 case 'text':
-                    outputList.push( <TextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <TextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'button':
-                    outputList.push( <Button formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <Button formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'select':
-                    outputList.push( <SelectInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <SelectInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'date':
-                    outputList.push( <DateInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <DateInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'multitext':
-                    outputList.push( <MultitextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <MultitextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'adress':
-                    outputList.push( <AddressInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <AddressInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'checkbox':
-                    outputList.push( <CheckBoxInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <CheckBoxInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'year':
-                    outputList.push( <YearInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <YearInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
             }
