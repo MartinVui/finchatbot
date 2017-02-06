@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -47,7 +47,7 @@ export default class ChatBox extends Component {
         super( );
         this.state = {
             showIntro: true,
-            children: [],
+            children: [ ]
         };
     }
 
@@ -75,7 +75,7 @@ export default class ChatBox extends Component {
             Meteor.call( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,
-                'answersPile': [ "" ]
+                'answersPile': [""],
             }, function ( error, discussionId ) {
                 if ( error ) {
                     console.log( error );
@@ -100,6 +100,7 @@ export default class ChatBox extends Component {
 
         children = nextStepExt( scenarioId );
         Session.set( 'children', children );
+        console.log( Session );
 
         // // Find scenario in DB
         // scenario = Scenarios.findOne({_id:scenarioId});
@@ -140,7 +141,7 @@ export default class ChatBox extends Component {
                         {this.state.showIntro
                             ? <div className="introduction">
                                     <div id="intro-part1">
-                                        < img src="images/logo.png" className="intro-logo"/>
+                                        <img src="images/logo.png" className="intro-logo"/>
                                     </div>
                                     <div id="intro-part2">
 
