@@ -26,10 +26,7 @@ function nextStepExt(scenarioId) {
   question = Questions.findOne({_id:scenario['idQuestion']});
 
   //Ask question
-
-  Session.set('showGif' , true);
-
-
+  Session.set('showGif' , false);
   // Find formGenerators
   forms = FormGenerators.find({
     _id:{
@@ -39,12 +36,9 @@ function nextStepExt(scenarioId) {
     }
   }).fetch();
 
-  // console.log(forms);
-
   // Display formGenerators, with the idScenario
   return scenario.children;
   // The form subcomponent will use a callback to nextStep with the right scenario
-
 }
 
 
