@@ -14,7 +14,7 @@ import { Users } from '../../api/users.js';
 import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
-import ButtonList from './ButtonList.jsx';
+import Button from './Button.jsx';
 import DateInput from './DateInput.jsx';
 import TextInput from './TextInput.jsx';
 import SelectInput from './SelectInput.jsx';
@@ -44,14 +44,13 @@ export default class MessageForm extends Component {
       }
     }).fetch();
 
-    console.log(forms);
+    
     if (forms.length > 0) {
-        //console.log(forms);
+        
         Session.set('showGif', false);
     } else {
         Session.set('showGif', true);
     }
-    console.log(Session);
 
     var outputList = [];
     for (form of forms) {
@@ -59,54 +58,47 @@ export default class MessageForm extends Component {
         switch (form.inputType) {
 
             case 'text':
-                outputList.push(<TextInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<TextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
             case 'button':
-                outputList.push(<Button formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<Button formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
             case 'select':
-                outputList.push(<SelectInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<SelectInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
             case 'date':
-                outputList.push(<DateInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<DateInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
             case 'multitext':
-                outputList.push(<MultitextInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<MultitextInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
             case 'adress':
-                outputList.push(<AddressInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<AddressInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
             case 'checkbox':
-                outputList.push(<CheckBoxInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<CheckBoxInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
             case 'year':
-                outputList.push(<YearInput formGenerators={forms} nextStep={this.props.nextStep}/>);
+                outputList.push(<YearInput formGenerator={form} nextStep={this.props.nextStep} key={form._id}/>);
                 break;
 
         }
     }
 
-    //WARNING WE SHOULD BE ABLE TO ADD A SINGLE FORM FIELD FOR EACH FORMGENERATOR THAT WE GET HERE...
-    //SHOULD MAYBE LIMIT THE FORM UI TO ELEMENTARY COMPONENTS THAT ARE ADDED TO THE FINAL FORM
+   
 
     return(
 
 
 
         <footer>
-
-        // {/*<ReactCSSTransitionGroup                // Animation when the messages appear
-        //     transitionName="footer"
-        //     transitionEnterTimeout={500}
-        //     transitionAppearTimeout={500}
-        //     transitionLeaveTimeout={1500}>*/}
 
 
         {Session.get('showGif') !== true ? // Shows the input field when the typing gif disappears. Quite smart.
@@ -118,8 +110,7 @@ export default class MessageForm extends Component {
             </div>:null
         }
 
-        // {/*</ReactCSSTransitionGroup>*/}
-
+        
         </footer>
 
 

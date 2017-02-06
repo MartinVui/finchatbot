@@ -13,10 +13,10 @@ export default class Button extends Component {
 
     onButtonClick() {
         event.preventDefault();
-
-        const text = this.props.formGenerator.value;
+        var text = this.props.formGenerator.value;
+        console.log(text);
         var formGeneratorId = this.props.formGenerator._id;
-
+        
         Meteor.call('answer.insert',{'idFormGenerator':formGeneratorId, 'content':text},
           function(error, answerId)
             {
@@ -26,6 +26,7 @@ export default class Button extends Component {
             }
             answerPile = Discussions.findOne({'_id' : Session.get('SessionId')}).answerPile;
             answerPile.push(answerId);
+            console.log(answerPile);
             Discussions.update(Session.get('SessionId'),
                 $set : {answerPile : answerPile}
               );
@@ -40,14 +41,10 @@ export default class Button extends Component {
 
     render() {
 
-        if (this.props.buttonText == undefined) {       // That's quite useless now
-            return(null);                               // Totally useless
-        }
-
         return(
-            <div className="button" //id={this.props.buttonKey}
+            <div className="button"
             onClick={this.onButtonClick.bind(this)}>
-            <p>{this.props.buttonText}</p>
+            <p>{this.props.formGenerator.value}</p>
             </div>
         );
     }
