@@ -58,7 +58,7 @@ export default class TextInput extends Component {
 
     render(){
         return (
-            <input type="text" ref={this.key} placeholder={this.props.formGenerator.placeholder}} required/>
+            <input type="text" ref={this.key} placeholder={this.props.formGenerator.placeholder} required/>
         )
     }
 }
