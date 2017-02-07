@@ -18,9 +18,8 @@ export default class TextInput extends Component {
 
         event.preventDefault( );
 
-        var text =  ReactDOM.findDOMNode(this.refs[this.props.key].value.trim());
-        var formGeneratorId = this.props.key;
-
+        var text =  ReactDOM.findDOMNode(this.refs[this.key].value.trim());
+        var formGeneratorId = this.key;
 
         Meteor.call( 'answer.insert', {
             'idFormGenerator': formGeneratorId,
@@ -55,7 +54,7 @@ export default class TextInput extends Component {
 
     render(){
         return (
-                <input type="text" ref={this.props.key} placeholder={this.props.formGenerator.placeholder} required/> 
+                <input type="text" ref={this.key} placeholder={this.props.formGenerator.placeholder} onSubmit={ this.handleSubmit.bind(this) }required/> 
         )
     }
 }

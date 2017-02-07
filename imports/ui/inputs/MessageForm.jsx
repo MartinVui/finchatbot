@@ -104,10 +104,8 @@ export default class MessageForm extends Component {
                     ?
                         <div className='message_form'>
                             <form className="new_message" id="newMessageForm">
-                                {outputList}
-                                { Session.get( 'isMobile' ) === true
-                                   ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
-                                    : null}
+                                {outputList}    
+                                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
                             </form>
                         </div>
                     : null}
