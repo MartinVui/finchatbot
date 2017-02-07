@@ -101,10 +101,14 @@ export default class MessageForm extends Component {
             <footer>
 
                 {Session.get( 'showGif' ) !== true
-                    ? <div className='message_form'>
-                        <form className="new_message" id="newMessageForm">
-                            {outputList}
-                        </form>
+                    ?
+                        <div className='message_form'>
+                            <form className="new_message" id="newMessageForm">
+                                {outputList}
+                                { Session.get( 'isMobile' ) === true
+                                   ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                                    : null}
+                            </form>
                         </div>
                     : null}
 
