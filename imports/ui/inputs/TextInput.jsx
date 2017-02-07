@@ -9,9 +9,6 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
-import Message from '../Message.jsx';
-// import bloc from '../../api/blocs.js';
-
 export default class TextInput extends Component {
 
     constructor( props ) {
