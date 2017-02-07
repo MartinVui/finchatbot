@@ -28,7 +28,13 @@ export default class MessageForm extends Component {
 
     constructor( props ) {
         super( props );
+        this.state = {submit:false};
     };
+
+    handleSubmit( event ) {
+        event.preventDefault( );
+        this.setState({ submit: true });
+    }
 
     render( ) {
         // Decides the type of input that has to be displayed
@@ -62,7 +68,7 @@ export default class MessageForm extends Component {
             switch ( form.inputType ) {
 
                 case 'text':
-                    outputList.push( <TextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <TextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id} submit={this.state.submit}/> );
                     break;
 
                 case 'button':
@@ -103,8 +109,8 @@ export default class MessageForm extends Component {
                 {Session.get( 'showGif' ) !== true
                     ?
                         <div className='message_form'>
-                            <form className="new_message" id="newMessageForm">
-                                {outputList}    
+                            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind( this )}>
+                                {outputList}
                                 <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
                             </form>
                         </div>

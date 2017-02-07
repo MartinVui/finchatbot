@@ -18,9 +18,9 @@ export default class TextInput extends Component {
         super( props );
     };
 
-    handleSubmit( event ) {
+    handleSubmit() {
 
-        event.preventDefault( );
+        // event.preventDefault( );
 
         var text =  ReactDOM.findDOMNode(this.refs[this.key].value.trim());
         var formGeneratorId = this.key;
@@ -57,6 +57,9 @@ export default class TextInput extends Component {
 
 
     render(){
+      if (this.props.submit) {
+        this.handleSubmit();
+      }
         return (
             <input type="text" ref={this.key} placeholder={this.props.formGenerator.placeholder} required/>
         )
