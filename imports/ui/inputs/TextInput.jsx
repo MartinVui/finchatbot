@@ -56,7 +56,7 @@ export default class TextInput extends Component {
     render( ) {
 
         return (
-            <div>
+            <div className="new-message" id="newMessageForm">
                 <input type="text" ref={this.props.key} placeholder={this.props.formGenerator.placeholder} required/>
                 {Session.get( 'isMobile' ) === true
                     ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
