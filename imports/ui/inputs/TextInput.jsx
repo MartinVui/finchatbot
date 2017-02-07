@@ -51,7 +51,7 @@ export default class TextInput extends Component {
             .props
             .nextStep( this.props.nextScenario );
     }
-    
+
 
     render( ) {
 
