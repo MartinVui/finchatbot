@@ -18,8 +18,9 @@ export default class TextInput extends Component {
 
         event.preventDefault( );
 
-        const text =  this.props.formGenerator.placeholder;
-        var formGeneratorId = this.props.formGenerators._id;
+        var text =  ReactDOM.findDOMNode(this.refs[this.props.key].value.trim());
+        var formGeneratorId = this.props.key;
+
 
         Meteor.call( 'answer.insert', {
             'idFormGenerator': formGeneratorId,
@@ -55,14 +56,9 @@ export default class TextInput extends Component {
     render( ) {
 
         return (
-            <form className="new_message" id="newMessageForm" onSubmit={this
-                .handleSubmit
-                .bind( this )}>
-
-                <input type="text" ref="textInput" placeholder={this.props.formGenerator.placeholder} required/> {Session.get( 'isMobile' ) === true
+                <input type="text" ref={this.props.key} placeholder={this.props.formGenerator.placeholder} required/> {Session.get( 'isMobile' ) === true
                     ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
                     : null}
-            </form>
         )
     }
 }

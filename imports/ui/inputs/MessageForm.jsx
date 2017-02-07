@@ -102,7 +102,9 @@ export default class MessageForm extends Component {
 
                 {Session.get( 'showGif' ) !== true
                     ? <div className='message_form'>
+                        <form className="new_message" id="newMessageForm">
                             {outputList}
+                        </form>
                         </div>
                     : null}
 
