@@ -9,7 +9,7 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
-import Message from '../Message.jsx';
+// import Message from '../Message.jsx';
 // import bloc from '../../api/blocs.js';
 
 export default class TextInput extends Component {
@@ -43,8 +43,6 @@ export default class TextInput extends Component {
                     '_id': Session.get( 'SessionId' )
                 })
                 .answersPile;
-
-            console.log(answerPile);
 
             if ( answerPile[0] === "" && answerPile.length === 1 ) {
                 answerPile = [ ];
