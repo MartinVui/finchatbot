@@ -16,14 +16,16 @@ export default class TextInput extends Component {
 
     constructor( props ) {
         super( props );
-    };
+        this.state = {
+            inputValue : '',
+        }
+    }
 
     handleSubmit() {
 
         // event.preventDefault( );
-
-        var text =  ReactDOM.findDOMNode(this.refs[this.key].value.trim());
-        var formGeneratorId = this.key;
+        var text = this.state.inputValue;
+        var formGeneratorId = this.props.formGenerator._id;
 
         Meteor.call( 'answer.insert', {
             'idFormGenerator': formGeneratorId,
@@ -57,11 +59,18 @@ export default class TextInput extends Component {
 
 
     render(){
-      if (this.props.submit) {
-        this.handleSubmit();
-      }
-        return (
-            <input type="text" ref={this.key} placeholder={this.props.formGenerator.placeholder} required/>
-        )
+        if (this.props.submit) {
+            this.handleSubmit();
+        }
+        return ( 
+            <input value={this.state.inputValue} placeholder={this.props.formGenerator.placeholder} onChange={this.updateInputValue.bind(this)} required/>
+            );
     }
+
+    updateInputValue(evt) {
+        this.setState({
+            inputValue: evt.target.value
+        });
+    }
+
 }

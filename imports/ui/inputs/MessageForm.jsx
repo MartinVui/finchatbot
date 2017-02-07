@@ -68,7 +68,7 @@ export default class MessageForm extends Component {
             switch ( form.inputType ) {
 
                 case 'text':
-                    outputList.push( <TextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id} submit={this.state.submit}/> );
+                    outputList.push( <TextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} submit={this.state.submit} key={form._id}/> );
                     break;
 
                 case 'button':
