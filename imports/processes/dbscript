@@ -1,10 +1,4 @@
 db.formGenerators.insert({
-    "_id": "0",
-    "input": "textfield",
-    "placeholder": "Write something here !"
-});
-
-db.formGenerators.insert({
     "_id": "1",
     "inputType": "button",
     "value": "Sounds good !"
@@ -52,10 +46,6 @@ db.scenarios.insert({
     "_id": "2",
     "idQuestion": "3",
     "children": [
-        {
-            "idFormGenerator": "0",
-            "idScenario": "2"
-        }
     ]
 })
 
