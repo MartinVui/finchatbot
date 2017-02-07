@@ -67,12 +67,12 @@ random@1.0.10
 react@15.0.1
 react-meteor-data@0.2.9
 react-runtime@15.0.1
-reactive-dict@1.0.5
+reactive-dict@1.1.8
 reactive-var@1.0.11
 reload@1.1.11
 retry@1.0.9
 routepolicy@1.0.12
-session@1.0.5
+session@1.1.7
 shell-server@0.2.1
 spacebars@1.0.13
 spacebars-compiler@1.1.0
