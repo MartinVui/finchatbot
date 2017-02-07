@@ -14,12 +14,16 @@ import Message from '../Message.jsx';
 
 export default class TextInput extends Component {
 
+    constructor( props ) {
+        super( props );
+    };
+
     handleSubmit( event ) {
 
         event.preventDefault( );
 
-        var text =  ReactDOM.findDOMNode(this.refs[this.props.key].value.trim());
-        var formGeneratorId = this.props.key;
+        var text =  ReactDOM.findDOMNode(this.refs[this.key].value.trim());
+        var formGeneratorId = this.key;
 
 
         Meteor.call( 'answer.insert', {
@@ -51,11 +55,11 @@ export default class TextInput extends Component {
             .props
             .nextStep( this.props.nextScenario );
     }
-    
+
 
     render(){
         return (
-                <input type="text" ref={this.props.key} placeholder={this.props.formGenerator.placeholder} required/> 
+                <input type="text" ref={this.key} placeholder={this.props.formGenerator.placeholder}} required/>
         )
     }
 }
