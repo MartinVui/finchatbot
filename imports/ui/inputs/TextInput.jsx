@@ -37,11 +37,15 @@ export default class TextInput extends Component {
                 console.log( error );
                 return;
             }
+
             answerPile = Discussions
                 .findOne({
-                '_id': Session.get( 'SessionId' )
-            })
-                .answerPile;
+                    '_id': Session.get( 'SessionId' )
+                })
+                .answersPile;
+
+            console.log(answerPile);
+
             if ( answerPile[0] === "" && answerPile.length === 1 ) {
                 answerPile = [ ];
             }
@@ -62,7 +66,7 @@ export default class TextInput extends Component {
         if (this.props.submit) {
             this.handleSubmit();
         }
-        return ( 
+        return (
             <input value={this.state.inputValue} placeholder={this.props.formGenerator.placeholder} onChange={this.updateInputValue.bind(this)} required/>
             );
     }
