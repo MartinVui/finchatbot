@@ -25,17 +25,6 @@ function nextStepExt( scenarioId ) {
 
     //Ask question
     Session.set( 'showGif', false );
-    // Find formGenerators
-    forms = FormGenerators.find({
-        _id: {
-            $in: scenario
-                .children
-                .map(( x ) => {
-                    return x.idFormGenerator;
-                })
-        }
-    }).fetch( );
-
     // Display formGenerators, with the idScenario
     return scenario.children;
     // The form subcomponent will use a callback to nextStep with the right scenario
@@ -97,37 +86,8 @@ export default class ChatBox extends Component {
     };
 
     nextStep( scenarioId ) {
-
         children = nextStepExt( scenarioId );
         Session.set( 'children', children );
-        // console.log( Session );
-
-        // // Find scenario in DB
-        // scenario = Scenarios.findOne({_id:scenarioId});
-        // // Find question(s)
-        // question = Questions.findOne({_id:scenario['idQuestion']});
-        //
-        // //Ask question
-        //
-        // Session.set('showGif' , true);
-        //
-        //
-        // // Find formGenerators
-        // forms = FormGenerators.find({
-        //   _id:{
-        //     $in: scenario.children.map((x) => {
-        //       return x.idFormGenerator;
-        //     })
-        //   }
-        // }).fetch();
-        //
-        // console.log(forms);
-        //
-        // // Display formGenerators, with the idScenario
-        // this.state.children = scenario.children;
-        // return scenario.children;
-        // // The form subcomponent will use a callback to nextStep with the right scenario
-
     }
 
     render( ) {

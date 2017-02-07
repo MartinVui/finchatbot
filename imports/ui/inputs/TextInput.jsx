@@ -16,65 +16,72 @@ export default class TextInput extends Component {
 
     constructor( props ) {
         super( props );
-        this.state = {
-            inputValue : '',
+        var dict = {};
+        for(element of this.props.formGenerator) {
+            dict[element.key] = "";
         }
+        this.state = {
+            inputDict : dict,
+        };
     }
 
-    handleSubmit() {
+    // handleSubmit(event) {
 
-        // event.preventDefault( );
-        var text = this.state.inputValue;
-        var formGeneratorId = this.props.formGenerator._id;
+    //     event.preventDefault();
 
-        Meteor.call( 'answer.insert', {
-            'idFormGenerator': formGeneratorId,
-            'content': {
-                "text": text
-            },
-        }, function ( error, answerId ) {
-            if ( error ) {
-                console.log( error );
-                return;
-            }
+    //     var text = this.state.inputValue;
+    //     var formGeneratorId = this.props.formGenerator._id;
 
-            answerPile = Discussions
-                .findOne({
-                    '_id': Session.get( 'SessionId' )
-                })
-                .answersPile;
+    //     Meteor.call( 'answer.insert', {
+    //         'idFormGenerator': formGeneratorId,
+    //         'content': {
+    //             "text": text
+    //         },
+    //     }, function ( error, answerId ) {
+    //         if ( error ) {
+    //             console.log( error );
+    //             return;
+    //         }
 
-            console.log(answerPile);
+    //         answerPile = Discussions
+    //             .findOne({
+    //                 '_id': Session.get( 'SessionId' )
+    //             })
+    //             .answersPile;
 
-            if ( answerPile[0] === "" && answerPile.length === 1 ) {
-                answerPile = [ ];
-            }
-            answerPile.push( answerId );
+    //         console.log(answerPile);
 
-            Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+    //         if ( answerPile[0] === "" && answerPile.length === 1 ) {
+    //             answerPile = [ ];
+    //         }
+    //         answerPile.push( answerId );
 
-        });
+    //         Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
 
-        //nextStep Callback here
-        this
-            .props
-            .nextStep( this.props.nextScenario );
-    }
+    //     });
+
+    //     //nextStep Callback here
+    //     this
+    //         .props
+    //         .nextStep( this.props.nextScenario );
+    // }
 
 
     render(){
-        if (this.props.submit) {
-            this.handleSubmit();
+        var outputList = [ ];
+        for ( element of this.props.formGenerator ) {
+            outputList.push(<input value={this.state.inputDict[element.key]} placeholder={element.placeholder} onChange={this.updateInputValue.bind(this)}/>)
         }
         return (
-            <input value={this.state.inputValue} placeholder={this.props.formGenerator.placeholder} onChange={this.updateInputValue.bind(this)} required/>
-            );
+            <h1>Hello</h1>
+        )
     }
 
     updateInputValue(evt) {
-        this.setState({
-            inputValue: evt.target.value
-        });
+        // this.setState({
+        //     inputValue: evt.target.value
+        // });
+        console.log(evt.target);
     }
 
 }

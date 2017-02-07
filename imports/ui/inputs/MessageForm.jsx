@@ -28,19 +28,12 @@ export default class MessageForm extends Component {
 
     constructor( props ) {
         super( props );
-        this.state = {submit:false};
     };
 
-    handleSubmit( event ) {
-        event.preventDefault( );
-        this.setState({ submit: true });
-    }
-
-    render( ) {
+    render() {
         // Decides the type of input that has to be displayed
 
         //adding a mapper that links this.props.scenarioChildren to the proper UI form element
-        this.setState({ submit: false })
         forms = FormGenerators.find({
             _id: {
                 $in: this
@@ -68,35 +61,31 @@ export default class MessageForm extends Component {
             switch ( form.inputType ) {
 
                 case 'text':
-                    outputList.push( <TextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} submit={this.state.submit} key={form._id}/> );
+                    outputList.push( <TextInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'button':
-                    outputList.push( <Button formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <Button formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'select':
-                    outputList.push( <SelectInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <SelectInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'date':
-                    outputList.push( <DateInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
-                    break;
-
-                case 'multitext':
-                    outputList.push( <MultitextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <DateInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'adress':
-                    outputList.push( <AddressInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <AddressInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'checkbox':
-                    outputList.push( <CheckBoxInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <CheckBoxInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'year':
-                    outputList.push( <YearInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <YearInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
             }
@@ -109,10 +98,7 @@ export default class MessageForm extends Component {
                 {Session.get( 'showGif' ) !== true
                     ?
                         <div className='message_form'>
-                            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind( this )}>
                                 {outputList}
-                                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
-                            </form>
                         </div>
                     : null}
 
