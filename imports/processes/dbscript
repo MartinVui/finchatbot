@@ -50,7 +50,7 @@ db.scenarios.insert({
 
 db.scenarios.insert({
     "_id": "2",
-    "idQuestion": "2",
+    "idQuestion": "3",
     "children": [
         {
             "idFormGenerator": "0",
@@ -61,7 +61,7 @@ db.scenarios.insert({
 
 db.scenarios.insert({
     "_id": "3",
-    "idQuestion": "3",
+    "idQuestion": "2",
     "children": [
         {
             "idFormGenerator": "3",
