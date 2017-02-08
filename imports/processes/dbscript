@@ -24,7 +24,7 @@ db.formGenerators.insert({
       "placeholder": "Name"},
       {"inputType": "textfield",
       "placeholder": "Surname"}
-    ]s
+    ]
 });
 
 
