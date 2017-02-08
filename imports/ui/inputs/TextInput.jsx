@@ -13,18 +13,16 @@ export default class TextInput extends Component {
 
     constructor( props ) {
         super( props );
-        var dict = {};
-        for(element of this.props.formGenerator) {
-            dict[element.key] = "";
-        }
         this.state = {
-            inputDict : dict,
+            inputs : Array(this.props.formGenerator.length).fill(""),
         };
     }
 
-    // handleSubmit(event) {
+    handleSubmit(event) {
 
-    //     event.preventDefault();
+        event.preventDefault();
+
+        console.log("submit");
 
     //     var text = this.state.inputValue;
     //     var formGeneratorId = this.props.formGenerator._id;
@@ -61,26 +59,29 @@ export default class TextInput extends Component {
     //     this
     //         .props
     //         .nextStep( this.props.nextScenario );
-    // }
+    }
 
 
     render(){
         var outputList = [ ];
-        for ( element of this.props.formGenerator ) {
-            outputList.push(<input value={this.state.inputDict[element.key]} placeholder={element.placeholder} onChange={this.updateInputValue.bind(this)}/>)
+        for ( var i=0;i<this.props.formGenerator.length;i++ ) {
+            outputList.push(<input value={this.state.inputs[i]} placeholder={this.props.formGenerator[i].placeholder} key={i} onChange={this.updateInputValue.bind(this, i)}/>)
         }
         return (
-            <form className="new_message" id="newMessageForm">
+            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
                 {outputList}
+                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
             </form>
         )
     }
 
-    updateInputValue(evt) {
+    updateInputValue(i, evt) {
+        state = this.state.inputs;
+        state[i] = evt.target.value;
         this.setState({
-            inputValue: evt.target.value
+            inputs: state
         });
-        console.log(evt.target);
+        console.log(this.state.inputs);
     }
 
 }
