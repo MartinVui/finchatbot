@@ -1,5 +1,6 @@
 import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
+import Mustache from 'mustache';
 import { Session } from 'meteor/session';
 
 import { Answers } from '../../api/answers.js';
@@ -18,23 +19,76 @@ export default class SelectInput extends Component {
             inputs[element.targetName] = "";
         }
         this.state = {
-            inputs : inputs
+            inputs : inputs,
+            submit : false
         };
     }
 
     handleSubmit(event) {
+        event.preventDefault();
+        if (this.state.submit){
+            //User Update
+            var text = this.props.formGenerator.generatedAnswer;
+            console.log(this.state.inputs);
+            var answer = Mustache.render(text, this.state.inputs);
+            var formGeneratorId = this.props.formGenerator._id;
+            var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+            var user = Users.findOne({'_id': discussion.idUser});
+            Meteor.call("user.update", user._id, this.state.inputs);
 
+            //Discussion and answers update
+            Meteor.call( 'answer.insert', {
+                'idFormGenerator': formGeneratorId,
+                'content': {
+                    "text": answer
+                },
+            }, function ( error, answerId ) {
+                if ( error ) {
+                    console.log( error );
+                    return;
+                }
+
+                //Discussion Update
+                var discussion =  Discussions
+                    .findOne({
+                    '_id': Session.get( 'SessionId' )
+                });
+
+                var answerPile = discussion
+                    .answersPile;
+
+                if ( answerPile[0] === "" && answerPile.length === 1 ) {
+                    answerPile = [ ];
+                }
+                answerPile.push( answerId );
+
+                Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+
+                //User Update
+
+            });
+
+            //nextStep Callback here
+            this
+                .props
+                .nextStep( this.props.nextScenario );
+        }
     }
 
 
     render(){
+        console.log(this.props.formGenerator.elements[0].options);
         var outputList = [ ];
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
-            outputList.push(<select targetName={this.props.formGenerator.elements[i].targetName} key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}>)
-            for (option of this.props.formGenerator.elements[i].options){
-                outputList.push(<option value={option}>{option}</option>)
+            var targetName = this.props.formGenerator.elements[i].targetName;
+            var temp = [];
+            for (selection of this.props.formGenerator.elements[i].options){
+                temp.push(<option value={selection} key={selection}>{selection}</option>)
             }
-            outputList.push(</select>);
+            outputList.push(<select  className="Selectinput" key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}>
+                <option value=""> - </option>
+                {temp}
+                </select>);
         }
 
         return (
@@ -43,6 +97,24 @@ export default class SelectInput extends Component {
                 <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
             </form>
         )
+
+    }
+    updateInputValue(targetName, evt) {
+        state = this.state.inputs;
+        state[targetName] = evt.target.value;
+        if(state[targetName] !== ""){
+            this.setState({
+              submit :true  
+            })
+        }else{
+            this.setState({
+              submit :false  
+            })
+        }
+        this.setState({
+            inputs: state
+        });
+        console.log(this.state.inputs);
     }
 
 }
