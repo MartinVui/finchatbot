@@ -48,7 +48,6 @@ export default class ChatBox extends Component {
         this.setState({ showIntro: false });
 
         Meteor.call( 'user.insert', {
-            "data": {}
         }, function ( error, userId ) {
             if ( error ) {
                 console.log( error );

@@ -13,7 +13,6 @@ export default class Button extends Component {
     onButtonClick( event ) {
         event.preventDefault( );
 
-        console.log(this.props.formGenerator);
         var text = this.props.formGenerator.elements[0].value;
         var formGeneratorId = this.props.formGenerator._id;
 

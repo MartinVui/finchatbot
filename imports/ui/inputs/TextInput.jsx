@@ -27,44 +27,50 @@ export default class TextInput extends Component {
 
         event.preventDefault();
 
+        //User Update
         var text = this.props.formGenerator.generatedAnswer;
         var answer = Mustache.render(text, this.state.inputs);
+        var formGeneratorId = this.props.formGenerator._id;
+        var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+        var user = Users.findOne({'_id': discussion.idUser});
+        Meteor.call("user.update", user._id, this.state.inputs);
 
-    //     var text = this.state.inputValue;
-    //     var formGeneratorId = this.props.formGenerator._id;
+        //Discussion and answers update
+        Meteor.call( 'answer.insert', {
+            'idFormGenerator': formGeneratorId,
+            'content': {
+                "text": answer
+            },
+        }, function ( error, answerId ) {
+            if ( error ) {
+                console.log( error );
+                return;
+            }
 
-    //     Meteor.call( 'answer.insert', {
-    //         'idFormGenerator': formGeneratorId,
-    //         'content': {
-    //             "text": text
-    //         },
-    //     }, function ( error, answerId ) {
-    //         if ( error ) {
-    //             console.log( error );
-    //             return;
-    //         }
+            //Discussion Update
+            var discussion =  Discussions
+                .findOne({
+                '_id': Session.get( 'SessionId' )
+            });
 
-    //         answerPile = Discussions
-    //             .findOne({
-    //                 '_id': Session.get( 'SessionId' )
-    //             })
-    //             .answersPile;
+            var answerPile = discussion
+                .answersPile;
 
-    //         console.log(answerPile);
+            if ( answerPile[0] === "" && answerPile.length === 1 ) {
+                answerPile = [ ];
+            }
+            answerPile.push( answerId );
 
-    //         if ( answerPile[0] === "" && answerPile.length === 1 ) {
-    //             answerPile = [ ];
-    //         }
-    //         answerPile.push( answerId );
+            Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
 
-    //         Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+            //User Update
 
-    //     });
+        });
 
-    //     //nextStep Callback here
-    //     this
-    //         .props
-    //         .nextStep( this.props.nextScenario );
+        //nextStep Callback here
+        this
+            .props
+            .nextStep( this.props.nextScenario );
     }
 
 
@@ -87,7 +93,6 @@ export default class TextInput extends Component {
         this.setState({
             inputs: state
         });
-        console.log(this.state.inputs);
     }
 
 }
