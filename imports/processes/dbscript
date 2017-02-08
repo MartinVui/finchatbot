@@ -1,27 +1,31 @@
 db.formGenerators.insert({
     "_id": "1",
     "inputType": "button",
-    "value": "Sounds good !"
+    "elements": [
+      {"inputType": "button",
+      "value": "Sounds good !"}
+    ]
 });
 
 db.formGenerators.insert({
     "_id": "2",
     "inputType": "button",
-    "value": "No thanks."
+    "elements": [
+      {"inputType": "button",
+      "value": "No thanks."}
+    ]
 });
 
 db.formGenerators.insert({
     "_id": "3",
-    "inputType": "textfield",
-    "placeholder": "Name"
+    "inputType": "text",
+    "elements": [
+      {"inputType": "text",
+      "placeholder": "Name"},
+      {"inputType": "textfield",
+      "placeholder": "Surname"}
+    ]s
 });
-
-db.formGenerators.insert({
-    "_id": "4",
-    "inputType": "textfield",
-    "placeholder": "Surname"
-});
-
 
 
 
