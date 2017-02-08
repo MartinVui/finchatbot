@@ -1,4 +1,5 @@
 import React, { Component, PropTypes, } from 'react';
+import Mustache from 'mustache';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -13,8 +14,12 @@ export default class TextInput extends Component {
 
     constructor( props ) {
         super( props );
+        var inputs = {};
+        for(element of this.props.formGenerator.elements){
+            inputs[element.targetName] = "";
+        }
         this.state = {
-            inputs : Array(this.props.formGenerator.length).fill(""),
+            inputs : inputs
         };
     }
 
@@ -22,7 +27,8 @@ export default class TextInput extends Component {
 
         event.preventDefault();
 
-        console.log("submit");
+        var text = this.props.formGenerator.generatedAnswer;
+        var answer = Mustache.render(text, this.state.inputs);
 
     //     var text = this.state.inputValue;
     //     var formGeneratorId = this.props.formGenerator._id;
@@ -64,8 +70,8 @@ export default class TextInput extends Component {
 
     render(){
         var outputList = [ ];
-        for ( var i=0;i<this.props.formGenerator.length;i++ ) {
-            outputList.push(<input value={this.state.inputs[i]} placeholder={this.props.formGenerator[i].placeholder} key={i} onChange={this.updateInputValue.bind(this, i)}/>)
+        for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
+            outputList.push(<input value={this.state.inputs[this.props.formGenerator.elements[i].targetName]} placeholder={this.props.formGenerator.elements[i].placeholder} key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
         }
         return (
             <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
@@ -75,9 +81,9 @@ export default class TextInput extends Component {
         )
     }
 
-    updateInputValue(i, evt) {
+    updateInputValue(targetName, evt) {
         state = this.state.inputs;
-        state[i] = evt.target.value;
+        state[targetName] = evt.target.value;
         this.setState({
             inputs: state
         });
