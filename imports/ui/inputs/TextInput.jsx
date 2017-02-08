@@ -70,14 +70,16 @@ export default class TextInput extends Component {
             outputList.push(<input value={this.state.inputDict[element.key]} placeholder={element.placeholder} onChange={this.updateInputValue.bind(this)}/>)
         }
         return (
-            <h1>Hello</h1>
+            <form className="new_message" id="newMessageForm">
+                {outputList}
+            </form>
         )
     }
 
     updateInputValue(evt) {
-        // this.setState({
-        //     inputValue: evt.target.value
-        // });
+        this.setState({
+            inputValue: evt.target.value
+        });
         console.log(evt.target);
     }
 
