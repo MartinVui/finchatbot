@@ -65,7 +65,7 @@ export default class MessageForm extends Component {
                     break;
 
                 case 'button':
-                    outputList.push( <Button formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <Button formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'select':
