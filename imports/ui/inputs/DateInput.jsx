@@ -29,57 +29,57 @@ export default class DateInput extends Component {
         this.setState({ year: event.target.value });
     }
 
-    // sendBotMessage( json ) {
-    //     // Always the same, see AddressInput
-    //
-    //     var _this = this;
-    //
-    //     var typingTime = 300 + json.botResponse.length * 20;
-    //
-    //     setTimeout( function ( ) {
-    //
-    //         Session.set( 'botResponseJSON', json );
-    //
-    //         if ( json.skip === true ) {
-    //
-    //             Session.set( 'showGif', false );
-    //             Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
-    //
-    //             if ( json.image !== false ) {
-    //                 Session.set( 'image', json.image );
-    //                 Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
-    //             }
-    //
-    //             // Set the new state of the bot
-    //             Session.set( 'nextBlocName', json.nextBlocID );
-    //
-    //             var newJson = bloc(" ", Session.get( 'nextBlocName' ), Session.get( 'allData' ));
-    //
-    //             Session.set( 'showGif', true );
-    //
-    //             _this.sendBotMessage( newJson );
-    //
-    //         } else {
-    //
-    //             Session.set( 'showGif', false );
-    //             Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
-    //
-    //             if ( json.image !== false ) {
-    //                 Session.set( 'image', json.image );
-    //                 Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
-    //             }
-    //
-    //             // Set the new state of the bot
-    //             Session.set( 'nextBlocName', json.nextBlocID );
-    //
-    //         }
-    //
-    //     }, typingTime)
-    //
-    // }
+    sendBotMessage( json ) {
+        // Always the same, see AddressInput
+
+        var _this = this;
+
+        var typingTime = 300 + json.botResponse.length * 20;
+
+        setTimeout( function ( ) {
+
+            Session.set( 'botResponseJSON', json );
+
+            if ( json.skip === true ) {
+
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
+
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
+                }
+
+                // Set the new state of the bot
+                Session.set( 'nextBlocName', json.nextBlocID );
+
+                var newJson = bloc(" ", Session.get( 'nextBlocName' ), Session.get( 'allData' ));
+
+                Session.set( 'showGif', true );
+
+                _this.sendBotMessage( newJson );
+
+            } else {
+
+                Session.set( 'showGif', false );
+                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
+
+                if ( json.image !== false ) {
+                    Session.set( 'image', json.image );
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get( 'sessionId' ));
+                }
+
+                // Set the new state of the bot
+                Session.set( 'nextBlocName', json.nextBlocID );
+
+            }
+
+        }, typingTime)
+
+    }
 
     onButtonClick( ) {
-        // Create the response format: DD/MM/YYYY
+        // Create tthe response format: DD/MM/YYYY
         var day = this.state.day;
         var month = this.state.month;
         var year = this.state.year;
