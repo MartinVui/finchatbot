@@ -77,7 +77,11 @@ export default class TextInput extends Component {
     render(){
         var outputList = [ ];
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
-            outputList.push(<input value={this.state.inputs[this.props.formGenerator.elements[i].targetName]} placeholder={this.props.formGenerator.elements[i].placeholder} key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+            outputList.push(<input 
+                value={this.state.inputs[this.props.formGenerator.elements[i].targetName]} 
+                placeholder={this.props.formGenerator.elements[i].placeholder} 
+                key={i} 
+                onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
         }
         return (
             <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>

@@ -15,75 +15,83 @@ import Message from '../Message.jsx';
 
 export default class SelectInput extends Component {
 
-    constructor( ) {
-        super( );
+    constructor( props ) {
+        super( props );
+        var inputs = {};
+        for(element of this.props.formGenerator.elements){
+            inputs[element.targetName] = "";
+        }
         this.state = {
-            value: this.props.forms[0].placeholder
+            inputs : inputs
         };
     }
 
-    handleChange( event ) {
-        this.setState({ value: event.target.value });
-    }
+    handleSubmit(event) {
 
-    onButtonClick( ) {
-        const text = ReactDOM
-            .findDOMNode( this.refs.selectInput )
-            .value;
-        var formGeneratorId = this.props.formGenerators[0]._id;
+        event.preventDefault();
 
+        //User Update
+        var text = this.props.formGenerator.generatedAnswer;
+        var answer = Mustache.render(text, this.state.inputs);
+        var formGeneratorId = this.props.formGenerator._id;
+        var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+        var user = Users.findOne({'_id': discussion.idUser});
+        Meteor.call("user.update", user._id, this.state.inputs);
+
+        //Discussion and answers update
         Meteor.call( 'answer.insert', {
             'idFormGenerator': formGeneratorId,
-            'content': text,
+            'content': {
+                "text": answer
+            },
         }, function ( error, answerId ) {
             if ( error ) {
                 console.log( error );
                 return;
             }
-            answerPile = Discussions
+
+            //Discussion Update
+            var discussion =  Discussions
                 .findOne({
                 '_id': Session.get( 'SessionId' )
-            })
-                .answerPile;
-            answerPile.push( answerId );
-            Discussions.update(Session.get( 'SessionId' ), $set : {
-                answerPile: answerPile
             });
+
+            var answerPile = discussion
+                .answersPile;
+
+            if ( answerPile[0] === "" && answerPile.length === 1 ) {
+                answerPile = [ ];
+            }
+            answerPile.push( answerId );
+
+            Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+
+            //User Update
+
         });
 
-        currentScenario = Scenarios.findOne({ '_id': this.props.formGenerators[0].answer.idScenario });
+        //nextStep Callback here
         this
             .props
-            .nextStep( currentScenario._id );
-
-        //Saving several times the same answer value if several users choose the same for now
+            .nextStep( this.props.nextScenario );
     }
 
-    render( ) {
-        // Shows a select input with the values we decided
 
-        var options = this.props.forms[0].options;
-        var optionsUi = [ ];
-        for ( option in options ) {
-            optionsUi.push(
-                <option value={option}>{option}</option>
-            );
+    render(){
+        var outputList = [ ];
+        for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
+            outputList.push(<select targetName={this.props.formGenerator.elements[i].targetName} key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}>);
+            for (option of this.props.formGenerator.elements[i].options){
+                outputList.push(<option value={option}>{option}</option>);
+            }
         }
-
+        outputList.push(</select>);
         return (
-            <div className="SelectInput">
-
-                <select ref='selectInput' onChange={this
-                    .handleChange
-                    .bind( this )} className="scroll-input">
-                    <option value={this.state.value} disabled>{this.state.value}</option>
-                    {optionsUi}
-                </select>
-                <img src="images/send.png" className="send-icon-mobile" onClick={this
-                    .onButtonClick
-                    .bind( this )}/>
-            </div>
+            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
+                {outputList}
+                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+            </form>
         )
     }
-
+}
 }

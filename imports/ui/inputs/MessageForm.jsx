@@ -11,15 +11,12 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
-import Message from '../Message.jsx';
-// import bloc from '../../api/blocs.js';
 
 import Button from './Button.jsx';
 import DateInput from './DateInput.jsx';
 import TextInput from './TextInput.jsx';
 import SelectInput from './SelectInput.jsx';
 import CheckBoxInput from './CheckBoxInput.jsx';
-import MultitextInput from './MultitextInput.jsx';
 import AddressInput from './AddressInput.jsx';
 import YearInput from './YearInput.jsx';
 //import CarMakeInput from './CarMakeInput.jsx';
@@ -69,7 +66,7 @@ export default class MessageForm extends Component {
                     break;
 
                 case 'select':
-                    outputList.push( <SelectInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <SelectInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'date':
