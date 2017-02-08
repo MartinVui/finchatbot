@@ -1,4 +1,5 @@
 import React, { Component, PropTypes, } from 'react';
+import Mustache from 'mustache';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
@@ -9,39 +10,60 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
-import Message from '../Message.jsx';
-// import bloc from '../../api/blocs.js';
-
 export default class TextInput extends Component {
 
-    handleSubmit( event ) {
+    constructor( props ) {
+        super( props );
+        var inputs = {};
+        for(element of this.props.formGenerator.elements){
+            inputs[element.targetName] = "";
+        }
+        this.state = {
+            inputs : inputs
+        };
+    }
 
-        event.preventDefault( );
+    handleSubmit(event) {
 
-        const text =  this.props.formGenerator.placeholder;
-        var formGeneratorId = this.props.formGenerators._id;
+        event.preventDefault();
 
+        //User Update
+        var text = this.props.formGenerator.generatedAnswer;
+        var answer = Mustache.render(text, this.state.inputs);
+        var formGeneratorId = this.props.formGenerator._id;
+        var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+        var user = Users.findOne({'_id': discussion.idUser});
+        Meteor.call("user.update", user._id, this.state.inputs);
+
+        //Discussion and answers update
         Meteor.call( 'answer.insert', {
             'idFormGenerator': formGeneratorId,
             'content': {
-                "text": text
+                "text": answer
             },
         }, function ( error, answerId ) {
             if ( error ) {
                 console.log( error );
                 return;
             }
-            answerPile = Discussions
+
+            //Discussion Update
+            var discussion =  Discussions
                 .findOne({
                 '_id': Session.get( 'SessionId' )
-            })
-                .answerPile;
+            });
+
+            var answerPile = discussion
+                .answersPile;
+
             if ( answerPile[0] === "" && answerPile.length === 1 ) {
                 answerPile = [ ];
             }
             answerPile.push( answerId );
 
             Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+
+            //User Update
 
         });
 
@@ -51,17 +73,26 @@ export default class TextInput extends Component {
             .nextStep( this.props.nextScenario );
     }
 
-    render( ) {
 
+    render(){
+        var outputList = [ ];
+        for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
+            outputList.push(<input value={this.state.inputs[this.props.formGenerator.elements[i].targetName]} placeholder={this.props.formGenerator.elements[i].placeholder} key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+        }
         return (
-            <form className="new_message" id="newMessageForm" onSubmit={this
-                .handleSubmit
-                .bind( this )}>
-
-                <input type="text" ref="textInput" placeholder={this.props.formGenerator[0].placeholder} required/> {Session.get( 'isMobile' ) === true
-                    ? <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
-                    : null}
+            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
+                {outputList}
+                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
             </form>
         )
     }
+
+    updateInputValue(targetName, evt) {
+        state = this.state.inputs;
+        state[targetName] = evt.target.value;
+        this.setState({
+            inputs: state
+        });
+    }
+
 }

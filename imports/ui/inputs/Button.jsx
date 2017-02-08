@@ -13,7 +13,7 @@ export default class Button extends Component {
     onButtonClick( event ) {
         event.preventDefault( );
 
-        var text = this.props.formGenerator.value;
+        var text = this.props.formGenerator.elements[0].value;
         var formGeneratorId = this.props.formGenerator._id;
 
         Meteor.call( 'answer.insert', {
@@ -50,7 +50,7 @@ export default class Button extends Component {
             <div className="button" onClick={this
                 .onButtonClick
                 .bind( this )}>
-                <p>{this.props.formGenerator.value}</p>
+                <p>{this.props.formGenerator.elements[0].value}</p>
             </div>
         );
     }

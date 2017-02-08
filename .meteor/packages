@@ -20,12 +20,13 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
 aldeed:simple-schema
-check
+check@1.2.4
 aldeed:autoform
 aldeed:collection2
-reactive-dict
-random
+reactive-dict@1.1.8
+random@1.0.10
 react-meteor-data
-session
+session@1.1.7
 react
 meteorhacks:async
+msavin:mongol

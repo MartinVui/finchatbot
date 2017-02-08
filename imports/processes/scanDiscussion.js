@@ -2,10 +2,14 @@ import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
 import { Answers } from '../api/answers.js';
+import { Users } from '../api/users.js';
+
+import Mustache from 'mustache';
 
 export function scanDiscussion(discussion) {
 
     var scenario = Scenarios.findOne({ '_id': discussion.idScenario });
+    var user = Users.findOne({'_id': discussion.idUser});
     var messages = [];
 
     // console.log("scanning");
@@ -18,7 +22,8 @@ export function scanDiscussion(discussion) {
 
             for (question of questions.content) {
                 if (question != {}) {
-                    messages.push({ "text": question, "author": "bot" });
+                    var interpretedQuestion = Mustache.render(question , {'user' : user});
+                    messages.push({ "text": interpretedQuestion, "author": "bot" });
                 }
             }
 
@@ -41,7 +46,8 @@ export function scanDiscussion(discussion) {
 
     for (question of questions.content) {
         if (question != {}) {
-            messages.push({ "text": question, "author": "bot" });
+            var interpretedQuestion = Mustache.render(question , {'user' : user});
+            messages.push({ "text": interpretedQuestion, "author": "bot" });
         }
     }
 

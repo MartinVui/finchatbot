@@ -1,4 +1,16 @@
 export var FormGeneratorSchema = new SimpleSchema({
+    inputType : {
+        type : String,
+    },
+    elements: {
+        type : Array,
+    },
+    'elements.$': {
+        type : EntityFormSchema
+    },
+});
+
+var EntityFormSchema = new SimpleSchema({
     inputType: {
         type: String,
     },
