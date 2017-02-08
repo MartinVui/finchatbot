@@ -1,33 +1,31 @@
 db.formGenerators.insert({
-    "_id": "0",
-    "input": "textfield",
-    "placeholder": "Write something here !"
-});
-
-db.formGenerators.insert({
     "_id": "1",
     "inputType": "button",
-    "value": "Sounds good !"
+    "elements": [
+      {"inputType": "button",
+      "value": "Sounds good !"}
+    ]
 });
 
 db.formGenerators.insert({
     "_id": "2",
     "inputType": "button",
-    "value": "No thanks."
+    "elements": [
+      {"inputType": "button",
+      "value": "No thanks."}
+    ]
 });
 
 db.formGenerators.insert({
     "_id": "3",
-    "inputType": "textfield",
-    "placeholder": "Name"
+    "inputType": "text",
+    "elements": [
+      {"inputType": "text",
+      "placeholder": "Name"},
+      {"inputType": "textfield",
+      "placeholder": "Surname"}
+    ]
 });
-
-db.formGenerators.insert({
-    "_id": "4",
-    "inputType": "textfield",
-    "placeholder": "Surname"
-});
-
 
 
 
@@ -50,18 +48,14 @@ db.scenarios.insert({
 
 db.scenarios.insert({
     "_id": "2",
-    "idQuestion": "2",
+    "idQuestion": "3",
     "children": [
-        {
-            "idFormGenerator": "0",
-            "idScenario": "2"
-        }
     ]
 })
 
 db.scenarios.insert({
     "_id": "3",
-    "idQuestion": "3",
+    "idQuestion": "2",
     "children": [
         {
             "idFormGenerator": "3",

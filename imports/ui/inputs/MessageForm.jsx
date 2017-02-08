@@ -30,11 +30,10 @@ export default class MessageForm extends Component {
         super( props );
     };
 
-    render( ) {
+    render() {
         // Decides the type of input that has to be displayed
 
         //adding a mapper that links this.props.scenarioChildren to the proper UI form element
-
         forms = FormGenerators.find({
             _id: {
                 $in: this
@@ -70,27 +69,23 @@ export default class MessageForm extends Component {
                     break;
 
                 case 'select':
-                    outputList.push( <SelectInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <SelectInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'date':
-                    outputList.push( <DateInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
-                    break;
-
-                case 'multitext':
-                    outputList.push( <MultitextInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <DateInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'adress':
-                    outputList.push( <AddressInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <AddressInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'checkbox':
-                    outputList.push( <CheckBoxInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <CheckBoxInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
                 case 'year':
-                    outputList.push( <YearInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <YearInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
             }
@@ -101,8 +96,9 @@ export default class MessageForm extends Component {
             <footer>
 
                 {Session.get( 'showGif' ) !== true
-                    ? <div className='message_form'>
-                            {outputList}
+                    ?
+                        <div className='message_form'>
+                                {outputList}
                         </div>
                     : null}
 
