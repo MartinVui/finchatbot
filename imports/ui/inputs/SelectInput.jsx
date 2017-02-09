@@ -85,7 +85,7 @@ export default class SelectInput extends Component {
             for (selection of this.props.formGenerator.elements[i].options){
                 temp.push(<option value={selection} key={selection}>{selection}</option>)
             }
-            outputList.push(<select  className="Selectinput" key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}>
+            outputList.push(<select  className="scroll-input" key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}>
                 <option value=""> - </option>
                 {temp}
                 </select>);
@@ -93,8 +93,10 @@ export default class SelectInput extends Component {
 
         return (
             <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
-                {outputList}
-                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                <div className="SelectInput">
+                    {outputList}
+                    <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                </div>
             </form>
         )
 
