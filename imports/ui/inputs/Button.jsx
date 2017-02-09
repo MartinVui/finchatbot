@@ -13,7 +13,7 @@ export default class Button extends Component {
     onButtonClick( event ) {
         event.preventDefault( );
 
-        var text = this.props.formGenerator.elements[0].value;
+        var text = this.props.formGenerator.elements[0].generatedAnswer;
         var formGeneratorId = this.props.formGenerator._id;
 
         Meteor.call( 'answer.insert', {
