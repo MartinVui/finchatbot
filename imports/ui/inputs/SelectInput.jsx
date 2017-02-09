@@ -1,5 +1,6 @@
 import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
+import Mustache from 'mustache';
 import { Session } from 'meteor/session';
 
 import { Answers } from '../../api/answers.js';
@@ -9,81 +10,113 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
-// import { Messages } from '../../api/messages.js';
-import Message from '../Message.jsx';
-// import bloc from '../../api/blocs.js';
-
 export default class SelectInput extends Component {
 
-    constructor( ) {
-        super( );
+    constructor( props ) {
+        super( props );
+        var inputs = {};
+        for(element of this.props.formGenerator.elements){
+            inputs[element.targetName] = "";
+        }
         this.state = {
-            value: this.props.forms[0].placeholder
+            inputs : inputs,
+            submit : false
         };
     }
 
-    handleChange( event ) {
-        this.setState({ value: event.target.value });
-    }
+    handleSubmit(event) {
+        event.preventDefault();
+        if (this.state.submit){
+            //User Update
+            var text = this.props.formGenerator.generatedAnswer;
+            console.log(this.state.inputs);
+            var answer = Mustache.render(text, this.state.inputs);
+            var formGeneratorId = this.props.formGenerator._id;
+            var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+            var user = Users.findOne({'_id': discussion.idUser});
+            Meteor.call("user.update", user._id, this.state.inputs);
 
-    onButtonClick( ) {
-        const text = ReactDOM
-            .findDOMNode( this.refs.selectInput )
-            .value;
-        var formGeneratorId = this.props.formGenerators[0]._id;
+            //Discussion and answers update
+            Meteor.call( 'answer.insert', {
+                'idFormGenerator': formGeneratorId,
+                'content': {
+                    "text": answer
+                },
+            }, function ( error, answerId ) {
+                if ( error ) {
+                    console.log( error );
+                    return;
+                }
 
-        Meteor.call( 'answer.insert', {
-            'idFormGenerator': formGeneratorId,
-            'content': text,
-        }, function ( error, answerId ) {
-            if ( error ) {
-                console.log( error );
-                return;
-            }
-            answerPile = Discussions
-                .findOne({
-                '_id': Session.get( 'SessionId' )
-            })
-                .answerPile;
-            answerPile.push( answerId );
-            Discussions.update(Session.get( 'SessionId' ), $set : {
-                answerPile: answerPile
+                //Discussion Update
+                var discussion =  Discussions
+                    .findOne({
+                    '_id': Session.get( 'SessionId' )
+                });
+
+                var answerPile = discussion
+                    .answersPile;
+
+                if ( answerPile[0] === "" && answerPile.length === 1 ) {
+                    answerPile = [ ];
+                }
+                answerPile.push( answerId );
+
+                Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+
+                //User Update
+
             });
-        });
 
-        currentScenario = Scenarios.findOne({ '_id': this.props.formGenerators[0].answer.idScenario });
-        this
-            .props
-            .nextStep( currentScenario._id );
-
-        //Saving several times the same answer value if several users choose the same for now
+            //nextStep Callback here
+            this
+                .props
+                .nextStep( this.props.nextScenario );
+        }
     }
 
-    render( ) {
-        // Shows a select input with the values we decided
 
-        var options = this.props.forms[0].options;
-        var optionsUi = [ ];
-        for ( option in options ) {
-            optionsUi.push(
-                <option value={option}>{option}</option>
-            );
+    render(){
+        console.log(this.props.formGenerator.elements[0].options);
+        var outputList = [ ];
+        for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
+            var targetName = this.props.formGenerator.elements[i].targetName;
+            var temp = [];
+            for (selection of this.props.formGenerator.elements[i].options){
+                temp.push(<option value={selection} key={selection}>{selection}</option>)
+            }
+            outputList.push(<select  className="scroll-input" key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}>
+                <option value=""> - </option>
+                {temp}
+                </select>);
         }
 
         return (
-            <div className="SelectInput">
-
-                <select ref='selectInput' onChange={this
-                    .handleChange
-                    .bind( this )} className="scroll-input">
-                    <option value={this.state.value} disabled>{this.state.value}</option>
-                    {optionsUi}
-                </select>
-                <img src="images/send.png" className="send-icon-mobile" onClick={this
-                    .onButtonClick
-                    .bind( this )}/>
-            </div>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+                <div className="SelectInput">
+                    {outputList}
+                    <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                </div>
+            </form>
         )
+
+    }
+    updateInputValue(targetName, evt) {
+        state = this.state.inputs;
+        state[targetName] = evt.target.value;
+        if(state[targetName] !== ""){
+            this.setState({
+              submit :true  
+            })
+        }else{
+            this.setState({
+              submit :false  
+            })
+        }
+        this.setState({
+            inputs: state
+        });
+        console.log(this.state.inputs);
     }
 
 }

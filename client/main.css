@@ -362,8 +362,8 @@ input :focus {
 
 form {
     padding:10px;
-    display: flex;
-    display: -webkit-flex;
+    /*display: flex;*/
+    /*display: -webkit-flex;*/
     width: 100%;
 }
 
@@ -399,6 +399,7 @@ form {
 }
 
 #newMessageForm {
+    display: -webkit-flex;
     font-size: 16px;
 }
 

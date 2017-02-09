@@ -8,6 +8,9 @@ export var FormGeneratorSchema = new SimpleSchema({
     'elements.$': {
         type : EntityFormSchema
     },
+    generatedAnswer: {
+        type: String,
+    }
 });
 
 var EntityFormSchema = new SimpleSchema({
