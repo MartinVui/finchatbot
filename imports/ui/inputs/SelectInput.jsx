@@ -92,7 +92,7 @@ export default class SelectInput extends Component {
         }
 
         return (
-            <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
+            <form onSubmit={this.handleSubmit.bind(this)}>
                 <div className="SelectInput">
                     {outputList}
                     <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
