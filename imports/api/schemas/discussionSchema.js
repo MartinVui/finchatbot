@@ -19,10 +19,10 @@ var MessageSchema = new SimpleSchema({
     author: {
         type: String
     },
-    content: {
-        type: Object,
-        blackbox: true
-    },
+    text: {
+        type: String,
+        optional: true
+    }
     createdAt: {
         type: Date,
         optional: true,

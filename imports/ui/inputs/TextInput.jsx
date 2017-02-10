@@ -43,9 +43,7 @@ export default class TextInput extends Component {
 
         newMessage = {
             'author' : 'user',
-            'content' : {
-                'text': answer
-            },
+            'text': answer
             'createdAt' : date
         }
         messagesPile.push(newMessage);

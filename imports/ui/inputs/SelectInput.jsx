@@ -44,14 +44,11 @@ export default class SelectInput extends Component {
 
             newMessage = {
                 'author' : 'user',
-                'content' : {
-                    'text': answer
-                },
+                'text': answer
                 'createdAt' : date
             }
         messagesPile.push(newMessage);
         Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
-            });
 
             //nextStep Callback here
             this

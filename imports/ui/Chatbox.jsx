@@ -19,12 +19,27 @@ import MessageList from './MessageList.jsx';
 function nextStepExt( scenarioId ) {
 
     // Find scenario in DB
-    scenario = Scenarios.findOne({ _id: scenarioId });
-    // Find question(s)
-    question = Questions.findOne({_id: scenario['idQuestion']});
+    var scenario = Scenarios.findOne({ _id: scenarioId });
+    var text = Questions.findOne({_id: scenario['idQuestion']}).content.text;
+    var discussion = Discussions.findOne('_id' : Session.get('SessionId'));
+    var user = Users.findOne('_id' : discussion.idUser);
 
-    //Ask question
-    Session.set( 'showGif', false );
+    //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
+    var interpretedQuestion = Mustache.render(text , {'user' : user});
+    var date = new Date();
+
+    var messagesPile = discussion.messagesPile;
+
+    newMessage = {
+        'author' : 'bot',
+        'text': interpretedAnswer
+        'createdAt' : date
+    };
+
+    messagesPile.push(newMessage);
+
+    Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
+
     // Display formGenerators, with the idScenario
     return scenario.children;
     // The form subcomponent will use a callback to nextStep with the right scenario
@@ -63,7 +78,7 @@ export default class ChatBox extends Component {
             Meteor.call( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,
-                'answersPile': [""],
+                'messagesPile': [""],
             }, function ( error, discussionId ) {
                 if ( error ) {
                     console.log( error );
