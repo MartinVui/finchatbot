@@ -25,29 +25,22 @@ function nextStepExt( scenarioId ) {
     var content = Questions.findOne({_id: scenario['idQuestion']}).content;
     //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
 
-    var i = 1;
-    for(text of content){
-        Session.set('showGif' , true);
-        setTimeout(function(){
+    Session.set('showGif' , true);
+    setTimeout(function(){
+        Session.set('showGif' , false);
+        for(text of content){        
             var interpretedQuestion = Mustache.render(text , {'user' : user});
             var date = new Date();
-
             newMessage = {
                 'author' : 'bot',
                 'text': interpretedQuestion,
                 'createdAt' : date
             };
-
             messagesPile.push(newMessage);
             Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
-            if (i === 2 * content.length) {
-                Session.set('showGif' , false); 
-            }
-            i++;
-        },800*i);
-        i++
-        
-    }
+            };
+        }
+        ,800);
     // Display formGenerators, with the idScenario
     return scenario.children;
     // The form subcomponent will use a callback to nextStep with the right scenario
