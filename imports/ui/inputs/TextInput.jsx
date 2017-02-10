@@ -44,7 +44,8 @@ export default class TextInput extends Component {
         newMessage = {
             'author' : 'user',
             'text': answer,
-            'createdAt' : date
+            'createdAt' : date,
+            'idFormGenerator': formGeneratorId
         }
         messagesPile.push(newMessage);
         Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});

@@ -45,7 +45,8 @@ export default class SelectInput extends Component {
             newMessage = {
                 'author' : 'user',
                 'text': answer,
-                'createdAt' : date
+                'createdAt' : date,
+                'idFormGenerator': formGeneratorId
             }
         messagesPile.push(newMessage);
         Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
@@ -59,7 +60,6 @@ export default class SelectInput extends Component {
 
 
     render(){
-        console.log(this.props.formGenerator.elements[0].options);
         var outputList = [ ];
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
             var targetName = this.props.formGenerator.elements[i].targetName;
@@ -98,6 +98,5 @@ export default class SelectInput extends Component {
         this.setState({
             inputs: state
         });
-        console.log(this.state.inputs);
     }
 }
