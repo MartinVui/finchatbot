@@ -118,5 +118,4 @@ export default class SelectInput extends Component {
         });
         console.log(this.state.inputs);
     }
-
 }
