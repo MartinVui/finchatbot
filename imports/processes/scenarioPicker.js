@@ -12,7 +12,6 @@ export function scenarioPicker() {
         return choice;
 
     } else {
-
         throw "No initial scenario. Please define one."
 
     }

@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Mustache from 'mustache';
 import { Session } from 'meteor/session';
 
-import { Answers } from '../../api/answers.js';
 import { Questions } from '../../api/questions.js';
 import { Discussions } from '../../api/discussions.js';
 import { Scenarios } from '../../api/scenarios.js';
@@ -27,46 +26,29 @@ export default class SelectInput extends Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.state.submit){
-            //User Update
+
             var text = this.props.formGenerator.generatedAnswer;
-            console.log(this.state.inputs);
             var answer = Mustache.render(text, this.state.inputs);
             var formGeneratorId = this.props.formGenerator._id;
             var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+            var date = new Date();
+
+            //User Update
             var user = Users.findOne({'_id': discussion.idUser});
             Meteor.call("user.update", user._id, this.state.inputs);
 
-            //Discussion and answers update
-            Meteor.call( 'answer.insert', {
-                'idFormGenerator': formGeneratorId,
-                'content': {
-                    "text": answer
-                },
-            }, function ( error, answerId ) {
-                if ( error ) {
-                    console.log( error );
-                    return;
-                }
+            //Discussion Update
+            var messagesPile = Discussions.findOne({
+                '_id' : Session.get( 'SessionId' )
+            }).messagesPile;
 
-                //Discussion Update
-                var discussion =  Discussions
-                    .findOne({
-                    '_id': Session.get( 'SessionId' )
-                });
-
-                var answerPile = discussion
-                    .answersPile;
-
-                if ( answerPile[0] === "" && answerPile.length === 1 ) {
-                    answerPile = [ ];
-                }
-                answerPile.push( answerId );
-
-                Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
-
-                //User Update
-
-            });
+            newMessage = {
+                'author' : 'user',
+                'text': answer,
+                'createdAt' : date
+            }
+        messagesPile.push(newMessage);
+        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 
             //nextStep Callback here
             this
@@ -106,11 +88,11 @@ export default class SelectInput extends Component {
         state[targetName] = evt.target.value;
         if(state[targetName] !== ""){
             this.setState({
-              submit :true  
+              submit :true
             })
         }else{
             this.setState({
-              submit :false  
+              submit :false
             })
         }
         this.setState({
@@ -118,5 +100,4 @@ export default class SelectInput extends Component {
         });
         console.log(this.state.inputs);
     }
-
 }

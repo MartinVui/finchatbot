@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Session } from 'meteor/session';
 
-// import { Messages } from '../../api/messages.js';
-import { Answers } from '../../api/answers.js';
 import { Questions } from '../../api/questions.js';
 import { Discussions } from '../../api/discussions.js';
 import { Scenarios } from '../../api/scenarios.js';
@@ -19,7 +17,6 @@ import SelectInput from './SelectInput.jsx';
 import CheckBoxInput from './CheckBoxInput.jsx';
 import AddressInput from './AddressInput.jsx';
 import YearInput from './YearInput.jsx';
-//import CarMakeInput from './CarMakeInput.jsx';
 
 export default class MessageForm extends Component {
 
@@ -41,13 +38,6 @@ export default class MessageForm extends Component {
                     })
             }
         }).fetch( );
-
-        if ( forms.length > 0 ) {
-
-            Session.set( 'showGif', false );
-        } else {
-            Session.set( 'showGif', true );
-        }
 
         var outputList = [ ];
         for ( form of forms ) {

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
+import Mustache from 'mustache';
 
 import { Users } from '../api/users.js';
 import { Discussions } from '../api/discussions.js';
@@ -19,12 +20,29 @@ import MessageList from './MessageList.jsx';
 function nextStepExt( scenarioId ) {
 
     // Find scenario in DB
-    scenario = Scenarios.findOne({ _id: scenarioId });
-    // Find question(s)
-    question = Questions.findOne({_id: scenario['idQuestion']});
+    var scenario = Scenarios.findOne({ _id: scenarioId });
+    
+    var discussion = Discussions.findOne({'_id' : Session.get('SessionId')});
+    var messagesPile = discussion.messagesPile;
+    var user = Users.findOne({'_id' : discussion.idUser});
+    var content = Questions.findOne({_id: scenario['idQuestion']}).content;
+    //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
+    
 
-    //Ask question
-    Session.set( 'showGif', false );
+    for(text of content){
+        var interpretedQuestion = Mustache.render(text , {'user' : user});
+        var date = new Date();
+
+        newMessage = {
+            'author' : 'bot',
+            'text': interpretedQuestion,
+            'createdAt' : date
+        };
+
+        messagesPile.push(newMessage);
+
+        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
+    }
     // Display formGenerators, with the idScenario
     return scenario.children;
     // The form subcomponent will use a callback to nextStep with the right scenario
@@ -63,7 +81,7 @@ export default class ChatBox extends Component {
             Meteor.call( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,
-                'answersPile': [""],
+                'messagesPile': [""],
             }, function ( error, discussionId ) {
                 if ( error ) {
                     console.log( error );
