@@ -4,7 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { Session } from 'meteor/session';
 
 // import { Messages } from '../../api/messages.js';
-import { Answers } from '../../api/answers.js';
+// import { Answers } from '../../api/answers.js';
 import { Questions } from '../../api/questions.js';
 import { Discussions } from '../../api/discussions.js';
 import { Scenarios } from '../../api/scenarios.js';

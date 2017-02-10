@@ -51,7 +51,7 @@ export default class SelectInput extends Component {
             }
         messagesPile.push(newMessage);
         Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
-            });
+            // });
 
             //nextStep Callback here
             this

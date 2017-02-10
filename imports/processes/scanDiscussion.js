@@ -1,7 +1,7 @@
 import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
-import { Answers } from '../api/answers.js';
+// import { Answers } from '../api/answers.js';
 import { Users } from '../api/users.js';
 
 import Mustache from 'mustache';
@@ -12,6 +12,7 @@ export function scanDiscussion(discussion) {
     var user = Users.findOne({'_id': discussion.idUser});
 
     return discussion.messagesPile;
+
     // var messages = [];
     //
     // for (var answerId of discussion['answersPile']) {
