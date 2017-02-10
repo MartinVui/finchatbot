@@ -22,7 +22,7 @@ var MessageSchema = new SimpleSchema({
     text: {
         type: String,
         optional: true
-    }
+    },
     createdAt: {
         type: Date,
         optional: true,

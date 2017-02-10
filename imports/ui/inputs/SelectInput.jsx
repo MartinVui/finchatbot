@@ -44,7 +44,7 @@ export default class SelectInput extends Component {
 
             newMessage = {
                 'author' : 'user',
-                'text': answer
+                'text': answer,
                 'createdAt' : date
             }
         messagesPile.push(newMessage);

@@ -9,9 +9,17 @@ import Mustache from 'mustache';
 export function scanDiscussion(discussion) {
 
     var scenario = Scenarios.findOne({ '_id': discussion.idScenario });
-    var user = Users.findOne({'_id': discussion.idUser});
-
-    return discussion.messagesPile;
+    var cleanMessagesPile = discussion.messagesPile.filter((x) => {
+            if (x !== ""){
+            return x;
+            }
+        });
+    
+    if (discussion.messagesPile[0] === "" && discussion.length > 1 ) {
+        Meteor.call('discussion.update', discussion._id, {messagesPile : cleanMessagesPile})    
+    } 
+    
+    return cleanMessagesPile;
 
     // var messages = [];
     //

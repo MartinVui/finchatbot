@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Session } from 'meteor/session';
+import Mustache from 'mustache';
 
 import { Users } from '../api/users.js';
 import { Discussions } from '../api/discussions.js';
@@ -21,9 +22,9 @@ function nextStepExt( scenarioId ) {
     // Find scenario in DB
     var scenario = Scenarios.findOne({ _id: scenarioId });
     
-    var discussion = Discussions.findOne('_id' : Session.get('SessionId'));
+    var discussion = Discussions.findOne({'_id' : Session.get('SessionId')});
     var messagesPile = discussion.messagesPile;
-    var user = Users.findOne('_id' : discussion.idUser);
+    var user = Users.findOne({'_id' : discussion.idUser});
     var content = Questions.findOne({_id: scenario['idQuestion']}).content;
     //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
     
@@ -34,7 +35,7 @@ function nextStepExt( scenarioId ) {
 
         newMessage = {
             'author' : 'bot',
-            'text': interpretedAnswer
+            'text': interpretedQuestion,
             'createdAt' : date
         };
 

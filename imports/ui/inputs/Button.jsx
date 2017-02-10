@@ -22,7 +22,7 @@ export default class Button extends Component {
 
         newMessage = {
             'author' : 'user',
-            'text': text
+            'text': text,
             'createdAt' : date
         }
 
