@@ -39,13 +39,6 @@ export default class MessageForm extends Component {
             }
         }).fetch( );
 
-        if ( forms.length > 0 ) {
-
-            Session.set( 'showGif', false );
-        } else {
-            Session.set( 'showGif', true );
-        }
-
         var outputList = [ ];
         for ( form of forms ) {
             var nextScenario = this.props.scenarioChildren.filter(function(obj) {

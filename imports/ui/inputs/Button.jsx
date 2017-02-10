@@ -12,7 +12,7 @@ export default class Button extends Component {
     onButtonClick( event ) {
         event.preventDefault( );
 
-        var text = this.props.formGenerator.elements[0].generatedAnswer;
+        var text = this.props.formGenerator.generatedAnswer;
         var formGeneratorId = this.props.formGenerator._id;
         var date = new Date();
 
