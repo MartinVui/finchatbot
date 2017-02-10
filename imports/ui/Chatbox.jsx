@@ -18,30 +18,35 @@ import MessageForm from './inputs/MessageForm.jsx';
 import MessageList from './MessageList.jsx';
 
 function nextStepExt( scenarioId ) {
-
-    // Find scenario in DB
     var scenario = Scenarios.findOne({ _id: scenarioId });
-    
     var discussion = Discussions.findOne({'_id' : Session.get('SessionId')});
     var messagesPile = discussion.messagesPile;
     var user = Users.findOne({'_id' : discussion.idUser});
     var content = Questions.findOne({_id: scenario['idQuestion']}).content;
     //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
-    
 
+    var i = 1;
     for(text of content){
-        var interpretedQuestion = Mustache.render(text , {'user' : user});
-        var date = new Date();
+        Session.set('showGif' , true);
+        setTimeout(function(){
+            var interpretedQuestion = Mustache.render(text , {'user' : user});
+            var date = new Date();
 
-        newMessage = {
-            'author' : 'bot',
-            'text': interpretedQuestion,
-            'createdAt' : date
-        };
+            newMessage = {
+                'author' : 'bot',
+                'text': interpretedQuestion,
+                'createdAt' : date
+            };
 
-        messagesPile.push(newMessage);
-
-        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
+            messagesPile.push(newMessage);
+            Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
+            if (i === 2 * content.length) {
+                Session.set('showGif' , false); 
+            }
+            i++;
+        },800*i);
+        i++
+        
     }
     // Display formGenerators, with the idScenario
     return scenario.children;

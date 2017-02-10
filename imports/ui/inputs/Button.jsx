@@ -23,7 +23,8 @@ export default class Button extends Component {
         newMessage = {
             'author' : 'user',
             'text': text,
-            'createdAt' : date
+            'createdAt' : date,
+            'idFormGenerator': formGeneratorId
         }
 
         messagesPile.push(newMessage);

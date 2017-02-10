@@ -26,5 +26,9 @@ var MessageSchema = new SimpleSchema({
     createdAt: {
         type: Date,
         optional: true,
+    },
+    idFormGenerator: {
+        type: String,
+        optional: true
     }
 })
