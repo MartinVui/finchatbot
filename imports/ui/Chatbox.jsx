@@ -20,26 +20,28 @@ function nextStepExt( scenarioId ) {
 
     // Find scenario in DB
     var scenario = Scenarios.findOne({ _id: scenarioId });
-    var text = Questions.findOne({_id: scenario['idQuestion']}).content.text;
+    
     var discussion = Discussions.findOne('_id' : Session.get('SessionId'));
-    var user = Users.findOne('_id' : discussion.idUser);
-
-    //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
-    var interpretedQuestion = Mustache.render(text , {'user' : user});
-    var date = new Date();
-
     var messagesPile = discussion.messagesPile;
+    var user = Users.findOne('_id' : discussion.idUser);
+    var content = Questions.findOne({_id: scenario['idQuestion']}).content;
+    //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
+    
 
-    newMessage = {
-        'author' : 'bot',
-        'text': interpretedAnswer
-        'createdAt' : date
-    };
+    for(text of content){
+        var interpretedQuestion = Mustache.render(text , {'user' : user});
+        var date = new Date();
 
-    messagesPile.push(newMessage);
+        newMessage = {
+            'author' : 'bot',
+            'text': interpretedAnswer
+            'createdAt' : date
+        };
 
-    Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
+        messagesPile.push(newMessage);
 
+        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
+    }
     // Display formGenerators, with the idScenario
     return scenario.children;
     // The form subcomponent will use a callback to nextStep with the right scenario
