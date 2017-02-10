@@ -17,7 +17,6 @@ import SelectInput from './SelectInput.jsx';
 import CheckBoxInput from './CheckBoxInput.jsx';
 import AddressInput from './AddressInput.jsx';
 import YearInput from './YearInput.jsx';
-//import CarMakeInput from './CarMakeInput.jsx';
 
 export default class MessageForm extends Component {
 

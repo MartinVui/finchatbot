@@ -26,7 +26,7 @@ export default class SelectInput extends Component {
     handleSubmit(event) {
         event.preventDefault();
         if (this.state.submit){
-            
+
             var text = this.props.formGenerator.generatedAnswer;
             var answer = Mustache.render(text, this.state.inputs);
             var formGeneratorId = this.props.formGenerator._id;
@@ -88,11 +88,11 @@ export default class SelectInput extends Component {
         state[targetName] = evt.target.value;
         if(state[targetName] !== ""){
             this.setState({
-              submit :true  
+              submit :true
             })
         }else{
             this.setState({
-              submit :false  
+              submit :false
             })
         }
         this.setState({
