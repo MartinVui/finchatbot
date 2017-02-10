@@ -3,7 +3,6 @@ import Mustache from 'mustache';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
 
-import { Answers } from '../../api/answers.js';
 import { Questions } from '../../api/questions.js';
 import { Discussions } from '../../api/discussions.js';
 import { Scenarios } from '../../api/scenarios.js';
@@ -27,45 +26,30 @@ export default class TextInput extends Component {
 
         event.preventDefault();
 
-        //User Update
         var text = this.props.formGenerator.generatedAnswer;
         var answer = Mustache.render(text, this.state.inputs);
         var formGeneratorId = this.props.formGenerator._id;
-        var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+        var discussion = Discussions.findOne({'_id': Session.get('SessionId')});
+        var date = new Date();
+        
+        //Update the user
         var user = Users.findOne({'_id': discussion.idUser});
         Meteor.call("user.update", user._id, this.state.inputs);
 
-        //Discussion and answers update
-        Meteor.call( 'answer.insert', {
-            'idFormGenerator': formGeneratorId,
-            'content': {
-                "text": answer
+        //Update discussion
+        var messagesPile = Discussions.findOne({
+            '_id' : Session.get( 'SessionId' )
+        }).messagesPile;
+
+        newMessage = {
+            'author' : 'user',
+            'content' : {
+                'text': answer
             },
-        }, function ( error, answerId ) {
-            if ( error ) {
-                console.log( error );
-                return;
-            }
-
-            //Discussion Update
-            var discussion =  Discussions
-                .findOne({
-                '_id': Session.get( 'SessionId' )
-            });
-
-            var answerPile = discussion
-                .answersPile;
-
-            if ( answerPile[0] === "" && answerPile.length === 1 ) {
-                answerPile = [ ];
-            }
-            answerPile.push( answerId );
-
-            Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
-
-            //User Update
-
-        });
+            'createdAt' : date
+        }
+        messagesPile.push(newMessage);
+        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 
         //nextStep Callback here
         this

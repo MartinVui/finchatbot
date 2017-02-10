@@ -3,7 +3,6 @@ import { ReactDOM } from 'react-dom';
 import { Session } from 'meteor/session';
 
 import { Discussions } from '../../api/discussions.js';
-import { Answers } from '../../api/answers.js';
 import { Scenarios } from '../../api/scenarios.js';
 import { Users } from '../../api/users.js';
 import { Message } from '../Message.jsx';
@@ -15,30 +14,23 @@ export default class Button extends Component {
 
         var text = this.props.formGenerator.elements[0].generatedAnswer;
         var formGeneratorId = this.props.formGenerator._id;
+        var date = new Date();
 
-        Meteor.call( 'answer.insert', {
-            'idFormGenerator': formGeneratorId,
-            'content': {
+        var messagesPile = Discussions.findOne({
+            '_id' : Session.get( 'SessionId' )
+        }).messagesPile;
+
+        newMessage = {
+            'author' : 'user',
+            'content' : {
                 'text': text
-            }
-        }, function ( error, answerId ) {
-            if ( error ) {
-                console.log( error );
-                return;
-            }
-            var answerPile = Discussions
-                .findOne({
-                '_id': Session.get( 'SessionId' )
-            })
-                .answersPile;
-            if ( answerPile[0] === "" && answerPile.length === 1 ) {
-                answerPile = [ ];
-            }
-            answerPile.push( answerId );
+            },
+            'createdAt' : date
+        }
 
-            Meteor.call("discussion.update", Session.get( 'SessionId' ), { "answersPile": answerPile });
+        messagesPile.push(newMessage);
 
-        });
+        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 
         //nextStep Callback here
         this

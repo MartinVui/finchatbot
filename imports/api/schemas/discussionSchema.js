@@ -7,10 +7,24 @@ export var DiscussionSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-    answersPile: {
+    messagesPile: {
         type: Array
     },
-    'answersPile.$': {
-        type: String,
+    'messagesPile.$': {
+        type: MessageSchema  
+    }
+})
+
+var MessageSchema = new SimpleSchema({
+    author: {
+        type: String
+    },
+    content: {
+        type: Object,
+        blackbox: true
+    },
+    createdAt: {
+        type: Date,
+        optional: true,
     }
 })
