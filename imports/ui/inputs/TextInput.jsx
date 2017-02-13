@@ -69,7 +69,7 @@ export default class TextInput extends Component {
         return (
             <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
                 {outputList}
-                <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                <input type="image" src="/images/send.png" alt="Submit" className='send-icon-mobile'/>
             </form>
         )
     }

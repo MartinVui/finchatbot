@@ -77,7 +77,7 @@ export default class SelectInput extends Component {
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <div className="SelectInput">
                     {outputList}
-                    <input type="image" src="images/send.png" alt="Submit" className='send-icon-mobile'/>
+                    <input type="image" src="/images/send.png" alt="Submit" className='send-icon-mobile'/>
                 </div>
             </form>
         )
