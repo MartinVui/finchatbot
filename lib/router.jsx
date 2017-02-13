@@ -14,7 +14,7 @@ Router.route('/', () => {
 
 Router.route( "/messenger", { where: "server" } )
   	.get(function(req, res) {
-	  	if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === "finchatbot_messenger") {
+	  	if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'finchatbot_messenger') {
     		console.log("Validating webhook");
     		res.status(200).send(req.query['hub.challenge']);
 		} else {
