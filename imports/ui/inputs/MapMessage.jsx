@@ -4,9 +4,21 @@ import { Session } from 'meteor/session';
 
 export default class MapMessage extends Component {
 
+    constructor( props ) {
+        super( props );
+        var inputs = {};
+        for(element of this.props.formGenerator.elements){
+            inputs[element.targetName] = "";
+        }
+        this.state = {
+            adress : "",
+            submit : false
+        };
+    }
+
     componentDidMount( ) {
-        this.mapInit( )
-        console.log(Session.get( 'address' ));
+        this.mapInit( );
+        // console.log(Session.get( 'address' ));
     }
 
     mapInit( ) {
@@ -26,7 +38,7 @@ export default class MapMessage extends Component {
             .maps
             .Geocoder( );
 
-        var address = Session.get( 'address' );
+        var address = this.state.adress;
         geocoder.geocode({
             'address': address
         }, function ( results, status ) {

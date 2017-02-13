@@ -58,21 +58,25 @@ export default class MessageForm extends Component {
                     outputList.push( <SelectInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
-                case 'date':
-                    outputList.push( <DateInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                case 'map':
+                    outputList.push( <MapMessage formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
 
-                case 'adress':
-                    outputList.push( <AddressInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
-                    break;
-
-                case 'checkbox':
-                    outputList.push( <CheckBoxInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
-                    break;
-
-                case 'year':
-                    outputList.push( <YearInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
-                    break;
+                // case 'date':
+                //     outputList.push( <DateInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                //     break;
+                //
+                // case 'adress':
+                //     outputList.push( <AddressInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                //     break;
+                //
+                // case 'checkbox':
+                //     outputList.push( <CheckBoxInput formGenerator={form.elements} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                //     break;
+                //
+                // case 'year':
+                //     outputList.push( <YearInput formGenerator={form.elements[0]} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                //     break;
 
             }
         }
