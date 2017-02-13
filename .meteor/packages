@@ -30,3 +30,4 @@ session@1.1.7
 react
 meteorhacks:async
 msavin:mongol
+iron:router

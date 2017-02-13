@@ -81,8 +81,8 @@ export default class MessageList extends Component {
 
                 {Session.get( 'showGif' )
                     ? <div className='bot_message'>
-                            <img src='images/logo.png' className="bot_message"/>
-                            <img src='images/typing3.gif' className="typing_gif"/>
+                            <img src='/images/logo.png' className="bot_message"/>
+                            <img src='/images/typing3.gif' className="typing_gif"/>
                         </div>
                     : null}
             </div>

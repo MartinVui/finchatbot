@@ -100,7 +100,7 @@ export default class Message extends Component {
 
                 return (
                     <div className="bot_message">
-                        <img src='images/logo.png' className="bot_message" onLoad={this
+                        <img src='/images/logo.png' className="bot_message" onLoad={this
                             .handleImageLoad
                             .bind( this )}/> {this.state.imageLoaded
                             ? <p className="bot_text">{contents}</p>

@@ -120,7 +120,7 @@ export default class ChatBox extends Component {
                         {this.state.showIntro
                             ? <div className="introduction">
                                     <div id="intro-part1">
-                                        <img src="images/logo.png" className="intro-logo"/>
+                                        <img src="/images/logo.png" className="intro-logo"/>
                                     </div>
                                     <div id="intro-part2">
 
