@@ -19,4 +19,14 @@ ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.2.1            # Server-side component of the `meteor shell` command
 
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
-insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
+aldeed:simple-schema
+check@1.2.4
+aldeed:autoform
+aldeed:collection2
+reactive-dict@1.1.8
+random@1.0.10
+react-meteor-data
+session@1.1.7
+react
+meteorhacks:async
+msavin:mongol
