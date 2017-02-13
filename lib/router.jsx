@@ -13,13 +13,14 @@ Router.route('/', () => {
 });
 
 Router.route( "/messenger", { where: "server" } )
-  	.get(function(req, res) {
-	  	if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'finchatbot_messenger') {
+  	.get(function() {
+	  	if (this.request.query['hub.mode'] === 'subscribe' && this.request.query['hub.verify_token'] === 'finchatbot_messenger') {
     		console.log("Validating webhook");
-    		res.status(200).send(req.query['hub.challenge']);
+    		this.response.statusCode = 200;
+    		this.response.end( this.request.query['hub.challenge'] );
 		} else {
 	    	console.error("Failed validation. Make sure the validation tokens match.");
-	    	res.sendStatus(403);          
+	    	this.response.statusCode = 403;
 		}  
 	})
 
