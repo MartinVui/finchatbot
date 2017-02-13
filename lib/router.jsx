@@ -12,20 +12,16 @@ Router.route('/', () => {
   render(page, document.getElementById( 'render-target' ));
 });
 
-var getRoutes = Picker.filter(function(req, res) {
-  // you can write any logic you want.
-  // but this callback does not run inside a fiber
-  // at the end, you must return either true or false
-  return req.method == "GET";
-});
-
-getRoutes.route('/messenger', function(params, req, res, next) {
-  if (params.query['hub.verify_token'] === '78750') {
-        console.log(params.query['hub.verify_token']);
-        // res.end();
-        res.end(params.query['hub.challenge']);
-  }
-});
+Router.route( "/messenger", { where: "server" } )
+  	.get(function(req, res) {
+	  	if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === 'finchatbot_messenger') {
+    		console.log("Validating webhook");
+    		res.status(200).send(req.query['hub.challenge']);
+		} else {
+	    	console.error("Failed validation. Make sure the validation tokens match.");
+	    	res.sendStatus(403);          
+		}  
+	})
 
   .post( function() {
     // If a POST request is made, create the user's profile.
