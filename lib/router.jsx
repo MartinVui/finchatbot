@@ -13,11 +13,15 @@ Router.route('/', () => {
 });
 
 Router.route( "/messenger", { where: "server" } )
-  .get( function() {
-    this.response.setHeader( 'access-control-allow-origin', '*' );
-    this.response.statusCode = 200;
-    this.response.end( JSON.stringify({"test":"test"}) );
-  })
+  	.get(function(req, res) {
+	  	if (req.query['hub.mode'] === 'subscribe' && req.query['hub.verify_token'] === "finchatbot_messenger") {
+    		console.log("Validating webhook");
+    		res.status(200).send(req.query['hub.challenge']);
+		} else {
+	    	console.error("Failed validation. Make sure the validation tokens match.");
+	    	res.sendStatus(403);          
+		}  
+	});
   .post( function() {
     // If a POST request is made, create the user's profile.
   })
