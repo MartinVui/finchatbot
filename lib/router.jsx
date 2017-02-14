@@ -2,10 +2,8 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { render } from 'react-dom';
-<<<<<<< Updated upstream
-=======
 import { HTTP } from 'meteor/http';
->>>>>>> Stashed changes
+
 
 import App from '../imports/ui/App.jsx';
 
