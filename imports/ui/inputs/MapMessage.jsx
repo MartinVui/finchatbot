@@ -4,18 +4,6 @@ import { Session } from 'meteor/session';
 
 export default class MapMessage extends Component {
 
-    constructor( props ) {
-        super( props );
-        var inputs = {};
-        for(element of this.props.formGenerator.elements){
-            inputs[element.targetName] = "";
-        }
-        this.state = {
-            adress : "",
-            submit : false
-        };
-    }
-
     componentDidMount( ) {
         this.mapInit( );
         // console.log(Session.get( 'address' ));
@@ -38,7 +26,7 @@ export default class MapMessage extends Component {
             .maps
             .Geocoder( );
 
-        var address = this.state.adress;
+        var address = this.props.adress;
         geocoder.geocode({
             'address': address
         }, function ( results, status ) {

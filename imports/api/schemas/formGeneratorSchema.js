@@ -25,6 +25,10 @@ var EntityFormSchema = new SimpleSchema({
         type: String,
         optional: true
     },
+    targetName: {
+        type: String,
+        optional: true
+    },
     options: {
         type: Array,
         optional: true
@@ -33,4 +37,8 @@ var EntityFormSchema = new SimpleSchema({
         type: Object,
         blackbox: true
     },
+    map: {
+        type: Boolean,
+        optional: true,
+    }
 });
