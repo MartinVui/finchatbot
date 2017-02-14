@@ -22,6 +22,23 @@ export default class TextInput extends Component {
         };
     }
 
+    componentDidMount() {
+        var input = document.getElementById( 'address-input' );
+        var options = {
+            componentRestrictions: {
+                country: 'ZA'
+            },
+            types: [
+                'geocode', 'establishment',
+            ],
+        };
+
+        var autocomplete = new google
+            .maps
+            .places
+            .Autocomplete( input, options );
+    }
+
     handleSubmit(event) {
 
         event.preventDefault();
@@ -70,11 +87,21 @@ export default class TextInput extends Component {
     render(){
         var outputList = [ ];
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
-            outputList.push(<input
-                value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
-                placeholder={this.props.formGenerator.elements[i].placeholder}
-                key={i}
-                onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+
+            if (this.props.formGenerator.elements[i].map) {
+                outputList.push(<input
+                    value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                    placeholder={this.props.formGenerator.elements[i].placeholder}
+                    key={i}
+                    onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}
+                    id="address-input"/>)
+            } else {
+                outputList.push(<input
+                    value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                    placeholder={this.props.formGenerator.elements[i].placeholder}
+                    key={i}
+                    onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+            }
         }
         return (
             <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
