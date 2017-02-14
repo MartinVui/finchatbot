@@ -4,7 +4,6 @@ import { Session } from 'meteor/session';
 import { render } from 'react-dom';
 import { HTTP } from 'meteor/http';
 
-
 import App from '../imports/ui/App.jsx';
 
 Router.route('/', () => {
@@ -14,17 +13,16 @@ Router.route('/', () => {
   render(page, document.getElementById( 'render-target' ));
 });
 
-
 Router.route( "/messenger-test", { where: "server" } )
   	.get(function() {
 	  	if (this.request.query['hub.mode'] === 'subscribe' && this.request.query['hub.verify_token'] === 'finchatbot_messenger') {
     		console.log("Validating webhook");
-    		res.status(200).send(req.query['hub.challenge']);
+    		this.response.statusCode = 200;
+    		this.response.end( this.request.query['hub.challenge'] );
 		} else {
 	    	console.error("Failed validation. Make sure the validation tokens match.");
-	    	res.sendStatus(403);          
+	    	this.response.statusCode = 403;
 		}  
-
 	})
 
   	.post(function () {
