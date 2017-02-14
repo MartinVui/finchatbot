@@ -25,7 +25,7 @@ Router.route( "/messenger", { where: "server" } )
 		}  
 	})
 
-  	.post('/messenger', function (req, res) {
+  	.post(function (req, res) {
 	  	var data = this.request.query['body'];
 	  	// Make sure this is a page subscription
 	  	if (data.object === 'page') {
