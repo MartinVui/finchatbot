@@ -30,22 +30,21 @@ Router.route( "/messenger-test", { where: "server" } )
 	  	console.log(data);
 	  	// Make sure this is a page subscription
 	  	if (data.object === 'page') {
-
+	  	this.response.statusCode = 200;	
 	    // Iterate over each entry - there may be multiple if batched
 	    data.entry.forEach(function(entry) {
 	      	var pageID = entry.id;
 	      	var timeOfEvent = entry.time;
-	      	console.log(entry);
+	      	
 	      // Iterate over each messaging event
 	      	entry.messaging.forEach(function(event) {
-	        	if (event.message) {
+	        	if (event.message && event.message.text) {
 	          		receivedMessage(event);
 	        	} else {
 	        	  	console.log("Webhook received unknown event: ", event);
 	        	}
-	      	});
+	      	})
 	    });
-    this.response.statusCode = 200;
   	}
 })
 
@@ -60,14 +59,13 @@ function receivedMessage(event) {
 
   console.log("Received message for user %d and page %d at %d with message:", 
     senderID, recipientID, timeOfMessage);
-  console.log(JSON.stringify(message));
 
   var messageId = message.mid;
 
-  var messageText = message.text;
+  var messageText = message.text
   var messageAttachments = message.attachments;
 
-  if (messageText) {
+  if (messageText){
 
     // If we receive a text message, check to see if it matches a keyword
     // and send back the example. Otherwise, just echo the text we received.
