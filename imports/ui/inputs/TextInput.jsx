@@ -9,6 +9,8 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
+
 export default class TextInput extends Component {
 
     constructor( props ) {
@@ -20,23 +22,6 @@ export default class TextInput extends Component {
         this.state = {
             inputs : inputs
         };
-    }
-
-    componentDidMount() {
-        var input = document.getElementById( 'address-input' );
-        var options = {
-            componentRestrictions: {
-                country: 'ZA'
-            },
-            types: [
-                'geocode', 'establishment',
-            ],
-        };
-
-        var autocomplete = new google
-            .maps
-            .places
-            .Autocomplete( input, options );
     }
 
     handleSubmit(event) {
@@ -53,6 +38,7 @@ export default class TextInput extends Component {
         }
 
         var answer = Mustache.render(text, this.state.inputs);
+        console.log(answer);
         var formGeneratorId = this.props.formGenerator._id;
         var discussion = Discussions.findOne({'_id': Session.get('SessionId')});
         var date = new Date();
@@ -89,12 +75,18 @@ export default class TextInput extends Component {
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
 
             if (this.props.formGenerator.elements[i].map) {
-                outputList.push(<input
-                    value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
-                    placeholder={this.props.formGenerator.elements[i].placeholder}
-                    key={i}
-                    onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}
-                    id="address-input"/>)
+                outputList.push(
+                    <PlacesAutocomplete
+                        value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                        placeholder={this.props.formGenerator.elements[i].placeholder}
+                        key={i}
+                        onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+                // outputList.push(<input
+                    // value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                    // placeholder={this.props.formGenerator.elements[i].placeholder}
+                    // key={i}
+                    // onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}
+                    // id="address-input"/>)
             } else {
                 outputList.push(<input
                     value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
@@ -112,8 +104,17 @@ export default class TextInput extends Component {
     }
 
     updateInputValue(targetName, evt) {
+        console.log(targetName);
+        console.log(evt);
+
         state = this.state.inputs;
-        state[targetName] = evt.target.value;
+
+        if (evt.hasOwnProperty("target")){
+            state[targetName] = evt.target.value;
+        } else {
+            state[targetName] = evt;
+        }
+
         this.setState({
             inputs: state
         });
