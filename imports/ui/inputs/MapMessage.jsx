@@ -46,7 +46,7 @@ export default class MapMessage extends Component {
 
         return (
 
-            <div id="map"></div>
+            <div id="map" className="user_text"></div>
 
         )
     }

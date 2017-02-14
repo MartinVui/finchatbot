@@ -29,7 +29,7 @@ export default class TextInput extends Component {
         var text = this.props.formGenerator.generatedAnswer;
 
         var map = false;
-        for (form of this.props.formGenerator) {
+        for (form of this.props.formGenerator.elements) {
             if ( "{{"+form.targetName+"}}" === text && form.hasOwnProperty('map') && form.map){
                 map = true;
             }
@@ -56,6 +56,7 @@ export default class TextInput extends Component {
             'idFormGenerator': formGeneratorId,
             'map': map
         }
+
         messagesPile.push(newMessage);
         Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 

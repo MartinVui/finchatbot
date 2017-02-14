@@ -64,8 +64,6 @@ export default class MessageList extends Component {
     }
 
     render( ) {
-        // console.log("messages");
-        // console.log(this.props.messages);
 
         return (
 
@@ -76,7 +74,7 @@ export default class MessageList extends Component {
                     {this
                         .props
                         .messages
-                        .map(( message, i ) => ( <Message key={"message" + i} text={message.text} author={message.author}/> ))}
+                        .map(( message, i ) => ( <Message key={"message" + i} text={message.text} author={message.author} map={message.map}/> ))}
                 </ReactCSSTransitionGroup>
 
                 {Session.get( 'showGif' )
