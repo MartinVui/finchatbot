@@ -27,11 +27,19 @@ export default class TextInput extends Component {
         event.preventDefault();
 
         var text = this.props.formGenerator.generatedAnswer;
+
+        var map = false;
+        for (form of this.props.formGenerator.elements) {
+            if ( "{{"+form.targetName+"}}" === text && form.hasOwnProperty('map') && form.map){
+                map = true;
+            }
+        }
+
         var answer = Mustache.render(text, this.state.inputs);
         var formGeneratorId = this.props.formGenerator._id;
         var discussion = Discussions.findOne({'_id': Session.get('SessionId')});
         var date = new Date();
-        
+
         //Update the user
         var user = Users.findOne({'_id': discussion.idUser});
         Meteor.call("user.update", user._id, this.state.inputs);
@@ -45,8 +53,10 @@ export default class TextInput extends Component {
             'author' : 'user',
             'text': answer,
             'createdAt' : date,
-            'idFormGenerator': formGeneratorId
+            'idFormGenerator': formGeneratorId,
+            'map': map
         }
+
         messagesPile.push(newMessage);
         Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 
@@ -60,10 +70,10 @@ export default class TextInput extends Component {
     render(){
         var outputList = [ ];
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
-            outputList.push(<input 
-                value={this.state.inputs[this.props.formGenerator.elements[i].targetName]} 
-                placeholder={this.props.formGenerator.elements[i].placeholder} 
-                key={i} 
+            outputList.push(<input
+                value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                placeholder={this.props.formGenerator.elements[i].placeholder}
+                key={i}
                 onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
         }
         return (

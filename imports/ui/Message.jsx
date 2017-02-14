@@ -68,11 +68,11 @@ export default class Message extends Component {
 
         if ( this.props.author === 'user' ) {
 
-            if ( this.props.text === 'MAP' ) { // Check if the message is a map
+            if ( this.props.map) { // Check if the message is a map
 
                 return (
                     <div className="user_message">
-                        <MapMessage/>
+                        <MapMessage adress={this.props.text}/>
                     </div>
                 )
 

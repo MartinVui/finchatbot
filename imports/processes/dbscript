@@ -1,10 +1,15 @@
 db.formGenerators.insert({
-    "_id": "1",
-    "inputType": "button",
+    "_id": "contact1",
+    "inputType": "text",
     "elements": [
-      {"inputType": "button",
-      "value": "Sounds good !"}
-    ]
+        {
+            "inputType": "text",
+            "placeholder": "email adress",
+            "targetName": "email",
+            "map": true
+        }
+    ],
+    "generatedAnswer": "{{email}}"
 });
 
 db.formGenerators.insert({
@@ -36,12 +41,8 @@ db.scenarios.insert({
     "idQuestion": "1",
     "children": [
         {
-            "idFormGenerator": "1",
+            "idFormGenerator": "contact1",
             "idScenario": "2"
-        },
-        {
-            "idFormGenerator": "2",
-            "idScenario": "3"
         }
     ]
 })
