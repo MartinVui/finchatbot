@@ -46,10 +46,11 @@ export default class CheckBoxInput extends Component {
         var outputList = [];
         for ( var i = 0; i < this.props.formGenerator.elements.length; i++ ) {
             outputList.push(
-                <div key={i}>
+                <div key={i} className="one-checkbox">
                     <input type='checkbox' className='case' key={i} onChange={this
                         .onUpdate
-                        .bind( this , this.props.formGenerator.elements[i].targetName)} checked={this.state.inputs[this.props.formGenerator.elements[i].targetName]}/>{this.props.formGenerator.elements[i].checkboxLabel}
+                        .bind( this , this.props.formGenerator.elements[i].targetName)} checked={this.state.inputs[this.props.formGenerator.elements[i].targetName]}/>
+                    <label>{this.props.formGenerator.elements[i].checkboxLabel}</label>
                 </div>
             );
         }

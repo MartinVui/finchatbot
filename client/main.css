@@ -411,30 +411,21 @@ form {
 
 .checkbox {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    /*align-items: flex-start;*/
     width: 40%;
 }
 
-.one-checkbox {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-}
-
 .one-checkbox input {
-    width: 10% !important;
     margin-right: 20px;
+    vertical-align: middle;
+    display: inline-block;
 }
 
-
-#car-propositions {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 40vh;
+.one-checkbox label {
+    word-wrap: break-word; 
+    line-height: 16px;
+    float: left;
 }
-
 
 
 
