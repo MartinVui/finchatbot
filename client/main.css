@@ -247,7 +247,7 @@ a:visited {
     border-radius:0px 12px 12px 12px;
     color: #fff;
     margin: 0px;
-    box-shadow: 4px 4px 4px #343434;
+    box-shadow: 2px 2px 5px #898989;
 }
 
 .user_text { 
@@ -258,7 +258,7 @@ a:visited {
     padding:7px;
     border-radius: 12px 12px 0px 12px;
     margin: 0px;
-    box-shadow: 4px 4px 4px #343434;
+    box-shadow: 2px 2px 5px #898989;
 }
 
 p {
