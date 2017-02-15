@@ -24,10 +24,10 @@ export default class MessageList extends Component {
 		this.scrollDown()
 	}
 
-	// scrollABitToTheBottom() {
-	// 	var node = ReactDOM.findDOMNode(this.refs.messageList);
-	// 	node.scrollTop = node.scrollHeight;
-	// }
+	scrollABitToTheBottom() {
+		var node = ReactDOM.findDOMNode(this.refs.messageList);
+		node.scrollTop = node.scrollHeight;
+	}
 
 	scrollDown() {
 		// Here is the worst function ever created!
@@ -38,30 +38,30 @@ export default class MessageList extends Component {
 		var node = ReactDOM.findDOMNode(this.refs.messageList);
 		node.scrollTop = node.scrollHeight;
 
-		//_this = this;
+		_this = this;
 
-		// for (var i = 0; i < 600; i++) {
+		for (var i = 0; i < 1000; i++) {
 
-		// 	var TIMEOUT = setTimeout(function() {
-		// 		_this.scrollABitToTheBottom();
-		// 	},i);
-		// }
+			var TIMEOUT = setTimeout(function() {
+				_this.scrollABitToTheBottom();
+			},i);
+		}
 
-		var TIMEOUT1 = setTimeout(function() {
-			node.scrollTop = node.scrollHeight;
-		},150);
+		// var TIMEOUT1 = setTimeout(function() {
+		// 	node.scrollTop = node.scrollHeight;
+		// },150);
 
-		var TIMEOUT2 = setTimeout(function() {
-			node.scrollTop = node.scrollHeight;
-		},300);
+		// var TIMEOUT2 = setTimeout(function() {
+		// 	node.scrollTop = node.scrollHeight;
+		// },300);
 
-		var TIMEOUT3 = setTimeout(function() {
-			node.scrollTop = node.scrollHeight;
-		},450);
+		// var TIMEOUT3 = setTimeout(function() {
+		// 	node.scrollTop = node.scrollHeight;
+		// },450);
 
-		var TIMEOUT4 = setTimeout(function() {
-			node.scrollTop = node.scrollHeight;
-		},600);
+		// var TIMEOUT4 = setTimeout(function() {
+		// 	node.scrollTop = node.scrollHeight;
+		// },600);
 	}
 
 
@@ -84,7 +84,7 @@ export default class MessageList extends Component {
 					</div>
 
 					{this.props.messages.map((message, i) => (
-					<Message key={i} text={message.text} author={message.author}/>
+					<Message key={"message"+i} text={message.text} author={message.author} image={message.image}/>
 					))
 					}
 				</ReactCSSTransitionGroup>

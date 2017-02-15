@@ -57,7 +57,7 @@ export default class Message extends Component {
 
 				} else if (word.match(/:SMILE:/)) {	// We can add any emoji we want
 
-					return <span>{emoji('😀')}</span>;
+					return <span key={i}>{emoji('😀')}</span>;
 
 				}
 
@@ -95,8 +95,8 @@ export default class Message extends Component {
 
 			if(this.props.text === 'IMAGE') {	// Check if the message is an image
 				return (
-					<div className="bot_message">
-						<img src={Session.get('image')}/>
+					<div className="bot_message img_message">
+						<img src={this.props.image}/>
 					</div>
 				);
 

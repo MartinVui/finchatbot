@@ -34,6 +34,11 @@ export default class CheckBoxInput extends Component {
 				Session.set('showGif', false);
 				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
 
+				if(json.image !== false) {
+                    Session.set('image', json.image);
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'), json.image);
+                }
+
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
 				
@@ -48,6 +53,11 @@ export default class CheckBoxInput extends Component {
 
 				Session.set('showGif', false);
 				Meteor.call('messages.insert', Session.get('botResponseJSON').botResponse, 'bot', Session.get('sessionId'));
+
+				if(json.image !== false) {
+                    Session.set('image', json.image);
+                    Meteor.call('messages.insert', 'IMAGE', 'bot', Session.get('sessionId'), json.image);
+                }
 
 				// Set the new state of the bot
 				Session.set('nextBlocName', json.nextBlocID);
