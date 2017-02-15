@@ -10,8 +10,8 @@ import CheckBox from './CheckBox.jsx';
 
 export default class CheckBoxInput extends Component {
 
-    constructor( ) {
-        super( );
+    constructor( props ) {
+        super( props );
         var inputs = {};
         for(element of this.props.formGenerator.elements){
             inputs[element.targetName] = false;
@@ -23,16 +23,16 @@ export default class CheckBoxInput extends Component {
     }
 
 
-    handleSubmit() {
-        
+    handleSubmit(event) {
+        event.preventDefault();  
     }
 
     onUpdate(targetName, evt) {
         state = this.state.inputs;
         state[targetName] = !state[targetName];
         var oneCheck = false;
-        for (element of state){
-            if (element) {
+        for (element in state){
+            if (state[element]) {
                 oneCheck = true;
             }
         }
@@ -46,10 +46,10 @@ export default class CheckBoxInput extends Component {
         var outputList = [];
         for ( var i = 0; i < this.props.formGenerator.elements.length; i++ ) {
             outputList.push(
-                <div className="one-checkbox">
-                    <input type='checkbox' onClick={this
+                <div key={i}>
+                    <input type='checkbox' className='case' key={i} onChange={this
                         .onUpdate
-                        .bind( this , this.props.formGenerator.elements[i].targetName)}/>{this.props.formGenerator.elements[i].checkboxLabel}
+                        .bind( this , this.props.formGenerator.elements[i].targetName)} checked={this.state.inputs[this.props.formGenerator.elements[i].targetName]}/>{this.props.formGenerator.elements[i].checkboxLabel}
                 </div>
             );
         }
