@@ -40,14 +40,10 @@ var EntityFormSchema = new SimpleSchema({
     map: {
         type: Boolean,
         optional: true,
-    }
-    checkboxLabels: {
-        type: Array,
-        optional: true
     },
-    'checkboxLabels.$'{
-        type: Object,
-        blackbox: true
+    checkboxLabel:{
+        type: String,
+        optional: true,
     }
 });
 

@@ -33,7 +33,7 @@ export default class CheckBox extends Component {
 
     }
 
-    render( ) {
+    render() {
         // render a single checkbox. When this checkbox is selected, execute the function onUpdate of CheckboxInput, returning a couple (checkValue, isChecked)
         // For instance: (peach, true)
 
