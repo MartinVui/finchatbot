@@ -24,7 +24,7 @@ export default class CheckBoxInput extends Component {
 
 
     handleSubmit() {
-
+        
     }
 
     onUpdate(targetName, evt) {
@@ -45,7 +45,13 @@ export default class CheckBoxInput extends Component {
     render() {
         var outputList = [];
         for ( var i = 0; i < this.props.formGenerator.elements.length; i++ ) {
-            outputList.push( <CheckBox value={this.props.elements[i].targetName} label={this.props.elements[i].checkboxLabel} key={"check" + i} onUpdate={this.onUpdate.bind( this , this.props.formGenerator.elements[i].targetName)}/> );
+            outputList.push(
+                <div className="one-checkbox">
+                    <input type='checkbox' onClick={this
+                        .onUpdate
+                        .bind( this , this.props.formGenerator.elements[i].targetName)}/>{this.props.formGenerator.elements[i].checkboxLabel}
+                </div>
+            );
         }
         return (
             <form onSubmit={this.handleSubmit.bind(this)} id="checkbox-input">
