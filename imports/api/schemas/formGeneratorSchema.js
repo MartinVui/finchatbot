@@ -41,4 +41,13 @@ var EntityFormSchema = new SimpleSchema({
         type: Boolean,
         optional: true,
     }
+    checkboxLabels: {
+        type: Array,
+        optional: true
+    },
+    'checkboxLabels.$'{
+        type: Object,
+        blackbox: true
+    }
 });
+
