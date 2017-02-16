@@ -4,10 +4,18 @@ import { Session } from 'meteor/session';
 import { render } from 'react-dom';
 
 import App from '../imports/ui/App.jsx';
+import Orm from '../imports/ui/Orm.jsx';
 
 Router.route('/', () => {
   let page = (
     <App />
+  );
+  render(page, document.getElementById( 'render-target' ));
+});
+
+Router.route('/orm-test', () => {
+  let page = (
+    <Orm />
   );
   render(page, document.getElementById( 'render-target' ));
 });

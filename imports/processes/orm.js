@@ -1,4 +1,4 @@
-export function interpretJSON(inputText) {
+export function importJSON(inputText) {
 
     var output
 
@@ -20,6 +20,10 @@ export function interpretJSON(inputText) {
     }
 
     return output;
+}
+
+export function exportJSON(scenarioId) {
+
 }
 
 
