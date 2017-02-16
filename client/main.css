@@ -312,7 +312,7 @@ img.bot_message {
 
 .SelectInput {
     display: flex;
-    justify-content: center;
+    justify-content: middle;
     display: -webkit-flex;
     -webkit-justify-content: center;
 }
@@ -411,19 +411,23 @@ form {
 
 .checkbox {
     display: flex;
-    /*align-items: flex-start;*/
+    align-items: flex-start;
     width: 40%;
+}
+
+.one-checkbox{
+    justify-content: space-around;
 }
 
 .one-checkbox input {
     margin-right: 20px;
     vertical-align: middle;
-    display: inline-block;
+    word-wrap: break-word;
 }
 
 .one-checkbox label {
+    margin-right: 20px;
     word-wrap: break-word; 
-    line-height: 16px;
     float: left;
 }
 
