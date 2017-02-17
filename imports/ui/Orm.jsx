@@ -32,7 +32,7 @@ class Orm extends Component {
                 <textarea
                     onChange={this.handleChange.bind(this)}>
                 </textarea>
-                <p>{this.processed}</p>
+                <p>{this.state.processed}</p>
             </div>
         );
     }
