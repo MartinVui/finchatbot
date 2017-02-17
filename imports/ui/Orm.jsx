@@ -9,22 +9,30 @@ class Orm extends Component {
     constructor( ) {
         super( );
         this.state = {
-            json: ""
+            json: "",
+            processed: ""
         };
     }
 
     handleChange( event ) {
-        this.setState({"json" : event.target.value})
+
+        const json = event.target.value;
+        const processed = importJSON(json);
+
+        this.setState({
+            "json" : json,
+            "processed" : processed
+        });
     }
 
-    render( ) { // Seems like the Orm is only a chatbox. Maybe we could delete this component
+    render( ) {
 
         return (
             <div>
                 <textarea
                     onChange={this.handleChange.bind(this)}>
                 </textarea>
-                <p>{importJSON(this.state.json)}</p>
+                <p>{this.processed}</p>
             </div>
         );
     }
