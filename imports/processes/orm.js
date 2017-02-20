@@ -1,3 +1,28 @@
+export function importJSON(inputText) {
+
+    var output
+
+    try {
+
+        var obj = JSON.parse(inputText);
+
+        output = processObject(obj);
+
+        // output = JSON.stringify(output, { indent: true });
+
+        console.log(output);
+        return output;
+
+    } catch (e) {
+
+        output = e;
+        return;
+
+    }
+
+}
+
+
 // {
 // 	"nodes":
 //     [
@@ -7,36 +32,31 @@
 //     ],
 // 	"links":
 //     [
-// 		{"source":"A", "target":"B", "inputInfo":"{...}"},
+// 		{"source":"A", "target":"B", "inputInfo":{
+// 			    "inputType": "text",
+// 			    "elements": [
+// 			        {
+// 			            "inputType": "text",
+// 			            "placeholder": "Name",
+// 			            "targetName": "name"
+// 			        },
+// 			        {
+// 			            "inputType": "text",
+// 			            "placeholder": "Surname",
+// 			            "targetName": "surname"
+// 			        }
+// 			    ],
+// 			    "generatedAnswer": "Hi Holly! My name is {{name}} {{surname}}, nice to meet you!"
+// 			}},
 //      {"source":"A", "target":"C", "inputInfo":"{...}"}
 //     ]
 // }
 
-export function importJSON(inputText) {
-
-    var output
-
-    try {
-
-        var obj = JSON.parse(inputText);
-
-        obj = processObject(obj);
-
-        output = JSON.stringify(obj, { indent: true });
-
-    } catch (e) {
-
-        output = e;
-
-    }
-
-    return output;
-}
-
-
 function processObject(obj) {
 
     var questions = [];
+    var formGenerators = [];
+    var scenarios = [];
 
     if (obj.hasOwnProperty("nodes")) {
         for (node of obj.nodes) {
@@ -45,9 +65,11 @@ function processObject(obj) {
     }
 
     if (obj.hasOwnProperty("links")) {
-        for (link of links) {
+        for (link of obj.links) {
+            formGenerators.push(link.inputInfo);
             
         }
     }
-    return { questions : questions };
+
+    return { questions : questions, formGenerators : formGenerators };
 }

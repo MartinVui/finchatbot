@@ -17,7 +17,7 @@ class Orm extends Component {
     handleChange( event ) {
 
         const json = event.target.value;
-        const processed = importJSON(json);
+        const processed = JSON.stringify(importJSON(json), { indent: true });
 
         this.setState({
             "json" : json,
