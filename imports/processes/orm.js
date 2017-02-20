@@ -1,34 +1,15 @@
-export function importJSON(inputText) {
+import Promise from 'promise';
 
-    var output
-
-    try {
-
-        var obj = JSON.parse(inputText);
-
-        output = processObject(obj);
-
-        // output = JSON.stringify(output, { indent: true });
-
-        console.log(output);
-        return output;
-
-    } catch (e) {
-
-        output = e;
-        return;
-
-    }
-
-}
-
+import { Questions } from "../api/questions.js";
+import { FormGenerators } from "../api/formgenerators.js";
+import { Scenarios } from "../api/scenarios.js";
 
 // {
 // 	"nodes":
 //     [
 //         {"id": "A", "bot-message": ["..."]},
-//         {"id": "B", "bot-message": ["..."]},
-//         {"id": "C", "bot-message": ["..."]}
+//         {"id": "B", "bot-message": ["Foo"]},
+//         {"id": "C", "bot-message": ["Bar"]}
 //     ],
 // 	"links":
 //     [
@@ -52,24 +33,44 @@ export function importJSON(inputText) {
 //     ]
 // }
 
-function processObject(obj) {
+export async function importJSON(inputText) {
 
-    var questions = [];
-    var formGenerators = [];
-    var scenarios = [];
+    var output
 
-    if (obj.hasOwnProperty("nodes")) {
-        for (node of obj.nodes) {
-            questions.push({ content : node["bot-message"] });
+    // try {
+
+        var obj = JSON.parse(inputText);
+
+        var questions = {};
+
+        if (obj.hasOwnProperty("nodes")) {
+            for (node of obj.nodes) {
+                questions[node.id] = await Meteor.callPromise(
+                    "question.insert",
+                    { content : node["bot-message"] }
+                ).then(res => {return res})
+            }
+            console.log(questions);
         }
-    }
 
-    if (obj.hasOwnProperty("links")) {
-        for (link of obj.links) {
-            formGenerators.push(link.inputInfo);
-            
+        if (obj.hasOwnProperty("links")) {
+
+
+            groupedLinks = obj.links.reduce(
+                function(acc, link) {
+                    acc[link.source].push(link);
+                    return acc;
+                }, {});
+
+            console.log(groupedLinks);
+            console.log("test");
         }
-    }
 
-    return { questions : questions, formGenerators : formGenerators };
+    // } catch (e) {
+    //
+    //     output = e;
+    //     return;
+    //
+    // }
+
 }
