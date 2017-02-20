@@ -12,6 +12,7 @@ import { Questions } from '../api/questions.js';
 import { FormGenerators } from '../api/formgenerators.js';
 
 import { nextStepWeb } from '../processes/nextScenario.js';
+import { startDiscussionWeb } from '../processes/startDiscussion.js';
 import { scenarioPicker } from '../processes/scenarioPicker.js';
 
 import Message from './Message.jsx';
@@ -28,45 +29,14 @@ export default class ChatBox extends Component {
         };
     }
 
-    startConversation( ) {
+    startConversation() {
 
         Session.set('children', [ ])
 
         // Set show messages instead of intro
         this.setState({ showIntro: false });
 
-        Meteor.call( 'user.insert', {
-        }, function ( error, userId ) {
-            if ( error ) {
-                console.log( error );
-                return;
-            }
-
-            // console.log(userId);
-
-            // Choose scenario
-            var initScenario = scenarioPicker( );
-
-            // Create discussion in DB
-            Meteor.call( 'discussion.insert', {
-                'idUser': userId,
-                'idScenario': initScenario._id,
-                'messagesPile': [""],
-            }, function ( error, discussionId ) {
-                if ( error ) {
-                    console.log( error );
-                    return;
-                }
-
-                // Add discussion id to the session
-                Session.set( 'SessionId', discussionId );
-
-                // Return scenario Id
-                children = nextStepWeb( initScenario._id );
-                // this.setState({children:children});
-                Session.set( 'children', children );
-            });
-        });
+        startDiscussionWeb();
     };
 
     nextStep( scenarioId ) {

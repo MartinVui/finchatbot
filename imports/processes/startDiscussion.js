@@ -2,6 +2,7 @@ import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
 import { Users } from '../api/users.js';
+import { nextStepWeb } from '../processes/nextScenario.js';
 
 import { scenarioPicker } from '../processes/scenarioPicker.js';
 
@@ -46,7 +47,7 @@ export function startDiscussionWeb(){
 
 
 export function startDiscussionMessenger(facebookId){
-	Meteor.call('user.insert', {'facebookId': facebookId},{
+	Meteor.call('user.insert', {'facebookId': facebookId},
 		function ( error, userId ) {
             if ( error ) {
                 console.log( error );
