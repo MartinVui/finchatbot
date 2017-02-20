@@ -42,8 +42,6 @@ export async function importJSON(inputText) {
         var obj = JSON.parse(inputText);
 
         var questions = {};
-        var formGenerators = {};
-        var scenarios = {};
 
         if (obj.hasOwnProperty("nodes")) {
             for (node of obj.nodes) {
@@ -55,10 +53,21 @@ export async function importJSON(inputText) {
                 }
             //     ).then(res => {return res})
             }
-            console.log(questions);
         }
 
+        var formGenerators = {};
+        var scenarios = {};
+
         if (obj.hasOwnProperty("links")) {
+
+            for (link of obj.links) {
+
+                id = Random.id();
+                formGenerators[[link.source, link.target]] = link.inputInfo;
+                formGenerators[[link.source, link.target]]._id = id;
+
+                link.inputInfo = id;
+            }
 
             const groupedLinks = obj.links.reduce(
                 function(acc, link) {
@@ -75,26 +84,32 @@ export async function importJSON(inputText) {
                 },
                 {}
             );
-            console.log(groupedLinks);
 
             for (group in groupedLinks) {
 
                 groupContent = groupedLinks[group];
 
-                if (typeof(groupContent.inserted) === "undefined") {
-                    scenario = {
-                        idQuestion : questions[group]._id,
-                    }
-                    scenarios[group] = scenario;
+                var children = [];
+                for (child of groupContent) {
+
+                    console.log(child);
+
+                    const target = child.target;
+                    const form = formGenerators[[group, target]];
+                    console.log(form);
+                    children.push({
+                        idFormGenerator : form._id,
+                        idScenario : ""
+                    })
                 }
 
-                // for (form of groupedLinks[group]) {
-                //     questions[node.id] = await Meteor.callPromise(
-                //         "question.insert",
-                //         { content : node["bot-message"] }
-                //     ).then(res => {return res})
-                // }
+                scenario = {
+                    idQuestion : questions[group]._id,
+                    children : children
+                }
+                scenarios[group] = scenario;
             }
+            console.log(scenarios);
         }
 
     // } catch (e) {
