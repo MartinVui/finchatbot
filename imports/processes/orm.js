@@ -1,4 +1,4 @@
-import Promise from 'promise';
+import { Random } from 'meteor/random'
 
 import { Questions } from "../api/questions.js";
 import { FormGenerators } from "../api/formgenerators.js";
@@ -42,28 +42,59 @@ export async function importJSON(inputText) {
         var obj = JSON.parse(inputText);
 
         var questions = {};
+        var formGenerators = {};
+        var scenarios = {};
 
         if (obj.hasOwnProperty("nodes")) {
             for (node of obj.nodes) {
-                questions[node.id] = await Meteor.callPromise(
-                    "question.insert",
-                    { content : node["bot-message"] }
-                ).then(res => {return res})
+            //     questions[node.id] = await Meteor.callPromise(
+            //         "question.insert",
+                questions[node.id] = {
+                    _id : Random.id(),
+                    content : node["bot-message"]
+                }
+            //     ).then(res => {return res})
             }
             console.log(questions);
         }
 
         if (obj.hasOwnProperty("links")) {
 
-
-            groupedLinks = obj.links.reduce(
+            const groupedLinks = obj.links.reduce(
                 function(acc, link) {
-                    acc[link.source].push(link);
-                    return acc;
-                }, {});
-
+                    if (typeof(link) !== "undefined") {
+                        if (typeof(acc[link.source]) === "undefined") {
+                            acc[link.source] = [link];
+                        } else {
+                            acc[link.source].push(link);
+                        }
+                        return acc;
+                    } else {
+                        return;
+                    }
+                },
+                {}
+            );
             console.log(groupedLinks);
-            console.log("test");
+
+            for (group in groupedLinks) {
+
+                groupContent = groupedLinks[group];
+
+                if (typeof(groupContent.inserted) === "undefined") {
+                    scenario = {
+                        idQuestion : questions[group]._id,
+                    }
+                    scenarios[group] = scenario;
+                }
+
+                // for (form of groupedLinks[group]) {
+                //     questions[node.id] = await Meteor.callPromise(
+                //         "question.insert",
+                //         { content : node["bot-message"] }
+                //     ).then(res => {return res})
+                // }
+            }
         }
 
     // } catch (e) {
