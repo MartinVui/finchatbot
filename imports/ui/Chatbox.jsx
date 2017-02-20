@@ -11,44 +11,12 @@ import { Scenarios } from '../api/scenarios.js';
 import { Questions } from '../api/questions.js';
 import { FormGenerators } from '../api/formgenerators.js';
 
+import { nextStepWeb } from '../processes/nextScenario.js';
 import { scenarioPicker } from '../processes/scenarioPicker.js';
 
 import Message from './Message.jsx';
 import MessageForm from './inputs/MessageForm.jsx';
 import MessageList from './MessageList.jsx';
-
-function nextStepExt( scenarioId ) {
-    var scenario = Scenarios.findOne({ _id: scenarioId });
-    var discussion = Discussions.findOne({'_id' : Session.get('SessionId')});
-    var messagesPile = discussion.messagesPile;
-    var user = Users.findOne({'_id' : discussion.idUser});
-    var content = Questions.findOne({_id: scenario['idQuestion']}).content;
-    //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
-
-    Session.set('showGif' , true);
-    for (var i=0 ; i < content.length ; i++) {
-        (function(ind) {
-            setTimeout(function(){
-                var interpretedQuestion = Mustache.render(content[ind] , {'user' : user});
-                var date = new Date();
-                newMessage = {
-                    'author' : 'bot',
-                    'text': interpretedQuestion,
-                    'createdAt' : date
-                };
-                messagesPile.push(newMessage);
-                Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
-                if (ind == content.length - 1) {
-                    Session.set('showGif' , false);
-                }
-            }
-            ,800 + (800 * ind));
-        })(i);
-    }
-    // Display formGenerators, with the idScenario
-    return scenario.children;
-    // The form subcomponent will use a callback to nextStep with the right scenario
-}
 
 export default class ChatBox extends Component {
 
@@ -90,14 +58,11 @@ export default class ChatBox extends Component {
                     return;
                 }
 
-                // console.log(discussionId);
-
                 // Add discussion id to the session
                 Session.set( 'SessionId', discussionId );
-                // console.log(Session);
 
                 // Return scenario Id
-                children = nextStepExt( initScenario._id );
+                children = nextStepWeb( initScenario._id );
                 // this.setState({children:children});
                 Session.set( 'children', children );
             });
@@ -105,7 +70,7 @@ export default class ChatBox extends Component {
     };
 
     nextStep( scenarioId ) {
-        children = nextStepExt( scenarioId );
+        children = nextStepWeb( scenarioId );
         Session.set( 'children', children );
     }
 

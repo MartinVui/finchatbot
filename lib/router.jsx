@@ -3,6 +3,12 @@ import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { render } from 'react-dom';
 
+import { Users } from '../imports/api/users.js';
+import { Discussions } from '../imports/api/discussions.js';
+import { Scenarios } from '../imports/api/scenarios.js';
+import { Questions } from '../imports/api/questions.js';
+import { FormGenerators } from '../imports/api/formgenerators.js';
+
 import App from '../imports/ui/App.jsx';
 
 Router.route('/', () => {
@@ -12,19 +18,17 @@ Router.route('/', () => {
   render(page, document.getElementById( 'render-target' ));
 });
 
-Router.route( "/messenger", { where: "server" } )
-  .get( function() {
-    this.response.setHeader( 'access-control-allow-origin', '*' );
-    this.response.statusCode = 200;
-    this.response.end( JSON.stringify({"test":"test"}) );
-  })
+Router.route( "/messenger/", { where: "server" } )
   .post( function() {
-    // If a POST request is made, create the user's profile.
+    var data = this.request.body;
+    
+    var idDiscussion = data.idSession;
+    var message = data.message;
+    var idNextScenario = data.nextScenario;
+
+
+
+
+
+    // return children;
   })
-  .put( function() {
-    // If a PUT request is made, either update the user's profile or
-   // create it if it doesn't already exist.
-  })
-  .delete( function() {
-   // If a DELETE request is made, delete the user's profile.
-  });
