@@ -33,7 +33,7 @@ import { Scenarios } from "../api/scenarios.js";
 //     ]
 // }
 
-export async function importJSON(inputText) {
+export function importJSON(inputText) {
 
     var output
 
@@ -92,14 +92,28 @@ export async function importJSON(inputText) {
                 var children = [];
                 for (child of groupContent) {
 
-                    console.log(child);
-
                     const target = child.target;
                     const form = formGenerators[[group, target]];
-                    console.log(form);
+
+                    const id = Random.id();
+                    console.log(target);
+                    console.log(groupedLinks);
+                    if (typeof(groupedLinks[target]) === "undefined") {
+
+                        scenarios[target] = {
+                            _id : id,
+                            idQuestion : questions[target]._id
+                        };
+
+                    } else {
+
+                        groupedLinks[target].dbId = id
+
+                    }
+
                     children.push({
                         idFormGenerator : form._id,
-                        idScenario : ""
+                        idScenario : id
                     })
                 }
 
@@ -107,10 +121,20 @@ export async function importJSON(inputText) {
                     idQuestion : questions[group]._id,
                     children : children
                 }
+                if (groupContent.hasOwnProperty("dbId")) {
+                    scenario._id = groupContent.dbId;
+                    console.log("used defined id");
+                }
                 scenarios[group] = scenario;
             }
-            console.log(scenarios);
         }
+
+        result = {
+            questions : questions,
+            formGenerators : formGenerators,
+            scenarios : scenarios
+        }
+        return result;
 
     // } catch (e) {
     //
