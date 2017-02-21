@@ -35,99 +35,18 @@ import { Scenarios } from "../api/scenarios.js";
 
 export function importJSON(inputText) {
 
-    var output
+    try {
 
-    // try {
+        // Parsing JSON text
+        // May raise an exception => try/catch
+        let obj = JSON.parse(inputText);
 
-        var obj = JSON.parse(inputText);
-
-        var questions = {};
-
-        if (obj.hasOwnProperty("nodes")) {
-            for (node of obj.nodes) {
-            //     questions[node.id] = await Meteor.callPromise(
-            //         "question.insert",
-                questions[node.id] = {
-                    _id : Random.id(),
-                    content : node["bot-message"]
-                }
-            //     ).then(res => {return res})
-            }
-        }
-
-        var formGenerators = {};
-        var scenarios = {};
-
-        if (obj.hasOwnProperty("links")) {
-
-            for (link of obj.links) {
-
-                id = Random.id();
-                formGenerators[[link.source, link.target]] = link.inputInfo;
-                formGenerators[[link.source, link.target]]._id = id;
-
-                link.inputInfo = id;
-            }
-
-            const groupedLinks = obj.links.reduce(
-                function(acc, link) {
-                    if (typeof(link) !== "undefined") {
-                        if (typeof(acc[link.source]) === "undefined") {
-                            acc[link.source] = [link];
-                        } else {
-                            acc[link.source].push(link);
-                        }
-                        return acc;
-                    } else {
-                        return;
-                    }
-                },
-                {}
-            );
-
-            for (group in groupedLinks) {
-
-                groupContent = groupedLinks[group];
-
-                var children = [];
-                for (child of groupContent) {
-
-                    const target = child.target;
-                    const form = formGenerators[[group, target]];
-
-                    const id = Random.id();
-                    console.log(target);
-                    console.log(groupedLinks);
-                    if (typeof(groupedLinks[target]) === "undefined") {
-
-                        scenarios[target] = {
-                            _id : id,
-                            idQuestion : questions[target]._id
-                        };
-
-                    } else {
-
-                        groupedLinks[target].dbId = id
-
-                    }
-
-                    children.push({
-                        idFormGenerator : form._id,
-                        idScenario : id
-                    })
-                }
-
-                scenario = {
-                    idQuestion : questions[group]._id,
-                    children : children
-                }
-                if (groupContent.hasOwnProperty("dbId")) {
-                    scenario._id = groupContent.dbId;
-                    console.log("used defined id");
-                }
-                scenarios[group] = scenario;
-            }
-        }
+        // Get all the questions
+        let questions = getNodes(obj);
+        // Get all formGenerators and scenarios
+        let linksResult = getLinks(obj, questions);
+        let formGenerators = linksResult.formGenerators;
+        let scenarios = linksResult.scenarios;
 
         result = {
             questions : questions,
@@ -136,11 +55,113 @@ export function importJSON(inputText) {
         }
         return result;
 
-    // } catch (e) {
-    //
-    //     output = e;
-    //     return;
-    //
-    // }
+    } catch (e) {
+
+        return "Invalid JSON";
+
+    }
 
 }
+
+
+function getNodes(obj) {
+
+    var questions = {};
+
+    if (obj.hasOwnProperty("nodes")) {
+        // Get all the nodes
+        for (node of obj.nodes) {
+            // Insert them as questions
+            questions[node.id] = {
+                _id : Random.id(),
+                content : node["bot-message"]
+            }
+        }
+    }
+
+    return questions;
+}
+
+
+function getLinks(obj, questions) {
+
+    var formGenerators = {};
+    var scenarios = {};
+
+    if (obj.hasOwnProperty("links")) {
+
+        for (link of obj.links) {
+
+            id = Random.id();
+            formGenerators[[link.source, link.target]] = link.inputInfo;
+            formGenerators[[link.source, link.target]]._id = id;
+
+            link.inputInfo = id;
+        }
+
+        const groupedLinks = obj.links.reduce(
+            function(acc, link) {
+                if (typeof(link) !== "undefined") {
+                    if (typeof(acc[link.source]) === "undefined") {
+                        acc[link.source] = [link];
+                    } else {
+                        acc[link.source].push(link);
+                    }
+                    return acc;
+                } else {
+                    return;
+                }
+            },
+            {}
+        );
+
+        for (group in groupedLinks) {
+
+            groupContent = groupedLinks[group];
+
+            var children = [];
+            for (child of groupContent) {
+
+                const target = child.target;
+                const form = formGenerators[[group, target]];
+
+                const id = Random.id();
+                if (typeof(groupedLinks[target]) === "undefined") {
+
+                    scenarios[target] = {
+                        _id : id,
+                        idQuestion : questions[target]._id
+                    };
+
+                } else {
+
+                    groupedLinks[target].dbId = id
+
+                }
+
+                children.push({
+                    idFormGenerator : form._id,
+                    idScenario : id
+                })
+            }
+
+            scenario = {
+                idQuestion : questions[group]._id,
+                children : children
+            }
+            if (groupContent.hasOwnProperty("dbId")) {
+                scenario._id = groupContent.dbId;
+            }
+            scenarios[group] = scenario;
+        }
+    }
+
+    return {
+        formGenerators : formGenerators,
+        scenarios : scenarios
+    }
+}
+
+//     questions[node.id] = await Meteor.callPromise(
+//         "question.insert",
+//     ).then(res => {return res})

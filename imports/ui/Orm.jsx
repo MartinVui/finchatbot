@@ -18,7 +18,6 @@ class Orm extends Component {
 
         const json = event.target.value;
         const result = importJSON(json);
-        console.log(result);
         const processed = JSON.stringify(result, { indent: true });
 
         this.setState({
@@ -27,15 +26,22 @@ class Orm extends Component {
         });
     }
 
+    handleSubmit( event ) {
+
+        event.preventDefault();
+    }
+
     render( ) {
 
         return (
-            <div>
+            <form onSubmit={this.handleSubmit.bind(this)}>
                 <textarea
                     onChange={this.handleChange.bind(this)}>
                 </textarea>
                 <p>{this.state.processed}</p>
-            </div>
+                <button alt="Submit">Submit</button>
+                <p></p>
+            </form>
         );
     }
 };
