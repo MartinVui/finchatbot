@@ -73,12 +73,18 @@ export default class TextInput extends Component {
     render(){
         var outputList = [ ];
         const myStyles = {
-            autocompleteContainer: { top:'-262px',
-            borderRadius: '10px 10px 10px 10px',
-            border: 'solid lightgrey 2px' },
-            autocompleteItem: { borderRadius: '10px' },
+            autocompleteContainer: {
+                position: 'relative',
+                top:'-600px !important',
+                // borderRadius: '10px 10px 10px 10px',
+                border: 'solid lightgrey 2px'
+            },
+            autocompleteItem: {
+                // borderRadius: '10px',
+                overflow : "hide"
+            },
             autocompleteItemActive: {  }
-          };
+         };
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
 
             if (this.props.formGenerator.elements[i].map) {
