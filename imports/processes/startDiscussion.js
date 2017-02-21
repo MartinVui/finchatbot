@@ -10,49 +10,46 @@ import { Session } from 'meteor/session';
 import Mustache from 'mustache';
 
 
-export function startDiscussion(userId){
+export async function startDiscussion(userId){
 	var initScenario = scenarioPicker();
 
-	Meteor.call( 'discussion.insert', {
+	discussion = await Meteor.callPromise( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,
                 'messagesPile': [""],
-            }, function ( error, discussionId ) {
-                if ( error ) {
-                    console.log( error );
-                    return;
-                }
+            }.then(res => {return res}))
 
-                // Add discussion id to the session
-                Session.set( 'SessionId', discussionId );
+	children = nextStepWeb( initScenario._id );
 
-                // Return scenario Id
-                children = nextStepWeb( initScenario._id );
-                // this.setState({children:children});
-                Session.set( 'children', children );
-            });
+	returnedData = {};
+
+	returnedData.discussionId = discussion._id;
+	returnedData.children = children
+    
+    return returnedData;
 }
 
 export function startDiscussionWeb(){
+	
+
 	Meteor.call( 'user.insert', {
         }, function ( error, userId ) {
             if ( error ) {
                 console.log( error );
                 return;
             }
-            startDiscussion(userId);
-            
+            data = startDiscussion(userId);
+            Session.set('children' , data.children);
+            Session.set('SessionId', data.discussionId);
         });
 }
 
+export async function startDiscussionMessenger(facebookId){
+	user = await Meteor.callPromise('user.insert', {
+		'_id': facebookId
+	}.then(res => {return res}));
+    
+    data = startDiscussion(user._id);
 
-export function startDiscussionMessenger(facebookId){
-	Meteor.call('user.insert', {'facebookId': facebookId},
-		function ( error, userId ) {
-            if ( error ) {
-                console.log( error );
-                return;
-            }
-            startDiscussion(userId);
-	});
+	return data;
 }

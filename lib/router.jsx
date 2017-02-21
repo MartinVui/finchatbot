@@ -9,6 +9,8 @@ import { Scenarios } from '../imports/api/scenarios.js';
 import { Questions } from '../imports/api/questions.js';
 import { FormGenerators } from '../imports/api/formgenerators.js';
 
+import { startDiscussionMessenger } from '../imports/processes/startDiscussion.js'
+
 import App from '../imports/ui/App.jsx';
 
 Router.route('/', () => {
@@ -18,17 +20,13 @@ Router.route('/', () => {
   render(page, document.getElementById( 'render-target' ));
 });
 
-Router.route( "/messenger/", { where: "server" } )
+Router.route( "/messenger", { where: "server" })
   .post( function() {
-    var data = this.request.body;
-    
-    var idDiscussion = data.idSession;
-    var message = data.message;
-    var idNextScenario = data.nextScenario;
-
-
-
-
-
-    // return children;
+    user = Users.findOne({'_id' : this.request.facebookid});
+    if(typeof(user) == 'undefined'){
+      this.response.data = startDiscussionMessenger(this.request.body.facebookid);
+    }
+    console.log("node call received");
+    console.log(this.request.body);
+    this.response.statusCode = 200;
   })

@@ -14,7 +14,7 @@ import Button from './Button.jsx';
 import DateInput from './DateInput.jsx';
 import TextInput from './TextInput.jsx';
 import SelectInput from './SelectInput.jsx';
-import CheckBoxInput from './CheckBoxInput.jsx';
+import CheckBox from './CheckBox.jsx';
 import AddressInput from './AddressInput.jsx';
 import YearInput from './YearInput.jsx';
 
@@ -63,7 +63,7 @@ export default class MessageForm extends Component {
                     break;
 
                 case 'checkbox':
-                    outputList.push( <CheckBoxInput formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
+                    outputList.push( <CheckBox formGenerator={form} nextScenario={nextScenario} nextStep={this.props.nextStep} key={form._id}/> );
                     break;
             }
         }
