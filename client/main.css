@@ -352,6 +352,26 @@ input :focus {
     outline: none !important;
 }
 
+/* for the adress google input */
+
+.geoform {
+    width:100%;
+    padding: 3px;
+    padding-left: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none !important;
+    border: 1px solid #a6a6a6;
+    font-size: 16px !important;
+}
+
+.geoform :focus {
+    outline: none !important;
+}
+
+/* for the adress google input */
+
 .submit {
     width: 50%;
     background-color: #fff;
@@ -362,8 +382,9 @@ input :focus {
 
 form {
     padding:10px;
-    /*display: flex;*/
-    /*display: -webkit-flex;*/
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
     width: 100%;
 }
 
@@ -387,10 +408,9 @@ form {
 .send-icon-mobile {
     height:30px;
     width: auto;
-    margin-left: 15px;
     align-self: center;
     padding: 0;
-    margin: 0;
+    margin-left: 20px;
     border: none;
 }
 
@@ -427,7 +447,7 @@ form {
 
 .one-checkbox label {
     margin-right: 20px;
-    word-wrap: break-word; 
+    word-wrap: break-word;
     float: left;
 }
 
