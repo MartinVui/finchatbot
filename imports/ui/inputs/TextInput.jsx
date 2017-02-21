@@ -9,7 +9,7 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
-import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
+import Geosuggest from 'react-geosuggest'
 
 export default class TextInput extends Component {
 
@@ -72,22 +72,33 @@ export default class TextInput extends Component {
 
     render(){
         var outputList = [ ];
+
         const myStyles = {
-            autocompleteContainer: { top:'-262px',
-            borderRadius: '10px 10px 10px 10px',
-            border: 'solid lightgrey 2px' },
-            autocompleteItem: { borderRadius: '10px' },
-            autocompleteItemActive: {  }
-          };
+            root: {  },
+            input: {  },
+            autocompleteContainer: { top: '-250px',
+                zIndex:'2 !important',
+                borderRadius: '10px',
+                border: 'solid lightgrey 2px',
+                maxHeight: '200px',
+                overFlow: 'hidden'
+            },
+            autocompleteItem: { color: 'black',
+                zIndex:'2 !important',
+                borderRadius: '10px',
+            },
+            autocompleteItemActive: {}
+          }
+
+    
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
 
             if (this.props.formGenerator.elements[i].map) {
                 outputList.push(
-                    <PlacesAutocomplete
+                    <Geosuggest
                         value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
                         placeholder={this.props.formGenerator.elements[i].placeholder}
-                        targetName='geoform'
-                        styles={myStyles}
+                        targetName='geosuggest'
                         key={i}
                         onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
                 // outputList.push(<input
