@@ -72,13 +72,6 @@ export default class TextInput extends Component {
 
     render(){
         var outputList = [ ];
-        const myStyles = {
-            autocompleteContainer: { top:'-262px',
-            borderRadius: '10px 10px 10px 10px',
-            border: 'solid lightgrey 2px' },
-            autocompleteItem: { borderRadius: '10px' },
-            autocompleteItemActive: {  }
-          };
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
 
             if (this.props.formGenerator.elements[i].map) {
@@ -86,8 +79,6 @@ export default class TextInput extends Component {
                     <PlacesAutocomplete
                         value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
                         placeholder={this.props.formGenerator.elements[i].placeholder}
-                        targetName='geoform'
-                        styles={myStyles}
                         key={i}
                         onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
                 // outputList.push(<input
