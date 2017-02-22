@@ -28,6 +28,7 @@ export default class MessageForm extends Component {
         // Decides the type of input that has to be displayed
 
         //adding a mapper that links this.props.scenarioChildren to the proper UI form element
+        console.log(this.props.scenarioChildren);
         forms = FormGenerators.find({
             _id: {
                 $in: this

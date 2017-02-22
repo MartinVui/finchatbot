@@ -1,3 +1,6 @@
+import React, { Component, PropTypes, } from 'react';
+import ReactDOM from 'react-dom';
+
 import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
@@ -34,6 +37,7 @@ export async function startDiscussionWeb(){
 
 	user = await Meteor.callPromise( 'user.insert', {});
     data = startDiscussion(user);
+    return data;
 }
 
 export async function startDiscussionMessenger(facebookId){

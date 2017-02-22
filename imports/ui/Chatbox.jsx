@@ -29,13 +29,12 @@ export default class ChatBox extends Component {
         };
     }
 
+
     startConversation() {
-
-
         // Set show messages instead of intro
         this.setState({ showIntro: false });
 
-        startDiscussionWeb();
+        const data = startDiscussionWeb();
         console.log(Session.get('children'));
     }
 

@@ -1,3 +1,6 @@
+import React, { Component, PropTypes, } from 'react';
+import ReactDOM from 'react-dom';
+
 import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
@@ -49,7 +52,7 @@ export function nextStepWeb(idScenario, idDiscussion){
         })(i);
     }
 
-    return data;
+    return data.scenario.children;
 }
 
 
