@@ -179,10 +179,26 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
     return scenarios;
 }
 
+// async function insertJSON(obj) {
+//
+//     if (obj.hasOwnProperty("questions")) {
+//         Meteor.callPromise("meteorMethod", dataObject, function(error, result){
+//             if(error){
+//                 console.log("error", error);
+//             }
+//             if(result){
+//
+//             }
+//         });
+//     }
+//
+//
+// }
 
-export function exportJSON(idScenario) {
-    return {};
-}
+
+// export function exportJSON(idScenario) {
+//     return {};
+// }
 //     questions[node.id] = await Meteor.callPromise(
 //         "question.insert",
 //     ).then(res => {return res})

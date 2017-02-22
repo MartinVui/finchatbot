@@ -20,7 +20,7 @@ class Orm extends Component {
 
         const json = event.target.value;
         const result = importJSON(json);
-        const processed = JSON.stringify(result, { indent: true });
+        const processed = result;
 
         this.setState({
             "json" : json,
@@ -35,8 +35,9 @@ class Orm extends Component {
 
     render( ) {
 
-        var initScenarios = Scenarios.find().fetch();
-        console.log(initScenarios);
+        // questions = this.state.processed.questions.keys.map(
+        //     
+        // )
 
         return (
             <div>
@@ -44,9 +45,12 @@ class Orm extends Component {
                     <textarea
                         onChange={this.handleChange.bind(this)}>
                     </textarea>
-                    <p>{this.state.processed}</p>
-                    <button alt="Submit">Submit</button>
-                    <p></p>
+                    <h1>Questions</h1>
+                    <p>{JSON.stringify(this.state.processed.questions)}</p>
+                    <h1>FormGenerators</h1>
+                    <p>{JSON.stringify(this.state.processed.formGenerators)}</p>
+                    <h1>Scenarios</h1>
+                    <p>{JSON.stringify(this.state.processed.scenarios)}</p>
                 </form>
             </div>
         );
