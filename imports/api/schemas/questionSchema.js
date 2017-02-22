@@ -1,9 +1,8 @@
 export var QuestionSchema = new SimpleSchema({
     content: {
-        type: [Object]
+        type: [String]
     },
-    'content.$': {
-        type: Object,
-        blackbox: true
-    }
+    // 'content.$': {
+    //     type: String
+    // }
 });
