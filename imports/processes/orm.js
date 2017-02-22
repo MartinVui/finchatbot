@@ -35,7 +35,7 @@ import { Scenarios } from "../api/scenarios.js";
 
 export function importJSON(inputText) {
 
-    try {
+    // try {
 
         // Parsing JSON text
         // May raise an exception => try/catch
@@ -55,11 +55,11 @@ export function importJSON(inputText) {
         }
         return result;
 
-    } catch (e) {
-
-        return "Invalid JSON";
-
-    }
+    // } catch (e) {
+    //
+    //     return "Invalid JSON";
+    //
+    // }
 
 }
 
@@ -85,19 +85,9 @@ function getNodes(obj) {
 
 function getLinks(obj, questions) {
 
-    var formGenerators = {};
-    var scenarios = {};
-
     if (obj.hasOwnProperty("links")) {
 
-        for (link of obj.links) {
-
-            id = Random.id();
-            formGenerators[[link.source, link.target]] = link.inputInfo;
-            formGenerators[[link.source, link.target]]._id = id;
-
-            link.inputInfo = id;
-        }
+        const formGenerators = buildFormGenerators(obj.links);
 
         const groupedLinks = obj.links.reduce(
             function(acc, link) {
@@ -114,52 +104,81 @@ function getLinks(obj, questions) {
             },
             {}
         );
+        console.log(formGenerators);
+        const scenarios = buildScenarios(groupedLinks, questions, formGenerators);
 
-        for (group in groupedLinks) {
 
-            groupContent = groupedLinks[group];
-
-            var children = [];
-            for (child of groupContent) {
-
-                const target = child.target;
-                const form = formGenerators[[group, target]];
-
-                const id = Random.id();
-                if (typeof(groupedLinks[target]) === "undefined") {
-
-                    scenarios[target] = {
-                        _id : id,
-                        idQuestion : questions[target]._id
-                    };
-
-                } else {
-
-                    groupedLinks[target].dbId = id
-
-                }
-
-                children.push({
-                    idFormGenerator : form._id,
-                    idScenario : id
-                })
-            }
-
-            scenario = {
-                idQuestion : questions[group]._id,
-                children : children
-            }
-            if (groupContent.hasOwnProperty("dbId")) {
-                scenario._id = groupContent.dbId;
-            }
-            scenarios[group] = scenario;
-        }
     }
 
     return {
         formGenerators : formGenerators,
         scenarios : scenarios
     }
+}
+
+function buildFormGenerators(links) {
+
+    var formGenerators = {};
+
+    for (link of links) {
+
+        id = Random.id();
+        formGenerators[[link.source, link.target]] = link.inputInfo;
+        formGenerators[[link.source, link.target]]._id = id;
+
+        link.inputInfo = id;
+    }
+
+    console.log(formGenerators);
+
+    return formGenerators;
+}
+
+function buildScenarios(groupedLinks, questions, formGenerators) {
+
+    var scenarios = {};
+
+    for (group in groupedLinks) {
+
+        groupContent = groupedLinks[group];
+
+        var children = [];
+        for (child of groupContent) {
+
+            const target = child.target;
+            const form = formGenerators[[group, target]];
+
+            const id = Random.id();
+            if (typeof(groupedLinks[target]) === "undefined") {
+
+                scenarios[target] = {
+                    _id : id,
+                    idQuestion : questions[target]._id
+                };
+
+            } else {
+
+                groupedLinks[target].dbId = id
+
+            }
+
+            children.push({
+                idFormGenerator : form._id,
+                idScenario : id
+            })
+        }
+
+        scenario = {
+            idQuestion : questions[group]._id,
+            children : children
+        }
+        if (groupContent.hasOwnProperty("dbId")) {
+            scenario._id = groupContent.dbId;
+        }
+        scenarios[group] = scenario;
+    }
+
+    return scenarios;
 }
 
 //     questions[node.id] = await Meteor.callPromise(
