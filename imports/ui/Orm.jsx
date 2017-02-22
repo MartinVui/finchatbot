@@ -41,7 +41,7 @@ class Orm extends Component {
                 const val = this.state.processed.questions[key];
                 // console.log(key);
                 // console.log(val);
-                questions.push(<p>{JSON.stringify(val)}</p>)
+                questions.push(<pre>{JSON.stringify(val, null, 2)}</pre>)
             }
         };
 
@@ -51,7 +51,7 @@ class Orm extends Component {
                 const val = this.state.processed.formGenerators[key];
                 // console.log(key);
                 // console.log(val);
-                formGenerators.push(<p>{JSON.stringify(val)}</p>)
+                formGenerators.push(<pre>{JSON.stringify(val, null, 2)}</pre>)
             }
         };
 
@@ -61,7 +61,7 @@ class Orm extends Component {
                 const val = this.state.processed.scenarios[key];
                 // console.log(key);
                 // console.log(val);
-                scenarios.push(<p>{JSON.stringify(val)}</p>)
+                scenarios.push(<pre>{JSON.stringify(val, null, 2)}</pre>)
             }
         };
 
