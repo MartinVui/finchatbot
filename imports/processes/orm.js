@@ -139,6 +139,7 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
     for (group in groupedLinks) {
 
         groupContent = groupedLinks[group];
+        // console.log(groupContent);
 
         var children = [];
         for (child of groupContent) {
@@ -148,6 +149,8 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
 
             const id = Random.id();
             if (typeof(groupedLinks[target]) === "undefined") {
+
+                // console.log(target);
 
                 scenarios[target] = {
                     _id : id,

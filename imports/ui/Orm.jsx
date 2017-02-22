@@ -35,9 +35,35 @@ class Orm extends Component {
 
     render( ) {
 
-        // questions = this.state.processed.questions.keys.map(
-        //     
-        // )
+        let questions = [];
+        if(typeof(this.state.processed.questions)==="object"){
+            for (key in this.state.processed.questions) {
+                const val = this.state.processed.questions[key];
+                // console.log(key);
+                // console.log(val);
+                questions.push(<p>{JSON.stringify(val)}</p>)
+            }
+        };
+
+        let formGenerators = [];
+        if(typeof(this.state.processed.formGenerators)==="object"){
+            for (key in this.state.processed.formGenerators) {
+                const val = this.state.processed.formGenerators[key];
+                // console.log(key);
+                // console.log(val);
+                formGenerators.push(<p>{JSON.stringify(val)}</p>)
+            }
+        };
+
+        let scenarios = [];
+        if(typeof(this.state.processed.scenarios)==="object"){
+            for (key in this.state.processed.scenarios) {
+                const val = this.state.processed.scenarios[key];
+                // console.log(key);
+                // console.log(val);
+                scenarios.push(<p>{JSON.stringify(val)}</p>)
+            }
+        };
 
         return (
             <div>
@@ -46,11 +72,11 @@ class Orm extends Component {
                         onChange={this.handleChange.bind(this)}>
                     </textarea>
                     <h1>Questions</h1>
-                    <p>{JSON.stringify(this.state.processed.questions)}</p>
+                    <div>{questions}</div>
                     <h1>FormGenerators</h1>
-                    <p>{JSON.stringify(this.state.processed.formGenerators)}</p>
+                    <p>{formGenerators}</p>
                     <h1>Scenarios</h1>
-                    <p>{JSON.stringify(this.state.processed.scenarios)}</p>
+                    <p>{scenarios}</p>
                 </form>
             </div>
         );
