@@ -45,6 +45,7 @@ export function importJSON(inputText) {
         let questions = getNodes(obj);
         // Get all formGenerators and scenarios
         let linksResult = getLinks(obj, questions);
+        // console.log(linksResult);
         let formGenerators = linksResult.formGenerators;
         let scenarios = linksResult.scenarios;
 
@@ -85,9 +86,15 @@ function getNodes(obj) {
 
 function getLinks(obj, questions) {
 
+    let result = {
+        "formGenerators" : [],
+        "scenarios" : []
+    }
+
     if (obj.hasOwnProperty("links")) {
 
         const formGenerators = buildFormGenerators(obj.links);
+        result.formGenerators = formGenerators;
 
         const groupedLinks = obj.links.reduce(
             function(acc, link) {
@@ -104,16 +111,11 @@ function getLinks(obj, questions) {
             },
             {}
         );
-        console.log(formGenerators);
         const scenarios = buildScenarios(groupedLinks, questions, formGenerators);
-
-
+        result.scenarios = scenarios;
     }
 
-    return {
-        formGenerators : formGenerators,
-        scenarios : scenarios
-    }
+    return result;
 }
 
 function buildFormGenerators(links) {
@@ -128,8 +130,6 @@ function buildFormGenerators(links) {
 
         link.inputInfo = id;
     }
-
-    console.log(formGenerators);
 
     return formGenerators;
 }
