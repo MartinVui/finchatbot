@@ -24,8 +24,7 @@ export function nextStep(idScenario , idDiscussion){
 }
 
 
-export function nextStepWeb(idScenario){
-	var idDiscussion = Session.get('SessionId');
+export function nextStepWeb(idScenario, idDiscussion){
 	data = nextStep(idScenario , idDiscussion);
 	var messagesPile = data.discussion.messagesPile;
 
@@ -50,7 +49,7 @@ export function nextStepWeb(idScenario){
         })(i);
     }
 
-    return data.scenario.children;
+    return data;
 }
 
 

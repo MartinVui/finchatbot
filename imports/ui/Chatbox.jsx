@@ -31,17 +31,16 @@ export default class ChatBox extends Component {
 
     startConversation() {
 
-        Session.set('children', [ ])
 
         // Set show messages instead of intro
         this.setState({ showIntro: false });
 
         startDiscussionWeb();
-    };
+        console.log(Session.get('children'));
+    }
 
     nextStep( scenarioId ) {
-        children = nextStepWeb( scenarioId );
-        Session.set( 'children', children );
+        nextStepWeb( scenarioId );
     }
 
     render( ) {

@@ -21,12 +21,17 @@ Router.route('/', () => {
 });
 
 Router.route( "/messenger", { where: "server" })
-  .post( function() {
-    user = Users.findOne({'_id' : this.request.facebookid});
-    if(typeof(user) == 'undefined'){
-      this.response.data = startDiscussionMessenger(this.request.body.facebookid);
-    }
+  .post( async function() {
     console.log("node call received");
-    console.log(this.request.body);
+
+    user = Users.findOne({'_id' : this.request.facebookid});
+    console.log("New User");
+    if(typeof(user) === 'undefined'){
+      this.response.data = await startDiscussionMessenger(this.request.body.facebookid);
+      console.log(this.response.data);
+      console.log("discussion creation completed");
+    }
+    
+    
     this.response.statusCode = 200;
   })

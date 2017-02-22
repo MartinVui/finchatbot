@@ -12,44 +12,35 @@ import Mustache from 'mustache';
 
 export async function startDiscussion(userId){
 	var initScenario = scenarioPicker();
-
 	discussion = await Meteor.callPromise( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,
                 'messagesPile': [""],
-            }.then(res => {return res}))
-
-	children = nextStepWeb( initScenario._id );
+            })
+    console.log(discussion);
+	children = nextStepWeb( initScenario._id, discussion );
 
 	returnedData = {};
 
-	returnedData.discussionId = discussion._id;
-	returnedData.children = children
-    
+	returnedData.discussionId = discussion;
+	returnedData.children = children;
+    Session.set('children' , children);
+    Session.set('SessionId', discussion);
     return returnedData;
 }
 
-export function startDiscussionWeb(){
+export async function startDiscussionWeb(){
 	
 
-	Meteor.call( 'user.insert', {
-        }, function ( error, userId ) {
-            if ( error ) {
-                console.log( error );
-                return;
-            }
-            data = startDiscussion(userId);
-            Session.set('children' , data.children);
-            Session.set('SessionId', data.discussionId);
-        });
+	user = await Meteor.callPromise( 'user.insert', {});
+    data = startDiscussion(user);
 }
 
 export async function startDiscussionMessenger(facebookId){
-	user = await Meteor.callPromise('user.insert', {
-		'_id': facebookId
-	}.then(res => {return res}));
-    
-    data = startDiscussion(user._id);
+    user = await Meteor.callPromise('user.insert', {
+		'facebookId': facebookId
+	});
+    data = startDiscussion(user);
 
 	return data;
 }
