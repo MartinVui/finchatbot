@@ -2,6 +2,8 @@ import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
 
+import { Scenarios } from '../api/scenarios.js';
+
 import { importJSON } from '../processes/orm.js';
 
 class Orm extends Component {
@@ -33,15 +35,20 @@ class Orm extends Component {
 
     render( ) {
 
+        var initScenarios = Scenarios.find().fetch();
+        console.log(initScenarios);
+
         return (
-            <form onSubmit={this.handleSubmit.bind(this)}>
-                <textarea
-                    onChange={this.handleChange.bind(this)}>
-                </textarea>
-                <p>{this.state.processed}</p>
-                <button alt="Submit">Submit</button>
-                <p></p>
-            </form>
+            <div>
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <textarea
+                        onChange={this.handleChange.bind(this)}>
+                    </textarea>
+                    <p>{this.state.processed}</p>
+                    <button alt="Submit">Submit</button>
+                    <p></p>
+                </form>
+            </div>
         );
     }
 };

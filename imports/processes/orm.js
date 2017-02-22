@@ -64,7 +64,6 @@ export function importJSON(inputText) {
 
 }
 
-
 function getNodes(obj) {
 
     var questions = {};
@@ -82,7 +81,6 @@ function getNodes(obj) {
 
     return questions;
 }
-
 
 function getLinks(obj, questions) {
 
@@ -181,6 +179,10 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
     return scenarios;
 }
 
+
+export function exportJSON(idScenario) {
+    return {};
+}
 //     questions[node.id] = await Meteor.callPromise(
 //         "question.insert",
 //     ).then(res => {return res})
