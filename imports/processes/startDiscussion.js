@@ -6,7 +6,7 @@ import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
 import { Users } from '../api/users.js';
 import { nextStepWeb } from '../processes/nextScenario.js';
-
+import { nextStepMessenger } from '../processes/nextScenario.js';
 import { scenarioPicker } from '../processes/scenarioPicker.js';
 
 import { Session } from 'meteor/session';
@@ -15,18 +15,28 @@ import Mustache from 'mustache';
 
 export async function startDiscussion(userId){
 	var initScenario = scenarioPicker();
-	discussion = await Meteor.callPromise( 'discussion.insert', {
+    user = Users.findOne({'_id': userId});
+    
+    if (user.facebookId === 'undefined') {
+        discussion = await Meteor.callPromise( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,
                 'messagesPile': [""],
             })
-
-    var returnedData = {
+        var returnedData = {
         scenarioId : initScenario,
         discussionId : discussion
+        }
+        return returnedData;
+    }else{
+        Meteor.call('discussion.insert', {
+            'idUser': userId,
+            'idScenario': initScenario._id,
+            'messagesPile': [arguments[1]],
+        }, function(error, result){
+            nextStepMessenger(initScenario._id, result);
+        });
     }
-    return returnedData
-	
 }
 
 export async function startDiscussionWeb(){
@@ -44,18 +54,16 @@ export async function startDiscussionWeb(){
     return returnedData;
 }
 
-export async function startDiscussionMessenger(facebookId){
+export async function startDiscussionMessenger(facebookId, firstMessage){
     
-    Meteor.call('user.insert', {
+    data = Meteor.call('user.insert', {
 		'facebookId': facebookId
 	}, function(error, result){
            if(error){
-              console.log(error);
+                console.log(error);
            }else{
-              var data = startDiscussion(result);
-              return data;
+                return startDiscussion(result, firstMessage).then((res)=>{return res});
            }
         }
-    );
-
+    ).then((res) => {return res});
 }

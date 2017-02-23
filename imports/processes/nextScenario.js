@@ -5,6 +5,7 @@ import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
 import { Users } from '../api/users.js';
+import { FormGenerators } from '../api/formgenerators.js';
 
 import { Session } from 'meteor/session';
 import Mustache from 'mustache';
@@ -61,13 +62,13 @@ export function nextStepMessenger(idScenario, idDiscussion){
 	var children = data.scenario.children;
 
 	var formGeneratorList = new Array();
-	for(child in children){
-		var formGenerator = formGenerators.findOne({_id : child.formGeneratorId});
+	for(child of children){
+		var formGenerator = FormGenerators.findOne({_id : child.idFormGenerator});
 		formGeneratorList.push(formGenerator);
 	}
 
 	var messengerData = {};
 	messengerData.formGeneratorList = formGeneratorList
 	messengerData.questions = data.questions
-	return ;
+	return messengerData;
 }

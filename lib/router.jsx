@@ -22,14 +22,10 @@ Router.route('/', () => {
 
 Router.route( "/messenger", { where: "server" })
   .post( function() {
-    console.log("node call received");
-
-    user = Users.findOne({'_id' : this.request.facebookid});
-    console.log("New User");
-    if(typeof(user) === 'undefined'){
-      startDiscussionMessenger(this.request.body.facebookid)
-    }
-    
-    
     this.response.statusCode = 200;
-  })
+    user = Users.findOne({'facebookId' : this.request.facebookid});
+    if(typeof(user) === 'undefined'){  
+      data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
+      Meteor.setTimeout(function(){console.log(data)}, 1000);
+    }       
+})
