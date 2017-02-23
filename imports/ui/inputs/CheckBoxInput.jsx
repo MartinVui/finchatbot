@@ -1,157 +1,109 @@
 import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
+import Mustache from 'mustache';
 import { Session } from 'meteor/session';
 
-// import { Messages } from '../../api/messages.js';
-import Message from '../Message.jsx';
-// import bloc from '../../api/blocs.js';
-
-import CheckBox from './CheckBox.jsx';
+import { Questions } from '../../api/questions.js';
+import { Discussions } from '../../api/discussions.js';
+import { Scenarios } from '../../api/scenarios.js';
+import { FormGenerators } from '../../api/formgenerators.js';
+import { Users } from '../../api/users.js';
 
 export default class CheckBoxInput extends Component {
 
-    constructor( ) {
-        super( );
+    constructor( props ) {
+        super( props );
+        var inputs = {};
+        var dataWrapper = {};
+        for(element of this.props.formGenerator.elements){
+            inputs[element.targetName] = false;
+            dataWrapper[element.targetName] = element.checkboxLabel;
+        }
         this.state = {
-            isChecked: [],
-            checksValue: [ ]
-        }
+            inputs : inputs,
+            dataWrapper : dataWrapper,
+            submit : false
+        };
     }
 
-    sendBotMessage( json ) { // Always the same function - See AddressInput
 
-        var _this = this;
+    handleSubmit(event) {
+        event.preventDefault();
+        
 
-        var typingTime = 300 + json.botResponse.length * 20;
+        if (this.state.submit){
+            var text = this.props.formGenerator.generatedAnswer;
+            var answer = text ; 
+            //MUSTACHE REQUIRED HERE
 
-        setTimeout( function ( ) {
+            //SAVING USER DATA
 
-            Session.set( 'botResponseJSON', json );
 
-            if ( json.skip === true ) {
+            var formGeneratorId = this.props.formGenerator._id;
+            var discussion =  Discussions.findOne({'_id': Session.get( 'SessionId' )});
+            var date = new Date();
 
-                Session.set( 'showGif', false );
-                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
+            //User Update (douille de l'extrême)
+            var user = Users.findOne({'_id': discussion.idUser});
+            user['data'] = {}
+            user['data'][this.props.formGenerator.generalLabel] = this.state.inputs;
+            Meteor.call("user.update", user._id, user['data']);
 
-                // Set the new state of the bot
-                Session.set( 'nextBlocName', json.nextBlocID );
+            //Discussion Update
+            var messagesPile = Discussions.findOne({
+                '_id' : Session.get( 'SessionId' )
+            }).messagesPile;
 
-                var newJson = bloc(" ", Session.get( 'nextBlocName' ), Session.get( 'allData' ));
-
-                Session.set( 'showGif', true );
-
-                _this.sendBotMessage( newJson );
-
-            } else {
-
-                Session.set( 'showGif', false );
-                Meteor.call('messages.insert', Session.get( 'botResponseJSON' ).botResponse, 'bot', Session.get( 'sessionId' ));
-
-                // Set the new state of the bot
-                Session.set( 'nextBlocName', json.nextBlocID );
-
+            newMessage = {
+                'author' : 'user',
+                'text': answer,
+                'createdAt' : date,
+                'idFormGenerator': formGeneratorId
             }
+        messagesPile.push(newMessage);
+        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 
-        }, typingTime)
-
-    }
-
-    onButtonClick( ) { // See AddressInput fore more details
-
-        var data = '';
-        var checkedItems = [ ];
-        var dataWrapper = Session
-            .get( 'botResponseJSON' )
-            .dataWrapper;
-
-        for ( var i = 0; i < this.state.checksValue.length; i++ ) { // Create an array with the values the user checked
-            if ( this.state.isChecked[this.state.checksValue[i]] === true ) {
-                var data = data + ' ' + this.state.checksValue[i];
-                checkedItems.push(this.state.checksValue[i]);
-            }
-        }
-
-        if ( Session.get( 'botResponseJSON' ).createData !== false ) {
-            var dataName = Session
-                .get( 'botResponseJSON' )
-                .createData
-                .dataName;
-            var allData = Session.get( 'allData' );
-            allData.push({ dataName: dataName, text: data, });
-            Session.set( 'allData', allData );
-        }
-
-        var json = bloc(data, Session.get( 'nextBlocName' ), Session.get( 'allData' ));
-
-        var betweenData = [ ]; // We are going to create an array containing all the words that has to be send between the values checked by the user
-        // For instance: betweenData = [", "," and "] -> I like peaches", "abricots" and "bananas
-
-        if ( checkedItems.length > 1 ) {
-            betweenData.push( " and " );
-        }
-
-        if ( checkedItems.length > 2 ) {
-            for ( var i = 2; i < checkedItems.length; i++ ) {
-                betweenData.push( ", " );
-            }
-        }
-
-        betweenData.reverse( );
-
-        var text = checkedItems[0];
-
-        for ( i = 0; i < betweenData.length; i++ ) { // Create the response using the checked values
-            text = text + betweenData[i] + checkedItems[i + 1];
-        }
-
-        text = dataWrapper.replace( /DATA/, text );
-
-        Meteor.call('messages.insert', text, 'user', Session.get( 'sessionId' ));
-
-        // Insert the bot message
-        Session.set( 'showGif', true );
-
-        this.sendBotMessage( json );
-
-    }
-
-    onUpdate( val, checkedValue ) { // Modify the state isCheked when an input is checked
-        this.state.isChecked[checkedValue] = val;
-    }
-
-    render( ) {
-        // Display the checkbox
-        // Also create the state checksValue containing all the checkable values
-
-        var checkbox = [ ];
-
-        this.state.checksValue = [ ]
-
-        for ( var i = 0; i < Session.get( 'botResponseJSON' ).input.checks.length; i++ ) {
-            checkbox.push( <CheckBox value={Session
-                .get( 'botResponseJSON' )
-                .input
-                .checks[i]
-                .value} key={"check" + i} onUpdate={this
-                .onUpdate
-                .bind( this )}/> );
-
+            //nextStep Callback here
             this
-                .state
-                .checksValue
-                .push( Session.get( 'botResponseJSON' ).input.checks[i].value );
+                .props
+                .nextStep( this.props.nextScenario );
+        }  
+    }
+
+    onUpdate(targetName, evt) {
+        state = this.state.inputs;
+        state[targetName] = !state[targetName];
+        var oneCheck = false;
+        for (element in state){
+            if (state[element]) {
+                oneCheck = true;
+            }
         }
+        this.setState({
+            inputs: state,
+            submit: oneCheck
+        });
+    }
 
-        return (
-            <form id='checkbox-input'>
-                <div className="checkbox">
-                    {checkbox}
+    render() {
+        var outputList = [];
+        for ( var i = 0; i < this.props.formGenerator.elements.length; i++ ) {
+            outputList.push(
+                <div key={i} className="one-checkbox">
+                    <input type='checkbox' className='case' key={i} onChange={this
+                        .onUpdate
+                        .bind( this , this.props.formGenerator.elements[i].targetName)} checked={this.state.inputs[this.props.formGenerator.elements[i].targetName]}/>
+                    <label>{this.props.formGenerator.elements[i].checkboxLabel}</label>
                 </div>
-                <img src="images/send.png" onClick={this
-                    .onButtonClick
-                    .bind( this )} className='send-icon-mobile'/>
+            );
+        }
+        return (
+            <form onSubmit={this.handleSubmit.bind(this)} id="checkbox-input">
+                <div className="SelectInput">
+                    {outputList}
+                    <input type="image" src="/images/send.png" alt="Submit" className='send-icon-mobile'/>
+                </div>
             </form>
-
         )
     }
 }

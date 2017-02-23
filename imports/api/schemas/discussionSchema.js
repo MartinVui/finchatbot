@@ -11,9 +11,9 @@ export var DiscussionSchema = new SimpleSchema({
         type: Array
     },
     'messagesPile.$': {
-        type: MessageSchema  
+        type: MessageSchema
     }
-})
+});
 
 var MessageSchema = new SimpleSchema({
     author: {
@@ -30,5 +30,9 @@ var MessageSchema = new SimpleSchema({
     idFormGenerator: {
         type: String,
         optional: true
+    },
+    map: {
+      type: Boolean,
+      optional: true,
     }
 })

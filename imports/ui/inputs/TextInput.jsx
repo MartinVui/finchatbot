@@ -9,6 +9,8 @@ import { Scenarios } from '../../api/scenarios.js';
 import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 
+import Geosuggest from 'react-geosuggest'
+
 export default class TextInput extends Component {
 
     constructor( props ) {
@@ -27,11 +29,20 @@ export default class TextInput extends Component {
         event.preventDefault();
 
         var text = this.props.formGenerator.generatedAnswer;
+
+        var map = false;
+        for (form of this.props.formGenerator.elements) {
+            if ( "{{"+form.targetName+"}}" === text && form.hasOwnProperty('map') && form.map){
+                map = true;
+            }
+        }
+
         var answer = Mustache.render(text, this.state.inputs);
+        // console.log(answer);
         var formGeneratorId = this.props.formGenerator._id;
         var discussion = Discussions.findOne({'_id': Session.get('SessionId')});
         var date = new Date();
-        
+
         //Update the user
         var user = Users.findOne({'_id': discussion.idUser});
         Meteor.call("user.update", user._id, this.state.inputs);
@@ -45,8 +56,10 @@ export default class TextInput extends Component {
             'author' : 'user',
             'text': answer,
             'createdAt' : date,
-            'idFormGenerator': formGeneratorId
+            'idFormGenerator': formGeneratorId,
+            'map': map
         }
+
         messagesPile.push(newMessage);
         Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 
@@ -59,12 +72,48 @@ export default class TextInput extends Component {
 
     render(){
         var outputList = [ ];
+
+        const myStyles = {
+            root: {  },
+            input: {  },
+            autocompleteContainer: { top: '-250px',
+                zIndex:'2 !important',
+                borderRadius: '10px',
+                border: 'solid lightgrey 2px',
+                maxHeight: '200px',
+                overFlow: 'hidden'
+            },
+            autocompleteItem: { color: 'black',
+                zIndex:'2 !important',
+                borderRadius: '10px',
+            },
+            autocompleteItemActive: {}
+          }
+
+
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
-            outputList.push(<input 
-                value={this.state.inputs[this.props.formGenerator.elements[i].targetName]} 
-                placeholder={this.props.formGenerator.elements[i].placeholder} 
-                key={i} 
-                onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+
+            if (this.props.formGenerator.elements[i].map) {
+                outputList.push(
+                    <Geosuggest
+                        value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                        placeholder={this.props.formGenerator.elements[i].placeholder}
+                        targetName='geosuggest'
+                        key={i}
+                        onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+                // outputList.push(<input
+                    // value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                    // placeholder={this.props.formGenerator.elements[i].placeholder}
+                    // key={i}
+                    // onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}
+                    // id="address-input"/>)
+            } else {
+                outputList.push(<input
+                    value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
+                    placeholder={this.props.formGenerator.elements[i].placeholder}
+                    key={i}
+                    onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}/>)
+            }
         }
         return (
             <form className="new_message" id="newMessageForm" onSubmit={this.handleSubmit.bind(this)}>
@@ -75,8 +124,17 @@ export default class TextInput extends Component {
     }
 
     updateInputValue(targetName, evt) {
+        // console.log(targetName);
+        // console.log(evt);
+
         state = this.state.inputs;
-        state[targetName] = evt.target.value;
+
+        if (evt.hasOwnProperty("target")){
+            state[targetName] = evt.target.value;
+        } else {
+            state[targetName] = evt;
+        }
+
         this.setState({
             inputs: state
         });

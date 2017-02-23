@@ -5,6 +5,7 @@ import { render } from 'react-dom';
 import { HTTP } from 'meteor/http';
 
 import App from '../imports/ui/App.jsx';
+import Orm from '../imports/ui/Orm.jsx';
 
 Router.route('/', () => {
   let page = (
@@ -22,7 +23,7 @@ Router.route( "/messenger-test", { where: "server" } )
 		} else {
 	    	console.error("Failed validation. Make sure the validation tokens match.");
 	    	this.response.statusCode = 403;
-		}  
+		}
 	})
 
   	.post(function () {
@@ -30,12 +31,12 @@ Router.route( "/messenger-test", { where: "server" } )
 	  	console.log(data);
 	  	// Make sure this is a page subscription
 	  	if (data.object === 'page') {
-	  	this.response.statusCode = 200;	
+	  	this.response.statusCode = 200;
 	    // Iterate over each entry - there may be multiple if batched
 	    data.entry.forEach(function(entry) {
 	      	var pageID = entry.id;
 	      	var timeOfEvent = entry.time;
-	      	
+
 	      // Iterate over each messaging event
 	      	entry.messaging.forEach(function(event) {
 	        	if (event.message && event.message.text) {
@@ -57,7 +58,7 @@ function receivedMessage(event) {
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
-  console.log("Received message for user %d and page %d at %d with message:", 
+  console.log("Received message for user %d and page %d at %d with message:",
     senderID, recipientID, timeOfMessage);
 
   var messageId = message.mid;
@@ -101,19 +102,43 @@ function callSendAPI(messageData) {
   HTTP.call('POST', 'https://graph.facebook.com/v2.6/me/messages?access_token=EAAOIHSAYVBUBAALMt7siZBPg2bZAezMMckI9ZCO1ZCwX9K41ZBISNxLBChxso0C2JtdItrZBf3RIJxaOrnSDQBBDey40L17rOfbDoNWIaZCB0ShJdqShSn9yfbkmjtU8qdhzT96XnZBsUXuZBmuPasXlxob2VLzTtMP2tfCFQbrWjhQZDZD'
   	,{
   		headers:  {'Content-Type': 'application/json'},
-  		data: messageData				
+  		data: messageData
   	}
   	, function (error, result) {
     if (!error && result.statusCode === 200) {
       var recipientId = result.data.recipient_id;
       var messageId = result.data.message_id;
 
-      console.log("Successfully sent generic message with id %s to recipient %s", 
+      console.log("Successfully sent generic message with id %s to recipient %s",
         messageId, recipientId);
     } else {
       console.error("Unable to send message.");
       console.error(result);
       console.error(error);
     }
-  });  
+  });
 }
+
+Router.route('/orm-test', () => {
+  let page = (
+    <Orm />
+  );
+  render(page, document.getElementById( 'render-target' ));
+});
+
+Router.route( "/messenger", { where: "server" } )
+  .get( function() {
+    this.response.setHeader( 'access-control-allow-origin', '*' );
+    this.response.statusCode = 200;
+    this.response.end( JSON.stringify({"test":"test"}) );
+  })
+  .post( function() {
+    // If a POST request is made, create the user's profile.
+  })
+  .put( function() {
+    // If a PUT request is made, either update the user's profile or
+   // create it if it doesn't already exist.
+  })
+  .delete( function() {
+   // If a DELETE request is made, delete the user's profile.
+  });
