@@ -71,13 +71,13 @@ class Orm extends Component {
                     <textarea
                         onChange={this.handleChange.bind(this)}>
                     </textarea>
-                    <h1>Questions</h1>
-                    <div>{questions}</div>
-                    <h1>FormGenerators</h1>
-                    <div>{formGenerators}</div>
-                    <h1>Scenarios</h1>
-                    <div>{scenarios}</div>
                 </form>
+                <h1>Questions</h1>
+                <div>{questions}</div>
+                <h1>FormGenerators</h1>
+                <div>{formGenerators}</div>
+                <h1>Scenarios</h1>
+                <div>{scenarios}</div>
             </div>
         );
     }
