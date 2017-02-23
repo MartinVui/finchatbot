@@ -38,7 +38,7 @@ export default class TextInput extends Component {
         }
 
         var answer = Mustache.render(text, this.state.inputs);
-        console.log(answer);
+        // console.log(answer);
         var formGeneratorId = this.props.formGenerator._id;
         var discussion = Discussions.findOne({'_id': Session.get('SessionId')});
         var date = new Date();
@@ -90,7 +90,7 @@ export default class TextInput extends Component {
             autocompleteItemActive: {}
           }
 
-    
+
         for ( var i=0;i<this.props.formGenerator.elements.length;i++ ) {
 
             if (this.props.formGenerator.elements[i].map) {
@@ -124,8 +124,8 @@ export default class TextInput extends Component {
     }
 
     updateInputValue(targetName, evt) {
-        console.log(targetName);
-        console.log(evt);
+        // console.log(targetName);
+        // console.log(evt);
 
         state = this.state.inputs;
 

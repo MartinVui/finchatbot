@@ -123,8 +123,14 @@ function buildFormGenerators(links) {
     for (link of links) {
 
         id = Random.id();
-        formGenerators[[link.source, link.target]] = link.inputInfo;
-        formGenerators[[link.source, link.target]]._id = id;
+        if (typeof(formGenerators[[link.source, link.target]]) === "undefined") {
+            formGenerators[[link.source, link.target]] = [link.inputInfo];
+            formGenerators[[link.source, link.target]][0]._id = id;
+        } else {
+            let obj = link.inputInfo;
+            obj._id = id;
+            formGenerators[[link.source, link.target]].push(obj);
+        }
 
         link.inputInfo = id;
     }
@@ -139,13 +145,18 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
     for (group in groupedLinks) {
 
         groupContent = groupedLinks[group];
-        // console.log(groupContent);
 
         var children = [];
         for (child of groupContent) {
 
+            // console.log(child.inputInfo);
+
             const target = child.target;
             const form = formGenerators[[group, target]];
+
+            // console.log(form);
+
+            // for (form of formGenerators[[group, target]]) {
 
             const id = Random.id();
             if (typeof(groupedLinks[target]) === "undefined") {
@@ -154,7 +165,8 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
 
                 scenarios[target] = {
                     _id : id,
-                    idQuestion : questions[target]._id
+                    idQuestion : questions[target]._id,
+                    children : []
                 };
 
             } else {
@@ -163,12 +175,17 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
 
             }
 
+            // console.log('yolo');
+
             children.push({
-                idFormGenerator : form._id,
+                idFormGenerator : child.inputInfo,
                 idScenario : id
             })
-        }
 
+            // }
+
+        }
+        // console.log(children);
         scenario = {
             idQuestion : questions[group]._id,
             children : children
