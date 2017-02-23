@@ -20,24 +20,28 @@ export async function startDiscussion(userId){
                 'idScenario': initScenario._id,
                 'messagesPile': [""],
             })
-    console.log(discussion);
-	children = nextStepWeb( initScenario._id, discussion );
 
-	returnedData = {};
-
-	returnedData.discussionId = discussion;
-	returnedData.children = children;
-    Session.set('children' , children);
-    Session.set('SessionId', discussion);
-    return returnedData;
+    var returnedData = {
+        scenarioId : initScenario,
+        discussionId : discussion
+    }
+    return returnedData
+	
 }
 
 export async function startDiscussionWeb(){
 	
-
 	user = await Meteor.callPromise( 'user.insert', {});
-    data = startDiscussion(user);
-    return data;
+    data = await startDiscussion(user);
+    children = nextStepWeb( data.scenarioId._id, data.discussionId );
+
+    returnedData = {
+        discussionId: data.discussionId,
+        children: children 
+    }
+    Session.set('children' , children);
+    Session.set('SessionId', discussion);
+    return returnedData;
 }
 
 export async function startDiscussionMessenger(facebookId){

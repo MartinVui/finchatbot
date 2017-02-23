@@ -28,7 +28,7 @@ export function nextStep(idScenario , idDiscussion){
 
 
 export function nextStepWeb(idScenario, idDiscussion){
-	data = nextStep(idScenario , idDiscussion);
+    data = nextStep(idScenario , idDiscussion);
 	var messagesPile = data.discussion.messagesPile;
 
 	Session.set('showGif' , true);
