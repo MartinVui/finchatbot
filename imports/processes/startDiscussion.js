@@ -41,10 +41,17 @@ export async function startDiscussionWeb(){
 }
 
 export async function startDiscussionMessenger(facebookId){
-    user = await Meteor.callPromise('user.insert', {
+    
+    Meteor.call('user.insert', {
 		'facebookId': facebookId
-	});
-    data = startDiscussion(user);
+	}, function(error, result){
+           if(error){
+              console.log(error);
+           }else{
+              var data = startDiscussion(result);
+              return data;
+           }
+        }
+    );
 
-	return data;
 }

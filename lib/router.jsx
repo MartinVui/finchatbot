@@ -21,15 +21,13 @@ Router.route('/', () => {
 });
 
 Router.route( "/messenger", { where: "server" })
-  .post( async function() {
+  .post( function() {
     console.log("node call received");
 
     user = Users.findOne({'_id' : this.request.facebookid});
     console.log("New User");
     if(typeof(user) === 'undefined'){
-      this.response.data = await startDiscussionMessenger(this.request.body.facebookid);
-      console.log(this.response.data);
-      console.log("discussion creation completed");
+      startDiscussionMessenger(this.request.body.facebookid)
     }
     
     
