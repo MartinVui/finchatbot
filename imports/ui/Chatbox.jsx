@@ -113,7 +113,7 @@ export default class ChatBox extends Component {
 
         return (
             <div>
-                <div className="container">
+                <div className="container-react">
 
                     <ReactCSSTransitionGroup transitionName="introduction" transitionEnterTimeout={1} transitionLeaveTimeout={1000}>
 
