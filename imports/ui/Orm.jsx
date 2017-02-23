@@ -39,9 +39,8 @@ class Orm extends Component {
         if(typeof(this.state.processed.questions)==="object"){
             for (key in this.state.processed.questions) {
                 const val = this.state.processed.questions[key];
-                // console.log(key);
-                // console.log(val);
-                questions.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>)
+                questions.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
+                // questions.push(<br/>);
             }
         };
 
