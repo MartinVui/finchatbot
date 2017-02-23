@@ -4,9 +4,9 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Scenarios } from '../api/scenarios.js';
 
-import { importJSON } from '../processes/orm.js';
+import { importJSON } from '../processes/ormImport.js';
 
-class Orm extends Component {
+class OrmImport extends Component {
 
     constructor( ) {
         super( );
@@ -84,4 +84,4 @@ class Orm extends Component {
 
 export default createContainer( ( ) => {
     return {};
-}, Orm );
+}, OrmImport );
