@@ -31,6 +31,8 @@ react
 meteorhacks:async
 msavin:mongol
 iron:router
+http
+gandev:server-eval
 dburles:google-maps
 twbs:bootstrap
 deanius:promise
