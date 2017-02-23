@@ -123,8 +123,14 @@ function buildFormGenerators(links) {
     for (link of links) {
 
         id = Random.id();
-        formGenerators[[link.source, link.target]] = link.inputInfo;
-        formGenerators[[link.source, link.target]]._id = id;
+        if (typeof(formGenerators[[link.source, link.target]]) === "undefined") {
+            formGenerators[[link.source, link.target]] = [link.inputInfo];
+            formGenerators[[link.source, link.target]][0]._id = id;
+        } else {
+            let obj = link.inputInfo;
+            obj._id = id;
+            formGenerators[[link.source, link.target]].push(obj);
+        }
 
         link.inputInfo = id;
     }
