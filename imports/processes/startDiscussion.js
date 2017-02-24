@@ -17,7 +17,7 @@ export async function startDiscussion(userId){
 	var initScenario = scenarioPicker();
     user = Users.findOne({'_id': userId});
     
-    if (user.facebookId === 'undefined') {
+    if (typeof(user.facebookId) === 'undefined') {
         discussion = await Meteor.callPromise( 'discussion.insert', {
                 'idUser': userId,
                 'idScenario': initScenario._id,

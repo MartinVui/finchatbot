@@ -23,15 +23,19 @@ Router.route('/', () => {
 Router.route( "/messenger", { where: "server" })
   .post( function() {
     this.response.statusCode = 200;
+    that = this;
     user = Users.findOne({'facebookId' : this.request.facebookid});
+    
+    //DIFFERENT SCENARIOS -> FIRST TALK WITH THE BOT OR NOT
+    //DIFFERENT SCENARIOS -> FIRST TALK WITH THE BOT OR NOT 
+    //DIFFERENT SCENARIOS -> FIRST TALK WITH THE BOT OR NOT 
+
     if(typeof(user) === 'undefined'){  
-      data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text);
+      data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
+      
       Meteor.setTimeout(function(){
         //Traitement après réception des formgénérateurs -> appel de fonctions -> appel à l'API messenger 
-        console.log(data);
-
-
-
+        console.log(that.response.end("bonjour"))
         //Traitement après réception des formgénérateurs -> appel de fonctions -> appel à l'API messenger 
       }, 1000);
     }       
