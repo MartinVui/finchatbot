@@ -25,7 +25,14 @@ Router.route( "/messenger", { where: "server" })
     this.response.statusCode = 200;
     user = Users.findOne({'facebookId' : this.request.facebookid});
     if(typeof(user) === 'undefined'){  
-      data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
-      Meteor.setTimeout(function(){console.log(data)}, 1000);
+      data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text);
+      Meteor.setTimeout(function(){
+        //Traitement après réception des formgénérateurs -> appel de fonctions -> appel à l'API messenger 
+        console.log(data);
+
+
+
+        //Traitement après réception des formgénérateurs -> appel de fonctions -> appel à l'API messenger 
+      }, 1000);
     }       
 })

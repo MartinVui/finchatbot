@@ -52,7 +52,7 @@ export function nextStepWeb(idScenario, idDiscussion){
             ,800 + (800 * ind));
         })(i);
     }
-
+    
     return data.scenario.children;
 }
 
@@ -70,5 +70,6 @@ export function nextStepMessenger(idScenario, idDiscussion){
 	var messengerData = {};
 	messengerData.formGeneratorList = formGeneratorList
 	messengerData.questions = data.questions
+
 	return messengerData;
 }

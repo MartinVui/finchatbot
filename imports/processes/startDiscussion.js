@@ -29,13 +29,16 @@ export async function startDiscussion(userId){
         }
         return returnedData;
     }else{
-        Meteor.call('discussion.insert', {
+        data = Meteor.call('discussion.insert', {
             'idUser': userId,
             'idScenario': initScenario._id,
             'messagesPile': [arguments[1]],
         }, function(error, result){
-            nextStepMessenger(initScenario._id, result);
-        });
+            data = nextStepMessenger(initScenario._id, result);
+            return data;
+        }).then((x)=>{return x})
+        console.log(data);
+        return data;
     }
 }
 
@@ -56,14 +59,16 @@ export async function startDiscussionWeb(){
 
 export async function startDiscussionMessenger(facebookId, firstMessage){
     
-    data = Meteor.call('user.insert', {
+    return Meteor.call('user.insert', {
 		'facebookId': facebookId
 	}, function(error, result){
            if(error){
                 console.log(error);
            }else{
-                return startDiscussion(result, firstMessage).then((res)=>{return res});
+                data = startDiscussion(result, firstMessage).then((res)=>{return res});
+                return data;
            }
         }
-    ).then((res) => {return res});
+    ).then((res)=>{return res});
+
 }
