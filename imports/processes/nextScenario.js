@@ -59,7 +59,21 @@ export function nextStepWeb(idScenario, idDiscussion){
 
 export function nextStepMessenger(idScenario, idDiscussion){
 	data = nextStep(idScenario, idDiscussion);
-	var children = data.scenario.children;
+	   
+    var messagesPile = data.discussion.messagesPile;
+    for (var i=0 ; i < data.questions.length ; i++) {    
+        var interpretedQuestion = Mustache.render(data.questions[i] , {'user' : data.user});
+        var date = new Date();
+        newMessage = {
+            'author' : 'bot',
+            'text': interpretedQuestion,
+            'createdAt' : date
+        };
+        messagesPile.push(newMessage);
+        Meteor.call('discussion.update', data.discussion._id, {"messagesPile" : messagesPile});
+    }
+
+    var children = data.scenario.children;
 
 	var formGeneratorList = new Array();
 	for(child of children){
@@ -67,9 +81,13 @@ export function nextStepMessenger(idScenario, idDiscussion){
 		formGeneratorList.push(formGenerator);
 	}
 
+
 	var messengerData = {};
 	messengerData.formGeneratorList = formGeneratorList
 	messengerData.questions = data.questions
 
 	return messengerData;
 }
+
+
+
