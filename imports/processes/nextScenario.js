@@ -78,10 +78,10 @@ export function nextStepMessenger(idScenario, idDiscussion){
 	var formGeneratorList = new Array();
 	for(child of children){
 		var formGenerator = FormGenerators.findOne({_id : child.idFormGenerator});
+        var nextScenario = Scenarios.findOne({_id: child.idScenario});
+        formGenerator.correspondingScenarioId = nextScenario._id;
 		formGeneratorList.push(formGenerator);
 	}
-
-
 	var messengerData = {};
 	messengerData.formGeneratorList = formGeneratorList
 	messengerData.questions = data.questions
