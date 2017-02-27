@@ -24,7 +24,8 @@ Router.route( "/messenger", { where: "server" })
   .post( function() {
     this.response.statusCode = 200;
     that = this;
-    user = Users.findOne({'facebookId' : this.request.facebookid});
+    user = Users.findOne({'facebookId' : this.request.body.facebookid});
+    
     
     //DIFFERENT SCENARIOS -> FIRST TALK WITH THE BOT OR NOT
     //DIFFERENT SCENARIOS -> FIRST TALK WITH THE BOT OR NOT 
@@ -35,7 +36,8 @@ Router.route( "/messenger", { where: "server" })
       
       Meteor.setTimeout(function(){
         //Traitement après réception des formgénérateurs -> appel de fonctions -> appel à l'API messenger 
-        console.log(that.response.end("bonjour"))
+        var buf = new Buffer.from(JSON.stringify(data));
+        that.response.end(buf);
         //Traitement après réception des formgénérateurs -> appel de fonctions -> appel à l'API messenger 
       }, 1000);
     }       
