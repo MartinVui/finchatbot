@@ -5,7 +5,8 @@ import { render } from 'react-dom';
 import { HTTP } from 'meteor/http';
 
 import App from '../imports/ui/App.jsx';
-import Orm from '../imports/ui/Orm.jsx';
+import OrmImport from '../imports/ui/OrmImport.jsx';
+import OrmExport from '../imports/ui/OrmExport.jsx';
 
 Router.route('/', () => {
   let page = (
@@ -14,131 +15,16 @@ Router.route('/', () => {
   render(page, document.getElementById( 'render-target' ));
 });
 
-Router.route( "/messenger-test", { where: "server" } )
-  	.get(function() {
-	  	if (this.request.query['hub.mode'] === 'subscribe' && this.request.query['hub.verify_token'] === 'finchatbot_messenger') {
-    		console.log("Validating webhook");
-    		this.response.statusCode = 200;
-    		this.response.end( this.request.query['hub.challenge'] );
-		} else {
-	    	console.error("Failed validation. Make sure the validation tokens match.");
-	    	this.response.statusCode = 403;
-		}
-	})
-
-  	.post(function () {
-	  	var data = this.request.body;
-	  	console.log(data);
-	  	// Make sure this is a page subscription
-	  	if (data.object === 'page') {
-	  	this.response.statusCode = 200;
-	    // Iterate over each entry - there may be multiple if batched
-	    data.entry.forEach(function(entry) {
-	      	var pageID = entry.id;
-	      	var timeOfEvent = entry.time;
-
-	      // Iterate over each messaging event
-	      	entry.messaging.forEach(function(event) {
-	        	if (event.message && event.message.text) {
-	          		receivedMessage(event);
-	        	} else {
-	        	  	console.log("Webhook received unknown event: ", event);
-	        	}
-	      	})
-	    });
-  	}
-})
-
-
-
-
-function receivedMessage(event) {
-  var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
-  var timeOfMessage = event.timestamp;
-  var message = event.message;
-
-  console.log("Received message for user %d and page %d at %d with message:",
-    senderID, recipientID, timeOfMessage);
-
-  var messageId = message.mid;
-
-  var messageText = message.text
-  var messageAttachments = message.attachments;
-
-  if (messageText){
-
-    // If we receive a text message, check to see if it matches a keyword
-    // and send back the example. Otherwise, just echo the text we received.
-    switch (messageText) {
-      case 'generic':
-        sendGenericMessage(senderID);
-        break;
-
-      default:
-        sendTextMessage(senderID, messageText);
-    }
-  } else if (messageAttachments) {
-    sendTextMessage(senderID, "Message with attachment received");
-  }
-}
-
-
-function sendTextMessage(recipientId, messageText) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      text: messageText
-    }
-  };
-
-  callSendAPI(messageData);
-}
-
-
-function callSendAPI(messageData) {
-  HTTP.call('POST', 'https://graph.facebook.com/v2.6/me/messages?access_token=EAAOIHSAYVBUBAALMt7siZBPg2bZAezMMckI9ZCO1ZCwX9K41ZBISNxLBChxso0C2JtdItrZBf3RIJxaOrnSDQBBDey40L17rOfbDoNWIaZCB0ShJdqShSn9yfbkmjtU8qdhzT96XnZBsUXuZBmuPasXlxob2VLzTtMP2tfCFQbrWjhQZDZD'
-  	,{
-  		headers:  {'Content-Type': 'application/json'},
-  		data: messageData
-  	}
-  	, function (error, result) {
-    if (!error && result.statusCode === 200) {
-      var recipientId = result.data.recipient_id;
-      var messageId = result.data.message_id;
-
-      console.log("Successfully sent generic message with id %s to recipient %s",
-        messageId, recipientId);
-    } else {
-      console.error("Unable to send message.");
-      console.error(result);
-      console.error(error);
-    }
-  });
-}
-
-Router.route('/orm-test', () => {
+Router.route('/orm/import', () => {
   let page = (
-    <Orm />
+    <OrmImport />
   );
   render(page, document.getElementById( 'render-target' ));
 });
 
-Router.route( "/messenger", { where: "server" } )
-  .get( function() {
-    this.response.setHeader( 'access-control-allow-origin', '*' );
-    this.response.statusCode = 200;
-    this.response.end( JSON.stringify({"test":"test"}) );
-  })
-  .post( function() {
-    // If a POST request is made, create the user's profile.
-  })
-  .put( function() {
-    // If a PUT request is made, either update the user's profile or
-   // create it if it doesn't already exist.
-  })
-  .delete( function() {
-   // If a DELETE request is made, delete the user's profile.
-  });
+Router.route('/orm/export', () => {
+  let page = (
+    <OrmExport />
+  );
+  render(page, document.getElementById( 'render-target' ));
+});

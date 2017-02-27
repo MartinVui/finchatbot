@@ -42,9 +42,11 @@ export function importJSON(inputText) {
         let obj = JSON.parse(inputText);
 
         // Get all the questions
-        let questions = getNodes(obj);
+        let nodes = getNodes(obj);
+        let questions = nodes.questions;
+        let init = nodes.init;
         // Get all formGenerators and scenarios
-        let linksResult = getLinks(obj, questions);
+        let linksResult = getLinks(obj, questions, init);
         // console.log(linksResult);
         let formGenerators = linksResult.formGenerators;
         let scenarios = linksResult.scenarios;
@@ -67,6 +69,7 @@ export function importJSON(inputText) {
 function getNodes(obj) {
 
     var questions = {};
+    var init = []
 
     if (obj.hasOwnProperty("nodes")) {
         // Get all the nodes
@@ -75,14 +78,17 @@ function getNodes(obj) {
             questions[node.id] = {
                 _id : Random.id(),
                 content : node["bot-message"]
+            };
+            if (node.hasOwnProperty("initiate") && node.initiate) {
+                init.push(node.id);
             }
         }
     }
 
-    return questions;
+    return { questions: questions, init: init };
 }
 
-function getLinks(obj, questions) {
+function getLinks(obj, questions, init) {
 
     let result = {
         "formGenerators" : [],
@@ -109,7 +115,7 @@ function getLinks(obj, questions) {
             },
             {}
         );
-        const scenarios = buildScenarios(groupedLinks, questions, formGenerators);
+        const scenarios = buildScenarios(groupedLinks, questions, formGenerators, init);
         result.scenarios = scenarios;
     }
 
@@ -138,7 +144,7 @@ function buildFormGenerators(links) {
     return formGenerators;
 }
 
-function buildScenarios(groupedLinks, questions, formGenerators) {
+function buildScenarios(groupedLinks, questions, formGenerators, init) {
 
     var scenarios = {};
 
@@ -184,12 +190,15 @@ function buildScenarios(groupedLinks, questions, formGenerators) {
 
             // }
 
-        }
-        // console.log(children);
+        };
+        // console.log(group);
         scenario = {
             idQuestion : questions[group]._id,
             children : children
-        }
+        };
+        if (init.indexOf(group) >= 0) {
+            scenario.initiate = true;
+        };
         if (groupContent.hasOwnProperty("dbId")) {
             scenario._id = groupContent.dbId;
         }
