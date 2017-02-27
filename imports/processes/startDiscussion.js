@@ -29,10 +29,17 @@ export async function startDiscussion(userId){
         }
         return returnedData;
     }else{
+        
         data = Meteor.call('discussion.insert', {
             'idUser': userId,
             'idScenario': initScenario._id,
-            'messagesPile': [arguments[1]],
+            'messagesPile': [
+                {
+                    'author' : 'user',
+                    'text' : arguments[1],
+                    'createdAt' : Date()
+                }
+            ]
         }, function(error, result){
             data = nextStepMessenger(initScenario._id, result);
             return data;
