@@ -12,71 +12,107 @@ class OrmImport extends Component {
         super( );
         this.state = {
             json: "",
-            processed: ""
+            processed: "",
+            displayed: "",
+            saved: ""
         };
     }
 
     handleChange( event ) {
 
         const json = event.target.value;
-        const result = importJSON(json);
-        const processed = result;
+        const processedTemp = importJSON(json);
+
+        let questionsProc = [];
+        let questionsDisp = [];
+        if(typeof(processedTemp.questions)==="object"){
+            for (key in processedTemp.questions) {
+                const val = processedTemp.questions[key];
+                questionsProc.push(val);
+                questionsDisp.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
+            }
+        };
+
+        let formGeneratorsProc = [];
+        let formGeneratorsDisp = [];
+        if(typeof(processedTemp.formGenerators)==="object"){
+            for (key in processedTemp.formGenerators) {
+                for (field of processedTemp.formGenerators[key]) {
+                    const val = field;
+                    formGeneratorsProc.push(val);
+                    formGeneratorsDisp.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
+                }
+            }
+        };
+
+        let scenariosProc = [];
+        let scenariosDisp = [];
+        if(typeof(processedTemp.scenarios)==="object"){
+            for (key in processedTemp.scenarios) {
+                const val = processedTemp.scenarios[key];
+                scenariosProc.push(val);
+                scenariosDisp.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
+            }
+        };
+
+        const processed = {
+            questions: questionsProc,
+            formGenerators:formGeneratorsProc,
+            scenarios: scenariosProc
+        }
+
+        const displayed = {
+            questions: questionsDisp,
+            formGenerators:formGeneratorsDisp,
+            scenarios: scenariosDisp
+        }
 
         this.setState({
-            "json" : json,
-            "processed" : processed
+            json : json,
+            processed : processed,
+            displayed: displayed,
+            saved: ""
         });
     }
 
     handleSubmit( event ) {
 
         event.preventDefault();
+        console.log("Submit");
+
+        for (element of this.state.processed.questions) {
+            console.log(element);
+            Meteor.call('question.insert', element);
+        };
+        for (element of this.state.processed.formGenerators) {
+            console.log(element);
+            Meteor.call('formGenerator.insert', element);
+        };
+        for (element of this.state.processed.scenarios) {
+            console.log(element);
+            Meteor.call('scenario.insert', element);
+        };
+
+        this.setState({saved:"Saved!"})
     }
 
     render( ) {
 
-        let questions = [];
-        if(typeof(this.state.processed.questions)==="object"){
-            for (key in this.state.processed.questions) {
-                const val = this.state.processed.questions[key];
-                questions.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
-                // questions.push(<br/>);
-            }
-        };
-
-        let formGenerators = [];
-        if(typeof(this.state.processed.formGenerators)==="object"){
-            for (key in this.state.processed.formGenerators) {
-                const val = this.state.processed.formGenerators[key];
-                // console.log(key);
-                // console.log(val);
-                formGenerators.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>)
-            }
-        };
-
-        let scenarios = [];
-        if(typeof(this.state.processed.scenarios)==="object"){
-            for (key in this.state.processed.scenarios) {
-                const val = this.state.processed.scenarios[key];
-                // console.log(key);
-                // console.log(val);
-                scenarios.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>)
-            }
-        };
-
         return (
             <div>
+                <p>{this.state.saved}</p>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <textarea
                         onChange={this.handleChange.bind(this)}>
                     </textarea>
+                    <input type="submit" value="Save in Mongo"/>
                 </form>
                 <h1>Questions</h1>
-                <div>{questions}</div>
+                <div>{this.state.displayed.questions}</div>
                 <h1>FormGenerators</h1>
-                <div>{formGenerators}</div>
+                <div>{this.state.displayed.formGenerators}</div>
                 <h1>Scenarios</h1>
-                <div>{scenarios}</div>
+                <div>{this.state.displayed.scenarios}</div>
             </div>
         );
     }

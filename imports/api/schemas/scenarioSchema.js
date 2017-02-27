@@ -1,23 +1,22 @@
 export var ScenarioSchema = new SimpleSchema({
+    _id:{
+        type: String,
+        optional:true
+    },
     initiate: {
         type: Boolean,
+        optional: true
     },
     idQuestion: {
         type: String,
     },
     children: {
-        type: Array,
+        type: [Object],
     },
-    'children.$': {
-        type: ChildSchema,
-    },
-});
-
-var ChildSchema = new SimpleSchema({
-    idFormGenerator: {
+    'children.$.idFormGenerator': {
         type: String,
     },
-    idScenario: {
+    'children.$.idScenario': {
         type: String,
     }
 });

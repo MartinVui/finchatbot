@@ -7,7 +7,7 @@ import { Scenarios } from "../api/scenarios.js";
 // {
 // 	"nodes":
 //     [
-//         {"id": "A", "bot-message": ["..."]},
+//         {"id": "A", "initiate": true, "bot-message": ["..."]},
 //         {"id": "B", "bot-message": ["Foo"]},
 //         {"id": "C", "bot-message": ["Bar"]}
 //     ],
@@ -207,27 +207,3 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
 
     return scenarios;
 }
-
-// async function insertJSON(obj) {
-//
-//     if (obj.hasOwnProperty("questions")) {
-//         Meteor.callPromise("meteorMethod", dataObject, function(error, result){
-//             if(error){
-//                 console.log("error", error);
-//             }
-//             if(result){
-//
-//             }
-//         });
-//     }
-//
-//
-// }
-
-
-// export function exportJSON(idScenario) {
-//     return {};
-// }
-//     questions[node.id] = await Meteor.callPromise(
-//         "question.insert",
-//     ).then(res => {return res})
