@@ -1,49 +1,46 @@
 export var FormGeneratorSchema = new SimpleSchema({
+    _id:{
+        type: String,
+        optional:true
+    },
     inputType : {
         type : String,
     },
     elements: {
-        type : Array,
+        type : [Object],
     },
-    'elements.$': {
-        type : EntityFormSchema
+    'elements.$.inputType': {
+        type: String,
+    },
+    'elements.$.placeholder': {
+        type: String,
+        optional: true
+    },
+    'elements.$.value': {
+        type: String,
+        optional: true
+    },
+    'elements.$.targetName': {
+        type: String,
+        optional: true
+    },
+    'elements.$.options': {
+        type: Array,
+        optional: true
+    },
+    'elements.$.options.$': {
+        type: Object,
+        blackbox: true
+    },
+    'elements.$.map': {
+        type: Boolean,
+        optional: true,
+    },
+    'elements.$.checkboxLabel':{
+        type: String,
+        optional: true,
     },
     generatedAnswer: {
         type: String,
     }
 });
-
-var EntityFormSchema = new SimpleSchema({
-    inputType: {
-        type: String,
-    },
-    placeholder: {
-        type: String,
-        optional: true
-    },
-    value: {
-        type: String,
-        optional: true
-    },
-    targetName: {
-        type: String,
-        optional: true
-    },
-    options: {
-        type: Array,
-        optional: true
-    },
-    'options.$': {
-        type: Object,
-        blackbox: true
-    },
-    map: {
-        type: Boolean,
-        optional: true,
-    },
-    checkboxLabel:{
-        type: String,
-        optional: true,
-    }
-});
-
