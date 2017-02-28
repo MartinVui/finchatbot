@@ -111,13 +111,13 @@ function processComponents(components) {
 
             let formGenerator = formGenerators.filter( (x) => {
                 return x._id === child.idFormGenerator
-            });
+            })[0];
             link.inputInfo = formGenerator;
 
             let target = scenarios.filter( (x) => {
                 return x._id === child.idScenario
-            });
-            link.target = target.idScenario;
+            })[0];
+            link.target = target.idQuestion;
 
             result.links.push(link);
         };
