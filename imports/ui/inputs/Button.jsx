@@ -34,7 +34,7 @@ export default class Button extends Component {
         //nextStep Callback here
         this
             .props
-            .nextStep( this.props.nextScenario );
+            .nextStep( this.props.nextScenario , Session.get("SessionId") );
     }
     render() {
         return (

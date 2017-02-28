@@ -38,8 +38,9 @@ export default class ChatBox extends Component {
         console.log(Session.get('children'));
     }
 
-    nextStep( scenarioId ) {
-        nextStepWeb( scenarioId );
+    nextStep(IdScenario, IdDiscussion) {
+        children = nextStepWeb(IdScenario, IdDiscussion);
+        Session.set('children', children);
     }
 
     render( ) {
