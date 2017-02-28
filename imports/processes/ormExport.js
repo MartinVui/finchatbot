@@ -104,5 +104,24 @@ function processComponents(components) {
         });
     }
 
+    for (scenario of scenarios) {
+
+        for (child of scenario.children) {
+            let link = {source: scenario.idQuestion};
+
+            let formGenerator = formGenerators.filter( (x) => {
+                return x._id === child.idFormGenerator
+            });
+            link.inputInfo = formGenerator;
+
+            let target = scenarios.filter( (x) => {
+                return x._id === child.idScenario
+            });
+            link.target = target.idScenario;
+
+            result.links.push(link);
+        };
+    }
+
     return result;
 }
