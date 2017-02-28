@@ -11,28 +11,32 @@ class OrmExport extends Component {
     constructor( ) {
         super( );
         this.state = {
+            chosenScenario : ""
         };
     }
 
     handleChange( event ) {
-        console.log(event);
+        chosenScenario = this.props.initScenarios.filter( (x) => {
+            return x._id === event.target.value;
+        })[0];
+        this.setState({ chosenScenario: chosenScenario });
     }
 
     render( ) {
 
         let options = [];
         for (option of this.props.initScenarios) {
-            options.push(<option value={option._id} onChange={this.handleChange.bind(this)}>{option._id}</option>)
+            options.push(<option value={option._id} key={option._id}>{option._id}</option>)
         };
 
         return (
             <div>
                 <form>
-                    <select>
+                    <select  onChange={this.handleChange.bind(this)}>
                         {options}
                     </select>
                 </form>
-                <pre></pre>
+                <pre>{JSON.stringify(this.state.chosenScenario, null, 2)}</pre>
             </div>
         );
     }
@@ -40,7 +44,11 @@ class OrmExport extends Component {
 
 export default createContainer( ( ) => {
 
-    const initScenarios = Scenarios.find({"initiate":true}).fetch();
-    return { initScenarios: initScenarios };
+    return {
+        initScenarios: Scenarios.find({initiate:true}).fetch(),
+        scenarios: Scenarios.find({}).fetch(),
+        questions: Questions.find({}).fetch(),
+        formGenerators: FormGenerators.find({}).fetch()
+    };
 
 }, OrmExport );
