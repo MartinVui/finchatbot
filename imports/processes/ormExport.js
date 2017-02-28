@@ -33,8 +33,48 @@ import { Scenarios } from "../api/scenarios.js";
 //     ]
 // }
 
-export function exportJSON(inputText) {
+export function exportJSON(chosenScenario) {
 
-    return "YOLO";
+    let acc = {
+        questions : [],
+        formGenerators : [],
+        scenarios : [chosenScenario]
+    }
+    let components = getScenarios(chosenScenario, acc);
 
+    return components;
+
+};
+
+
+function getScenarios(chosenScenario, acc){
+
+    append2Acc(Questions, acc.questions, chosenScenario, 'idQuestion', false);
+
+    if (chosenScenario.hasOwnProperty("children") && chosenScenario.children !== []){
+        for (child of chosenScenario.children) {
+            append2Acc(FormGenerators, acc.formGenerators, child, 'idFormGenerator', false);
+            let newScenario = append2Acc(Scenarios, acc.scenarios, child, 'idScenario', true);
+            getScenarios(newScenario, acc);
+        }
+    }
+    return acc;
+
+}
+
+function checkPresence(list, element, property) {
+    const result =  list.filter( (x) => {
+        return element[property] === x._id;
+    }).length > 0;
+    return !element.hasOwnProperty(property)||result;
+}
+
+function append2Acc(collection, list, element, property, rec) {
+    if (!checkPresence(list, element, property)) {
+        object = collection.findOne({_id:element[property]});
+        list.push(object);
+        if (rec) {
+            return object;
+        }
+    }
 }

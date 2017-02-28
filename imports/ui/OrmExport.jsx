@@ -11,7 +11,8 @@ class OrmExport extends Component {
     constructor( ) {
         super( );
         this.state = {
-            chosenScenario : ""
+            chosenScenario : {},
+            scenarioComponents : {}
         };
     }
 
@@ -19,7 +20,10 @@ class OrmExport extends Component {
         chosenScenario = this.props.initScenarios.filter( (x) => {
             return x._id === event.target.value;
         })[0];
-        this.setState({ chosenScenario: chosenScenario });
+        this.setState({
+            chosenScenario: chosenScenario,
+            scenarioComponents: exportJSON(chosenScenario)
+        });
     }
 
     render( ) {
@@ -36,7 +40,7 @@ class OrmExport extends Component {
                         {options}
                     </select>
                 </form>
-                <pre>{JSON.stringify(this.state.chosenScenario, null, 2)}</pre>
+                <pre>{JSON.stringify(this.state.scenarioComponents, null, 2)}</pre>
             </div>
         );
     }
@@ -46,9 +50,6 @@ export default createContainer( ( ) => {
 
     return {
         initScenarios: Scenarios.find({initiate:true}).fetch(),
-        scenarios: Scenarios.find({}).fetch(),
-        questions: Questions.find({}).fetch(),
-        formGenerators: FormGenerators.find({}).fetch()
     };
 
 }, OrmExport );
