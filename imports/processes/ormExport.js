@@ -41,8 +41,9 @@ export function exportJSON(chosenScenario) {
         scenarios : [chosenScenario]
     }
     let components = getScenarios(chosenScenario, acc);
+    let result = processComponents(components);
 
-    return components;
+    return result;
 
 };
 
@@ -77,4 +78,31 @@ function append2Acc(collection, list, element, property, rec) {
             return object;
         }
     }
+}
+
+function processComponents(components) {
+    let result = {"nodes":[], "links":[]};
+
+    const questions = components.questions;
+    const formGenerators = components.formGenerators;
+    const scenarios = components.scenarios;
+
+    for (question of questions) {
+
+        let initiate = false;
+        for (scenario of scenarios) {
+            if (scenario.idQuestion === question._id && scenario.initiate) {
+                initiate = true;
+                break;
+            };
+        };
+
+        result.nodes.push({
+            id: question._id,
+            content: question.content,
+            initiate: initiate
+        });
+    }
+
+    return result;
 }
