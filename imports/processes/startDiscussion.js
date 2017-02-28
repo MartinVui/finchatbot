@@ -44,7 +44,6 @@ export async function startDiscussion(userId){
             data = nextStepMessenger(initScenario._id, result);
             return data;
         }).then((x)=>{return x})
-        console.log(data);
         return data;
     }
 }

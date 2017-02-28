@@ -13,13 +13,13 @@ import Mustache from 'mustache';
 
 export function nextStep(idScenario , idDiscussion){
 	var scenario = Scenarios.findOne({ _id: idScenario });
-    var questions = Questions.findOne({_id: scenario['idQuestion']}).content;
+    var questions = Questions.findOne({_id: scenario['idQuestion']});
     var discussion = Discussions.findOne({_id: idDiscussion});
     var user = Users.findOne({_id: discussion.idUser});
     //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
     var data = {};
     data.scenario = scenario;
-    data.questions = questions;
+    data.questions = questions.content;
     data.user = user;
     data.discussion = discussion;
     // Display formGenerators, with the idScenario
