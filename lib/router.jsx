@@ -1,4 +1,5 @@
 import React from 'react';
+import { HTTP } from 'meteor/http'
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { render } from 'react-dom';
@@ -11,6 +12,7 @@ import { FormGenerators } from '../imports/api/formgenerators.js';
 
 import { startDiscussionMessenger } from '../imports/processes/startDiscussion.js';
 import { nextStepMessenger } from '../imports/processes/nextScenario.js';
+import { getNextScenario } from '../imports/processes/getNextScenario.js';
 
 import App from '../imports/ui/App.jsx';
 
@@ -27,15 +29,19 @@ Router.route( "/messenger", { where: "server" })
     this.response.statusCode = 200;
     that = this;
     user = Users.findOne({'facebookId' : this.request.body.facebookid});
-  
 
     if(typeof(user) === 'undefined'){  
-      var data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
+        
+      data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
+      Meteor.setTimeout(function(){
+        var buf = new Buffer.from(JSON.stringify(data));
+        that.response.end(buf);
+      }, 1000);
       //Start messenger Discussion 
       //User + discussion created
       //NextStepMessenger is called 
     }else{
-      
+
       //When the user is created, fetch the discussion he has with the bot
       //adding the message he sent
       discussion = Discussions.findOne({'idUser' : user._id});
@@ -46,20 +52,24 @@ Router.route( "/messenger", { where: "server" })
         'createdAt': Date() 
       }); 
       
-      //With the node application, we propose to the user some quick_replies (for buttons)
-      //The payload of a quickanswer contains the id of the corresponding scenario
 
-      idScenario = this.request.body.message.quick_reply.payload;
+      //In this part we need to find a way to fetch the next Scenario Id
+      
+        idScenario = this.request.body.message.quick_reply.payload;
+  
+      //In this part we need to find a way to fetch the next Scenario Id
 
       Meteor.call('discussion.update', discussion._id ,{'messagesPile' :messagesPile});
 
       //Calling nextStepMessenger with the Id of the scenario we must go to
-      var data = nextStepMessenger(idScenario, discussion._id);
+      data = nextStepMessenger(idScenario, discussion._id);
+      console.log(data);
+      Meteor.setTimeout(function(){
+        var buf = new Buffer.from(JSON.stringify(data));
+        that.response.end(buf);
+      }, 1000);
     }
-    Meteor.setTimeout(function(){
-      var buf = new Buffer.from(JSON.stringify(data));
-      that.response.end(buf);
-    }, 1000);
+    
 
 
 
