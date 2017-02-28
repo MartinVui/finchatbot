@@ -53,10 +53,15 @@ function getScenarios(chosenScenario, acc){
     append2Acc(Questions, acc.questions, chosenScenario, 'idQuestion', false);
 
     if (chosenScenario.hasOwnProperty("children") && chosenScenario.children !== []){
+        // console.log(chosenScenario.children);
         for (child of chosenScenario.children) {
+            // console.log(child);
             append2Acc(FormGenerators, acc.formGenerators, child, 'idFormGenerator', false);
             let newScenario = append2Acc(Scenarios, acc.scenarios, child, 'idScenario', true);
-            getScenarios(newScenario, acc);
+            if (typeof(newScenario) === "undefined") {
+                console.log(newScenario);
+                getScenarios(newScenario, acc);
+            }
         }
     }
     return acc;
@@ -64,6 +69,7 @@ function getScenarios(chosenScenario, acc){
 }
 
 function checkPresence(list, element, property) {
+    // console.log(element);
     const result =  list.filter( (x) => {
         return element[property] === x._id;
     }).length > 0;
@@ -71,6 +77,7 @@ function checkPresence(list, element, property) {
 }
 
 function append2Acc(collection, list, element, property, rec) {
+    console.log(element);
     if (!checkPresence(list, element, property)) {
         object = collection.findOne({_id:element[property]});
         list.push(object);
@@ -113,7 +120,8 @@ function processComponents(components) {
                 return x._id === child.idFormGenerator
             })[0];
             link.inputInfo = formGenerator;
-
+            console.log(scenarios);
+            console.log(child);
             let target = scenarios.filter( (x) => {
                 return x._id === child.idScenario
             })[0];
