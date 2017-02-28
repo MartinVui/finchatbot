@@ -29,7 +29,7 @@ export var FormGeneratorSchema = new SimpleSchema({
         optional: true
     },
     'elements.$.options.$': {
-        type: Object,
+        type: String,
         blackbox: true
     },
     'elements.$.map': {
