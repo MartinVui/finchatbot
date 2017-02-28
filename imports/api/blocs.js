@@ -105,7 +105,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			// And here are the blocs
 
-	if (blocName==='Hi') {
+	if (blocName === 'Hi') {
 
 		matchWord=/(.*)start(.*)/;
 
@@ -113,7 +113,7 @@ For the links : LINKhttps://google.comTEXTyoEND
 			var botResponse = 'Hey! My name is Holly and I am your personal robot assistant';
 			var image = false;
 			var inReplyto;
-			var nextBlocID = 'How can I help you';
+			var nextBlocID = 'What is your name';
 			var quickReplies = [];
 			var input = {"type":"none"};							
 			var dataWrapper = 'DATA';
@@ -137,17 +137,75 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName==='How can I help you') {
+	if (blocName === 'What is your name') {
 
 
 		
-		var botResponse = 'How can I help you today? :SMILE:';
+		var botResponse = 'And you what\'s your name?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Nice to meet you';
+		var skip = false;
+		var input = {'type':'multitext',
+					'inputs': [{'title':'Name', 'createData':'name'},{'title':'Surname', 'createData':'surname'}]
+					};
+		//var input = {'type':'carmake'};
+		var dataWrapper = 'Hello Holly! My name is DATA, nice to meet you';
+		var createData = {"dataName": "name"}; 
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'Nice to meet you') {
+
+		
+		var botResponse = 'Great to meet you too '+data['name']+'!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'How can I help you';
+		var skip = true;
+		var input = {"type":'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"skip": skip,
+			"input": input,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		return json;
+	}
+
+	if (blocName === 'How can I help you') {
+
+
+		
+		var botResponse = 'How can I help you today?';
 		var image = false;
 		var inReplyto;
 		var nextBlocID = 'How can I help you 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title':'I am interested in a car insurance', 'response':'I am interested in a car insurance'},{'title':'Tell me more about yourself', 'response': 'Can you tell me more about yourself, Holly?'}]
+					'buttons': [{'title':'Help me manage my debt', 'response':'I would like to get debt management solutions Holly'}]
 					};
 		var dataWrapper = 'DATA';
 		var createData = false;
@@ -167,68 +225,15 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName==='How can I help you 2') {
+	if (blocName === "How can I help you 2") {
 
-		var botResponse = 'Ok got it! We can do a quote together, are you ready?';
+
+		var botResponse = 'Sure no problem! That’s easy and fast. I will just ask you few question so as to see if you are eligible!';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Car insurance 3';
-		var skip = false;
-		var input = {'type':'buttons',
-				'buttons': [{'title':'Yes I\'m in', 'response':'Sounds cool, let\'s do it!'},{'title':'No', 'response': 'No, thanks'}]
-				};
-		var dataWrapper = "DATA";
-		var createData = false;
-
-		
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-
-		return json;
-	}
-
-	if (blocName === "Car insurance 3") {
-
-
-		var botResponse = 'Okay! Tell me more about the car you want to insure. Please enter below the year of manufacture';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Car check car year';
-		var skip = false;
-		var input = {'type':'year'};
-		var dataWrapper = 'DATA';
-		var createData = {"dataName": "Car year of manufacture"};
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Car check car year") {
-
-
-		var botResponse = 'Ok got it! Now please enter the make of your car. For example my boss drive a BMW, while I would love to drive a Peugeot if I were a human';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Car check make';
-		var skip = false;
-		var input = {'type':'text'};
+		var nextBlocID = 'Profil status';
+		var skip = true;
+		var input = {'type':'none'};
 		var dataWrapper = 'DATA';
 		var createData = {'dataName': 'Car make'};
 
@@ -246,68 +251,44 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === "Car check make") {
+	if (blocName === "Profil status") {
 
 
-		var botResponse = 'Ok nice one! Please now enter the model. My boss BMW is a Serie 1, while I would love to drive a 107 Peugeot';
+		var botResponse = 'Could you precise your current professional statu please?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Car check model';
-		var skip = false;
-		var input = {'type':'text'};
-		var dataWrapper = 'DATA';
-		var createData = {'dataName': "Car model"};
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Car check model") {
-
-
-		var botResponse = 'Okay cool! Now let’s talk about the car driver details';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Car driver details';
-		var skip = true;
-		var input = {'type':'none'};
-		var dataWrapper = 'DATA';
-		var createData = false;
-
-
-		var json = {
-			"botResponse": botResponse,
-			"image": image,
-			"inReplyTo": inReplyto,
-			"nextBlocID": nextBlocID,
-			"input": input,
-			"skip": skip,
-			"dataWrapper": dataWrapper,
-			"createData": createData,
-		};
-		return json;
-	}
-
-	if (blocName === "Car driver details") {
-
-
-		var botResponse = 'Are you the regular driver on this car?';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Car get driver birthday';
+		var nextBlocID = 'Profil status 2';
 		var skip = false;
 		var input = {'type':'buttons',
-					'buttons': [{'title': 'Yes', 'response': 'Yes I am the main driver on this car Holly!'}, {'title': 'No', 'response': 'No I am not'}]};
+					'buttons': [{'title':'Full time employed', 'response':'Full time employed'},{'title':'Part time employed', 'response':'Part time employed'},{'title':'Self employed', 'response':'Self employed'},{'title':'Not employed', 'response':'Not employed'}]
+					};
+		var dataWrapper = 'DATA';
+		var createData = {'dataName': "Profil status"};
+
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+		return json;
+	}
+
+	if (blocName === "Profil status 2") {
+
+		var botResponse = 'Okay got it. And can you please precise how long is it since you are in this situation?';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Payslip';
+		var skip = false;
+		var input = {'type':'buttons',
+					'buttons': [{'title':'More than 6 months', 'response':'More than 6 months'}, {'title':'Less than 6 months', 'response':'Less than 6 months'}]
+					};
 		var dataWrapper = 'DATA';
 		var createData = false;
 
@@ -325,15 +306,59 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === "Car get driver birthday") {
+	if (blocName === "Payslip") {
+
+		if (text.match(/.*less.*/i)) {
+
+			var botResponse = 'Sorry '+data['name']+' this is a key criteria in order to be eligible for our debt management solutions... Do not hesitate to come back to us as soon as you have sorted this out :SMILE: I wish you a lovely day!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get email';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		}
+
+		else {
+
+			var botResponse = 'Perfect I copy that. And what is your gross income as per your payslip?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Insolvent';
+			var skip = false;
+			var input = {"type":'select',
+							'text':"Select cover",
+							"choices": [{"value": "R0-R5k"},{"value": "R5K-R10K"},{"value": "R10K-R15K"}, {"value": "More than R15K"}]
+							};
+			var dataWrapper = 'DATA';
+			var createData = false;
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+		return json;
+	}
+
+	if (blocName === "Insolvent") {
 
 
-		var botResponse = 'Cool! And what is your address?';
+		var botResponse = 'Great! One last thing, are you under Debt Review or declared insolvent '+data['name']+'?';
 		var image = false;
 		var inReplyto;
-		var nextBlocID = 'Car get driver address';
+		var nextBlocID = 'Interested';
 		var skip = false;
-		var input = {'type':'address'};
+		var input = {'type':'buttons',
+						'buttons':[{'title': 'No', 'response': 'No'}, {'title': 'Yes', 'response': 'Yes'}]};
 		var dataWrapper = 'DATA';
 		var createData = {'dataName': 'car driver address'};
 
@@ -351,17 +376,33 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === "Car get driver address") {
+	if (blocName === "Interested") {
 
+		if (text.match(/.*yes.*/i)) {
 
-		var botResponse = 'That’s perfect, let me find the best quote for you...';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Car get driver previous insurance';
-		var skip = true;
-		var input = {'type':'none'};
-		var dataWrapper = 'DATA';
-		var createData = false;
+			var botResponse = 'Sorry '+data['name']+' this is a key criteria in order to be eligible for our debt management solutions... Do not hesitate to come back to us as soon as you have sorted this out :SMILE: I wish you a lovely day!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get email';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		}
+
+		else {
+
+			var botResponse = 'All good '+data['name']+', I have everything I need. I am glad to tell you that you are eligible for our debt management solutions!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get email';
+			var skip = false;
+			var input = {'type':'buttons',
+							'buttons':[{'title': 'I am interested', 'response': 'I am interested'}, {'title': 'No thanks', 'response': 'No thanks'}]};
+			var dataWrapper = 'DATA';
+			var createData = false;
+		}
 
 
 		var json = {
@@ -377,18 +418,32 @@ For the links : LINKhttps://google.comTEXTyoEND
 		return json;
 	}
 
-	if (blocName === "Car get driver previous insurance") {
+	if (blocName === "Get email") {
 
+		if (text.match(/.*no.*/i)) {
 
-		var botResponse = 'Your chosen cover will cost you only R251 pm! Do you want to buy it right now? :SMILE:';
-		var image = false;
-		var inReplyto;
-		var nextBlocID = 'Car get driver previous insurance 2';
-		var skip = false;
-		var input = {'type':'buttons',
-					'buttons': [{'title': 'Sure', 'response': 'Sure Holly let\'s do this!'},{'title': 'Not yet', 'response': 'No'}]};
-		var dataWrapper = 'DATA';
-		var createData = false;
+			var botResponse = 'Fair enough Name! Do not hesitate to come back any time if you change your mind :SMILE: You know where to find me and I would be please to help you. I wish you a lovely day!';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car get email';
+			var skip = false;
+			var input = {'type':'none'};
+			var dataWrapper = 'DATA';
+			var createData = false;
+
+		}
+
+		else {
+
+			var botResponse = 'Cool! Let me ask you for your contact details so as an agent can get back to you shortly. Please can I get your e-mail address?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car get email';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = 'DATA';
+			var createData = {'dataName': 'email'};
+		}
 
 
 		var json = {
@@ -401,6 +456,265 @@ For the links : LINKhttps://google.comTEXTyoEND
 			"dataWrapper": dataWrapper,
 			"createData": createData,
 		};
+		return json;
+	}
+
+	if (blocName==='Car get email') {
+
+		matchWord0=/(.*)(.*)@(.*)([a-zA-z]{2,4})(.*)(.*)/i;
+
+		if (text.match(matchWord0)) {
+		
+			var botResponse = 'Is your e-mail address '+data['email']+'? Do you confirm?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car check email';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons': [{'title':'Yes', 'response':'Yes Holly, that\'s right!'},{'title':'No', 'response':'No'}]
+						};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+			var botResponse = 'I\'m sorry, I don\'t think it is an e-mail address. Can you give it again please?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car get email';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = "DATA";
+			var createData = {'dataName': 'email'};
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName==='Car check email') {
+
+		matchWord1 = /(.*)yes(.*)/i;
+
+		if (text.match(matchWord1)) {
+		
+			var botResponse = 'Ok thanks. And what\'s you phone number? Please just enter your number';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car get number';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = "DATA";
+			var createData = {'dataName': 'number'};
+			
+		
+		} else {
+			var botResponse = 'Ok, can you give it again?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car get email';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = "DATA";
+			var createData = {'dataName': 'email'};
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName==='Car get number') {
+
+		matchWord0=/(.*)/i;
+
+		if (text.match(matchWord0)) {
+		
+			var botResponse = 'Is your phone number '+data['number']+'? Do you confirm?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car check number';
+			var skip = false;
+			var input = {'type':'buttons',
+						'buttons': [{'title':'Yes', 'response':'Yes Holly, but you\'re slow'},{'title':'No', 'response':'No'}]
+						};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+			var botResponse = 'I\'m sorry, I don\'t think it is an email address. Can you give it again please?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Get email';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName==='Car check number') {
+
+		matchWord1 = /(.*)yes(.*)/i;
+
+		if (text.match(matchWord1)) {
+		
+			var botResponse = 'Ahaha yes that\'s true '+data['name']+', but I am learning! I prefer to double check :SMILE:';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car check number 2';
+			var skip = true;
+			var input = {'type':'none'};
+			var dataWrapper = "DATA";
+			var createData = false;
+			
+		
+		} else {
+			var botResponse = 'Ok. Can you give it again please?';
+			var image = false;
+			var inReplyto;
+			var nextBlocID = 'Car get number';
+			var skip = false;
+			var input = {'type':'text'};
+			var dataWrapper = "DATA";
+			var createData = {'dataName': 'number'};
+			
+		}
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName==='Car check number 2') {
+
+				
+		var botResponse = 'Thanks '+data['name']+'! Can you please enter your residential address below:';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'Get address';
+		var skip = false;
+		var input = {'type':'address'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName==='Get address') {
+
+				
+		var botResponse = 'Perfect Name! I have everything I need. An agent will get back to you very shortly!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'End';
+		var skip = true;
+		var input = {'type':'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
+		return json;
+	}
+
+	if (blocName==='End') {
+				
+		var botResponse = 'Have a great day!';
+		var image = false;
+		var inReplyto;
+		var nextBlocID = 'yos';
+		var skip = false;
+		var input = {'type':'none'};
+		var dataWrapper = "DATA";
+		var createData = false;
+			
+
+		var json = {
+			"botResponse": botResponse,
+			"image": image,
+			"inReplyTo": inReplyto,			
+			"nextBlocID": nextBlocID,
+			"input": input,
+			"skip": skip,
+			"dataWrapper": dataWrapper,
+			"createData": createData,
+		};
+
+		
 		return json;
 	}
 }
