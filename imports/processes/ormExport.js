@@ -41,6 +41,7 @@ export function exportJSON(chosenScenario) {
         scenarios : [chosenScenario]
     }
     let components = getScenarios(chosenScenario, acc);
+    console.log(components);
     let result = processComponents(components);
 
     return result;
@@ -58,8 +59,8 @@ function getScenarios(chosenScenario, acc){
             // console.log(child);
             append2Acc(FormGenerators, acc.formGenerators, child, 'idFormGenerator', false);
             let newScenario = append2Acc(Scenarios, acc.scenarios, child, 'idScenario', true);
-            if (typeof(newScenario) === "undefined") {
-                console.log(newScenario);
+            if (typeof(newScenario) !== "undefined") {
+                // console.log(newScenario);
                 getScenarios(newScenario, acc);
             }
         }
@@ -77,7 +78,7 @@ function checkPresence(list, element, property) {
 }
 
 function append2Acc(collection, list, element, property, rec) {
-    console.log(element);
+    // console.log(element);
     if (!checkPresence(list, element, property)) {
         object = collection.findOne({_id:element[property]});
         list.push(object);
@@ -88,8 +89,7 @@ function append2Acc(collection, list, element, property, rec) {
 }
 
 function processComponents(components) {
-    console.log("test");
-    console.log(components);
+    // console.log(components);
     let result = {"nodes":[], "links":[]};
 
     const questions = components.questions;
@@ -122,8 +122,6 @@ function processComponents(components) {
                 return x._id === child.idFormGenerator
             })[0];
             link.inputInfo = formGenerator;
-            console.log(scenarios);
-            console.log(child);
             let target = scenarios.filter( (x) => {
                 return x._id === child.idScenario
             })[0];
