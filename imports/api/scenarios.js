@@ -5,6 +5,13 @@ import { ScenarioSchema } from './schemas/scenarioSchema.js';
 
 export const Scenarios = new Mongo.Collection("scenarios");
 
+if (Meteor.isServer) {
+    // This code only runs on the server
+    Meteor.publish('scenarios', function scenariosPublication() {
+        return Scenarios.find();
+    });
+}
+
 Meteor.methods({
 
     'scenario.insert' (scenario) {
