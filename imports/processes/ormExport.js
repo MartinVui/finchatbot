@@ -35,13 +35,17 @@ import { Scenarios } from "../api/scenarios.js";
 
 export function exportJSON(chosenScenario) {
 
+    // Defining accumulator for recursive tree reading
     let acc = {
         questions : [],
         formGenerators : [],
         scenarios : [chosenScenario]
     }
+
+    // Getting all the components from database
     let components = getScenarios(chosenScenario, acc);
-    console.log(components);
+
+    // Process them into the unified representation
     let result = processComponents(components);
 
     return result;
