@@ -12,7 +12,7 @@ import { FormGenerators } from '../imports/api/formgenerators.js';
 
 import { startDiscussionMessenger } from '../imports/processes/startDiscussion.js';
 import { nextStepMessenger } from '../imports/processes/nextScenario.js';
-import { getNextScenario } from '../imports/processes/getNextScenario.js';
+import { getLastScenario } from '../imports/processes/getLastScenario.js';
 
 import App from '../imports/ui/App.jsx';
 
@@ -27,8 +27,9 @@ Router.route( "/messenger", { where: "server" })
   .post( function() {
     //FUNCTION CALLED WHENEVER THE USER IS SENDING A MESSAGE
     this.response.statusCode = 200;
-    that = this;
-    user = Users.findOne({'facebookId' : this.request.body.facebookid});
+    var that = this;
+    var user = Users.findOne({'facebookId' : this.request.body.facebookid});
+    var userData = {}
 
     if(typeof(user) === 'undefined'){  
         
@@ -41,29 +42,38 @@ Router.route( "/messenger", { where: "server" })
       //User + discussion created
       //NextStepMessenger is called 
     }else{
-
       //When the user is created, fetch the discussion he has with the bot
       //adding the message he sent
       discussion = Discussions.findOne({'idUser' : user._id});
+      lastScenario = getLastScenario(discussion._id);
+      //In this part we need to find a way to fetch the next Scenario Id
+      if (typeof(this.request.body.message.quick_reply) !== 'undefined') {
+        idScenario = this.request.body.message.quick_reply.payload;
+        idFormGenerator = lastScenario.children.filter((element)=>{return (idScenario === element.idScenario)})[0].idFormGenerator;
+        console.log(idFormGenerator);
+      }else{
+        idScenario = lastScenario.children[0].idScenario;
+        idFormGenerator = lastScenario.children[0].idFormGenerator;
+        targetName = FormGenerators.findOne({'_id': idFormGenerator}).elements[0].targetName;
+        userData[targetName] = this.request.body.message.text;
+        Meteor.call("user.update", user._id, userData);
+      }
+
+      //In this part we need to find a way to fetch the next Scenario Id
       messagesPile = discussion.messagesPile;
+      
       messagesPile.push({
         'author': 'user',
         'text': this.request.body.message.text,
-        'createdAt': Date() 
-      }); 
-      
+        'createdAt': Date(),
+        'idFormGenerator': idFormGenerator 
+      });
 
-      //In this part we need to find a way to fetch the next Scenario Id
-      
-        idScenario = this.request.body.message.quick_reply.payload;
-  
-      //In this part we need to find a way to fetch the next Scenario Id
 
       Meteor.call('discussion.update', discussion._id ,{'messagesPile' :messagesPile});
 
       //Calling nextStepMessenger with the Id of the scenario we must go to
       data = nextStepMessenger(idScenario, discussion._id);
-      console.log(data);
       Meteor.setTimeout(function(){
         var buf = new Buffer.from(JSON.stringify(data));
         that.response.end(buf);
