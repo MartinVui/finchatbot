@@ -1,3 +1,4 @@
+import { Random } from 'meteor/random'
 import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
@@ -29,7 +30,7 @@ class OrmImport extends Component {
             for (key in processedTemp.questions) {
                 const val = processedTemp.questions[key];
                 questionsProc.push(val);
-                questionsDisp.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
+                questionsDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
             }
         };
 
@@ -40,7 +41,7 @@ class OrmImport extends Component {
                 for (field of processedTemp.formGenerators[key]) {
                     const val = field;
                     formGeneratorsProc.push(val);
-                    formGeneratorsDisp.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
+                    formGeneratorsDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
                 }
             }
         };
@@ -51,7 +52,7 @@ class OrmImport extends Component {
             for (key in processedTemp.scenarios) {
                 const val = processedTemp.scenarios[key];
                 scenariosProc.push(val);
-                scenariosDisp.push(<pre key={val._id}>{JSON.stringify(val, null, 2)}</pre>);
+                scenariosDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
             }
         };
 

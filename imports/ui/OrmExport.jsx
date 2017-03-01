@@ -17,18 +17,25 @@ class OrmExport extends Component {
     }
 
     handleChange( event ) {
-        chosenScenario = this.props.initScenarios.filter( (x) => {
-            return x._id === event.target.value;
-        })[0];
-        this.setState({
-            chosenScenario: chosenScenario,
-            scenarioComponents: exportJSON(chosenScenario)
-        });
+        if (event.target.value === "") {
+            this.setState({
+                chosenScenario: {},
+                scenarioComponents: {}
+            });
+        } else {
+            chosenScenario = this.props.initScenarios.filter( (x) => {
+                return x._id === event.target.value;
+            })[0];
+            this.setState({
+                chosenScenario: chosenScenario,
+                scenarioComponents: exportJSON(chosenScenario)
+            });
+        }
     }
 
     render( ) {
 
-        let options = [];
+        let options = [<option value="" key="lolilol">-----</option>];
         for (option of this.props.initScenarios) {
             options.push(<option value={option._id} key={option._id}>{option._id}</option>)
         };
