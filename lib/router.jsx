@@ -48,27 +48,45 @@ Router.route( "/messenger", { where: "server" })
       //adding the message he sent
       discussion = Discussions.findOne({'idUser' : user._id});
       lastScenario = getLastScenario(discussion._id);
-      
+      messagesPile = discussion.messagesPile;
+
       if (typeof(this.request.body.message.quick_reply) !== 'undefined') {
         idScenario = this.request.body.message.quick_reply.payload;
         idFormGenerator = lastScenario.children.filter((element)=>{return (idScenario === element.idScenario)})[0].idFormGenerator;
         console.log(idFormGenerator);
-      }else{
+        messagesPile.push({
+          'author': 'user',
+          'text': this.request.body.message.text,
+          'createdAt': Date(),
+          'idFormGenerator': idFormGenerator 
+        });
+       }
+      else if(typeof(this.request.body.message.attachments[0].type) !== 'undefined'){
+        if (this.request.body.message.attachments[0].type === "location") {
+          idScenario = lastScenario.children[0].idScenario;
+          idFormGenerator = lastScenario.children[0].idFormGenerator;
+          Meteor.call("user.update", user._id, {'location' : this.request.body.message.attachments[0]});
+          messagesPile.push({
+            'author': 'user',
+            'location': this.request.body.message.attachments[0],
+            'createdAt': Date(),
+            'idFormGenerator': idFormGenerator 
+          });
+        }
+      }
+      else{
         idScenario = lastScenario.children[0].idScenario;
         idFormGenerator = lastScenario.children[0].idFormGenerator;
         targetName = FormGenerators.findOne({'_id': idFormGenerator}).elements[0].targetName;
         userData[targetName] = this.request.body.message.text;
         Meteor.call("user.update", user._id, userData);
+        messagesPile.push({
+          'author': 'user',
+          'text': this.request.body.message.text,
+          'createdAt': Date(),
+          'idFormGenerator': idFormGenerator 
+        });
       }
-
-      messagesPile = discussion.messagesPile;
-      
-      messagesPile.push({
-        'author': 'user',
-        'text': this.request.body.message.text,
-        'createdAt': Date(),
-        'idFormGenerator': idFormGenerator 
-      });
 
 
       Meteor.call('discussion.update', discussion._id ,{'messagesPile' :messagesPile});
