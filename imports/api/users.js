@@ -5,12 +5,12 @@ import { UserSchema } from './schemas/userSchema.js';
 
 export const Users = new Mongo.Collection("users");
 
-if (Meteor.isServer) {
-    // This code only runs on the server
-    Meteor.publish('users', function usersPublication() {
-        return Users.find();
-    });
-}
+// if (Meteor.isServer) {
+//     // This code only runs on the server
+//     Meteor.publish('users', function usersPublication() {
+//         return Users.find();
+//     });
+// }
 
 Meteor.methods({
     'user.insert' (user) {

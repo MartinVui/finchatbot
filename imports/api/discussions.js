@@ -5,12 +5,12 @@ import { DiscussionSchema } from './schemas/discussionSchema.js';
 
 export const Discussions = new Mongo.Collection("discussions");
 
-if (Meteor.isServer) {
-    // This code only runs on the server
-    Meteor.publish('discussions', function discussionsPublication() {
-        return Discussions.find();
-    });
-}
+// if (Meteor.isServer) {
+//     // This code only runs on the server
+//     Meteor.publish('discussions', function discussionsPublication() {
+//         return Discussions.find();
+//     });
+// }
 
 Meteor.methods({
     'discussion.insert' (discussion) {
