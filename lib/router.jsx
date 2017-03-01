@@ -1,5 +1,5 @@
 import React from 'react';
-import { HTTP } from 'meteor/http'
+import { HTTP } from 'meteor/http';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { render } from 'react-dom';
@@ -33,6 +33,8 @@ Router.route( "/messenger", { where: "server" })
 
     if(typeof(user) === 'undefined'){  
         
+
+
       data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
       Meteor.setTimeout(function(){
         var buf = new Buffer.from(JSON.stringify(data));
@@ -46,7 +48,7 @@ Router.route( "/messenger", { where: "server" })
       //adding the message he sent
       discussion = Discussions.findOne({'idUser' : user._id});
       lastScenario = getLastScenario(discussion._id);
-      //In this part we need to find a way to fetch the next Scenario Id
+      
       if (typeof(this.request.body.message.quick_reply) !== 'undefined') {
         idScenario = this.request.body.message.quick_reply.payload;
         idFormGenerator = lastScenario.children.filter((element)=>{return (idScenario === element.idScenario)})[0].idFormGenerator;
@@ -59,7 +61,6 @@ Router.route( "/messenger", { where: "server" })
         Meteor.call("user.update", user._id, userData);
       }
 
-      //In this part we need to find a way to fetch the next Scenario Id
       messagesPile = discussion.messagesPile;
       
       messagesPile.push({
