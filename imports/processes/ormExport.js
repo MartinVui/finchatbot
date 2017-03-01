@@ -88,6 +88,8 @@ function append2Acc(collection, list, element, property, rec) {
 }
 
 function processComponents(components) {
+    console.log("test");
+    console.log(components);
     let result = {"nodes":[], "links":[]};
 
     const questions = components.questions;
