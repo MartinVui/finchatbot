@@ -1456,9 +1456,7 @@ Meteor.methods({
 			+'    '
 			+'    <!-- Two Columns, With Padding ==> Stacked Layout : BEGIN -->      <!-- Two Columns, With Padding ==> Stacked Layout : END -->'
 			+'    <!-- Full Width, Fluid Column : BEGIN -->'
-			+'    <tbody><tr>'
-			+'      <td><a href="https://www.metropolitan.co.za" "target="_blank"?utm_source=PI&utm_medium=BANNER&utm_term=HOLLARD&utm_campaign=HOLLARD "target="_blank"?utm_source=PI&utm_medium=BANNER&utm_term=HOLLARD&utm_campaign=HOLLARD "target="_blank"><img src="https://finchatbotmvp.herokuapp.com/images/metropolitan.png" width="100%" height="auto" alt="Get Affordable Funeral Cover with Hollard"></a></td>'
-			+'    </tr>'
+			+'    <tbody>'
 			+'      <tr>'
 			+'        <td align="center" style="padding:10px; background-color:#fff"><table width="100%" border="0" cellspacing="8" cellpadding="6">'
 			+'          <tbody>'
@@ -1525,7 +1523,7 @@ Meteor.methods({
 			+'      </tr>'
 			+'      '
 			+'      <tr>'
-			+'        <td style="padding-left:20px; padding-top:15px; padding-right:5px; padding-bottom:15px; background-color:#0b4f9f; font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:8px; line-height:19px; color:#ffffff">Metropolitan is an authorised financial services provider. Terms and &amp; Conditions apply.</td>'
+			+'        <td style="padding-left:20px; padding-top:15px; padding-right:5px; padding-bottom:15px; background-color:#0b4f9f; font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:8px; line-height:19px; color:#ffffff">Finchatbot is an authorised financial services provider. Terms and &amp; Conditions apply.</td>'
 			+'      </tr>'
 			+''
 			+''
@@ -1873,7 +1871,7 @@ Meteor.methods({
 		    this.unblock();
 		    Email.send({
 			   	to: data['email'],
-			    from: "hello@metropolitan.com",
+			    from: "hello@finchatbot.com",
 			    subject: 'Your quote',
 			    html: html
 		    });
