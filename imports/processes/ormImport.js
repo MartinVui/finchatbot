@@ -5,6 +5,7 @@ import { FormGenerators } from "../api/formgenerators.js";
 import { Scenarios } from "../api/scenarios.js";
 
 // {
+// "name":"test",
 // 	"nodes":
 //     [
 //         {"id": "A", "initiate": true, "bot-message": ["..."]},
@@ -51,11 +52,25 @@ export function importJSON(inputText) {
         let formGenerators = linksResult.formGenerators;
         let scenarios = linksResult.scenarios;
 
+        // Set all trees
+        let trees = [];
+        // for (init of linksResult.inits) {
+        //     trees.append({
+        //         idInit : init,
+        //         metadata : {
+        //             lastUpdate : new Date(),
+        //             name : obj.name+init
+        //         }
+        //     })
+        // }
+
         result = {
             questions : questions,
             formGenerators : formGenerators,
-            scenarios : scenarios
+            scenarios : scenarios,
+            trees : trees
         }
+        console.log(result);
         return result;
 
     // } catch (e) {
@@ -147,6 +162,7 @@ function buildFormGenerators(links) {
 function buildScenarios(groupedLinks, questions, formGenerators, init) {
 
     var scenarios = {};
+    var inits = [];
 
     for (group in groupedLinks) {
 
@@ -165,13 +181,7 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
             const id = ids[target];
             const form = formGenerators[[group, target]];
 
-            // console.log(form);
-
-            // for (form of formGenerators[[group, target]]) {
-
             if (typeof(groupedLinks[target]) === "undefined") {
-
-                // console.log(target);
 
                 scenarios[target] = {
                     _id : id,
@@ -185,28 +195,24 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
 
             }
 
-            // console.log('yolo');
-
             children.push({
                 idFormGenerator : child.inputInfo,
                 idScenario : id
-            })
-
-            // }
+            });
 
         };
-        // console.log(group);
+
         scenario = {
             idQuestion : questions[group]._id,
             children : children
         };
+        console.log(scenario);
         if (init.indexOf(group) >= 0) {
             scenario.initiate = true;
         };
         if (groupContent.hasOwnProperty("dbId")) {
-            console.log("lol");
             scenario._id = groupContent.dbId;
-        }
+        };
         scenarios[group] = scenario;
     }
 

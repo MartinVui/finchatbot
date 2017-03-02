@@ -19,7 +19,7 @@ class OrmImport extends Component {
         };
     }
 
-    handleChange( event ) {
+    handleChange( event ) { 
 
         const json = event.target.value;
         const processedTemp = importJSON(json);
