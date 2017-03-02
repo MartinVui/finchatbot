@@ -49,18 +49,28 @@ Router.route( "/messenger", { where: "server" })
       lastScenario = getLastScenario(discussion._id);
       messagesPile = discussion.messagesPile;
 
-      if (typeof(this.request.body.message.quick_reply) !== 'undefined') {
+      if (typeof(this.request.body.postback) !== 'undefined') {
+        idScenario = this.request.body.postback.payload;
+        idFormGenerator = lastScenario.children.filter((element)=>{return (idScenario === element.idScenario)})[0].idFormGenerator;
+        formGenerator = FormGenerators.findOne({'_id' : idFormGenerator});
+        messagesPile.push({
+          'author': 'user',
+          'text': formGenerator.generatedAnswer,
+          'createdAt': Date(),
+          'idFormGenerator': idFormGenerator
+        })
+      }
+      else if (typeof(this.request.body.message.quick_reply) !== 'undefined') {
         //BOUTTON QUICK_REPLY
         idScenario = this.request.body.message.quick_reply.payload;
         idFormGenerator = lastScenario.children.filter((element)=>{return (idScenario === element.idScenario)})[0].idFormGenerator;
-        console.log(idFormGenerator);
         messagesPile.push({
           'author': 'user',
           'text': this.request.body.message.text,
           'createdAt': Date(),
           'idFormGenerator': idFormGenerator 
         });
-       }
+      }
       else if(typeof(this.request.body.message.attachments) !== 'undefined'){
         //ATTACHMENTS
         if (this.request.body.message.attachments[0].type === "location") {
