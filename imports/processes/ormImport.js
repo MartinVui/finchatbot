@@ -153,18 +153,22 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
         groupContent = groupedLinks[group];
 
         var children = [];
+
+        const ids ={};
+        for (child of groupContent) {
+            ids[child.target] = Random.id();
+        };
+
         for (child of groupContent) {
 
-            // console.log(child.inputInfo);
-
             const target = child.target;
+            const id = ids[target];
             const form = formGenerators[[group, target]];
 
             // console.log(form);
 
             // for (form of formGenerators[[group, target]]) {
 
-            const id = Random.id();
             if (typeof(groupedLinks[target]) === "undefined") {
 
                 // console.log(target);
@@ -200,6 +204,7 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
             scenario.initiate = true;
         };
         if (groupContent.hasOwnProperty("dbId")) {
+            console.log("lol");
             scenario._id = groupContent.dbId;
         }
         scenarios[group] = scenario;
