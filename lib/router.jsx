@@ -33,8 +33,6 @@ Router.route( "/messenger", { where: "server" })
 
     if(typeof(user) === 'undefined'){  
         
-
-
       data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
       Meteor.setTimeout(function(){
         var buf = new Buffer.from(JSON.stringify(data));
@@ -42,8 +40,9 @@ Router.route( "/messenger", { where: "server" })
       }, 1000);
       //Start messenger Discussion 
       //User + discussion created
-      //NextStepMessenger is called 
+      
     }else{
+      
       //When the user is created, fetch the discussion he has with the bot
       //adding the message he sent
       discussion = Discussions.findOne({'idUser' : user._id});
@@ -51,6 +50,7 @@ Router.route( "/messenger", { where: "server" })
       messagesPile = discussion.messagesPile;
 
       if (typeof(this.request.body.message.quick_reply) !== 'undefined') {
+        //BOUTTON QUICK_REPLY
         idScenario = this.request.body.message.quick_reply.payload;
         idFormGenerator = lastScenario.children.filter((element)=>{return (idScenario === element.idScenario)})[0].idFormGenerator;
         console.log(idFormGenerator);
@@ -61,8 +61,10 @@ Router.route( "/messenger", { where: "server" })
           'idFormGenerator': idFormGenerator 
         });
        }
-      else if(typeof(this.request.body.message.attachments[0].type) !== 'undefined'){
+      else if(typeof(this.request.body.message.attachments) !== 'undefined'){
+        //ATTACHMENTS
         if (this.request.body.message.attachments[0].type === "location") {
+          //LOCATION
           idScenario = lastScenario.children[0].idScenario;
           idFormGenerator = lastScenario.children[0].idFormGenerator;
           Meteor.call("user.update", user._id, {'location' : this.request.body.message.attachments[0]});
@@ -75,19 +77,24 @@ Router.route( "/messenger", { where: "server" })
         }
       }
       else{
+        //TEXT INPUT
         idScenario = lastScenario.children[0].idScenario;
         idFormGenerator = lastScenario.children[0].idFormGenerator;
-        targetName = FormGenerators.findOne({'_id': idFormGenerator}).elements[0].targetName;
-        userData[targetName] = this.request.body.message.text;
-        Meteor.call("user.update", user._id, userData);
-        messagesPile.push({
-          'author': 'user',
-          'text': this.request.body.message.text,
-          'createdAt': Date(),
-          'idFormGenerator': idFormGenerator 
-        });
+        formGenerator = FormGenerators.find({'_id' : idFormGenerator});
+        if (formGenerator.inputType === 'text') {
+          targetName = FormGenerators.findOne({'_id': idFormGenerator}).elements[0].targetName;
+          userData[targetName] = this.request.body.message.text;
+          Meteor.call("user.update", user._id, userData);
+          messagesPile.push({
+            'author': 'user',
+            'text': this.request.body.message.text,
+            'createdAt': Date(),
+            'idFormGenerator': idFormGenerator 
+          });
+        }else{
+          idScenario = lastScenario._id;
+        }
       }
-
 
       Meteor.call('discussion.update', discussion._id ,{'messagesPile' :messagesPile});
 
