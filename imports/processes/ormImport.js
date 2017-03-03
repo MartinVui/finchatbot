@@ -181,7 +181,7 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
 
             } else {
 
-                groupedLinks[target].dbId = id
+                groupedLinks[target].dbId = id;
 
             }
 
@@ -196,7 +196,12 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
 
         };
         // console.log(group);
+        id = Random.id();
+        console.log(group);
+        console.log(groupedLinks);
+        // groupedLinks[source].dbId = id;
         scenario = {
+            _id : id,
             idQuestion : questions[group]._id,
             children : children
         };
@@ -204,7 +209,7 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
             scenario.initiate = true;
         };
         if (groupContent.hasOwnProperty("dbId")) {
-            console.log("lol");
+            // console.log("lol");
             scenario._id = groupContent.dbId;
         }
         scenarios[group] = scenario;
