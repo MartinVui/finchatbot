@@ -91,7 +91,7 @@ Router.route( "/messenger", { where: "server" })
         idScenario = lastScenario.children[0].idScenario;
         idFormGenerator = lastScenario.children[0].idFormGenerator;
         formGenerator = FormGenerators.find({'_id' : idFormGenerator});
-        if (formGenerator.inputType === 'text') {
+        if (formGenerator.inputType === 'text' && !formGenerator.elements[0].map) {
           targetName = FormGenerators.findOne({'_id': idFormGenerator}).elements[0].targetName;
           userData[targetName] = this.request.body.message.text;
           Meteor.call("user.update", user._id, userData);
