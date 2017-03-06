@@ -7,8 +7,21 @@ export function scenarioPicker() {
 
     if (InitScenarios.length != 0) {
 
-        choice = Random.choice(InitScenarios);
-        // console.log(choice);
+        let choice = Random.choice(InitScenarios);
+
+        let metadata = choice.metadata;
+        if (metadata.hasOwnProperty("usesNumber")) {
+            metadata.usesNumber += 1;
+        } else {
+            metadata.usesNumber = 1;
+        }
+
+        Meteor.call(
+            "tree.update",
+            choice._id,
+            {metadata: metadata}
+        );
+
         return choice;
 
     } else {

@@ -4,5 +4,6 @@ export var TreeSchema = new SimpleSchema({
     },
     metadata: {
         type: Object,
+        blackbox: true
     }
 });
