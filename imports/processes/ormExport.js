@@ -33,7 +33,10 @@ import { Scenarios } from "../api/scenarios.js";
 //     ]
 // }
 
-export function exportJSON(chosenScenario) {
+export function exportJSON(idChosenScenario) {
+
+    let chosenScenario = Scenarios.findOne({_id:idChosenScenario});
+    let initNode = chosenScenario.idQuestion;
 
     // Defining accumulator for recursive tree reading
     let acc = {
@@ -46,7 +49,7 @@ export function exportJSON(chosenScenario) {
     let components = getScenarios(chosenScenario, acc);
 
     // Process them into the unified representation
-    let result = processComponents(components);
+    let result = processComponents(components, initNode);
 
     return result;
 
@@ -92,8 +95,8 @@ function append2Acc(collection, list, element, property, rec) {
     }
 }
 
-function processComponents(components) {
-    // console.log(components);
+function processComponents(components, initNode) {
+
     let result = {"nodes":[], "links":[]};
 
     const questions = components.questions;
@@ -103,11 +106,8 @@ function processComponents(components) {
     for (question of questions) {
 
         let initiate = false;
-        for (scenario of scenarios) {
-            if (scenario.idQuestion === question._id && scenario.initiate) {
-                initiate = true;
-                break;
-            };
+        if (question._id === initNode) {
+            initiate = true;
         };
 
         result.nodes.push({
