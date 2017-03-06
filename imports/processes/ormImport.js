@@ -110,7 +110,6 @@ export function importJSON(inputText) {
             formGenerators : formGeneratorsList,
             scenarios : scenariosList
         }
-        console.log(result);
         return result;
 
     // } catch (e) {
