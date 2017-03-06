@@ -25,3 +25,5 @@ http
 react-meteor-data
 aldeed:simple-schema
 iron:router
+dburles:google-maps
+deanius:promise

@@ -13,8 +13,8 @@ class OrmImport extends Component {
         super( );
         this.state = {
             json: "",
-            processed: "",
-            displayed: "",
+            processed: {},
+            displayed: {},
             saved: ""
         };
     }
@@ -22,45 +22,28 @@ class OrmImport extends Component {
     handleChange( event ) { 
 
         const json = event.target.value;
-        const processedTemp = importJSON(json);
+        const processed = importJSON(json);
 
-        let questionsProc = [];
         let questionsDisp = [];
-        if(typeof(processedTemp.questions)==="object"){
-            for (key in processedTemp.questions) {
-                const val = processedTemp.questions[key];
-                questionsProc.push(val);
+        if(processed.questions){
+            for (val of processed.questions) {
                 questionsDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
             }
         };
 
-        let formGeneratorsProc = [];
         let formGeneratorsDisp = [];
-        if(typeof(processedTemp.formGenerators)==="object"){
-            for (key in processedTemp.formGenerators) {
-                for (field of processedTemp.formGenerators[key]) {
-                    const val = field;
-                    formGeneratorsProc.push(val);
-                    formGeneratorsDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
-                }
+        if(processed.formGenerators){
+            for (val of processed.formGenerators) {
+                formGeneratorsDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
             }
         };
 
-        let scenariosProc = [];
         let scenariosDisp = [];
-        if(typeof(processedTemp.scenarios)==="object"){
-            for (key in processedTemp.scenarios) {
-                const val = processedTemp.scenarios[key];
-                scenariosProc.push(val);
+        if(processed.scenarios){
+            for (val of processed.scenarios) {
                 scenariosDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
             }
         };
-
-        const processed = {
-            questions: questionsProc,
-            formGenerators:formGeneratorsProc,
-            scenarios: scenariosProc
-        }
 
         const displayed = {
             questions: questionsDisp,

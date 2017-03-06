@@ -54,7 +54,7 @@ export default class SelectInput extends Component {
             //nextStep Callback here
             this
                 .props
-                .nextStep( this.props.nextScenario );
+                .nextStep( this.props.nextScenario , Session.get("SessionId") );
         }
     }
 

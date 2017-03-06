@@ -5,7 +5,6 @@ import { FormGenerators } from "../api/formgenerators.js";
 import { Scenarios } from "../api/scenarios.js";
 
 // {
-// "name":"test",
 // 	"nodes":
 //     [
 //         {"id": "A", "initiate": true, "bot-message": ["..."]},
@@ -42,35 +41,75 @@ export function importJSON(inputText) {
         // May raise an exception => try/catch
         let obj = JSON.parse(inputText);
 
-        // Get all the questions
-        let nodes = getNodes(obj);
-        let questions = nodes.questions;
-        let init = nodes.init;
-        // Get all formGenerators and scenarios
-        let linksResult = getLinks(obj, questions, init);
-        // console.log(linksResult);
-        let formGenerators = linksResult.formGenerators;
-        let scenarios = linksResult.scenarios;
+        let questionsList = [];
+        let questionsDict = {};
+        let formGeneratorsList = [];
+        let formGeneratorsDict = {};
+        let scenariosList = [];
+        let scenariosDict = {};
 
-        // Set all trees
-        let trees = [];
-        // for (init of linksResult.inits) {
-        //     trees.append({
-        //         idInit : init,
-        //         metadata : {
-        //             lastUpdate : new Date(),
-        //             name : obj.name+init
-        //         }
-        //     })
-        // }
+        for (node of obj.nodes) {
+
+            const content = node['bot-message'];
+            const contentsList = questionsList.map( (x) => {
+                return x.content;
+            })
+            const index = contentsList.indexOf(content);
+            if (index < 0) {
+
+                questionsDict[node.id] = questionsList.length;
+                questionsList.push({
+                    _id: Random.id(),
+                    content: node['bot-message']
+                });
+
+            } else {
+
+                questionsDict[node.id] = index;
+
+            };
+        };
+
+        for (link of obj.links) {
+
+            const key = [link.source, link.target];
+            const formGenerator = link.inputInfo;
+            const formGeneratorsListNoId = formGeneratorsList.map( (x) => {
+                return x.inputInfo;
+            })
+            const index = formGeneratorsListNoId.indexOf(formGenerator);
+            if (index < 0) {
+
+                formGenerator._id = Random.id();
+                formGeneratorsDict[key] = formGeneratorsList.length;
+                formGeneratorsList.push(formGenerator);
+
+            } else {
+
+                formGeneratorsDict[key] = index;
+
+            };
+        };
+
+        for (link of obj.links) {
+
+            createScenario(
+                link.source,
+                questionsList,
+                questionsDict,
+                formGeneratorsList,
+                formGeneratorsDict,
+                scenariosDict,
+                scenariosList
+            );
+
+        };
 
         result = {
-            questions : questions,
-            formGenerators : formGenerators,
-            scenarios : scenarios,
-            trees : trees
+            questions : questionsList,
+            formGenerators : formGeneratorsList,
+            scenarios : scenariosList
         }
-        console.log(result);
         return result;
 
     // } catch (e) {
@@ -81,140 +120,63 @@ export function importJSON(inputText) {
 
 }
 
-function getNodes(obj) {
+function createScenario(
+    source,
+    questionsList,
+    questionsDict,
+    formGeneratorsList,
+    formGeneratorsDict,
+    scenariosDict,
+    scenariosList
+) {
 
-    var questions = {};
-    var init = []
+    let idScenario;
 
-    if (obj.hasOwnProperty("nodes")) {
-        // Get all the nodes
-        for (node of obj.nodes) {
-            // Insert them as questions
-            questions[node.id] = {
-                _id : Random.id(),
-                content : node["bot-message"]
-            };
-            if (node.hasOwnProperty("initiate") && node.initiate) {
-                init.push(node.id);
-            }
-        }
-    }
+    if (scenariosDict.hasOwnProperty(source)) {
 
-    return { questions: questions, init: init };
-}
+        idScenario = scenariosList[scenariosDict[source]]._id;
 
-function getLinks(obj, questions, init) {
+    } else {
 
-    let result = {
-        "formGenerators" : [],
-        "scenarios" : []
-    }
+        let children = [];
+        const idQuestion = questionsList[questionsDict[source]]._id;
 
-    if (obj.hasOwnProperty("links")) {
-
-        const formGenerators = buildFormGenerators(obj.links);
-        result.formGenerators = formGenerators;
-
-        const groupedLinks = obj.links.reduce(
-            function(acc, link) {
-                if (typeof(link) !== "undefined") {
-                    if (typeof(acc[link.source]) === "undefined") {
-                        acc[link.source] = [link];
-                    } else {
-                        acc[link.source].push(link);
-                    }
-                    return acc;
-                } else {
-                    return;
-                }
-            },
-            {}
-        );
-        const scenarios = buildScenarios(groupedLinks, questions, formGenerators, init);
-        result.scenarios = scenarios;
-    }
-
-    return result;
-}
-
-function buildFormGenerators(links) {
-
-    var formGenerators = {};
-
-    for (link of links) {
-
-        id = Random.id();
-        if (typeof(formGenerators[[link.source, link.target]]) === "undefined") {
-            formGenerators[[link.source, link.target]] = [link.inputInfo];
-            formGenerators[[link.source, link.target]][0]._id = id;
-        } else {
-            let obj = link.inputInfo;
-            obj._id = id;
-            formGenerators[[link.source, link.target]].push(obj);
-        }
-
-        link.inputInfo = id;
-    }
-
-    return formGenerators;
-}
-
-function buildScenarios(groupedLinks, questions, formGenerators, init) {
-
-    var scenarios = {};
-    var inits = [];
-
-    for (group in groupedLinks) {
-
-        groupContent = groupedLinks[group];
-
-        var children = [];
-
-        const ids ={};
-        for (child of groupContent) {
-            ids[child.target] = Random.id();
-        };
-
-        for (child of groupContent) {
-
-            const target = child.target;
-            const id = ids[target];
-            const form = formGenerators[[group, target]];
-
-            if (typeof(groupedLinks[target]) === "undefined") {
-
-                scenarios[target] = {
-                    _id : id,
-                    idQuestion : questions[target]._id,
-                    children : []
-                };
-
-            } else {
-
-                groupedLinks[target].dbId = id
-
-            }
-
-            children.push({
-                idFormGenerator : child.inputInfo,
-                idScenario : id
-            });
-
-        };
-
-        scenario = {
-            idQuestion : questions[group]._id,
+        idScenario = Random.id();
+        let scenario = {
+            _id : idScenario,
+            idQuestion : idQuestion,
             children : children
         };
-        console.log(scenario);
-        if (init.indexOf(group) >= 0) {
-            scenario.initiate = true;
+        scenariosDict[source] = scenariosList.length;
+        scenariosList.push(scenario);
+
+        for (tempKey in formGeneratorsDict) {
+
+            const key = tempKey.split(",");
+            if ( key[0] === source ) {
+
+                children.push({
+                    idFormGenerator: formGeneratorsList[
+                        formGeneratorsDict[key]
+                    ]._id,
+                    idScenario: createScenario(
+                        key[1],
+                        questionsList,
+                        questionsDict,
+                        formGeneratorsList,
+                        formGeneratorsDict,
+                        scenariosDict,
+                        scenariosList
+                    )
+                });
+            }
         };
-        if (groupContent.hasOwnProperty("dbId")) {
-            scenario._id = groupContent.dbId;
-        };
-        scenarios[group] = scenario;
+
+        scenario.children = children;
+        scenariosList[scenariosDict[source]] = scenario;
+
     }
 
-    return scenarios;
+    return idScenario;
+
 }
