@@ -60,11 +60,12 @@ export function nextStepWeb(idScenario, idDiscussion){
 
 export function nextStepMessenger(idScenario, idDiscussion){
 	data = nextStep(idScenario, idDiscussion);
-	   
+	var messengerData = {};
+    messengerData.questions = []; 
     var messagesPile = data.discussion.messagesPile;
     for (var i=0 ; i < data.questions.length ; i++) {
-        console.log(data.user);    
         var interpretedQuestion = Mustache.render(data.questions[i] , {'user' : data.user});
+        messengerData.questions.push(interpretedQuestion);
         var date = new Date();
         newMessage = {
             'author' : 'bot',
@@ -84,9 +85,9 @@ export function nextStepMessenger(idScenario, idDiscussion){
         formGenerator.correspondingScenarioId = nextScenario._id;
 		formGeneratorList.push(formGenerator);
 	}
-	var messengerData = {};
+	
 	messengerData.formGeneratorList = formGeneratorList
-	messengerData.questions = data.questions
+	
 
 	return messengerData;
 }
