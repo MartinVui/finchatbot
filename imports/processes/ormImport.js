@@ -41,20 +41,74 @@ export function importJSON(inputText) {
         // May raise an exception => try/catch
         let obj = JSON.parse(inputText);
 
-        // Get all the questions
-        let nodes = getNodes(obj);
-        let questions = nodes.questions;
-        let init = nodes.init;
-        // Get all formGenerators and scenarios
-        let linksResult = getLinks(obj, questions, init);
-        // console.log(linksResult);
-        let formGenerators = linksResult.formGenerators;
-        let scenarios = linksResult.scenarios;
+        let questionsList = [];
+        let questionsDict = {};
+        let formGeneratorsList = [];
+        let formGeneratorsDict = {};
+        let scenariosList = [];
+        let scenariosDict = {};
+
+        for (node of obj.nodes) {
+
+            const content = node['bot-message'];
+            const contentsList = questionsList.map( (x) => {
+                return x.content;
+            })
+            const index = contentsList.indexOf(content);
+            if (index < 0) {
+
+                questionsDict[node.id] = questionsList.length;
+                questionsList.push({
+                    _id: Random.id(),
+                    content: node['bot-message']
+                });
+
+            } else {
+
+                questionsDict[node.id] = index;
+
+            };
+        };
+
+        for (link of obj.links) {
+
+            const key = [link.source, link.target];
+            const formGenerator = link.inputInfo;
+            const formGeneratorsListNoId = formGeneratorsList.map( (x) => {
+                return x.inputInfo;
+            })
+            const index = formGeneratorsListNoId.indexOf(formGenerator);
+            if (index < 0) {
+
+                formGenerator._id = Random.id();
+                formGeneratorsDict[key] = formGeneratorsList.length;
+                formGeneratorsList.push(formGenerator);
+
+            } else {
+
+                formGeneratorsDict[key] = index;
+
+            };
+        };
+
+        for (link of obj.links) {
+
+            createScenario(
+                link.source,
+                questionsList,
+                questionsDict,
+                formGeneratorsList,
+                formGeneratorsDict,
+                scenariosDict,
+                scenariosList
+            );
+
+        };
 
         result = {
-            questions : questions,
-            formGenerators : formGenerators,
-            scenarios : scenarios
+            questions : questionsList,
+            formGenerators : formGeneratorsList,
+            scenarios : scenariosList
         }
         return result;
 
@@ -66,134 +120,32 @@ export function importJSON(inputText) {
 
 }
 
-function getNodes(obj) {
+function createScenario(
+    source,
+    questionsList,
+    questionsDict,
+    formGeneratorsList,
+    formGeneratorsDict,
+    scenariosDict,
+    scenariosList
+) {
 
-    var questions = {};
-    var init = []
-
-    if (obj.hasOwnProperty("nodes")) {
-        // Get all the nodes
-        for (node of obj.nodes) {
-            // Insert them as questions
-            questions[node.id] = {
-                _id : Random.id(),
-                content : node["bot-message"]
-            };
-            if (node.hasOwnProperty("initiate") && node.initiate) {
-                init.push(node.id);
-            }
-        }
-    }
-
-    return { questions: questions, init: init };
-}
-
-function getLinks(obj, questions, init) {
-
-    let result = {
-        "formGenerators" : [],
-        "scenarios" : []
-    }
-
-    if (obj.hasOwnProperty("links")) {
-
-        const formGenerators = buildFormGenerators(obj.links);
-        result.formGenerators = formGenerators;
-
-        const groupedLinks = obj.links.reduce(
-            function(acc, link) {
-                if (typeof(link) !== "undefined") {
-                    if (typeof(acc[link.source]) === "undefined") {
-                        acc[link.source] = [link];
-                    } else {
-                        acc[link.source].push(link);
-                    }
-                    return acc;
-                } else {
-                    return;
-                }
-            },
-            {}
-        );
-        const scenarios = buildScenarios(groupedLinks, questions, formGenerators, init);
-        result.scenarios = scenarios;
-    }
-
-    return result;
-}
-
-function buildFormGenerators(links) {
-
-    var formGenerators = {};
-
-    for (link of links) {
-
-        id = Random.id();
-        if (typeof(formGenerators[[link.source, link.target]]) === "undefined") {
-            formGenerators[[link.source, link.target]] = [link.inputInfo];
-            formGenerators[[link.source, link.target]][0]._id = id;
-        } else {
-            let obj = link.inputInfo;
-            obj._id = id;
-            formGenerators[[link.source, link.target]].push(obj);
-        }
-
-        link.inputInfo = id;
-    }
-
-    return formGenerators;
-}
-
-function buildScenarios(groupedLinks, questions, formGenerators, init) {
-
-    var scenarios = {};
-
-    for (group in groupedLinks) {
-
-        groupContent = groupedLinks[group];
-
-        var children = [];
-
-        const ids ={};
-        for (child of groupContent) {
-            ids[child.target] = Random.id();
-        };
-
-        for (child of groupContent) {
-
-            const target = child.target;
-            const id = ids[target];
-            const form = formGenerators[[group, target]];
-
-            // console.log(form);
-
-            // for (form of formGenerators[[group, target]]) {
-
-            if (typeof(groupedLinks[target]) === "undefined") {
-
-                // console.log(target);
-
-                scenarios[target] = {
-                    _id : id,
-                    idQuestion : questions[target]._id,
-                    children : []
-                };
-
-            } else {
-
+<<<<<<< HEAD
                 groupedLinks[target].dbId = id;
+=======
+    let idScenario;
+>>>>>>> refs/remotes/origin/orm
 
-            }
+    if (scenariosDict.hasOwnProperty(source)) {
 
-            // console.log('yolo');
+        idScenario = scenariosList[scenariosDict[source]]._id;
 
-            children.push({
-                idFormGenerator : child.inputInfo,
-                idScenario : id
-            })
+    } else {
 
-            // }
+        let children = [];
+        const idQuestion = questionsList[questionsDict[source]]._id;
 
+<<<<<<< HEAD
         };
         // console.log(group);
         id = Random.id();
@@ -203,17 +155,52 @@ function buildScenarios(groupedLinks, questions, formGenerators, init) {
         scenario = {
             _id : id,
             idQuestion : questions[group]._id,
+=======
+        idScenario = Random.id();
+        let scenario = {
+            _id : idScenario,
+            idQuestion : idQuestion,
+>>>>>>> refs/remotes/origin/orm
             children : children
         };
-        if (init.indexOf(group) >= 0) {
-            scenario.initiate = true;
+        scenariosDict[source] = scenariosList.length;
+        scenariosList.push(scenario);
+
+        for (tempKey in formGeneratorsDict) {
+
+            const key = tempKey.split(",");
+            if ( key[0] === source ) {
+
+                children.push({
+                    idFormGenerator: formGeneratorsList[
+                        formGeneratorsDict[key]
+                    ]._id,
+                    idScenario: createScenario(
+                        key[1],
+                        questionsList,
+                        questionsDict,
+                        formGeneratorsList,
+                        formGeneratorsDict,
+                        scenariosDict,
+                        scenariosList
+                    )
+                });
+            }
         };
+<<<<<<< HEAD
         if (groupContent.hasOwnProperty("dbId")) {
             // console.log("lol");
             scenario._id = groupContent.dbId;
         }
         scenarios[group] = scenario;
+=======
+
+        scenario.children = children;
+        scenariosList[scenariosDict[source]] = scenario;
+
+>>>>>>> refs/remotes/origin/orm
     }
 
-    return scenarios;
+    return idScenario;
+
 }
