@@ -51,8 +51,9 @@ export async function startDiscussion(userId){
 }
 
 export async function startDiscussionWeb(){
-
+    userAgent = navigator.userAgent;
 	user = await Meteor.callPromise( 'user.insert', {});
+    Meteor.call('user.update', user, {'user-agent': userAgent});
     data = await startDiscussion(user);
     children = nextStepWeb( data.scenarioId._id, data.discussionId );
 
