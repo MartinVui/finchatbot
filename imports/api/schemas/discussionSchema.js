@@ -3,7 +3,7 @@ export var DiscussionSchema = new SimpleSchema({
         type: String,
         optional: true,
     },
-    idScenario: {
+    idTree: {
         type: String,
         optional: true,
     },

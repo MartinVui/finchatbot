@@ -15,13 +15,14 @@ import Mustache from 'mustache';
 
 
 export async function startDiscussion(userId){
-	var initScenario = scenarioPicker();
+    let tree = scenarioPicker();
+	var initScenario = Scenarios.findOne({_id:tree.idInit});
     user = Users.findOne({'_id': userId});
-    
+
     if (typeof(user.facebookId) === 'undefined') {
         discussion = await Meteor.callPromise( 'discussion.insert', {
                 'idUser': userId,
-                'idScenario': initScenario._id,
+                'idTree': tree._id,
                 'messagesPile': [""],
             })
         var returnedData = {
@@ -30,10 +31,10 @@ export async function startDiscussion(userId){
         }
         return returnedData;
     }else{
-        
+
         data = Meteor.call('discussion.insert', {
             'idUser': userId,
-            'idScenario': initScenario._id,
+            'idTree': tree._id,
             'messagesPile': [
                 {
                     'author' : 'user',
@@ -50,14 +51,14 @@ export async function startDiscussion(userId){
 }
 
 export async function startDiscussionWeb(){
-	
+
 	user = await Meteor.callPromise( 'user.insert', {});
     data = await startDiscussion(user);
     children = nextStepWeb( data.scenarioId._id, data.discussionId );
 
     returnedData = {
         discussionId: data.discussionId,
-        children: children 
+        children: children
     }
     Session.set('children' , children);
     Session.set('SessionId', discussion);
@@ -65,7 +66,7 @@ export async function startDiscussionWeb(){
 }
 
 export async function startDiscussionMessenger(facebookId, firstMessage){
-    
+
 
 
     return Meteor.call('user.insert', {
@@ -80,7 +81,7 @@ export async function startDiscussionMessenger(facebookId, firstMessage){
                 function (error, result) {
                     Meteor.call("user.update", user._id, result.data);
                 });
-        
+
                 data = startDiscussion(result, firstMessage).then((res)=>{return res});
                 return data;
            }

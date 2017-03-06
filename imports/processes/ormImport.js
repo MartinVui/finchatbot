@@ -47,6 +47,8 @@ export function importJSON(inputText) {
         let formGeneratorsDict = {};
         let scenariosList = [];
         let scenariosDict = {};
+        let initiates = [];
+        let trees = [];
 
         for (node of obj.nodes) {
 
@@ -57,9 +59,15 @@ export function importJSON(inputText) {
             const index = contentsList.indexOf(content);
             if (index < 0) {
 
+                let id = Random.id();
+
+                if (node.hasOwnProperty("initiate") && node.initiate) {
+                    initiates.push(id);
+                };
+
                 questionsDict[node.id] = questionsList.length;
                 questionsList.push({
-                    _id: Random.id(),
+                    _id: id,
                     content: node['bot-message']
                 });
 
@@ -100,7 +108,9 @@ export function importJSON(inputText) {
                 formGeneratorsList,
                 formGeneratorsDict,
                 scenariosDict,
-                scenariosList
+                scenariosList,
+                initiates,
+                trees
             );
 
         };
@@ -108,8 +118,10 @@ export function importJSON(inputText) {
         result = {
             questions : questionsList,
             formGenerators : formGeneratorsList,
-            scenarios : scenariosList
+            scenarios : scenariosList,
+            trees : trees
         }
+        console.log(result);
         return result;
 
     // } catch (e) {
@@ -127,7 +139,9 @@ function createScenario(
     formGeneratorsList,
     formGeneratorsDict,
     scenariosDict,
-    scenariosList
+    scenariosList,
+    initiates,
+    trees
 ) {
 
     let idScenario;
@@ -139,9 +153,19 @@ function createScenario(
     } else {
 
         let children = [];
-        const idQuestion = questionsList[questionsDict[source]]._id;
+        const question = questionsList[questionsDict[source]];
+        const idQuestion = question._id;
 
         idScenario = Random.id();
+
+        if (initiates.indexOf(idQuestion) > -1) {
+            console.log("initiate!");
+            trees.push({
+                idInit: idScenario,
+                metadata: {}
+            });
+        }
+
         let scenario = {
             _id : idScenario,
             idQuestion : idQuestion,
@@ -166,7 +190,9 @@ function createScenario(
                         formGeneratorsList,
                         formGeneratorsDict,
                         scenariosDict,
-                        scenariosList
+                        scenariosList,
+                        initiates,
+                        trees
                     )
                 });
             }

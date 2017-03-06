@@ -49,29 +49,29 @@ Router.route( "/messenger", { where: "server" })
     var user = Users.findOne({'facebookId' : this.request.body.facebookid});
     var userData = {}
 
-    if(typeof(user) === 'undefined'){  
-        
+    if(typeof(user) === 'undefined'){
+
       data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
       Meteor.setTimeout(function(){
         var buf = new Buffer.from(JSON.stringify(data));
         that.response.end(buf);
       }, 1000);
-      //Start messenger Discussion 
+      //Start messenger Discussion
       //User + discussion created
-      
+
     }else{
-      
+
       //When the user is created, fetch the discussion he has with the bot
       //adding the message he sent
       discussion = Discussions.findOne({'idUser' : user._id});
-      
+
 
       data = handleUserMessage( discussion , this.request.body );
-      
+
       Meteor.setTimeout(function(){
         var buf = new Buffer.from(JSON.stringify(data));
         that.response.end(buf);
       }, 1000);
 
-    }  
-})
+    }
+  })

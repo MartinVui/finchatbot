@@ -3,10 +3,6 @@ export var ScenarioSchema = new SimpleSchema({
         type: String,
         optional:true
     },
-    initiate: {
-        type: Boolean,
-        optional: true
-    },
     idQuestion: {
         type: String,
     },
