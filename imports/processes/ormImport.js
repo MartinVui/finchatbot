@@ -130,11 +130,7 @@ function createScenario(
     scenariosList
 ) {
 
-<<<<<<< HEAD
-                groupedLinks[target].dbId = id;
-=======
     let idScenario;
->>>>>>> refs/remotes/origin/orm
 
     if (scenariosDict.hasOwnProperty(source)) {
 
@@ -145,22 +141,10 @@ function createScenario(
         let children = [];
         const idQuestion = questionsList[questionsDict[source]]._id;
 
-<<<<<<< HEAD
-        };
-        // console.log(group);
-        id = Random.id();
-        console.log(group);
-        console.log(groupedLinks);
-        // groupedLinks[source].dbId = id;
-        scenario = {
-            _id : id,
-            idQuestion : questions[group]._id,
-=======
         idScenario = Random.id();
         let scenario = {
             _id : idScenario,
             idQuestion : idQuestion,
->>>>>>> refs/remotes/origin/orm
             children : children
         };
         scenariosDict[source] = scenariosList.length;
@@ -187,18 +171,10 @@ function createScenario(
                 });
             }
         };
-<<<<<<< HEAD
-        if (groupContent.hasOwnProperty("dbId")) {
-            // console.log("lol");
-            scenario._id = groupContent.dbId;
-        }
-        scenarios[group] = scenario;
-=======
 
         scenario.children = children;
         scenariosList[scenariosDict[source]] = scenario;
 
->>>>>>> refs/remotes/origin/orm
     }
 
     return idScenario;
