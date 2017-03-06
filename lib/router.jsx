@@ -3,7 +3,7 @@ import { HTTP } from 'meteor/http';
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session';
 import { render } from 'react-dom';
-import { HTTP } from 'meteor/http';
+
 
 import { Users } from '../imports/api/users.js';
 import { Discussions } from '../imports/api/discussions.js';
@@ -72,6 +72,6 @@ Router.route( "/messenger", { where: "server" })
         var buf = new Buffer.from(JSON.stringify(data));
         that.response.end(buf);
       }, 1000);
-      
+
     }  
 })
