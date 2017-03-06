@@ -9,7 +9,7 @@ import { nextStepMessenger } from '../nextScenario.js';
 
 export function handleUserMessage(discussion, body){
 	lastScenario = getLastScenario(discussion._id);
-    messagesPile = discussion.messagesPile;
+  messagesPile = discussion.messagesPile;
 
       if (typeof(body.postback) !== 'undefined') {
         idScenario = body.postback.payload;
@@ -50,13 +50,16 @@ export function handleUserMessage(discussion, body){
       }
       else{
         //TEXT INPUT
+
         idScenario = lastScenario.children[0].idScenario;
         idFormGenerator = lastScenario.children[0].idFormGenerator;
-        formGenerator = FormGenerators.find({'_id' : idFormGenerator});
-        if (formGenerator.inputType === 'text' && !formGenerator.elements[0].map) {
+        formGenerator = FormGenerators.findOne({'_id' : idFormGenerator});
+        var userData = {};
+        console.log(formGenerator);
+        if (formGenerator.inputType === 'text' && typeof(formGenerator.elements[0].map) === 'undefined') {
           targetName = FormGenerators.findOne({'_id': idFormGenerator}).elements[0].targetName;
           userData[targetName] = body.message.text;
-          Meteor.call("user.update", user._id, userData);
+          Meteor.call("user.update", discussion.idUser, userData);
           messagesPile.push({
             'author': 'user',
             'text': body.message.text,
