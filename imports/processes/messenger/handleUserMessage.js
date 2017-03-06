@@ -39,7 +39,7 @@ export function handleUserMessage(discussion, body){
           //LOCATION
           idScenario = lastScenario.children[0].idScenario;
           idFormGenerator = lastScenario.children[0].idFormGenerator;
-          Meteor.call("user.update", user._id, {'location' : body.message.attachments[0]});
+          Meteor.call("user.update", discussion.idUser, {'location' : body.message.attachments[0]});
           messagesPile.push({
             'author': 'user',
             'location': body.message.attachments[0],

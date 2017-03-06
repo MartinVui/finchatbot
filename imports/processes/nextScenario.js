@@ -29,10 +29,10 @@ export function nextStep(idScenario , idDiscussion){
 
 
 export function nextStepWeb(idScenario, idDiscussion){
-    console.log(idDiscussion);
+    
     data = nextStep(idScenario , idDiscussion);
 	var messagesPile = data.discussion.messagesPile;
-
+    console.log(data.user);
 	Session.set('showGif' , true);
     for (var i=0 ; i < data.questions.length ; i++) {
         (function(ind) {
@@ -62,7 +62,8 @@ export function nextStepMessenger(idScenario, idDiscussion){
 	data = nextStep(idScenario, idDiscussion);
 	   
     var messagesPile = data.discussion.messagesPile;
-    for (var i=0 ; i < data.questions.length ; i++) {    
+    for (var i=0 ; i < data.questions.length ; i++) {
+        console.log(data.user);    
         var interpretedQuestion = Mustache.render(data.questions[i] , {'user' : data.user});
         var date = new Date();
         newMessage = {
