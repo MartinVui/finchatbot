@@ -14,6 +14,7 @@ export const Users = new Mongo.Collection("users");
 
 Meteor.methods({
     'user.insert' (user) {
+        check(user, UserSchema);
         var newUser = Users.insert(user);
         return newUser;
     },
