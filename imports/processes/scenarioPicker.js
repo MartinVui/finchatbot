@@ -1,10 +1,10 @@
-import { Scenarios } from '../api/scenarios.js';
+import { Trees } from '../api/trees.js';
 import { Random } from 'meteor/random';
 
 export function scenarioPicker() {
 
-    var InitScenarios = Scenarios.find({ 'initiate': true })
-        .fetch();
+    var InitScenarios = Trees.find({}).fetch();
+
     if (InitScenarios.length != 0) {
 
         choice = Random.choice(InitScenarios);
