@@ -139,7 +139,8 @@ function createScenario(
     } else {
 
         let children = [];
-        const idQuestion = questionsList[questionsDict[source]]._id;
+        const question = questionsList[questionsDict[source]];
+        const idQuestion = question._id;
 
         idScenario = Random.id();
         let scenario = {
