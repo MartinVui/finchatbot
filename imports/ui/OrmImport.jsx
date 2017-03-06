@@ -19,7 +19,7 @@ class OrmImport extends Component {
         };
     }
 
-    handleChange( event ) { 
+    handleChange( event ) {
 
         const json = event.target.value;
         const processed = importJSON(json);
@@ -45,10 +45,18 @@ class OrmImport extends Component {
             }
         };
 
+        let treesDisp = [];
+        if(processed.trees){
+            for (val of processed.trees) {
+                treesDisp.push(<pre key={Random.id()}>{JSON.stringify(val, null, 2)}</pre>);
+            }
+        };
+
         const displayed = {
             questions: questionsDisp,
             formGenerators:formGeneratorsDisp,
-            scenarios: scenariosDisp
+            scenarios: scenariosDisp,
+            trees: treesDisp
         }
 
         this.setState({
@@ -76,6 +84,10 @@ class OrmImport extends Component {
             console.log(element);
             Meteor.call('scenario.insert', element);
         };
+        for (element of this.state.processed.trees) {
+            console.log(element);
+            Meteor.call('tree.insert', element);
+        };
 
         this.setState({saved:"Saved!"})
     }
@@ -97,6 +109,8 @@ class OrmImport extends Component {
                 <div>{this.state.displayed.formGenerators}</div>
                 <h1>Scenarios</h1>
                 <div>{this.state.displayed.scenarios}</div>
+                <h1>Trees</h1>
+                <div>{this.state.displayed.trees}</div>
             </div>
         );
     }
