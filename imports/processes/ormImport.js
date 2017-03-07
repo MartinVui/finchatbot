@@ -117,17 +117,23 @@ export function importJSON(inputText) {
             const formGenerator = link.inputInfo;
             const formGeneratorsListNoId = formGeneratorsList.map( (x) => {
                 return x.inputInfo;
-            })
+            });
             const index = formGeneratorsListNoId.indexOf(formGenerator);
             if (index < 0) {
 
                 formGenerator._id = Random.id();
-                formGeneratorsDict[key] = formGeneratorsList.length;
+                if (!formGeneratorsDict.hasOwnProperty(key)){
+                    formGeneratorsDict[key] = [];
+                };
+                formGeneratorsDict[key].push(formGeneratorsList.length);
                 formGeneratorsList.push(formGenerator);
 
             } else {
 
-                formGeneratorsDict[key] = index;
+                if (!formGeneratorsDict.hasOwnProperty(key)){
+                    formGeneratorsDict[key] = [];
+                };
+                formGeneratorsDict[key].push(index);
 
             };
         };
@@ -208,24 +214,27 @@ function createScenario(
         for (tempKey in formGeneratorsDict) {
 
             const key = tempKey.split(",");
+
             if ( key[0] === source ) {
 
-                children.push({
-                    idFormGenerator: formGeneratorsList[
-                        formGeneratorsDict[key]
-                    ]._id,
-                    idScenario: createScenario(
-                        key[1],
-                        questionsList,
-                        questionsDict,
-                        formGeneratorsList,
-                        formGeneratorsDict,
-                        scenariosDict,
-                        scenariosList,
-                        initiates,
-                        trees
-                    )
-                });
+                for (index of formGeneratorsDict[key]) {
+
+                    children.push({
+                        idFormGenerator: formGeneratorsList[index]._id,
+                        idScenario: createScenario(
+                            key[1],
+                            questionsList,
+                            questionsDict,
+                            formGeneratorsList,
+                            formGeneratorsDict,
+                            scenariosDict,
+                            scenariosList,
+                            initiates,
+                            trees
+                        )
+                    });
+
+                }
             }
         };
 
