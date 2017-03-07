@@ -112,7 +112,7 @@ function processComponents(components, initNode) {
 
         result.nodes.push({
             id: question._id,
-            content: question.content,
+            "bot-message": question.content,
             initiate: initiate
         });
     }

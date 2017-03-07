@@ -55,9 +55,10 @@ export function importJSON(inputText) {
             const content = node['bot-message'];
             const contentsList = questionsList.map( (x) => {
                 return x.content;
-            })
+            });
             const index = contentsList.indexOf(content);
-            if (index < 0) {
+            console.log(index);
+            if (!index || index < 0) {
 
                 let id = Random.id();
 
@@ -77,6 +78,8 @@ export function importJSON(inputText) {
 
             };
         };
+
+        console.log(initiates);
 
         for (link of obj.links) {
 
@@ -153,8 +156,7 @@ function createScenario(
     } else {
 
         let children = [];
-        const question = questionsList[questionsDict[source]];
-        const idQuestion = question._id;
+        const idQuestion = questionsList[questionsDict[source]]._id;
 
         idScenario = Random.id();
 
