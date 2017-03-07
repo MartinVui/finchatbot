@@ -4,34 +4,67 @@ import { Questions } from "../api/questions.js";
 import { FormGenerators } from "../api/formgenerators.js";
 import { Scenarios } from "../api/scenarios.js";
 
-// {
-// 	"nodes":
-//     [
-//         {"id": "A", "initiate": true, "bot-message": ["..."]},
-//         {"id": "B", "bot-message": ["Foo"]},
-//         {"id": "C", "bot-message": ["Bar"]}
-//     ],
-// 	"links":
-//     [
-// 		{"source":"A", "target":"B", "inputInfo":{
-// 			    "inputType": "text",
-// 			    "elements": [
-// 			        {
-// 			            "inputType": "text",
-// 			            "placeholder": "Name",
-// 			            "targetName": "name"
-// 			        },
-// 			        {
-// 			            "inputType": "text",
-// 			            "placeholder": "Surname",
-// 			            "targetName": "surname"
-// 			        }
-// 			    ],
-// 			    "generatedAnswer": "Hi Holly! My name is {{name}} {{surname}}, nice to meet you!"
-// 			}},
-//      {"source":"A", "target":"C", "inputInfo":"{...}"}
-//     ]
-// }
+
+export const JSONSchema = new SimpleSchema({
+    nodes: {
+        type: Array
+    },
+    'nodes.$': {
+        type: Object
+    },
+    'node.$.id': {
+        type: String
+    },
+    'node.$.initiate': {
+        type: Boolean,
+        optional: true
+    },
+    'node.$.bot-message': {
+        type: Array
+    },
+    'node.$.bot-message.$': {
+        type: String
+    },
+    links: {
+        type: Array
+    },
+    'links.$': {
+        type: Object
+    },
+    'links.$.source': {
+        type: String
+    },
+    'links.$.target': {
+        type: String
+    },
+    'links.$.inputInfo': {
+        type: Object
+    },
+    'links.$.inputInfo.inputType': {
+        type: String
+    },
+    'links.$.inputInfo.elements': {
+        type: Array
+    },
+    'links.$.inputInfo.elements.$': {
+        type: Object
+    },
+    'links.$.inputInfo.elements.$.inputType': {
+        type: String
+    },
+    'links.$.inputInfo.elements.$.placeholder': {
+        type: String,
+        optional: true
+    },
+    'links.$.inputInfo.elements.$.targetName': {
+        type: String,
+        optional: true
+    },
+    'links.$.inputInfo.generatedAnswer': {
+        type: String
+    }
+
+})
 
 export function importJSON(inputText) {
 
@@ -57,7 +90,6 @@ export function importJSON(inputText) {
                 return x.content;
             });
             const index = contentsList.indexOf(content);
-            console.log(index);
             if (!index || index < 0) {
 
                 let id = Random.id();
@@ -78,8 +110,6 @@ export function importJSON(inputText) {
 
             };
         };
-
-        console.log(initiates);
 
         for (link of obj.links) {
 
@@ -161,7 +191,6 @@ function createScenario(
         idScenario = Random.id();
 
         if (initiates.indexOf(idQuestion) > -1) {
-            console.log("initiate!");
             trees.push({
                 idInit: idScenario,
                 metadata: {}
