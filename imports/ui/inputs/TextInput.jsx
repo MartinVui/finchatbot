@@ -198,7 +198,11 @@ export default class TextInput extends Component {
                     inputValidations[form.targetName] = false;
                 } 
             }else{
-                inputValidations[form.targetName] = false;
+                if (inputState[form.targetName].length > 0) {
+                    inputValidations[form.targetName] = false;
+                }else{
+                    inputValidations[form.targetName] = true;
+                }
             } 
         }        
 
