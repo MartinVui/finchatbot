@@ -6,8 +6,8 @@ export var emailSchema = new SimpleSchema({
 });
 
 export var phoneNumberSchema = new SimpleSchema({
-	email : {
+	phone : {
 		type: String,
-		regEx: /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g
+		regEx: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
 	}
 })

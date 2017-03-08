@@ -149,7 +149,7 @@ export default class TextInput extends Component {
                         inputClassName = "successTextInput"
                     }
                     outputList.push(
-                        <div className='textInputDiv'>
+                        <div className='textInputDiv' key={i}>
                             <input
                             value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
                             placeholder={this.props.formGenerator.elements[i].placeholder}
