@@ -4,7 +4,9 @@ import { ThirdParties } from '../api/thirdParties';
 
 export async function callREST(URL, method, parameters) {
 
-  const matchingAPIs = ThirdParties.find({"URL" : {$regex : URL+".*"}}).fetch();
+  console.log(URL+".*");
+
+  const matchingAPIs = ThirdParties.find({"baseURL" : {$regex : URL+".*"}}).fetch();
   let matchingAPI = {};
   if (matchingAPIs.length === 0) {
     throw "No API matches your request, please add " + URL + " to the database.";

@@ -26,19 +26,25 @@ export function nextStep(idScenario , idDiscussion){
     data.discussion = discussion;
 
     var lastFormGeneratorIndex = discussion.messagesPile.length-1;
-    var lastFormGeneratorId = discussion.messagesPile[lastFormGeneratorIndex].idFormGenerator;
-    var lastFormGenerator = FormGenerators.findOne({_id:lastFormGeneratorId});
+    if (lastFormGeneratorIndex>0) {
 
-    console.log(user);
-    if (lastFormGenerator.hasOwnProperty('apiCalls')) {
-        for (apiCall of lastFormGenerator.apiCalls) {
-            user[apiCall.targetName] = callREST(
-                apiCall.url,
-                apiCall.verb,
-                apiCall.parameters
-            );
-        }
+        console.log("ok");
+
+        var lastFormGeneratorId = discussion.messagesPile[lastFormGeneratorIndex].idFormGenerator;
+        var lastFormGenerator = FormGenerators.findOne({_id:lastFormGeneratorId});
+
         console.log(user);
+        if (lastFormGenerator.hasOwnProperty('apiCalls')) {
+            for (apiCall of lastFormGenerator.apiCalls) {
+                user[apiCall.targetName] = callREST(
+                    apiCall.url,
+                    apiCall.verb,
+                    apiCall.parameters
+                );
+            }
+            console.log(user);
+        };
+
     };
 
     // Display formGenerators, with the idScenario
