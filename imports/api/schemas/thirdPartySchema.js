@@ -2,10 +2,6 @@ export var ThirdParty = new SimpleSchema({
   baseURL: {
     type: String
   },
-  apiToken: {
-    type: String,
-    optional: true
-  },
   user: {
     type: String,
     optional: true
