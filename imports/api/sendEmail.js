@@ -5,18 +5,16 @@ Meteor.methods({
   	'sendEmail'(type, data) {
 
 
-		// Funeral mail for Metropolitan
-  		if (type === "Funeral") {
+  		// Gehneric car mail
+  		if (type === "Car") {
 
-	  		var html = "<!DOCTYPE html>"
-			+''
+  			var html = "<!DOCTYPE html>"
 			+'<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'
 			+'   <!-- utf-8 works for most cases -->'
 			+'	<meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn\'t be necessary -->'
 			+'	<meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->'
 			+'  <title>Get affordable funeral cover!</title> <!-- the <title> tag shows on email notifications on Android 4.4. -->'
 			+'  <style type="text/css">'
-			  	
 			+'  	/* ensure that clients don\'t add any padding or spaces around the email design and allow us to style emails for the entire width of the preview pane */'
 			+'		body,'
 			+'		#bodyTable {'
@@ -220,7 +218,7 @@ Meteor.methods({
 			+' '
 			+'  <!-- This table wraps the whole body email within it\'s width (600px), sets the background color (white) and border (thin, gray, solid) -->'
 			+''
-			+'  <table border="0" width="600" cellpadding="0" cellspacing="0" align="center" bgcolor="#ffffff" style="margin: auto;" class="email-container">'
+			+'  <table border="0" width="600" cellpadding="0" cellspacing="0" align="center" bgcolor="#f4f4f4" style="margin: auto;" class="email-container">'
 			+'    '
 			+'    <!-- Single Fluid Image, No Crop : BEGIN -->      <!-- Single Fluid Image, No Crop : END -->'
 			+'    '
@@ -238,55 +236,49 @@ Meteor.methods({
 			+'            </tr>'
 			+'            <tr>'
 			+'              '
-			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Following your enquiry, I am pleased to confirm your quotation for your funeral cover.'
-			+'				You have supplied the following details:'
+			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Following your enquiry, I am pleased to confirm your car insurance quotation based upon following details you supplied:'
+			+''
 			+'				</td>'
 			+'            </tr>'
 			+'            <tr>'
 			+''
-			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Main member:<br/>Date of birth: <strong>'+data['birthday']+'</strong><br/>'
-			+'				Cover level: <strong>'+data['cover amount']+'</strong><br/>'
-			+'				</td>'
+			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Main driver:<br/>Date of birth: <strong>'+data['car driver birthday']+'</strong><br/>'
+			+'				';
+							if (data['car driver address'] !== undefined) {
+								html = html + 'Address: <strong>'+data['car driver address']+'</strong><br/>'
+							}
+			html = html +'				</td>'
 			+'            </tr>';
 
-			if (data['partner birthday'] !== undefined) {
-				html = html + '<tr><td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Partner: <br/>Date of birth: <strong>'+data['partner birthday']+'</strong><br/>'
-				+'				Cover level: <strong>'+data['partner cover amount']+'</strong><br/>'
-				+''
-				+'            </tr>';
-			}
+			html = html + '<tr>'
+			+''
+			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:black;">Car details:<br/>'
+			+' 				Car make: <strong>'+data['Car make']+'</strong><br/>Car model: <strong>'+data['Car model']+'</strong><br/>Year of manufacture: <strong>'+data['Car year of manufacture']+'</strong></td>'
+			+'            </tr>';
 
-			if (data['number of children'] !== undefined) {
-
-				for (var i = 1; i <= parseInt(data['number of children']); i++) {
-
-					html = html + '<tr>'
-					+''
-					+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Child '+i+':<br/> Date of birth: <strong>'+data['child '+i+' birthday']+'</strong><br/>'
-					+'				Cover level: <strong>'+data['child '+i+' cover']+'</strong><br/>'
-					+'				</td>'
-					+'          </tr>';
-
-				}
-			}
+			html = html + '<tr>'
+			+''
+			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:black;">Type of insurance: <strong>'+data['car type of cover']+'</strong>'
+			+' 				</td>'
+			+'            </tr>';
 
 			html = html + '<tr>'
 			+''
 			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Please review these details to ensure that they are correct.</td>'
 			+'            </tr>'
 			+'            <tr>'
-			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Based upon the information you supplied we are glad to announce you that your monthly premium will be from <strong>R251</strong></td>'
+			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Based upon this information, we are delighted to confirm that your monthly premium will be only: <strong>R251</strong></td>'
 			+'            </tr>'
 			+''
 			+'            <tr>'
 			+'              	<td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Should you wish to take advantage of this quotation simply contact us by:'
-			+'				<br/>Telephone: <a href style="color:white">+27710629000</a>'
-			+'				<br/>Email: <a style="color:white" href="hello@finchatbot.com">hello@finchatbot.com</a>'
+			+'				<br/>Telephone: <a href style="color:black">+27710629000</a>'
+			+'				<br/>Email: <a style="color:black" href="hello@finchatbot.com">hello@finchatbot.com</a>'
 			+'				</td>'
 			+'          </tr>'
 			+''
 			+'            <tr>'
-			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Many thanks</td>'
+			+'              <td style="font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:13px; line-height:19px; color:#000">Many thanks,<br/>Qutoation Team</td>'
 			+'            </tr>'
 			+''
 			+''
@@ -295,7 +287,7 @@ Meteor.methods({
 			+'      </tr>'
 			+'      '
 			+'      <tr>'
-			+'        <td style="padding-left:20px; padding-top:15px; padding-right:5px; padding-bottom:15px; background-color:#0b4f9f; font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:8px; line-height:19px; color:#ffffff">Finchatbot is an authorised financial services provider. Terms and &amp; Conditions apply.</td>'
+			+'        <td style="padding-left:20px; padding-top:15px; padding-right:5px; padding-bottom:15px; background-color:#eb0356; font-family:&#39;Helvetica Neue&#39;, Helvetica, Arial, sans-serif; font-size:8px; line-height:19px; color:#ffffff">Copyright © 2017 Finchatbot is a registered short-term insurer and an authorised FSP (No. 33970). Finchatbot is an authorised FSP (No. 45741) and its product offering is underwritten by Sanlam Life Insurance Limited, a registered long-term insurer. Ts & Cs apply.</td>'
 			+'      </tr>'
 			+''
 			+''
@@ -309,12 +301,11 @@ Meteor.methods({
 			+''
 			+'</body></html>';
 
-		}
+  		}
 
 
 
-
-		if (type === "Funeral") {
+		if (type === "Car") {
 			process.env.MAIL_URL = "smtp://postmaster%40finchatbot.com:5e66679eec3180b029b627343e020848@smtp.mailgun.org:587";
 		    // check([to, from, subject, text], [String]);
 		    // Let other method calls from the same client start running,
@@ -325,8 +316,9 @@ Meteor.methods({
 			    from: "hello@finchatbot.com",
 			    subject: 'Your quote',
 			    html: html
-		    });
+			});
 		}
+
 
   	},
 });
