@@ -10,8 +10,7 @@ import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 import { Match } from 'meteor/check';
 
-import { emailSchema } from '../../processes/text-validator/textSchemas.js';
-import { phoneNumberSchema } from '../../processes/text-validator/textSchemas.js';
+import { emailSchema , phoneNumberSchema } from '../../processes/textValidator/textSchemas.js';
 
 import Geosuggest from 'react-geosuggest'
 
