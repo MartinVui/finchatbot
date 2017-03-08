@@ -10,7 +10,8 @@ import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 import { Match } from 'meteor/check';
 
-import { emailSchema } from '../../processes/text-validator/emailSchema.js';
+import { emailSchema } from '../../processes/text-validator/textSchemas.js';
+import { phoneNumberSchema } from '../../processes/text-validator/textSchemas.js';
 
 import Geosuggest from 'react-geosuggest'
 
@@ -21,21 +22,27 @@ export default class TextInput extends Component {
         var invalidInputs = {};
         var inputs = {};
         var errorMessages = {};
+
+        var mapTextTypeToSchema = {
+            "email" : emailSchema,
+            "phone" : phoneNumberSchema
+        }
+        var errorMessages = {
+            "email" : "This doesn't look like a valid email...",
+            "phone" : "This doesn't look like a valid phone number..."
+        }
+
         for(element of this.props.formGenerator.elements){
             inputs[element.targetName] = "";
-            invalidInputs[element.targetName] = false;
-            if (element.textType === "email" ) {
-                errorMessages[element.targetName] = "This doesn't look like an email..."
-            }else{
-                errorMessages[element.targetName] = ""
-            }
+            invalidInputs[element.targetName] = true;
         }
         
         this.state = {
             inputs : inputs,
             invalidInputs : invalidInputs,
             triedToSubmit : false,
-            errorMessages: errorMessages
+            errorMessages : errorMessages,
+            mapTextTypeToSchema : mapTextTypeToSchema
         };
     }
 
@@ -133,11 +140,10 @@ export default class TextInput extends Component {
 
             } else {
                 if (this.state.triedToSubmit) {
-                    console.log("ok");
                     var inputClassName = "";
                     var alertMessage = "";
                     if (this.state.invalidInputs[this.props.formGenerator.elements[i].targetName]) {
-                        alertMessage = <span className='errorAlert'>{this.state.errorMessages[this.props.formGenerator.elements[i].targetName]}</span>
+                        alertMessage = <span className='errorAlert'>{this.state.errorMessages[this.props.formGenerator.elements[i].textType]}</span>
                         inputClassName = "errorTextInput"
                     }else{
                         alertMessage = <span className='successAlert'>{'That\'s better !'}</span>
@@ -155,7 +161,6 @@ export default class TextInput extends Component {
                         </div>
                     )
                 }else{
-                    console.log("cool");
                     outputList.push(<input
                         value={this.state.inputs[this.props.formGenerator.elements[i].targetName]}
                         placeholder={this.props.formGenerator.elements[i].placeholder}
@@ -177,9 +182,6 @@ export default class TextInput extends Component {
         var inputState = this.state.inputs;
         var inputValidations = this.state.invalidInputs;
 
-        // console.log(this.state);
-        
-
         if (evt.hasOwnProperty("target")){
             inputState[targetName] = evt.target.value;
         } else {
@@ -187,8 +189,10 @@ export default class TextInput extends Component {
         }
 
         for (form of this.props.formGenerator.elements) {  
-            if (form.textType === "email") {
-                if(!Match.test({email: inputState[form.targetName]}, emailSchema)){
+            if (typeof(form.textType) !== 'undefined') {
+                var objToCheck = {}
+                objToCheck[form.textType] = inputState[form.targetName]
+                if(!Match.test(objToCheck, this.state.mapTextTypeToSchema[form.textType])){
                     inputValidations[form.targetName] = true;
                 }else{
                     inputValidations[form.targetName] = false;
@@ -196,10 +200,7 @@ export default class TextInput extends Component {
             }else{
                 inputValidations[form.targetName] = false;
             } 
-        }
-
-        console.log(inputValidations);
-        
+        }        
 
         this.setState({
             inputs: inputState,
