@@ -29,7 +29,7 @@ export function nextStep(idScenario , idDiscussion){
 
 
 export function nextStepWeb(idScenario, idDiscussion){
-    
+
     data = nextStep(idScenario , idDiscussion);
 	var messagesPile = data.discussion.messagesPile;
     console.log(data.user);
@@ -53,7 +53,7 @@ export function nextStepWeb(idScenario, idDiscussion){
             ,800 + (800 * ind));
         })(i);
     }
-    
+
     return data.scenario.children;
 }
 
@@ -61,7 +61,7 @@ export function nextStepWeb(idScenario, idDiscussion){
 export function nextStepMessenger(idScenario, idDiscussion){
 	data = nextStep(idScenario, idDiscussion);
 	var messengerData = {};
-    messengerData.questions = []; 
+    messengerData.questions = [];
     var messagesPile = data.discussion.messagesPile;
     for (var i=0 ; i < data.questions.length ; i++) {
         var interpretedQuestion = Mustache.render(data.questions[i] , {'user' : data.user});
@@ -85,12 +85,9 @@ export function nextStepMessenger(idScenario, idDiscussion){
         formGenerator.correspondingScenarioId = nextScenario._id;
 		formGeneratorList.push(formGenerator);
 	}
-	
+
 	messengerData.formGeneratorList = formGeneratorList
-	
+
 
 	return messengerData;
 }
-
-
-
