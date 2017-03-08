@@ -22,6 +22,7 @@ export function nextStep(idScenario , idDiscussion){
     data.questions = questions.content;
     data.user = user;
     data.discussion = discussion;
+
     // Display formGenerators, with the idScenario
     return data;
     // The form subcomponent will use a callback to nextStep with the right scenario
