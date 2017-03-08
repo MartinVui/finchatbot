@@ -12,7 +12,7 @@ export var ThirdParty = new SimpleSchema({
   },
   APIType: {
     type: String,
-    allowedValue: ["REST", "SOAP"]
+    allowedValues: ["REST", "SOAP"]
   },
   name: {
     type: String,

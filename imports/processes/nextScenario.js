@@ -7,6 +7,8 @@ import { Questions } from '../api/questions.js';
 import { Users } from '../api/users.js';
 import { FormGenerators } from '../api/formgenerators.js';
 
+import { callREST } from './callThirdParty.js';
+
 import { Session } from 'meteor/session';
 import Mustache from 'mustache';
 
@@ -22,6 +24,23 @@ export function nextStep(idScenario , idDiscussion){
     data.questions = questions.content;
     data.user = user;
     data.discussion = discussion;
+
+    var lastFormGeneratorIndex = discussion.messagesPile.length-1;
+    var lastFormGeneratorId = discussion.messagesPile[lastFormGeneratorIndex].idFormGenerator;
+    var lastFormGenerator = FormGenerators.findOne({_id:lastFormGeneratorId});
+
+    console.log(user);
+    if (lastFormGenerator.hasOwnProperty('apiCalls')) {
+        for (apiCall of lastFormGenerator.apiCalls) {
+            user[apiCall.targetName] = callREST(
+                apiCall.url,
+                apiCall.verb,
+                apiCall.parameters
+            );
+        }
+        console.log(user);
+    };
+
     // Display formGenerators, with the idScenario
     return data;
     // The form subcomponent will use a callback to nextStep with the right scenario
@@ -32,7 +51,6 @@ export function nextStepWeb(idScenario, idDiscussion){
 
     data = nextStep(idScenario , idDiscussion);
 	var messagesPile = data.discussion.messagesPile;
-    console.log(data.user);
 	Session.set('showGif' , true);
     for (var i=0 ; i < data.questions.length ; i++) {
         (function(ind) {

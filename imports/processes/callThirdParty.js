@@ -2,7 +2,7 @@ import { HTTP } from 'meteor/http';
 
 import { ThirdParties } from '../api/thirdParties';
 
-export async callREST(URL, method, parameters) {
+export async function callREST(URL, method, parameters) {
 
   const matchingAPIs = ThirdParties.find({"URL" : {$regex : URL+".*"}}).fetch();
   let matchingAPI = {};
@@ -27,7 +27,7 @@ export async callREST(URL, method, parameters) {
       method,
       URL,
       options
-    });
+    );
 
     console.log(result);
     return result;
