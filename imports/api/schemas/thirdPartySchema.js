@@ -1,5 +1,5 @@
 export var ThirdParty = new SimpleSchema({
-  baseURL: {
+  url: {
     type: String
   },
   user: {

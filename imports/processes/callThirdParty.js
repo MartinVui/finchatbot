@@ -4,9 +4,9 @@ import { ThirdParties } from '../api/thirdParties';
 
 export async function callREST(URL, method, parameters) {
 
-  console.log(URL+".*");
+  console.log(URL);
 
-  const matchingAPIs = ThirdParties.find({"baseURL" : {$regex : URL+".*"}}).fetch();
+  const matchingAPIs = ThirdParties.find({"url" : URL}).fetch();
   let matchingAPI = {};
   if (matchingAPIs.length === 0) {
     throw "No API matches your request, please add " + URL + " to the database.";
@@ -20,7 +20,7 @@ export async function callREST(URL, method, parameters) {
     params: parameters
   };
   if (matchingAPI.hasOwnProperty("user") && matchingAPI.hasOwnProperty("password")) {
-    options[auth] = matchingAPI.user + ":" + matchingAPI.password;
+    options.auth = matchingAPI.user + ":" + matchingAPI.password;
   };
 
   if (matchingAPI.APIType === "REST") {
