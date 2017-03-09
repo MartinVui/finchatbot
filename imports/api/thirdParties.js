@@ -40,12 +40,11 @@ Meteor.methods({
 
         if (matchingAPI.APIType === "REST") {
 
-            let result = HTTP.call(
+            const result = HTTP.call(
                 method,
                 URL,
                 options
             );
-
             console.log(result);
             return result;
 

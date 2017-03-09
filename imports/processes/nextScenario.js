@@ -35,26 +35,22 @@ export function nextStep(idScenario , idDiscussion){
         var lastFormGeneratorId = discussion.messagesPile[lastFormGeneratorIndex].idFormGenerator;
         var lastFormGenerator = FormGenerators.findOne({_id:lastFormGeneratorId});
 
-        console.log(user);
         if (lastFormGenerator.hasOwnProperty('apiCalls')) {
             for (apiCall of lastFormGenerator.apiCalls) {
 
-                user[apiCall.targetName] = Meteor.call(
+                console.log("test1");
+
+                user[apiCall.targetName] = Meteor.callPromise(
                     "thirdParty.callREST",
                     apiCall.url,
                     apiCall.verb,
-                    apiCall.parameters,
-                    function(error, result){
-                    if(error){
-                        console.log("error", error);
-                    }
-                    if(result){
-                        console.log("message", result);
-                    }
-                });
+                    apiCall.parameters
+                );
 
-            }
-            console.log(user);
+                console.log("test2");
+
+            };
+
         };
 
     };
