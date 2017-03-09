@@ -1,13 +1,15 @@
 import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 
 import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
 import { Users } from '../api/users.js';
 import { FormGenerators } from '../api/formgenerators.js';
+import { ThirdParties} from '../api/thirdParties.js';
 
-import { callREST } from './callThirdParty.js';
+// import { callREST } from './callThirdParty.js';
 
 import { Session } from 'meteor/session';
 import Mustache from 'mustache';
@@ -36,11 +38,21 @@ export function nextStep(idScenario , idDiscussion){
         console.log(user);
         if (lastFormGenerator.hasOwnProperty('apiCalls')) {
             for (apiCall of lastFormGenerator.apiCalls) {
-                user[apiCall.targetName] = callREST(
+
+                user[apiCall.targetName] = Meteor.call(
+                    "thirdParty.callREST",
                     apiCall.url,
                     apiCall.verb,
-                    apiCall.parameters
-                );
+                    apiCall.parameters,
+                    function(error, result){
+                    if(error){
+                        console.log("error", error);
+                    }
+                    if(result){
+                        console.log("message", result);
+                    }
+                });
+
             }
             console.log(user);
         };
