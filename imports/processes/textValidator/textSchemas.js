@@ -17,11 +17,23 @@ export var southAfricanIdNumber = new SimpleSchema({
 		type: String,
 		custom: function(){
 			var result = true;
+
 			allDigit = new RegExp(/^\d{13}$/);
 			if (!allDigit.test(this.value)) {
 				result = "Match error";
 			}
 			
+			birthDate = new Date(parseInt(this.value.substring(0,2)) , parseInt(this.value.substring(2,4)) , parseInt(this.value.substring(4,6)))
+			console.log(birthDate);
+			console.log(typeof(birthDate));
+			if (parseInt(this.value.substring(2,4)) > 12 || parseInt(this.value.substring(2,4)) < 1) {
+				result = "Match error";
+			}
+
+			if (parseInt(this.value.substring(4,5)) > 31 || parseInt(this.value.substring(4,6)) < 0) {
+				result = "Match error";
+			}
+
 			if(!(parseInt(this.value.charAt(10)) === 0) && !(parseInt(this.value.charAt(10)) === 1)){
 				result = "Match error";
 			}
