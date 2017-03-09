@@ -6,7 +6,7 @@ import { FormGenerators } from '../../api/formgenerators.js';
 
 import { getLastScenario } from '../messenger/getLastScenario.js';
 import { nextStepMessenger } from '../nextScenario.js';
-import { emailSchema , phoneNumberSchema } from '../textValidator/textSchemas.js';
+import { emailSchema , phoneNumberSchema , southAfricanIdNumber} from '../textValidator/textSchemas.js';
 import { Match } from 'meteor/check';
 
 export function handleUserMessage(discussion, body){
@@ -15,11 +15,13 @@ export function handleUserMessage(discussion, body){
 
   mapTextTypeToSchema = {
     'email' : emailSchema,
-    'phone' : phoneNumberSchema
+    'phone' : phoneNumberSchema,
+    'idNumber' : southAfricanIdNumber
   }
   errorMessages = {
-    'email' : 'Veuillez renseigner un email valide',
-    'phone' : 'Votre numéro de téléphone semble incorrect'
+    'email' : 'This doesn\'t look like a valid email...',
+    'phone' : 'I don\'t think that this is a valid phone number',
+    'idNumber' : 'This isn\'t a valid Id Number...'
   }
   var errorThrown = "";
 

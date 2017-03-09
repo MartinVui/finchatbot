@@ -10,7 +10,7 @@ import { FormGenerators } from '../../api/formgenerators.js';
 import { Users } from '../../api/users.js';
 import { Match } from 'meteor/check';
 
-import { emailSchema , phoneNumberSchema } from '../../processes/textValidator/textSchemas.js';
+import { emailSchema , phoneNumberSchema , southAfricanIdNumber } from '../../processes/textValidator/textSchemas.js';
 
 import Geosuggest from 'react-geosuggest'
 
@@ -24,11 +24,13 @@ export default class TextInput extends Component {
 
         var mapTextTypeToSchema = {
             "email" : emailSchema,
-            "phone" : phoneNumberSchema
+            "phone" : phoneNumberSchema,
+            "idNumber" : southAfricanIdNumber
         }
         var errorMessages = {
             "email" : "This doesn't look like a valid email...",
-            "phone" : "This doesn't look like a valid phone number..."
+            "phone" : "This doesn't look like a valid phone number...",
+            "idNumber" : "This is not a valid South African Id Number"
         }
 
         for(element of this.props.formGenerator.elements){
@@ -105,6 +107,7 @@ export default class TextInput extends Component {
 
 
     render(){
+
         var outputList = [ ];
 
         const myStyles = {
