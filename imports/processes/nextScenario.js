@@ -42,7 +42,8 @@ export function nextStep(idScenario , idDiscussion){
                     "thirdParty.callREST",
                     apiCall.url,
                     apiCall.verb,
-                    apiCall.parameters
+                    apiCall.parameters,
+                    user._id
                 );
 
             };

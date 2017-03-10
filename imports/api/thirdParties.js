@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 import { HTTP } from 'meteor/http'
+import Mustache from 'mustache';
+
 import { ThirdPartySchema } from './schemas/thirdPartySchema.js';
+import { Users } from './users.js';
 
 export const ThirdParties = new Mongo.Collection("thirdParties");
 
@@ -20,7 +23,7 @@ if (Meteor.isServer) {
             ThirdParties.remove(thirdPartyId);
         },
 
-        'thirdParty.callREST' (URL, method, parameters) {
+        'thirdParty.callREST' (URL, method, parameters, userId) {
 
             const matchingAPIs = ThirdParties.find({"url" : URL}).fetch();
             let matchingAPI = {};
@@ -30,6 +33,16 @@ if (Meteor.isServer) {
                 matchingAPI = matchingAPIs[0];
             } else {
                 throw "Too many APIs matching base URL " + URL + " in the database.";
+            };
+
+            // Process parameters with mustcache
+            let user = Users.findOne({_id:userId});
+            console.log(user);
+            for (var param in parameters) {
+                if (typeof(parameters[param]) === 'string') {
+                    parameters[param] = Mustache.render(parameters[param], {user : user});
+                };
+                console.log(parameters[param]);
             };
 
             let options = {
