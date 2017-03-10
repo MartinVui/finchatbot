@@ -38,16 +38,12 @@ export function nextStep(idScenario , idDiscussion){
         if (lastFormGenerator.hasOwnProperty('apiCalls')) {
             for (apiCall of lastFormGenerator.apiCalls) {
 
-                console.log("test1");
-
                 user[apiCall.targetName] = Meteor.callPromise(
                     "thirdParty.callREST",
                     apiCall.url,
                     apiCall.verb,
                     apiCall.parameters
                 );
-
-                console.log("test2");
 
             };
 
