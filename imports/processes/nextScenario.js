@@ -12,28 +12,27 @@ import Mustache from 'mustache';
 
 
 export function nextStep(idScenario , idDiscussion){
-	var scenario = Scenarios.findOne({ _id: idScenario });
-    var questions = Questions.findOne({_id: scenario['idQuestion']});
-    var discussion = Discussions.findOne({_id: idDiscussion});
-    var user = Users.findOne({_id: discussion.idUser});
-    //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
-    var data = {};
-    data.scenario = scenario;
-    data.questions = questions.content;
-    data.user = user;
-    data.discussion = discussion;
+	
+    var data = {
+        scenario : Scenarios.findOne({ _id: idScenario }),
+        questions : Questions.findOne({_id: scenario['idQuestion']}).content,
+        discussion : Discussions.findOne({_id: idDiscussion}),
+        user : Users.findOne({_id: discussion.idUser})
+    }
 
-    // Display formGenerators, with the idScenario
     return data;
-    // The form subcomponent will use a callback to nextStep with the right scenario
+
 }
 
 
 export function nextStepWeb(idScenario, idDiscussion){
     
     data = nextStep(idScenario , idDiscussion);
+    //First fetching all the data that we need for further processing
 	var messagesPile = data.discussion.messagesPile;
 	Session.set('showGif' , true);
+    //Loading the questions that the bot has to send
+    //Sending the questions with a timeout and the gif inbetween the different questions
     for (var i=0 ; i < data.questions.length ; i++) {
         (function(ind) {
             setTimeout(function(){
@@ -53,16 +52,18 @@ export function nextStepWeb(idScenario, idDiscussion){
             ,800 + (800 * ind));
         })(i);
     }
-    
+    //Returning the next (idScenario, idFormG) to the Chatbox to display the next form inputs
     return data.scenario.children;
 }
 
 
 export function nextStepMessenger(idScenario, idDiscussion){
 	data = nextStep(idScenario, idDiscussion);
-	var messengerData = {};
-    messengerData.questions = []; 
+	var messengerData = {
+        questions: []
+    }
     var messagesPile = data.discussion.messagesPile;
+    // loading the next bot messages and saving them in db before sending them 
     for (var i=0 ; i < data.questions.length ; i++) {
         var interpretedQuestion = Mustache.render(data.questions[i] , {'user' : data.user});
         messengerData.questions.push(interpretedQuestion);
@@ -77,18 +78,14 @@ export function nextStepMessenger(idScenario, idDiscussion){
     }
 
     var children = data.scenario.children;
-
-	var formGeneratorList = new Array();
+    messengerData.formGeneratorList = []
 	for(child of children){
 		var formGenerator = FormGenerators.findOne({_id : child.idFormGenerator});
         var nextScenario = Scenarios.findOne({_id: child.idScenario});
         formGenerator.correspondingScenarioId = nextScenario._id;
-		formGeneratorList.push(formGenerator);
+		messengerData.formGeneratorList.push(formGenerator);
 	}
-	
-	messengerData.formGeneratorList = formGeneratorList
-	
-
+	//Returning the formGenerators and bot questions to the router so it can send the right JSON to the NodeJS app
 	return messengerData;
 }
 

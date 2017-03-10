@@ -19,6 +19,8 @@ import App from '../imports/ui/App.jsx';
 import OrmImport from '../imports/ui/OrmImport.jsx';
 import OrmExport from '../imports/ui/OrmExport.jsx';
 
+
+//This is the usual route, displays the web bot
 Router.route('/', () => {
   let page = (
     <App />
@@ -26,6 +28,7 @@ Router.route('/', () => {
   render(page, document.getElementById( 'render-target' ));
 });
 
+//Displays the orm import page
 Router.route('/orm/import', () => {
   let page = (
     <OrmImport />
@@ -33,6 +36,7 @@ Router.route('/orm/import', () => {
   render(page, document.getElementById( 'render-target' ));
 });
 
+//Displays the orm export page
 Router.route('/orm/export', () => {
   let page = (
     <OrmExport />
@@ -43,31 +47,29 @@ Router.route('/orm/export', () => {
 
 Router.route( "/messenger", { where: "server" })
   .post( function() {
-    //FUNCTION CALLED WHENEVER THE USER IS SENDING A MESSAGE
+    //The user message is intercepted by the Node JS app that transfers the good info 
+    //to the router which responds to the node app who will then send the following questions to the user
     this.response.statusCode = 200;
     var that = this;
     var user = Users.findOne({'facebookId' : this.request.body.facebookid});
-    var userData = {}
 
     if(typeof(user) === 'undefined'){
-
+      //First time we meet the user
       data = startDiscussionMessenger(this.request.body.facebookid, this.request.body.message.text).then((res)=>{return res});
       Meteor.setTimeout(function(){
         var buf = new Buffer.from(JSON.stringify(data));
         that.response.end(buf);
       }, 1000);
-      //Start messenger Discussion
-      //User + discussion created
-
+      
     }else{
 
-      //When the user is created, fetch the discussion he has with the bot
-      //adding the message he sent
+      //If we already know the guy, fetch his discussion and calling the handleUserMessage function 
       discussion = Discussions.findOne({'idUser' : user._id});
 
 
       data = handleUserMessage( discussion , this.request.body );
 
+      //Without the timeout, data is empty when the response is made...
       Meteor.setTimeout(function(){
         var buf = new Buffer.from(JSON.stringify(data));
         that.response.end(buf);

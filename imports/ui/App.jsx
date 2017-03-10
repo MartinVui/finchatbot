@@ -11,7 +11,7 @@ import { scanDiscussion } from '../processes/scanDiscussion.js'
 
 class App extends Component {
 
-    render( ) { // Seems like the app is only a chatbox. Maybe we could delete this component
+    render() { 
 
         return (
             <div>

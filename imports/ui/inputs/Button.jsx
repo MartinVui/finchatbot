@@ -10,8 +10,9 @@ import { Message } from '../Message.jsx';
 export default class Button extends Component {
 
     onButtonClick( event ) {
+        
         event.preventDefault( );
-
+        //if the user clicks, very simple, adding the message to the discussion pile
         var text = this.props.formGenerator.generatedAnswer;
         var formGeneratorId = this.props.formGenerator._id;
         var date = new Date();

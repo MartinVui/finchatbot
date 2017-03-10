@@ -40,6 +40,8 @@ export default class MessageForm extends Component {
         }).fetch( );
 
         var outputList = [ ];
+        //outputList contains the list of ui form element that we need to display
+        //We pass the corresponding nextScenario ID to each element that leads to it
         for ( form of forms ) {
             var nextScenario = this.props.scenarioChildren.filter(function(obj) {
                 return obj['idFormGenerator'] === form._id;

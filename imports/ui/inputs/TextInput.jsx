@@ -190,16 +190,19 @@ export default class TextInput extends Component {
             inputState[targetName] = evt;
         }
 
-        for (form of this.props.formGenerator.elements) {  
+        for (form of this.props.formGenerator.elements) {
             if (typeof(form.textType) !== 'undefined') {
+            //Checking if any text input needs to be checked  
                 var objToCheck = {}
                 objToCheck[form.textType] = inputState[form.targetName]
                 if(!Match.test(objToCheck, this.state.mapTextTypeToSchema[form.textType])){
+                    //if not matching the schema, adding the corresp targetName to the invalid inputs
                     inputValidations[form.targetName] = true;
                 }else{
                     inputValidations[form.targetName] = false;
                 } 
             }else{
+            //If no validation has to be made, only allowing to submit if non null input
                 if (inputState[form.targetName].length > 0) {
                     inputValidations[form.targetName] = false;
                 }else{

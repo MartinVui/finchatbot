@@ -83,6 +83,7 @@ export default class SelectInput extends Component {
         )
 
     }
+    
     updateInputValue(targetName, evt) {
         state = this.state.inputs;
         state[targetName] = evt.target.value;

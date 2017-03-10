@@ -14,14 +14,13 @@ export default class CheckBoxInput extends Component {
     constructor( props ) {
         super( props );
         var inputs = {};
-        var dataWrapper = {};
         for(element of this.props.formGenerator.elements){
             inputs[element.targetName] = false;
-            dataWrapper[element.targetName] = element.checkboxLabel;
         }
+        //inputs is the obj in which we store the checkboxes states
+        //submit is the boolean that allows us or not to submit (no check -> no submit)
         this.state = {
             inputs : inputs,
-            dataWrapper : dataWrapper,
             submit : false
         };
     }
@@ -29,7 +28,6 @@ export default class CheckBoxInput extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        
 
         if (this.state.submit){
             var text = this.props.formGenerator.generatedAnswer;
@@ -45,8 +43,8 @@ export default class CheckBoxInput extends Component {
 
             //User Update (douille de l'extrême)
             var user = Users.findOne({'_id': discussion.idUser});
-            user['data'] = {}
-            user['data'][this.props.formGenerator.generalLabel] = this.state.inputs;
+            data= {}
+            data[this.props.formGenerator.generalLabel] = this.state.inputs;
             Meteor.call("user.update", user._id, user['data']);
 
             //Discussion Update
@@ -60,8 +58,8 @@ export default class CheckBoxInput extends Component {
                 'createdAt' : date,
                 'idFormGenerator': formGeneratorId
             }
-        messagesPile.push(newMessage);
-        Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
+            messagesPile.push(newMessage);
+            Meteor.call('discussion.update', Session.get("SessionId"), {"messagesPile" : messagesPile});
 
             //nextStep Callback here
             this
@@ -72,6 +70,7 @@ export default class CheckBoxInput extends Component {
 
     onUpdate(targetName, evt) {
         state = this.state.inputs;
+        //on update switching the state of the checkbox
         state[targetName] = !state[targetName];
         var oneCheck = false;
         for (element in state){
@@ -79,6 +78,7 @@ export default class CheckBoxInput extends Component {
                 oneCheck = true;
             }
         }
+        //if nothing is checked submit is set to false
         this.setState({
             inputs: state,
             submit: oneCheck

@@ -25,20 +25,19 @@ export default class ChatBox extends Component {
         super( );
         this.state = {
             showIntro: true,
-            children: [ ]
         };
     }
 
 
     startConversation() {
-        // Set show messages instead of intro
+        //When user first clicks on get started, this function is called
         this.setState({ showIntro: false });
-
         const data = startDiscussionWeb();
-        console.log(Session.get('children'));
     }
 
     nextStep(IdScenario, IdDiscussion) {
+        //This methods is passed in the props to the different inputs ui elements
+        //It is then called in theses different ui element
         children = nextStepWeb(IdScenario, IdDiscussion);
         Session.set('children', children);
     }
@@ -82,7 +81,7 @@ export default class ChatBox extends Component {
                     {this.state.showIntro === false
                         ? <MessageForm onMessageSubmit={this.handleMessageSubmit} scenarioChildren={Session.get( 'children' )} nextStep={this.nextStep}/>
                         : null
-}
+                    }
 
                 </div>
             </div>
