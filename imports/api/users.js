@@ -11,21 +11,22 @@ export const Users = new Mongo.Collection("users");
 //         return Users.find();
 //     });
 // }
-
-Meteor.methods({
-    'user.insert' (user) {
-        check(user, UserSchema);
-        var newUser = Users.insert(user);
-        return newUser;
-    },
-    'user.remove' (userId) {
-        check(userId, String);
-        Users.remove(userId);
-    },
-    'user.update' (userId, update) {
-        check(userId, String);
-        Users.update(userId, {
-            $set: update
-        });
-    },
-});
+if (Meteor.isServer) {
+    Meteor.methods({
+        'user.insert' (user) {
+            check(user, UserSchema);
+            var newUser = Users.insert(user);
+            return newUser;
+        },
+        'user.remove' (userId) {
+            check(userId, String);
+            Users.remove(userId);
+        },
+        'user.update' (userId, update) {
+            check(userId, String);
+            Users.update(userId, {
+                $set: update
+            });
+        },
+    })
+}

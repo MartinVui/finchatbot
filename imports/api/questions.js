@@ -11,18 +11,19 @@ export const Questions = new Mongo.Collection("questions");
 //         return Questions.find();
 //     });
 // }
+if (Meteor.isServer) {
+	Meteor.methods({
 
-Meteor.methods({
+	    'question.insert' (question) {
+	        check(question, QuestionSchema);
+	        var newQuestion = Questions.insert(question);
+	        return newQuestion;
+	    },
 
-    'question.insert' (question) {
-        check(question, QuestionSchema);
-        var newQuestion = Questions.insert(question);
-        return newQuestion;
-    },
+	    'question.remove' (questionId) {
+	        check(questionId, String);
+	        Questions.remove(questionId);
+	    }
 
-    'question.remove' (questionId) {
-        check(questionId, String);
-        Questions.remove(questionId);
-    }
-
-})
+	})
+}

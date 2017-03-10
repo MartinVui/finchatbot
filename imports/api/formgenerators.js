@@ -13,15 +13,16 @@ export const FormGenerators = new Mongo.Collection('formGenerators');
 //         return FormGenerators.find();
 //     });
 // }
-
-Meteor.methods({
-    'formGenerator.insert' (formGenerator) {
-        check(formGenerator, FormGeneratorSchema);
-        var newFormGenerator = FormGenerators.insert(formGenerator);
-        // console.log(newFormGenerator);
-        return formGenerator;
-    },
-    'formGenerator.remove' (formGeneratorId) {
-        FormGenerators.remove(formGeneratorId);
-    }
-})
+if (Meteor.isServer) {
+	Meteor.methods({
+	    'formGenerator.insert' (formGenerator) {
+	        check(formGenerator, FormGeneratorSchema);
+	        var newFormGenerator = FormGenerators.insert(formGenerator);
+	        // console.log(newFormGenerator);
+	        return formGenerator;
+	    },
+	    'formGenerator.remove' (formGeneratorId) {
+	        FormGenerators.remove(formGeneratorId);
+	    }
+	})
+}

@@ -11,22 +11,23 @@ export const Trees = new Mongo.Collection("trees");
 //         return Trees.find();
 //     });
 // }
+if (Meteor.isServer) {
+    Meteor.methods({
+        'tree.insert' (tree) {
+            check(tree, TreeSchema);
+            var newTree = Trees.insert(tree);
+            return newTree;
+        },
+        'tree.remove' (treeId) {
+            check(treeId, String);
+            Trees.remove(treeId);
+        },
+        'tree.update' (treeId, update) {
+            check(treeId, String);
+            Trees.update(treeId, {
+                $set: update
+            });
+        }
 
-Meteor.methods({
-    'tree.insert' (tree) {
-        check(tree, TreeSchema);
-        var newTree = Trees.insert(tree);
-        return newTree;
-    },
-    'tree.remove' (treeId) {
-        check(treeId, String);
-        Trees.remove(treeId);
-    },
-    'tree.update' (treeId, update) {
-        check(treeId, String);
-        Trees.update(treeId, {
-            $set: update
-        });
-    }
-
-});
+    })
+}
