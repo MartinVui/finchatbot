@@ -19,38 +19,52 @@ export function nextStep(idScenario , idDiscussion){
 	var scenario = Scenarios.findOne({ _id: idScenario });
     var questions = Questions.findOne({_id: scenario['idQuestion']});
     var discussion = Discussions.findOne({_id: idDiscussion});
-    var user = Users.findOne({_id: discussion.idUser});
     //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
-    var data = {};
-    data.scenario = scenario;
-    data.questions = questions.content;
-    data.user = user;
-    data.discussion = discussion;
 
     var lastFormGeneratorIndex = discussion.messagesPile.length-1;
     if (lastFormGeneratorIndex>0) {
-
-        console.log("ok");
 
         var lastFormGeneratorId = discussion.messagesPile[lastFormGeneratorIndex].idFormGenerator;
         var lastFormGenerator = FormGenerators.findOne({_id:lastFormGeneratorId});
 
         if (lastFormGenerator.hasOwnProperty('apiCalls')) {
+
+            let tempUser = {};
+
             for (apiCall of lastFormGenerator.apiCalls) {
 
-                user[apiCall.targetName] = Meteor.callPromise(
+                let temp = Meteor.apply(
                     "thirdParty.callREST",
-                    apiCall.url,
+                    [apiCall.url,
                     apiCall.verb,
                     apiCall.parameters,
-                    user._id
+                    discussion.idUser],
+                    {wait : true}
                 );
+                if (apiCall.hasOwnProperty("targetName")) {
+                    tempUser[apiCall.targetName] = temp;
+                };
 
             };
+
+            Meteor.apply(
+                "user.update",
+                [discussion.idUser,
+                tempUser],
+                {wait : true}
+            );
 
         };
 
     };
+
+    var user = Users.findOne({_id: discussion.idUser});
+
+    var data = {};
+    data.scenario = scenario;
+    data.questions = questions.content;
+    data.user = user;
+    data.discussion = discussion;
 
     // Display formGenerators, with the idScenario
     return data;

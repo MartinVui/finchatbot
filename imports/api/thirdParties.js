@@ -37,12 +37,17 @@ if (Meteor.isServer) {
 
             // Process parameters with mustcache
             let user = Users.findOne({_id:userId});
-            console.log(user);
             for (var param in parameters) {
                 if (typeof(parameters[param]) === 'string') {
                     parameters[param] = Mustache.render(parameters[param], {user : user});
+                } else if (Array.isArray(parameters[param])) {
+                    for (par of parameters[param]) {
+                        par = Mustache.render(par, {user : user});
+                    }
+                } else {
+                    console.log(typeof(parameters[param]));
+                    console.log(parameters[param]);
                 };
-                console.log(parameters[param]);
             };
 
             let options = {
@@ -53,6 +58,8 @@ if (Meteor.isServer) {
             };
 
             if (matchingAPI.APIType === "REST") {
+
+                console.log("API");
 
                 const result = HTTP.call(
                     method,
