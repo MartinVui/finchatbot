@@ -50,5 +50,25 @@ export var FormGeneratorSchema = new SimpleSchema({
     },
     generatedAnswer: {
         type: String,
+    },
+    apiCalls: {
+      type:Array,
+      optional:true
+    },
+    'apiCalls.$': {
+      type: Object
+    },
+    'apiCalls.$.url': {
+      type: String
+    },
+    'apiCalls.$.verb': {
+      type: String
+    },
+    'apiCalls.$.parameters': {
+      type: Object,
+      blackbox: true
+    },
+    'apiCalls.$.targetName': {
+      type: String
     }
 });

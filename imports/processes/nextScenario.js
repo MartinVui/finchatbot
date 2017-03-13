@@ -1,32 +1,80 @@
 import React, { Component, PropTypes, } from 'react';
 import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 
 import { Scenarios } from '../api/scenarios.js';
 import { Discussions } from '../api/discussions.js';
 import { Questions } from '../api/questions.js';
 import { Users } from '../api/users.js';
 import { FormGenerators } from '../api/formgenerators.js';
+import { ThirdParties} from '../api/thirdParties.js';
+
+// import { callREST } from './callThirdParty.js';
 
 import { Session } from 'meteor/session';
 import Mustache from 'mustache';
 
 
 export function nextStep(idScenario , idDiscussion){
-	
-    var data = {
-        scenario : Scenarios.findOne({ _id: idScenario }),
-        questions : Questions.findOne({_id: scenario['idQuestion']}).content,
-        discussion : Discussions.findOne({_id: idDiscussion}),
-        user : Users.findOne({_id: discussion.idUser})
-    }
 
+	var scenario = Scenarios.findOne({ _id: idScenario });
+    var questions = Questions.findOne({_id: scenario['idQuestion']});
+    var discussion = Discussions.findOne({_id: idDiscussion});
+    //ATTENTION DANS LES CAS DE QUESTIONS AVEC CONTENU DIFFÉRENTS DE TEXTE
+
+    var lastFormGeneratorIndex = discussion.messagesPile.length-1;
+    if (lastFormGeneratorIndex>0) {
+
+        var lastFormGeneratorId = discussion.messagesPile[lastFormGeneratorIndex].idFormGenerator;
+        var lastFormGenerator = FormGenerators.findOne({_id:lastFormGeneratorId});
+
+        if (lastFormGenerator.hasOwnProperty('apiCalls')) {
+
+            let tempUser = {};
+
+            for (apiCall of lastFormGenerator.apiCalls) {
+
+                let temp = Meteor.apply(
+                    "thirdParty.callREST",
+                    [apiCall.url,
+                    apiCall.verb,
+                    apiCall.parameters,
+                    discussion.idUser],
+                    {wait : true}
+                );
+                if (apiCall.hasOwnProperty("targetName")) {
+                    tempUser[apiCall.targetName] = temp;
+                };
+
+            };
+
+            Meteor.apply(
+                "user.update",
+                [discussion.idUser,
+                tempUser],
+                {wait : true}
+            );
+
+        };
+
+    };
+
+    var user = Users.findOne({_id: discussion.idUser});
+
+    var data = {};
+    data.scenario = scenario;
+    data.questions = questions.content;
+    data.user = user;
+    data.discussion = discussion;
+
+    // Display formGenerators, with the idScenario
     return data;
 
 }
 
 
 export function nextStepWeb(idScenario, idDiscussion){
-    
+
     data = nextStep(idScenario , idDiscussion);
     //First fetching all the data that we need for further processing
 	var messagesPile = data.discussion.messagesPile;
@@ -52,6 +100,7 @@ export function nextStepWeb(idScenario, idDiscussion){
             ,800 + (800 * ind));
         })(i);
     }
+
     //Returning the next (idScenario, idFormG) to the Chatbox to display the next form inputs
     return data.scenario.children;
 }
@@ -59,9 +108,11 @@ export function nextStepWeb(idScenario, idDiscussion){
 
 export function nextStepMessenger(idScenario, idDiscussion){
 	data = nextStep(idScenario, idDiscussion);
+
 	var messengerData = {
         questions: []
     }
+
     var messagesPile = data.discussion.messagesPile;
     // loading the next bot messages and saving them in db before sending them 
     for (var i=0 ; i < data.questions.length ; i++) {
@@ -86,8 +137,6 @@ export function nextStepMessenger(idScenario, idDiscussion){
 		messengerData.formGeneratorList.push(formGenerator);
 	}
 	//Returning the formGenerators and bot questions to the router so it can send the right JSON to the NodeJS app
+
 	return messengerData;
 }
-
-
-
