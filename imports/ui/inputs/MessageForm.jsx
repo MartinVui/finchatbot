@@ -11,12 +11,9 @@ import { Users } from '../../api/users.js';
 
 
 import Button from './Button.jsx';
-import DateInput from './DateInput.jsx';
 import TextInput from './TextInput.jsx';
 import SelectInput from './SelectInput.jsx';
 import CheckBox from './CheckBox.jsx';
-import AddressInput from './AddressInput.jsx';
-import YearInput from './YearInput.jsx';
 
 export default class MessageForm extends Component {
 

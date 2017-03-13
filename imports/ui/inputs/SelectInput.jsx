@@ -68,6 +68,7 @@ export default class SelectInput extends Component {
                 temp.push(<option value={selection} key={selection}>{selection}</option>)
             }
             outputList.push(<select  className="scroll-input" key={i} onChange={this.updateInputValue.bind(this, this.props.formGenerator.elements[i].targetName)}>
+                //adding a default input which isn't submittable
                 <option value=""> - </option>
                 {temp}
                 </select>);
@@ -83,10 +84,11 @@ export default class SelectInput extends Component {
         )
 
     }
-    
+
     updateInputValue(targetName, evt) {
         state = this.state.inputs;
         state[targetName] = evt.target.value;
+        //catching the select current value (after update)
         if(state[targetName] !== ""){
             this.setState({
               submit :true
