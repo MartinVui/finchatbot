@@ -17,6 +17,7 @@ import Geosuggest from 'react-geosuggest'
 export default class TextInput extends Component {
 
     constructor( props ) {
+        
         super( props );
         var invalidInputs = {};
         var inputs = {};
