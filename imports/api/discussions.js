@@ -11,7 +11,7 @@ export const Discussions = new Mongo.Collection("discussions");
 //         return Discussions.find();
 //     });
 // }
-if (Meteor.isServer) {
+// if (Meteor.isServer) {
     Meteor.methods({
         'discussion.insert' (discussion) {
             //check(discussion, DiscussionSchema);
@@ -30,4 +30,4 @@ if (Meteor.isServer) {
         }
 
     })
-}
+// }

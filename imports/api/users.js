@@ -11,7 +11,7 @@ export const Users = new Mongo.Collection("users");
 //         return Users.find();
 //     });
 // }
-if (Meteor.isServer) {
+// if (Meteor.isServer) {
     Meteor.methods({
         'user.insert' (user) {
             check(user, UserSchema);
@@ -29,4 +29,4 @@ if (Meteor.isServer) {
             });
         },
     })
-}
+// }

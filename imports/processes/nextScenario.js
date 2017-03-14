@@ -13,11 +13,15 @@ import Mustache from 'mustache';
 
 export function nextStep(idScenario , idDiscussion){
 	
+    var scenario = Scenarios.findOne({ _id: idScenario });
+    var questions = Questions.findOne({_id: scenario['idQuestion']}).content;
+    var discussion = Discussions.findOne({_id: idDiscussion})
+    var user = Users.findOne({_id: discussion.idUser})
     var data = {
-        scenario : Scenarios.findOne({ _id: idScenario }),
-        questions : Questions.findOne({_id: scenario['idQuestion']}).content,
-        discussion : Discussions.findOne({_id: idDiscussion}),
-        user : Users.findOne({_id: discussion.idUser})
+        scenario : scenario,
+        questions : questions,
+        discussion : discussion,
+        user : user
     }
 
     return data;

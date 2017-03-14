@@ -12,7 +12,7 @@ export const Scenarios = new Mongo.Collection("scenarios");
 //     });
 // }
 
-if (Meteor.isServer) {
+// if (Meteor.isServer) {
 	Meteor.methods({
 
 	    'scenario.insert' (scenario) {
@@ -27,4 +27,4 @@ if (Meteor.isServer) {
 	    }
 
 	})
-}
+// }

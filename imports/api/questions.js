@@ -11,7 +11,7 @@ export const Questions = new Mongo.Collection("questions");
 //         return Questions.find();
 //     });
 // }
-if (Meteor.isServer) {
+// if (Meteor.isServer) {
 	Meteor.methods({
 
 	    'question.insert' (question) {
@@ -26,4 +26,4 @@ if (Meteor.isServer) {
 	    }
 
 	})
-}
+// }

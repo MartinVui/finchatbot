@@ -11,7 +11,7 @@ export const Trees = new Mongo.Collection("trees");
 //         return Trees.find();
 //     });
 // }
-if (Meteor.isServer) {
+// if (Meteor.isServer) {
     Meteor.methods({
         'tree.insert' (tree) {
             check(tree, TreeSchema);
@@ -30,4 +30,4 @@ if (Meteor.isServer) {
         }
 
     })
-}
+// }

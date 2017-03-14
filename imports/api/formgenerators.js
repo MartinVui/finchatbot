@@ -13,7 +13,7 @@ export const FormGenerators = new Mongo.Collection('formGenerators');
 //         return FormGenerators.find();
 //     });
 // }
-if (Meteor.isServer) {
+// if (Meteor.isServer) {
 	Meteor.methods({
 	    'formGenerator.insert' (formGenerator) {
 	        check(formGenerator, FormGeneratorSchema);
@@ -25,4 +25,4 @@ if (Meteor.isServer) {
 	        FormGenerators.remove(formGeneratorId);
 	    }
 	})
-}
+// }
