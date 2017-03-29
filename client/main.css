@@ -99,81 +99,62 @@ a:visited {
 }
 
 .introduction {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 1000;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: default;
-    background-color: #fc0000;
 }
 
 #intro-part1 {
-    height: 50%;
-    display: flex;
-    align-items: center;
+  height: 50%;
+  display: flex;
+  align-items: center;
 
 }
 
 .intro-logo {
-    height: 90%;
+  height: 70%;
 }
 
 #intro-part2 {
-    font-family: 'CaviarDreams';
-    height: 50%;
-    width: 100%;
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f1f1f1;
-}
-
-.intro-finchatbot-logo {
-    margin-top: 50px;
-    display: -webkit-flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.intro-finchatbot-logo img {
-    height: 15vh;
-    width: auto;
-    margin-right: 20px;
+  font-family: 'CaviarDreams';
+  height: 50%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ 
+  background-color: #e31f00;
 }
 
 #intro-part2 h1 {
-    margin: 0;
+  margin-top: 50px;
 }
 
 #intro-part2 p {
-    margin-top: 15px;
-    font-size: 15px;
+  margin-top: 15px;
+  font-size: 15px;
 
 }
 
 #intro-part2 p:hover {
-    margin-top: 14px;
-    font-size: 17px;
+  margin-top: 14px;
+  font-size: 17px;
 }
 
 #intro-part2 h2 {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 
 
 .typing_gif {
     margin:5px;
-    margin-left: 20px;
+    margin-left: 0px;
     padding:3px;
-    background-color: #2a3060;
     height: 20px;
     display:flex;
     display: -webkit-flex;
@@ -185,9 +166,9 @@ a:visited {
     margin:10px;
     align-self: center;  
     background-color:#fff;
-    border: 1px #2a3060 solid;
+    border: 1px black solid;
     border-radius: 15px;
-    color: #2a3060;
+    color: black;
     cursor: pointer;
     text-align: center;
     display: flex;
@@ -200,8 +181,14 @@ a:visited {
 }
 
 .button:hover {
-    color: #fff;
-    background-color: #2a3060;
+    color: #e31f00;
+    border: 1px #e31f00 solid;
+}
+
+.button:active {
+    color: #e31f00;
+    border: 1px #e31f00 solid;
+
 }
 
 .button p {
@@ -255,23 +242,23 @@ a:visited {
     height:100%;
     font-size: 14px;
     max-width: 70%;
-    background-color: #2a3060;
+    background-color: #e31f00;
     padding:7px;
     border-radius:0px 12px 12px 12px;
     color: #fff;
     margin: 0px;
-    box-shadow: 4px 4px 4px #343434;
+    box-shadow: 2px 2px 5px #898989;
 }
 
 .user_text { 
     font-size: 14px;
     max-width: 70%;
-    background-color: #42a4a7;
-    color: #ffffff;
+    background-color: #bebebe;
+    color: black;
     padding:7px;
     border-radius: 12px 12px 0px 12px;
     margin: 0px;
-    box-shadow: 4px 4px 4px #343434;
+    box-shadow: 2px 2px 5px #898989;
 }
 
 p {
@@ -286,8 +273,7 @@ img.bot_message {
 }
 
 .container {
-    /*background-image: url("images/cellc-bakground.jpg");
-    background-size: 100% 100%;*/
+    background-size: 100% 100%;
     background: #f6f6f6;
     height: 100%;
     width: 100%;

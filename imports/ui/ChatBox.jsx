@@ -84,15 +84,12 @@ export default class ChatBox extends Component {
 					transitionLeaveTimeout={1000}>
 
 					{this.state.showIntro ? 	// Open the chatbox on the intro. The user has to click on a thing to start the conversation. That's cool
-						<div className="introduction" >
+						<div className="introduction">
 							<div id="intro-part1">
-								<img src="http://www.contact-us.co.za/wp-content/uploads/2013/12/Vodacom-contact-us-1038x576.jpg" className="intro-logo"/>
+								<img src="images/logo.png" className="intro-logo"/>
 							</div>
 							<div id="intro-part2">
-								<div className="intro-finchatbot-logo">
-									<img src="images/logo.png"/>
-									<h1>FinChatBot</h1>
-								</div>
+								<h1>Meet Holly</h1>
 								<h2>Your personal assisant</h2>
 								<p onClick={this.startConversation.bind(this)}>Click here to start the conversation</p>
 							</div>
